@@ -1,0 +1,311 @@
+% das Papierformat zuerst
+\documentclass[a4paper, 11pt]{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref} % clickable refs
+\usepackage{graphicx}
+\usepackage[toc, numberedsection]{glossaries}
+\usepackage{float}
+
+% TODO: template übersetzten
+
+\makeglossary
+
+%Hack for referencing labels
+\makeatletter
+\def\namedlabel#1#2{\begingroup
+    #2%
+    \def\@currentlabel{#2}%
+    \phantomsection\label{#1}\endgroup
+}
+\makeatother
+% End: Hack for referencing labels
+
+% Glossar: alle Einträge, aber ohne extra Referenzen
+% http://tex.stackexchange.com/questions/115635/glossaries-suppress-pages-when-using-glsaddall
+\newcommand*{\glsgobblenumber}[1]{}
+\makeatletter
+\newcommand*{\glsaddnp}[2][]{
+  \glsdoifexists{#2}{
+    \def\@glsnumberformat{glsgobblenumber}
+    \edef\@gls@counter{\csname glo@#2@counter\endcsname}
+    \setkeys{glossadd}{#1}
+    \@gls@saveentrycounter
+    \@do@wrglossary{#2}
+  }
+}
+\renewcommand{\glsaddallunused}[1][]{
+  \edef\@glo@type{\@glo@types}
+  \setkeys{glossadd}{#1}
+  \forallglsentries[\@glo@type]{\@glo@entry}{
+    \ifglsused{\@glo@entry}{}{
+      \glsaddnp[#1]{\@glo@entry}}}
+}
+\makeatother
+
+\renewcommand{\glsnamefont}[1]{\mdseries #1} % glossary entries shouldn’t be bold
+
+% Glossar
+
+% So sieht ein Glossar-Eintrag aus:
+%
+%\newglossaryentry{dijkstra}{
+%  name={Dijkstra’s Algorithmus},
+%  description={ein Algorithmus, um den optimalen Pfad in einem gerichteten Graphen zu finden}
+%}
+%\newglossaryentry{arc}{
+%  name={Arc-Flags},
+%  description={eine Technik, um Routenberechnung zu beschleunigen},
+%  see={dijkstra}
+%}
+%
+% Und so kann er im Dokument verwendet werden:
+%
+% lorem ipsum dolor sit \gls{arc}, consectetur
+%
+% End: Glossar
+
+% usage: \counteditem{prefix}{refName} -> item `/prefixXX/` with label `prefix:refName` (where XX is counted in increments of 10)
+\makeatletter
+\newcommand{\oitem}[2]{
+  % define the counter
+  \@ifundefined{c@oitem#1}{\newcounter{oitem#1}}{} % initialized at 0
+  \addtocounter{oitem#1}{10}
+  \item[\namedlabel{#1:#2}{/#1\arabic{oitem#1}/}]
+}
+\makeatother
+
+% usage: \testfall{szenario}{ablauf}{ergebnis} oder \testfall[\ref{F:getesteteFunktion}]{szenario}{ablauf}{ergebnis}
+\newcommand{\testfall}[4][]{
+  \begin{description}
+    \ifthenelse{\equal{#1}{}}
+               {} % optional argument #1 is empty: skip
+               {\item[Testet] #1}
+    \item[Vorbedingungen] #2
+    \item[Ablauf] #3
+    \item[Erwartetes Ergebnis] #4
+  \end{description}
+}
+
+\begin{document}
+
+% place a symbol before clickable links
+% this has to come *after* \begin{document} because hyperref installs a \AtBeginDocument hook that updates the ref command.
+\newcommand{\refsymbol}[0]{\scalebox{0.5}{$\nearrow$}}
+\let\oldref\ref
+\renewcommand{\ref}[1]{\refsymbol\oldref{#1}}
+\let\oldgls\gls
+\renewcommand{\gls}[1]{\refsymbol\oldgls{#1}}
+\let\oldGls\Gls
+\renewcommand{\Gls}[1]{\refsymbol\oldGls{#1}}
+\let\oldglspl\glspl
+\renewcommand{\glspl}[1]{\refsymbol\oldglspl{#1}}
+\let\oldGlspl\Glspl
+\renewcommand{\Glspl}[1]{\refsymbol\oldGlspl{#1}}
+\let\oldglslink\glslink
+\renewcommand{\glslink}[2]{\refsymbol\oldglslink{#1}{#2}}
+\let\oldhyperref\hyperref
+\renewcommand{\hyperref}[2][notActuallyOptional]{\refsymbol\oldhyperref[#1]{#2}}
+\let\oldautoref\autoref
+\renewcommand{\autoref}[1]{\refsymbol\oldautoref{#1}}
+
+\newcommand{\abbildung}[1]{\autoref{fig:#1}}
+\newcommand{\mamid}[0]{\textit{KIT-MAMID} }
+
+% alle Glossareintraege
+\newacronym[longplural=Personenkraftwagen]{pkw}{PKW}{Personenkraftwagen}
+\newacronym[longplural=Lastkraftwagen]{lkw}{LKW}{Lastkraftwagen}
+\newacronym{osm}{OSM}{OpenStreetMap}
+\newacronym{gui}{GUI}{Graphical User Interface}
+\newacronym[longplural={Points of interest}]{poi}{POI}{Point of interest}
+\newacronym{gpx}{GPX}{GPS Exchange Format}
+
+\newglossaryentry{Test}{
+  name={Test},
+  description={It's something.},
+  plural={Tests}
+}
+
+\begin{titlepage}
+\makeatletter
+\begin{center}
+~\\[5em]
+{\Huge KIT-MAMIT}\\[3em]
+{\huge Functional specification}\\[1em]
+{\large\today}\\[2.5em]
+{\LARGE
+Niklas Fuhrberg\\
+Anton Schirg\\
+Christian Schwarz\\
+Janis Streib\\
+Bob Weinand\\[3em]}
+supervised by\\[2em]
+{\Large
+Dr. Marek Szuba\\[1em]}
+at\\[1em]
+{\Large
+Karlsruhe Institute of Technology\\
+SCC}
+
+\end{center}
+\makeatother
+\end{titlepage}
+\newpage
+\tableofcontents
+\newpage
+
+% -------------------------------------------------------------- HIER BEGINNT DAS DOKUMENT WIRKLICH ---------------------------------
+\section{Introductoin}
+\mamid is foo and this is a \gls{Test}.
+
+\section{Zielbestimmung}
+\subsection{Musskriterien}
+
+\begin{description}
+\oitem{MK}{test} test.
+\end{description}
+
+\subsection{Wunschkriterien}
+\begin{description}
+\oitem{WK}{testwunsch} \gls{Test} wunsch.
+
+\end{description}
+
+\subsection{Abgrenzungskriterien}
+\begin{description}
+\oitem{AK}{testak} test ak.
+
+\end{description}
+
+\section{Produkteinsatz}
+%Kevin
+
+\subsection{Anwendungsbereiche}
+\begin{itemize}
+\item foo
+\end{itemize}
+
+\subsection{Zielgruppe}
+\begin{itemize}
+\item foo
+\end{itemize}
+
+\subsection{Betriebsbedingungen}
+\begin{itemize}
+\item zu Hause (test)
+\end{itemize}
+
+\section{Produktumgebung}
+%Kevin
+
+\subsection{Software}\label{subsec:Software}
+
+\begin{itemize}
+\item Operating system: Solaris (Indiana OS), Linux
+\end{itemize}
+
+\subsection{Hardware}
+
+\begin{itemize}
+\item foo
+\end{itemize}
+
+\section{Funktionale Anforderungen}
+% Format: Substantiviertes Verb am Anfang („Bestimmen von X“, nicht „Bestimmung von X“, „Bestimme X“ oder „X bestimmen”).
+\subsection{Kernfunktionen}
+\begin{description}
+\oitem{F}{testtest}
+Test
+\oitem{WF}{testestest}
+test
+\end{description}
+
+\subsection{Vorberechnung}
+\begin{description}
+\oitem{F}{test}
+test
+\oitem{WF}{test}
+test
+\end{description}
+
+\subsection{Benutzerschnittstelle}
+\begin{description}
+\oitem{F}{test}
+test
+\oitem{WF}{test}
+test
+\end{description}
+
+
+\section{Nichtfunktionale Anforderungen und Qualitätsziele}
+
+\begin{description}
+\oitem{NF}{ntest} test
+\end{description}
+
+\section{Userinterface}
+%Form:
+%Name [: Beschreibung]
+%Beschreibung: satz ohne subjekt, also klein und ohne Punkt; Strichpunkt getrennt
+\subsection{Hauptfenster}
+
+%\begin{enumerate}
+%\item
+%\end{enumerate}
+
+%text...
+
+\section{Globale Testfälle und Szenarien}
+% Vorbedinung, Aktionen, Nachbedingung 
+\subsection{Funktionssequenzen}
+Bei allen Testfällen gilt als Vorbedingung, dass \mamid gestartet ist (außer es ist explizit gefordert, dass es gestoppt ist).
+\begin{description}
+\itemsep 1em
+\subsubsection{Kernfunktionen}
+\oitem{TF}{testen} a testcase.
+\testfall[\ref{WK:beschlArc}] %testet:
+    {foo} %vorbedingung
+    {bar} % ablauf
+    {jon} % erwa. ergebnis
+\end{description}
+\subsection{Testszenarien}
+% all. vorbed.
+\begin{description}
+\oitem{TS}{test} blah
+\begin{itemize}
+\item ...
+\end{itemize}
+\end{description}
+
+\subsection{Datenkonsistenzen}
+
+\begin{description}
+\oitem{TD}{blah} blah
+\end{description}
+
+\section{Entwicklungsumgebung}
+\begin{description}
+\item[Team communication] Slack
+\item[Dokumentation] \LaTeX{}
+\item[UML-Planungswerkzeug] UMLet
+\item[IDE] ...
+\item[Qualitätssicherung] ...
+\item[Versionskontrolle] Git
+\end{description}
+% Kevin
+
+\glsaddallunused
+\makeatletter
+\newglossarystyle{myAltlist}{
+  \glossarystyle{altlist} % base this style on altlist
+  \renewcommand*{\glossaryentryfield}[5]{
+  \item[\glsentryitem{##1}\glstarget{##1}{##2}]
+    \mbox{}\par\nobreak\@afterheading
+    ##3\glspostdescription\space On page ##5.
+  }
+}
+\makeatother
+\printglossary[type=main, title={Glossary}, toctitle={Glossary}, style=myAltlist]
+
+\end{document}
