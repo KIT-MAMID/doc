@@ -202,14 +202,32 @@ A single \gls{master} instance coordinates the \gls{slaves'} membership in the \
 
 \subsection{Wunschkriterien}
 \begin{description}
-\oitem{WK}{testwunsch} \gls{Test} wunsch.
+	
+% inventory
+\oitem{WK}{} The \gls{master} auto-discovers new \gls{slaves} on the \gls{administrator's} request.
+\oitem{WK}{} The \gls{master} continuously auto-discovers \gls{slaves}.
+\oitem{WK}{} The \gls{master} monitors reachability of \gls{cluster} \gls{hosts} via ICMP.
 
+% slaves
+\oitem{WK}{} The \gls{administrator} can specify arbitrary \gls{MongoDB} command line parameters per \gls{slave}.
+\oitem{WK}{} The \gls{administrator} can specify a \gls{MongoDB} configuration file template.
+
+% automatic repair
+\oitem{WK}{} The \gls{master} automatically repairs \gls{degraded} \gls{replica sets} with \emph{suitable} \glslink{active mode}{active} \gls{slaves}.
+
+% replica sets
+\oitem{WK}{} The \gls{master} deploys \gls{MongoDB} \gls{arbiters} for configured \gls{replica sets}, removing some restrictions in \ref{MK:replica_set_member_counts}.
+\oitem{WK}{} The \gls{master} exports detailed state information %TODO
+
+% other
+\oitem{WK}{} The \gls{administrator} can interact with \mamid via a \gls{CLI}.
+\oitem{WK}{} The \gls{administrator} can interact with \mamid via a \gls{HTTP API}.
 \end{description}
 
 \subsection{Abgrenzungskriterien}
 \begin{description}
-\oitem{AK}{testak} test ak.
-
+\oitem{AK}{} The \gls{master} does not implement support for higher-layer \gls{MongoDB} features, e.g. \emph{Sharding}.
+\oitem{AK}{} \mamid neither deploys the operating system nor other required software (such as \gls{MongoDB} binaries) to the \gls{cluster} \gls{hosts}.
 \end{description}
 
 \section{Produkteinsatz}
