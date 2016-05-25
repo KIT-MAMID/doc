@@ -168,7 +168,36 @@ A single \gls{master} instance coordinates the \gls{slaves'} membership in the \
 \subsection{Musskriterien}
 
 \begin{description}
-\oitem{MK}{test} test.
+
+\oitem{MK}{} The \gls{administrator} interacts with \mamid through a web \gls{GUI}.
+
+% inventory ops
+\oitem{MK}{} The \gls{master} maintains a list of \gls{slaves} called \gls{inventory}.
+\oitem{MK}{} The \gls{administrator} can add \gls{slaves} to the \gls{inventory}.
+\oitem{MK}{} The \gls{GUI} visualizes the \gls{inventory}.
+\oitem{MK}{} The \gls{administrator} can remove a \gls{slave} in \gls{disabled mode} from the \gls{inventory}.
+\oitem{MK}{} The \gls{administrator} can specify \gls{physical interdependencies} between \gls{inventory} \gls{slaves}.
+
+% inventory ops -> slave
+\oitem{MK}{} The \gls{administrator} can set set a \gls{slave} in the \gls{inventory} to one of the following modes: \gls{active mode}, \gls{maintenance mode}, \gls{disabled mode}.
+\oitem{MK}{} The \gls{administrator} can set a \gls{slave} as either \glslink{persistent storage}{persistent} \glslink{volatile storage}{volatile}.
+\oitem{MK}{} The \gls{administrator} can specify a \gls{root data directory} per \gls{slave}.
+
+% replica set ops
+\oitem{MK}{} The \gls{administrator} can create a new \gls{replica set}.
+\oitem{M}{replica_set_member_counts} The \gls{administrator} can select the counts $p,v \in \mathbb{N}$ of (\glslink{persistent storage}{\textbf{p}ersisent} / \glslink{volatile storage}{\textbf{v}olatile}) \gls{replica set} members, where $(p+v) > 2 \land p >= 1 \land (p+v) odd$.
+\oitem{MK}{} The \gls{GUI} visualized the list of configured \gls{replica sets}.
+\oitem{MK}{} The \gls{administrator} can destroy a \gls{replica set}.
+\otiem{MK}{} The \gls{master} deploys the \gls{replica_set} configuration to the cluster.
+
+% slaves
+\opitem{MK}{} The \gls{slave} controls \gls{MongoDB} processes on the \gls{cluster} \gls{hosts}.
+
+% monitoring features
+\oitem{MK}{detect_slave_unexpected_behavior} The \gls{master} detects when a \gls{slave} in the \gls{inventory} behaves unexpectedly.
+\otiem{MK}{} The \gls{master} informs the \gls{administrator} by e-mail about problems in the cluster (\ref{MK:detect_slave_unexpected_behavior}).
+\oitem{MK}{} The \gls{GUI} visualizes \gls{slaves} behaving unexpectedly (\ref{MK:detect_slave_unexpected_behavior}).
+
 \end{description}
 
 \subsection{Wunschkriterien}
