@@ -7,10 +7,11 @@
 \usepackage{graphicx}
 \usepackage[toc, numberedsection]{glossaries}
 \usepackage{float}
+\usepackage{amssymb}
 
 % TODO: template übersetzten
 
-\makeglossary
+\makeglossaries
 
 %Hack for referencing labels
 \makeatletter
@@ -114,19 +115,99 @@
 \newcommand{\mamid}[0]{\textit{KIT-MAMID} }
 
 % alle Glossareintraege
-\newacronym[longplural=Personenkraftwagen]{pkw}{PKW}{Personenkraftwagen}
-\newacronym[longplural=Lastkraftwagen]{lkw}{LKW}{Lastkraftwagen}
-\newacronym{osm}{OSM}{OpenStreetMap}
 \newacronym{gui}{GUI}{Graphical User Interface}
-\newacronym[longplural={Points of interest}]{poi}{POI}{Point of interest}
-\newacronym{gpx}{GPX}{GPS Exchange Format}
+\newacronym{cli}{CLI}{Command Line Interface}
 
-\newglossaryentry{Test}{
-  name={Test},
+\newglossaryentry{cluster}{
+  name={cluster},
   description={It's something.},
-  plural={Tests}
+  plural={clusters}
 }
-
+\newglossaryentry{MongoDB}{
+	name={MongoDB},
+	description={It's something.},
+	plural={MongoDB}
+}
+\newglossaryentry{replica set}{
+	name={replica set},
+	description={It's something.},
+	plural={replica sets}
+}
+\newglossaryentry{administrator}{
+	name={administartor},
+	description={It's something.},
+	plural={administrators}
+}
+\newglossaryentry{host}{
+	name={host},
+	description={It's something.},
+	plural={hosts}
+}
+\newglossaryentry{slave}{
+	name={slave},
+	description={It's something.},
+	plural={slaves}
+}
+\newglossaryentry{master}{
+	name={master},
+	description={It's something.},
+	plural={masters}
+}
+\newglossaryentry{inventory}{
+	name={inventory},
+	description={It's something.},
+	plural={inventories}
+}
+\newglossaryentry{disabled mode}{
+	name={disabled mode},
+	description={It's something.},
+	plural={}
+}
+\newglossaryentry{physical interdependency}{
+	name={physical interdependency},
+	description={It's something.},
+	plural={physical interdependencies}
+}
+\newglossaryentry{maintenance mode}{
+	name={maintence mode},
+	description={It's something.},
+	plural={}
+}
+\newglossaryentry{persistent storage}{
+	name={persistent storage},
+	description={It's something.},
+	plural={}
+}
+\newglossaryentry{volatile storage}{
+	name={volatile storage},
+	description={It's something.},
+	plural={}
+}
+\newglossaryentry{root data directory}{
+	name={root data directory},
+	description={It's something.},
+	plural={hosts}
+}
+\newglossaryentry{arbiter}{
+	name={arbiter},
+	description={It's something.},
+	plural={hosts}
+}
+\newglossaryentry{degraded}{
+	name={degraded},
+	description={It's something.},
+	plural={hosts}
+}
+\newglossaryentry{HTTP API}{
+	name={HTTP API},
+	description={It's something.},
+	plural={hosts}
+}
+\newglossaryentry{active mode}{
+	name={active mode},
+	description={It's something.},
+	plural={hosts}
+}
 \begin{titlepage}
 \makeatletter
 \begin{center}
@@ -157,26 +238,26 @@ SCC}
 
 % -------------------------------------------------------------- HIER BEGINNT DAS DOKUMENT WIRKLICH ---------------------------------
 \section{Introduction}
-\mamid is a manager for database \gls{clusters}, facilitating creation, administration and monitoring of \gls{MongoDB} \gls{replica sets}.
+\mamid is a manager for database \glspl{cluster}, facilitating creation, administration and monitoring of \gls{MongoDB} \glspl{replica set}.
 
 \mamid assists the \gls{administrator} during initial setup, continuous operation, maintenance cases and expansion of the cluster.
 
 Each cluster \gls{host} runs a \gls{slave} instance of \mamid.
-A single \gls{master} instance coordinates the \gls{slaves'} membership in the \gls{replica sets}.
+A single \gls{master} instance coordinates the \glspl{slave}' membership in the \glspl{replica set}.
 
 \section{Zielbestimmung}
 \subsection{Musskriterien}
 
 \begin{description}
 
-\oitem{MK}{} The \gls{administrator} interacts with \mamid through a web \gls{GUI}.
+\oitem{MK}{} The \gls{administrator} interacts with \mamid through a web \acrshort{gui}.
 
 % inventory ops
-\oitem{MK}{} The \gls{master} maintains a list of \gls{slaves} called \gls{inventory}.
-\oitem{MK}{} The \gls{administrator} can add \gls{slaves} to the \gls{inventory}.
-\oitem{MK}{} The \gls{GUI} visualizes the \gls{inventory}.
+\oitem{MK}{} The \gls{master} maintains a list of \glspl{slave} called \gls{inventory}.
+\oitem{MK}{} The \gls{administrator} can add \glspl{slave} to the \gls{inventory}.
+\oitem{MK}{} The \acrshort{gui} visualizes the \gls{inventory}.
 \oitem{MK}{} The \gls{administrator} can remove a \gls{slave} in \gls{disabled mode} from the \gls{inventory}.
-\oitem{MK}{} The \gls{administrator} can specify \gls{physical interdependencies} between \gls{inventory} \gls{slaves}.
+\oitem{MK}{} The \gls{administrator} can specify \glspl{physical interdependency} between \gls{inventory} \glspl{slave}.
 
 % inventory ops -> slave
 \oitem{MK}{} The \gls{administrator} can set set a \gls{slave} in the \gls{inventory} to one of the following modes: \gls{active mode}, \gls{maintenance mode}, \gls{disabled mode}.
@@ -185,18 +266,18 @@ A single \gls{master} instance coordinates the \gls{slaves'} membership in the \
 
 % replica set ops
 \oitem{MK}{} The \gls{administrator} can create a new \gls{replica set}.
-\oitem{M}{replica_set_member_counts} The \gls{administrator} can select the counts $p,v \in \mathbb{N}$ of (\glslink{persistent storage}{\textbf{p}ersisent} / \glslink{volatile storage}{\textbf{v}olatile}) \gls{replica set} members, where $(p+v) > 2 \land p >= 1 \land (p+v) odd$.
-\oitem{MK}{} The \gls{GUI} visualized the list of configured \gls{replica sets}.
+\oitem{MK}{replica_set_member_counts} The \gls{administrator} can select the counts $p,v \in $ of (\glslink{persistent storage}{\textbf{p}ersisent} / \glslink{volatile storage}{\textbf{v}olatile}) \gls{replica set} members, where $(p+v) > 2 \land p >= 1 \land (p+v) \text{ odd}$.
+\oitem{MK}{} The \acrshort{gui} visualized the list of configured \glspl{replica set}.
 \oitem{MK}{} The \gls{administrator} can destroy a \gls{replica set}.
-\otiem{MK}{} The \gls{master} deploys the \gls{replica_set} configuration to the cluster.
+\oitem{MK}{} The \gls{master} deploys the \gls{replica set} configuration to the cluster.
 
 % slaves
-\opitem{MK}{} The \gls{slave} controls \gls{MongoDB} processes on the \gls{cluster} \gls{hosts}.
+\oitem{MK}{} The \gls{slave} controls \gls{MongoDB} processes on the \gls{cluster} \glspl{host}.
 
 % monitoring features
 \oitem{MK}{detect_slave_unexpected_behavior} The \gls{master} detects when a \gls{slave} in the \gls{inventory} behaves unexpectedly.
-\otiem{MK}{} The \gls{master} informs the \gls{administrator} by e-mail about problems in the cluster (\ref{MK:detect_slave_unexpected_behavior}).
-\oitem{MK}{} The \gls{GUI} visualizes \gls{slaves} behaving unexpectedly (\ref{MK:detect_slave_unexpected_behavior}).
+\oitem{MK}{} The \gls{master} informs the \gls{administrator} by e-mail about problems in the cluster (\ref{MK:detect_slave_unexpected_behavior}).
+\oitem{MK}{} The \acrshort{gui} visualizes \glspl{slave} behaving unexpectedly (\ref{MK:detect_slave_unexpected_behavior}).
 
 \end{description}
 
@@ -204,30 +285,30 @@ A single \gls{master} instance coordinates the \gls{slaves'} membership in the \
 \begin{description}
 	
 % inventory
-\oitem{WK}{} The \gls{master} auto-discovers new \gls{slaves} on the \gls{administrator's} request.
-\oitem{WK}{} The \gls{master} continuously auto-discovers \gls{slaves}.
-\oitem{WK}{} The \gls{master} monitors reachability of \gls{cluster} \gls{hosts} via ICMP.
+\oitem{WK}{} The \gls{master} auto-discovers new \glspl{slave} on the \gls{administrator}'s request.
+\oitem{WK}{} The \gls{master} continuously auto-discovers \glspl{slave}.
+\oitem{WK}{} The \gls{master} monitors reachability of \gls{cluster} \glspl{host} via ICMP.
 
 % slaves
 \oitem{WK}{} The \gls{administrator} can specify arbitrary \gls{MongoDB} command line parameters per \gls{slave}.
 \oitem{WK}{} The \gls{administrator} can specify a \gls{MongoDB} configuration file template.
 
 % automatic repair
-\oitem{WK}{} The \gls{master} automatically repairs \gls{degraded} \gls{replica sets} with \emph{suitable} \glslink{active mode}{active} \gls{slaves}.
+\oitem{WK}{} The \gls{master} automatically repairs \gls{degraded} \glspl{replica set} with \emph{suitable} \glslink{active mode}{active} \glspl{slave}.
 
 % replica sets
-\oitem{WK}{} The \gls{master} deploys \gls{MongoDB} \gls{arbiters} for configured \gls{replica sets}, removing some restrictions in \ref{MK:replica_set_member_counts}.
+\oitem{WK}{} The \gls{master} deploys \gls{MongoDB} \glspl{arbiter} for configured \glspl{replica set}, removing some restrictions in \ref{MK:replica_set_member_counts}.
 \oitem{WK}{} The \gls{master} exports detailed state information %TODO
 
 % other
-\oitem{WK}{} The \gls{administrator} can interact with \mamid via a \gls{CLI}.
+\oitem{WK}{} The \gls{administrator} can interact with \mamid via a \acrshort{cli}.
 \oitem{WK}{} The \gls{administrator} can interact with \mamid via a \gls{HTTP API}.
 \end{description}
 
 \subsection{Abgrenzungskriterien}
 \begin{description}
 \oitem{AK}{} The \gls{master} does not implement support for higher-layer \gls{MongoDB} features, e.g. \emph{Sharding}.
-\oitem{AK}{} \mamid neither deploys the operating system nor other required software (such as \gls{MongoDB} binaries) to the \gls{cluster} \gls{hosts}.
+\oitem{AK}{} \mamid neither deploys the operating system nor other required software (such as \gls{MongoDB} binaries) to the \gls{cluster} \glspl{host}.
 \end{description}
 
 \section{Produkteinsatz}
@@ -345,8 +426,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass \mamid gestartet ist (außer e
 \item[Qualitätssicherung] ...
 \item[Versionskontrolle] Git
 \end{description}
-% Kevin
-
+\newpage
 \glsaddallunused
 \makeatletter
 \newglossarystyle{myAltlist}{
@@ -358,6 +438,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass \mamid gestartet ist (außer e
   }
 }
 \makeatother
+\glsaddall
 \printglossary[type=main, title={Glossary}, toctitle={Glossary}, style=myAltlist]
 
 \end{document}
