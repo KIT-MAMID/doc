@@ -345,6 +345,24 @@ A single \gls{master} instance coordinates the \glspl{slave}' membership in the 
 \end{itemize}
 \section{System model}
 \includegraphics[width=\textwidth]{moduleplan}
+\begin{description}
+	\oitem{SM}{} Master::APIServer
+	\oitem{SM}{} Master::Controller
+	\oitem{SM}{} Master::Inventory
+	\oitem{SM}{} Master::ClusterAllocator
+	\oitem{SM}{} Master::Monitor
+	\oitem{SM}{} MasterSlaveProtocol
+	\oitem{SM}{} Slave::Controller
+	\oitem{SM}{} Slave::MongoDBClient
+	\oitem{SM}{} Slave::ProcessManager
+	%Angular und so...
+	\oitem{SM}{} GUI::Model
+	\oitem{SM}{} GUI::View
+	\oitem{SM}{} GUI::Controller
+	\oitem{SM}{} NotificationManager::MailNotifier
+	\oitem{SM}{} NotificationManager::APIClient
+	\oitem{SM}{} NotificationManager::Controller
+\end{description}
 \section{Funktionale Anforderungen}
 % Format: Substantiviertes Verb am Anfang („Bestimmen von X“, nicht „Bestimmung von X“, „Bestimme X“ oder „X bestimmen”).
 \subsection{Kernfunktionen}
