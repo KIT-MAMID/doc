@@ -347,27 +347,27 @@ A single \gls{master} instance coordinates the \glspl{slave}' membership in the 
 \includegraphics[width=\textwidth]{module_overview}
 \begin{description}
 	\oitem{SM}{masterapiserver} Master::APIServer\\
-	Provides an API for cluster status reporting and administrative activity. %TODO functional refs
+	Provides an API for \gls{cluster} status reporting and administrative activity. %TODO functional refs
  	\oitem{SM}{} Master::Controller\\
 	Controls flow of events between different \gls{master} submodules.
-	Updates the inventory database (SM30) as state change is recognized by the monitor.
-	\oitem{SM}{} Master::Inventory\\
+	Updates the inventory database (\ref{SM:inventory}) as state change is recognized by the monitor.
+	\oitem{SM}{inventory} Master::Inventory\\
 	Database containing
 	\begin{itemize}
-		\item list of slaves and associated state
-		\item list of configured replica sets.
+		\item list of \glspl{slave} and associated state
+		\item list of configured \glspl{replica set}.
 	\end{itemize}
 	\oitem{SM}{} Master::ClusterAllocator\\ %TODO funct ref
-	It lays out the cluster, i.e. decides the distribution of mongod instances onto cluster hosts.\\
-	It respects constraints as described in functional specifications X, Y and Z.\\
-	It communicates with the slaves using SM60 to enforce the cluster layout.
+	It lays out the \gls{cluster}, i.e. decides the distribution of mongod instances onto cluster hosts.\\
+	It respects constraints as described in functional specifications X, Y and Z.\\ %TODO fill refs
+	It communicates with the \glspl{slave} using \ref{SM:masterslaveproto} to enforce the \gls{cluster} layout.
 	\oitem{SM}{} Master::Monitor\\
 	Is responsible for observing whether \glspl{slave} are still alive using \ref{SM:masterslaveproto}.%TODO funct ref: alive
 	\oitem{SM}{masterslaveproto} MasterSlaveProtocol\\
 	Is responsible for communication between \gls{master} and \gls{slave}.
 	\oitem{SM}{} Slave::Controller\\
 	Dispatches instructions to the \glspl{MongoDB} client and 
-	the process manager. It notifies via the MasterSlaveProtocol whether 
+	the process manager. It notifies via \ref{SM:masterslaveproto} whether 
 	operations failed or succeeded as well as not locally recoverable 
 	failures.
 	\oitem{SM}{} Slave::MongoDBClient\\
