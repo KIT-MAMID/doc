@@ -335,13 +335,13 @@ halign=left</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>360</x>
-      <y>104</y>
-      <w>176</w>
-      <h>152</h>
+      <y>112</y>
+      <w>184</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>200.0;10.0;10.0;170.0</additional_attributes>
+    <additional_attributes>210.0;10.0;10.0;160.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
