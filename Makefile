@@ -19,4 +19,6 @@ clean:
 	rm -f functionalSpecification.glg
 	rm -f functionalSpecification.log
 
+	rm -f glossary.aux
+
 	rm -f module_overview.pdf
