@@ -8,6 +8,7 @@
 \usepackage[toc, numberedsection]{glossaries}
 \usepackage{float}
 \usepackage{amssymb}
+\usepackage{url}
 
 % TODO: template übersetzten
 
@@ -161,23 +162,24 @@ A single \gls{master} instance coordinates the \glspl{slave}' membership in the 
 \oitem{MK}{} The \gls{administrator} interacts with \mamid through a web \acrshort{gui}.
 
 % inventory ops
-\oitem{MK}{} The \gls{master} maintains a list of \glspl{slave} called \gls{inventory}.
+\oitem{MK}{inventory_definition} The \gls{master} maintains a list of \glspl{slave} called \gls{inventory}.
 \oitem{MK}{} The \gls{administrator} can add \glspl{slave} to the \gls{inventory}.
 \oitem{MK}{} The \acrshort{gui} visualizes the \gls{inventory}.
 \oitem{MK}{} The \gls{administrator} can remove a \gls{slave} in \gls{disabled mode} from the \gls{inventory}.
-\oitem{MK}{} The \gls{administrator} can specify \glspl{physical interdependency} between \gls{inventory} \glspl{slave}.
+\oitem{MK}{spec_physical_interdep} The \gls{administrator} can specify \glspl{physical interdependency} between \gls{inventory} \glspl{slave}.
 
 % inventory ops -> slave
-\oitem{MK}{} The \gls{administrator} can set set a \gls{slave} in the \gls{inventory} to one of the following modes: \gls{active mode}, \gls{maintenance mode}, \gls{disabled mode}.
-\oitem{MK}{} The \gls{administrator} can set a \gls{slave} as either \glslink{persistent storage}{persistent} \glslink{volatile storage}{volatile}.
-\oitem{MK}{} The \gls{administrator} can specify a \gls{root data directory} per \gls{slave}.
+\oitem{MK}{available_slave_modes} The \gls{administrator} can set set a \gls{slave} in the \gls{inventory} to one of the following modes: \gls{active mode}, \gls{maintenance mode}, \gls{disabled mode}.
+\oitem{MK}{available_slave_types} The \gls{administrator} can set a \gls{slave} as either \glslink{persistent storage}{persistent} \glslink{volatile storage}{volatile}.
+\oitem{MK}{root_data_directory} The \gls{administrator} can specify a \gls{root data directory} per \gls{slave}.
 
 % replica set ops
-\oitem{MK}{} The \gls{administrator} can create a new \gls{replica set}.
+\oitem{MK}{replica_set_create} The \gls{administrator} can create a new \gls{replica set}.
+\oitem{MK}{replica_set_config_profiles} The \gls{administrator} can --- on creation of a replica set (\ref{MK:replica_set_create}) --- specify that it can be used as a configuration server for a sharded-cluster \footnote{\url{https://docs.mongodb.com/manual/core/sharded-cluster-config-servers/\#replica-set-config-servers}}.
 \oitem{MK}{replica_set_member_counts} The \gls{administrator} can select the counts $p,v \in $ of (\glslink{persistent storage}{\textbf{p}ersisent} / \glslink{volatile storage}{\textbf{v}olatile}) \gls{replica set} members, where $(p+v) > 2 \land p >= 1 \land (p+v) \text{ odd}$.
-\oitem{MK}{} The \acrshort{gui} visualized the list of configured \glspl{replica set}.
+\oitem{MK}{} The \acrshort{gui} visualizes the list of configured \glspl{replica set}.
 \oitem{MK}{} The \gls{administrator} can destroy a \gls{replica set}.
-\oitem{MK}{} The \gls{master} deploys the \gls{replica set} configuration to the cluster.
+\oitem{MK}{deploy_replica_set_config} The \gls{master} deploys the \gls{replica set} configuration to the cluster.
 
 % slaves
 \oitem{MK}{} The \gls{slave} controls \gls{MongoDB} processes on the \gls{cluster} \glspl{host}.
@@ -278,7 +280,7 @@ A single \gls{master} instance coordinates the \glspl{slave}' membership in the 
 	the process manager. It notifies via \ref{SM:masterslaveproto} whether 
 	operations failed or succeeded as well as not locally recoverable 
 	failures.
-	\oitem{SM}{} Slave::MongoDBClient\\
+	\oitem{SM}{mongodbclient} Slave::MongoDBClient\\
 	Implements communication with \gls{MongoDB} processes.
 	\oitem{SM}{} Slave::ProcessManager\\
 	Spawns and controls \gls{MongoDB} processes.
@@ -298,30 +300,71 @@ A single \gls{master} instance coordinates the \glspl{slave}' membership in the 
 \end{description}
 \section{Funktionale Anforderungen}
 % Format: Substantiviertes Verb am Anfang („Bestimmen von X“, nicht „Bestimmung von X“, „Bestimme X“ oder „X bestimmen”).
-\subsection{Kernfunktionen}
+
+\subsection{GUI}
+The GUI acts as a frontend to the functionality provided by \ref{SM:masterapiserver}. Hence, all functionality described in this subsection is realized through API calls to the \gls{master}.
 \begin{description}
-\oitem{F}{testtest}
-Test
-\oitem{WF}{testestest}
-test
+	\oitem{F}{} \acrshort{CRUD} list of \glspl{slave} (\gls{inventory}).
+	\oitem{F}{} Specify type of slave (\ref{MK:available_slave_types}) on insertion into inventory.
+	\oitem{F}{} Specify root data directory of slave (\ref{MK:root_data_directory}).
+	\oitem{F}{} \acrshort{CRUD} physical interdependencies (\ref{MK:spec_physical_interdep}) between \gls{host}.
+	\oitem{F}{} Set mode of host (\ref{MK:available_slave_modes}).
+	\oitem{F}{} \acrshort{CRUD} \gls{replica set} configurations (\ref{MK:replica_set_create}).
+	\oitem{F}{} Display error reports (\ref{F:master_api_error_reports}).
 \end{description}
 
-\subsection{Vorberechnung}
+\subsection{Master}
 \begin{description}
-\oitem{F}{test}
-test
-\oitem{WF}{test}
-test
+	% API Server
+	\oitem{F}{} Provide API to \acrshort{CRUD} list of slaves in \gls{inventory} (\ref{MK:inventory_definition}).
+	\oitem{F}{} Provide API to \acrshort{CRUD} physical interdependencies between \glspl{host}.
+	\oitem{F}{} Provide API to set \gls{cluster} host mode (as defined in \ref{MK:available_slave_modes}).
+	\oitem{F}{} Provide API to \acrshort{CRUD} replica set configurations (\ref{MK:replica_set_create}, \ref{MK:replica_set_config_profiles}, \ref{MK:replica_set_member_counts}).
+	\oitem{F}{master_api_error_reports} Provide API to retrieve error reports (\ref{MK:detect_slave_unexpected_behavior}).
+
+	% Monitor
+	\oitem{F}{} Monitor configuration \& state of \gls{MongoDB} instances running on \gls{cluster} hosts (\ref{MK:detect_slave_unexpected_behavior}).
+	% Inventory
+	\oitem{F}{} Persist and provide the cluster configuration \& state (\gls{inventory}).
+	% Controller
+	% Cluster Allocator
+		\oitem{F}{} Lay out the cluster configuration, i.e. decide on a \gls{replica set} configuration
+	\begin{description}
+		\oitem{F}{} respecting physical interdependencies between \gls{cluster} \glspl{host} (\ref{MK:spec_physical_interdep}).
+		\oitem{F}{} respecting constraints given by administrator regarding number of persistent \& volatile replica set members per cluster host (\ref{MK:replica_set_member_counts} and \ref{MK:available_slave_types}).
+		\oitem{F}{} respecting the mode of hosts (\ref{MK:available_slave_modes}).
+	\end{description}
+	\oitem{F}{} Communicate the \gls{MongoDB} instance configuration to the \glspl{slave} (\ref{MK:deploy_replica_set_config}).
 \end{description}
 
-\subsection{Benutzerschnittstelle}
+\subsection{MasterSlaveProtocol}
 \begin{description}
-\oitem{F}{test}
-test
-\oitem{WF}{test}
-test
+	\oitem{F}{} Transport \gls{replica set} configuration description of \gls{cluster} \glspl{host}.
+	\oitem{F}{} Transport reachability check messages.
+	% Wunschkriterien erweiteretes Monitoring
 \end{description}
 
+\subsection{Slave}
+\begin{description}
+	% Process manager
+	\oitem{F}{} Spawn / Control / Kill \gls{MongoDB} processes.
+	% MongoDB Client
+	\oitem{F}{} Communicate with \gls{MongoDB} processes using \ref{SM:mongodbclient}.
+	% Controller
+	\oitem{F}{} Enforce configuration description received from \gls{master} through \ref{SM:masterslaveproto} (also: \ref{MK:deploy_replica_set_config}). 
+	\oitem{F}{} Report current configuration through \ref{SM:masterslaveproto}.
+\end{description}
+
+\subsection{NotificationManager}
+\begin{description}
+	% API Client
+	\oitem{F}{} Consume error reporting API of \gls{master} \ref{F:master_api_error_reports}.
+	% Controller
+	\oitem{F}{} Send error reports from \ref{F:master_api_error_reports} to configured list of contacts.
+	\oitem{F}{} Read configured list of contacts from a text-based configuration file.
+	% Mail Notifier
+	\oitem{F}{} Send error reports via \glslink{email}{e-mail messages} to a contact's email address.
+\end{description}
 
 \section{Nichtfunktionale Anforderungen und Qualitätsziele}
 
