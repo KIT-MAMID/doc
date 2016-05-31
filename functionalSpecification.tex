@@ -256,8 +256,9 @@ A single \gls{master} instance coordinates the \glspl{slave}' membership in the 
 \begin{itemize}
 \item foo
 \end{itemize}
-\section{System model}
+\section{System Model}
 \includegraphics[width=\textwidth]{module_overview}
+\subsection{Master}\label{SM:Master}
 \begin{description}
 	\oitem{SM}{masterapiserver} Master::APIServer\\
 	Provides an \acrshort{API} for \gls{cluster} status reporting and administrative activity. %TODO functional refs
@@ -270,14 +271,20 @@ A single \gls{master} instance coordinates the \glspl{slave}' membership in the 
 		\item list of \glspl{slave} and associated state
 		\item list of configured \glspl{replica set}.
 	\end{itemize}
-	\oitem{SM}{} Master::ClusterAllocator\\ %TODO funct ref
+	\oitem{SM}{master_clusterallocator} Master::ClusterAllocator\\ %TODO funct ref
 	It lays out the \gls{cluster}, i.e. decides the distribution of mongod instances onto cluster hosts.\\
 	It respects constraints as described in functional specifications X, Y and Z.\\ %TODO fill refs
 	It communicates with the \glspl{slave} using \ref{SM:masterslaveproto} to enforce the \gls{cluster} layout.
-	\oitem{SM}{} Master::Monitor\\
+	\oitem{SM}{master_monitor} Master::Monitor\\
 	Is responsible for observing whether \glspl{slave} are still alive using \ref{SM:masterslaveproto}.%TODO funct ref: alive
+\end{description}
+\subsection{MasterSlaveProtocol}\label{SM:MasterSlaveProtocol}
+\begin{description}
 	\oitem{SM}{masterslaveproto} MasterSlaveProtocol\\
 	Is responsible for communication between \gls{master} and \gls{slave}.
+\end{description}
+\subsection{Slave}\label{SM:Slave}
+\begin{description}
 	\oitem{SM}{} Slave::Controller\\
 	Dispatches instructions to the \glspl{MongoDB} client and 
 	the process manager. It notifies via \ref{SM:masterslaveproto} whether 
@@ -287,6 +294,9 @@ A single \gls{master} instance coordinates the \glspl{slave}' membership in the 
 	Implements communication with \gls{MongoDB} processes.
 	\oitem{SM}{} Slave::ProcessManager\\
 	Spawns and controls \gls{MongoDB} processes.
+\end{description}
+\subsection{GUI}\label{SM:GUI}
+\begin{description}
 	%Angular und so...
 	\oitem{SM}{gui_model} GUI::Model\\
 	Data structures representing \mamid entities that are displayed or managed through the web interface (\ref{SM:gui_view}).
@@ -294,11 +304,14 @@ A single \gls{master} instance coordinates the \glspl{slave}' membership in the 
 	Web interface and its UI elements.
 	\oitem{SM}{} GUI::Controller\\
 	Handles UI intercation, updates model and asserts semantic consistency between \ref{SM:gui_view} and \ref{SM:gui_model}.
+\end{description}
+\subsection{NotificationManager}\label{SM:NotificationManager}
+\begin{description}
 	\oitem{SM}{notif_mail} NotificationManager::MailNotifier\\
 	Sends e-mail messages.
 	\oitem{SM}{notif_apiclient} NotificationManager::APIClient\\
 	\acrshort{API} client for \ref{SM:masterapiserver}.
-	\oitem{SM}{} NotificationManager::Controller\\
+	\oitem{SM}{notif_controller} NotificationManager::Controller\\
 	Uses \ref{SM:notif_apiclient} and \ref{SM:notif_mail} to implement notification of the \gls{administrator}.
 \end{description}
 
@@ -311,7 +324,7 @@ List of tuples containing the following data
 \begin{description}
 	\oitem{D}{} hostname
 	\oitem{D}{} slave port $\in \mathbb{N}$
-	\oitem{D}{} mongod-portrange $\in \{{[i, j]} \mid i,j \in \mathbb{N}\}$
+	\oitem{D}{slave_mongod_portrange} mongod-portrange $\in \{{[i, j]} \mid i,j \in \mathbb{N}\}$ (also speportrangecifies how many mongod instances may run on the slave)
 	\oitem{D}{} persistency $\in \{persistent, volatile\}$
 	\oitem{D}{} root data directory
 	\oitem{D}{} mode $\in \{\text{active}, \text{maintenance}, \text{disabled}\}$
@@ -483,11 +496,89 @@ Bei allen Testfällen gilt als Vorbedingung, dass \mamid gestartet ist (außer e
 \end{description}
 \subsection{Testszenarien}
 % all. vorbed.
+Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the tester's browser. %TODO ref home page
+
 \begin{description}
-\oitem{TS}{test} blah
+
+\oitem{TS}{} Adding Machines to the Cluster\\
+Precondition: A machine $M$ with installed \gls{slave} software is connected to the \gls{cluster} network. The \gls{administrator} configures that the \gls{slave} software is started on boot.
 \begin{itemize}
-\item ...
+	\item The \gls{administrator} navigates to the 'slave management section' in the \hyperref[SM:GUI]{GUI}.
+	\item The \gls{administrator} adds the slave $S$ on $M$ using the 'add slave form'. %TODO ref testseq and ui
+	\item The \gls{administrator} sets $S$ from \gls{disabled mode} to \gls{active mode}.
 \end{itemize}
+
+\oitem{TS}{} Removing Machines from the Cluster \\
+Precondition: A machine $M$ with installed \gls{slave} software shall be removed from the cluster.
+\begin{itemize}
+	\item The \gls{administrator} navigates to the 'slave management section' in the \hyperref[SM:GUI]{GUI}.
+	\item The \gls{administrator} selects the slave $S$ and sets it to \gls{disabled mode}. %TODO ref testseq and ui
+	\item The \hyperref[SM:Master]{master} determines a new cluster layout to repair $S$'s former \glspl{replica set}.
+	\item The \hyperref[SM:Master]{master} communicates the desired configuration to the appropriate \glspl{slave}.
+	\item The \hyperref[SM:GUI]{GUI} now allows the \gls{administrator} to delete the slave $S$ from the \gls{inventory}.
+	\item The \gls{administrator} deletes the slave $S$ from the \gls{inventory}. %TODO ref testseq and ui
+	\item The \gls{administrator} can now physically remove $M$ from the cluster.
+\end{itemize}
+
+\oitem{TS}{} Temporarily Unreachable Slave \\
+Precondition: A slave becomes unreachable because of broken network cable.
+\begin{itemize}
+	\item \hyperref[SM:NotificationManager]{NotificationManager} sends an e-mail notification to the \gls{administrator}.
+	\item \glslink{administrator}{Administrator} responds to e-mail notification by opening the 'error reports' section in web interface %TODO ref
+	\item \hyperref[SM:GUI]{GUI} offers to set slave into \glslink{maintenance mode}{maintenance} or \gls{disabled mode}.
+	\item \glslink{administrator}{Administrator} does not choose either of the options but replaces the broken cable.
+	\item \hyperref[SM:Master]{Master} reaches the slave again.
+	\item \hyperref[SM:Master]{Master} determines that configuration is still as expected.
+	\item \hyperref[SM:Master]{Master} removes the slave from the error report.
+\end{itemize}
+
+\oitem{TS}{} Defective Slave \\
+Precondition: A slave $S$ becomes permanently unreachable because there was a short-circuit on its mainboard which needs to be replaced. The admin has no spare mainboards left and has to wait for replacement hardware to arrive. However, there is at least one \glslink{active mode}{active} slave allowed to take over the role of the failed one.
+\begin{itemize}
+	\item After $S$ becomes unavailable the \hyperref[SM:NotificationManager]{NotificationManager} sends an e-mail notification to the \gls{administrator}.
+	\item \glslink{administrator}{Administrator} responds to e-mail notification by opening the 'error reports' section in web interface %TODO ref
+	\item \hyperref[SM:GUI]{GUI} offers to set $S$ into \glslink{maintenance mode}{maintenance} or \gls{disabled mode}.
+	\item \glslink{administrator}{Administrator} chooses \gls{disabled mode}.
+	\item \hyperref[SM:Master]{Master} selects slave $S'$ as a replacement for $S$ and communicates the appropriate configuration to $S'$
+	\item $S'$ starts a new \gls{MongoDB} process and enforces the received configuration.
+	\item \hyperref[SM:Master]{Master} detects successful configuration of $S'$.
+	\item \hyperref[SM:Master]{Master} removes $S$ from the error report.
+\end{itemize}
+
+\oitem{TS}{} System Maintenance \\
+Precondition: A slave $S$ needs to be rebooted to install security updates to the installed software.
+\begin{itemize}
+	\item The \gls{administrator} navigates to the 'slave management section' in the \hyperref[SM:GUI]{GUI}. %TODO ui ref
+	\item The \gls{administrator} selects $S$ and sets it to \gls{maintenance mode}.
+	\item The \gls{administrator} installs the security updates and reboots the machine (killing the \gls{slave} instance and all \gls{MongoDB} instances).
+	\item The \gls{slave} process $S$ is restarted by the system's service manager after reboot.
+	\item The \gls{administrator} sets $S$ back to \gls{active mode}.
+	\item The \hyperref[SM:Master]{master} communicates the desired configuration to $S$.
+	\item $S$ starts the \gls{MongoDB} processes and configures replica set membership if required by the communicated configuration.
+\end{itemize}
+
+
+\oitem{TS}{} Adding a Replica Set \\
+The \gls{administrator} wants to add a replica set with $p \in \mathbb{N}$ persistent members and $v \in \mathbb{N}$ volatile members. $(p+v) >= 3 \land (p+v) is odd$. Enough \glspl{slave} with sufficient free \gls{MongoDB} \hyperref[D:slave_mongod_portrange]{ports} are available.
+\begin{itemize}
+	\item Navigate to 'replica set management section' %TODO ref ui
+	\item Add a new replica set $R$ using the 'add replica set form' with constraints $p$ and $v$. %TODO ref ui and testsequence
+	\item The \hyperref[SM:Master]{master} finds appropriate \glspl{slave} for hosting members of $R$ (\hyperref[SM:master_clusterallocator]{Master::ClusterAllocator}).
+	\item The \hyperref[SM:Master]{master} communicates the desired configuration to the appropriate \glspl{slave} $Z$.
+	\item The \glspl{slave} in $Z$ apply the received configuration.
+\end{itemize}
+
+\oitem{TS}{} Destroying a Replica Set \\
+The \gls{administrator} wants to destroy a \gls{replica set}.
+\begin{itemize}
+		\item Navigate to 'replica set management section' %TODO ref ui
+		\item The \gls{administrator} selects the replica set $R$ and clicks the remove button % TODO ref testseq and ui
+		\item The \hyperref[SM:GUI]{GUI} prompts the \gls{administrator} for confirmation.
+		\item The \gls{administrator} confirms the removal.
+		\item The \hyperref[SM:Master]{master} persists the change and communicates to the \glspl{slave} that host members of $R$ to kill the respective \gls{MongoDB} processes.
+		\item The \glspl{slave} apply the received instructions.
+\end{itemize}
+
 \end{description}
 
 \subsection{Datenkonsistenzen}
