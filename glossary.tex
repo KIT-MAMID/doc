@@ -9,49 +9,49 @@
 
 
 \newglossaryentry{cluster}{
-  name={cluster},
-  description={It's something.},
-  plural={clusters}
+	name={cluster},
+	description={Aggregation of multiple servers},
+	plural={clusters}
 }
 \newglossaryentry{MongoDB}{
 	name={MongoDB},
-	description={It's something.},
+	description={A NoSQL based database server},
 	plural={MongoDB}
 }
 \newglossaryentry{replica set}{
 	name={replica set},
-	description={It's something.},
+	description={Multiple \gls{MongoDB} databases distributed over multiple hosts sharing a copy of the same data},
 	plural={replica sets}
 }
 \newglossaryentry{administrator}{
 	name={administrator},
-	description={It's something.},
+	description={The person responsible for managing the \gls{MongoDB} \glspl{replica set} and \glspl{slave} configurations},
 	plural={administrators}
 }
 \newglossaryentry{host}{
 	name={host},
-	description={It's something.},
+	description={Network node having an unique hostname and IP address},
 	plural={hosts}
 }
 \newglossaryentry{slave}{
 	name={slave},
-	description={It's something.},
+	description={Program managing local \gls{MongoDB} instances or the \gls{Host} running it},
 	plural={slaves}
 }
 \newglossaryentry{master}{
 	name={master},
-	description={It's something.},
+	description={Program responsible for managaing slaves and providing access to the exterior},
 	plural={masters}
 }
 \newglossaryentry{inventory}{
 	name={inventory},
-	description={It's something.},
+	description={Persistent storage of configuration and slave state},
 	plural={inventories}
 }
 \newglossaryentry{disabled mode}{
 	name={disabled mode},
-	description={It's something.},
-	plural={}
+	description={Marks the slave as unavailable and dissociates it with any replica set it was involved in},
+	plural={disabled modes}
 }
 \newglossaryentry{physical interdependency}{
 	name={physical interdependency},
@@ -60,47 +60,46 @@
 }
 \newglossaryentry{maintenance mode}{
 	name={maintence mode},
-	description={It's something.},
-	plural={}
+	description={Marks the slave as unavailable, but does not affect any replica set the slave is involved in},
+	plural={maintenance modes}
 }
 \newglossaryentry{persistent storage}{
 	name={persistent storage},
-	description={It's something.},
-	plural={}
+	description={Storage backed up by a physical backend},
+	plural={persistent storages}
 }
 \newglossaryentry{volatile storage}{
 	name={volatile storage},
-	description={It's something.},
-	plural={}
+	description={Storage residing purely in memory and not persisting through restarts},
+	plural={volatile storages}
 }
 \newglossaryentry{root data directory}{
 	name={root data directory},
-	description={It's something.},
-	plural={hosts}
+	description={Base directory holding all the physical data of a \gls{MongoDB} instance},
+	plural={root data directories}
 }
 \newglossaryentry{arbiter}{
 	name={arbiter},
-	description={It's something.},
+	description={In task of breaking ties on a \gls{replica set} in case there is an even number of members},
 	plural={arbiters}
 }
 \newglossaryentry{degraded}{
 	name={degraded},
-	description={It's something.},
-	plural={hosts}
+	description={State the \gls{slave} will be in if unreachable or who is reporting a failure it cannot recover from automatically},
+	plural={degraded}
 }
 \newglossaryentry{HTTP API}{
 	name={HTTP API},
-	description={It's something.},
-	plural={hosts}
+	description={API to be accessed over the HTTP protocol for communication with the \gls{master}},
+	plural={HTTP_APIs}
 }
 \newglossaryentry{active mode}{
 	name={active mode},
-	description={It's something.},
-	plural={hosts}
+	description={Marks the slave as available for inclusion in (new) \gls{replica sets}},
+	plural={active modes}
 }
-
 \newglossaryentry{email}{
 	name={e-mail},
-	description={It's something.},
+	description={If you needed to look this up, you don't deserve being on the internet},
 	plural={e-mails}
 }
