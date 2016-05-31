@@ -154,8 +154,8 @@ SCC}
 Each cluster \gls{host} runs a \gls{slave} instance of \mamid.
 A single \gls{master} instance coordinates the \glspl{slave}' membership in the \glspl{replica set}.
 
-\section{Zielbestimmung}
-\subsection{Musskriterien}
+\section{Objectives \& Criteria}
+\subsection{Must-Have Criteria}
 
 \begin{description}
 
@@ -191,7 +191,7 @@ A single \gls{master} instance coordinates the \glspl{slave}' membership in the 
 
 \end{description}
 
-\subsection{Wunschkriterien}
+\subsection{Optional Criteria}
 \begin{description}
 	
 % master
@@ -219,30 +219,30 @@ A single \gls{master} instance coordinates the \glspl{slave}' membership in the 
 \oitem{WK}{http_api} The \gls{administrator} can interact with \mamid via a stable, documented \acrshort{HTTP} \acrshort{API}.
 \end{description}
 
-\subsection{Abgrenzungskriterien}
+\subsection{Demarcation Criteria}
 \begin{description}
 \oitem{AK}{} The \gls{master} does not implement support for higher-layer \gls{MongoDB} features, e.g. \emph{Sharding}.
 \oitem{AK}{} \mamid neither deploys the operating system nor other required software (such as \gls{MongoDB} binaries) to the \gls{cluster} \glspl{host}.
 \end{description}
 
-\section{Produkteinsatz}
+\section{Product Usage}
 
-\subsection{Anwendungsbereiche}
+\subsection{Scope of Application}
 \begin{itemize}
 \item foo
 \end{itemize}
 
-\subsection{Zielgruppe}
+\subsection{Target Users}
 \begin{itemize}
 \item foo
 \end{itemize}
 
-\subsection{Betriebsbedingungen}
+\subsection{Operating Conditions}
 \begin{itemize}
 \item zu Hause (test)
 \end{itemize}
 
-\section{Produktumgebung}
+\section{Environment}
 %Kevin
 
 \subsection{Software}\label{subsec:Software}
@@ -258,6 +258,7 @@ A single \gls{master} instance coordinates the \glspl{slave}' membership in the 
 \end{itemize}
 \section{System Model}
 \includegraphics[width=\textwidth]{module_overview}
+%TODO state diagram (-> Anton's laptop)
 \subsection{Master}\label{SM:Master}
 \begin{description}
 	\oitem{SM}{masterapiserver} Master::APIServer\\
@@ -316,6 +317,7 @@ A single \gls{master} instance coordinates the \glspl{slave}' membership in the 
 \end{description}
 
 \section{Product Data}
+
 \subsection{Inventory (contains slaves)}\label{D:Inventory}
 % hostname(PRIMARY KEY) | slaveport | mongod-portrange | persistent/volatile | root data directory | mode (active, maint, disabled)
 
@@ -360,13 +362,13 @@ List of tuples containing the following data
 	\oitem{D}{} Mutually disjoint sets of \glspl{slave}, denoting which \glspl{slave} must not be member of the same \gls{replica set}.
 \end{description}
 
-\section{Datenkonsistenzen}
+\section{Product Data Consistencies}
 
 \begin{description}
 	\oitem{TD}{blah} blah
 \end{description}
 
-\section{Funktionale Anforderungen}
+\section{Functional Requirements}
 % Format: Substantiviertes Verb am Anfang („Bestimmen von X“, nicht „Bestimmung von X“, „Bestimme X“ oder „X bestimmen”).
 
 %TODO cli paramters + config file template wf spezifizieren
@@ -463,7 +465,7 @@ The \acrshort{cli} is an optional functional requirement. It acts as a frontend 
 	\oitem{WF}{} Display replication status of the configured \glspl{replica set}.
 \end{description}
 
-\section{Nichtfunktionale Anforderungen und Qualitätsziele}
+\section{Non-Functional Requirements and Restrictions}
 
 \begin{description}
 	\oitem{NF}{} The \hyperref[SM:masterapiserver]{Master API} protocol is \acrshort{JSON} over \acrshort{HTTP}.
@@ -484,11 +486,10 @@ The \acrshort{cli} is an optional functional requirement. It acts as a frontend 
 	\item[Source Control Management] Git
 \end{description}
 
-\section{Userinterface}
+\section{\acrfull{gui}}
 %Form:
 %Name [: Beschreibung]
 %Beschreibung: satz ohne subjekt, also klein und ohne Punkt; Strichpunkt getrennt
-\subsection{Hauptfenster}
 
 %\begin{enumerate}
 %\item
@@ -496,9 +497,9 @@ The \acrshort{cli} is an optional functional requirement. It acts as a frontend 
 
 %text...
 
-\section{Globale Testfälle und Szenarien}
+\section{Test Cases and Scenarios}
 % Vorbedinung, Aktionen, Nachbedingung 
-\subsection{Funktionssequenzen}
+\subsection{Test Cases}
 Bei allen Testfällen gilt als Vorbedingung, dass \mamid gestartet ist (außer es ist explizit gefordert, dass es gestoppt ist).
 \begin{description}
 \itemsep 1em
@@ -509,7 +510,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass \mamid gestartet ist (außer e
     {bar} % ablauf
     {jon} % erwa. ergebnis
 \end{description}
-\subsection{Testszenarien}
+\subsection{Scenarios}
 % all. vorbed.
 Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the tester's browser. %TODO ref home page
 
