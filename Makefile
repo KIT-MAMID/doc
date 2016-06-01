@@ -9,7 +9,7 @@ SCREENSHOTS_BASE_URL ?=http://127.0.0.1:5000
 
 # Internal commands
 UMLET_CONVERT = $(JAVA) -jar $(UMLET_JAR) -action=convert -format=pdf -filename=$(1) -output=$(2)
-CUTYCAPT=$(XVFB_RUN) $(CUTYCAPT_BIN) --min-width=1024 --min-height=600 --url=$(SCREENSHOTS_BASE_URL)$(1) --out=$(2)
+CUTYCAPT=$(XVFB_RUN) $(CUTYCAPT_BIN) --min-width=1920 --min-height=1080  --user-style-string="html, body { max-height: 1080px; overflow: hidden;}" --url=$(SCREENSHOTS_BASE_URL)$(1) --out=$(2)
 
 # Internal vars (extend as needed)
 UMLET_PDFS = module_overview.pdf state_diagram.pdf cluster_layout.pdf hardware_layout.pdf
