@@ -528,15 +528,17 @@ The \acrshort{cli} is an optional functional requirement. It acts as a frontend 
 
 \subsection{Constraints}
 \begin{description}
-	\item[Implementation Languages]
+	\oitem{NF}{} The \hyperref[SM:masterapiserver]{Master API} protocol is \acrshort{JSON} over \acrshort{HTTP}.
+	\oitem{NF}{} The \hyperref[SM:masterapiserver]{Master API} is stateless.
+	\oitem{NF}{} Implementation Languages
 	\begin{itemize}
 		\item Golang (\hyperref[SM:Master]{Master}, \hyperref[SM:Slave]{Slave}, \hyperref[SM:MasterSlaveProtocol]{MasterSlaveProtocol}, \hyperref[SM:NotificationManager]{NotificationManager})
-		\item HTML, CSS, JavaScript (\hyperref[SM:GUI])
+		\item HTML, CSS, JavaScript (\hyperref[SM:GUI]{GUI})
 	\end{itemize}
-	\item[Team Communication] Slack, GitHub, \glslink{email}{E-Mail}
-	\item[Documentation] \LaTeX{}
-	\item[UML-Designer] UMLet
-	\item[Version Control] Git
+	\oitem{NF}{} Team Communication: Slack, GitHub, \glslink{email}{E-Mail}
+	\oitem{NF}{} Documentation: \LaTeX{}
+	\oitem{NF}{} UML-Designer UMLet
+	\oitem{NF}{} Version Control: Git
 	%TODO \item[Quality Assurance] ... %TODO
 \end{description}
 
