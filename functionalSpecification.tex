@@ -262,13 +262,23 @@ A single \gls{master} instance coordinates the \glspl{slave}' membership in the 
 \section{Environment}
 \subsection{Software}\label{subsec:Software}
 \begin{itemize}
-\item Primary Target Operating System: Open Indiana Build 151a9 (Illumos Kernel)
+\item Primary Target Operating System: Open Indiana Build 151a9 (Illumos Kernel, 64bit)
 \item MongoDB version 3.2
 \end{itemize}
 
 \subsection{Hardware}
 
 Each of the subsequently listed requirements describes the previously defined ones.
+
+\subsubsection{Cluster Hosts Hardware}
+\begin{itemize}
+	\item 64bit amd64 Instruction Set
+	\item Sufficient \glslink{persistent storage}{persistent} or \gls{volatile storage} to hold the required \gls{MongoDB} data. \\
+	      Up to $1GB$ file storage for \mamid applications.
+	\begin{itemize}
+		\item \textbf{Note}: fewer \glspl{host} with \gls{persistent storage} may require the \gls{persistent storage} on these \glspl{host} to be larger.
+	\end{itemize}
+\end{itemize}
 
 \subsubsection{Deployment of the Cluster}
 \begin{itemize}
