@@ -413,8 +413,12 @@ List of tuples containing the following data
 \section{Product Data Consistencies}
 
 \begin{description}
-	\oitem{TD}{blah} blah
+	%Ports
+	\oitem{DC}{} The port of a mongod process must be inside the mongod-portrange of the slave it is running on
+	\oitem{DC}{} The combination of mongod hostname and mongod port must be unique
+	\oitem{DC}{} The slave port must not be inside the mongod-portrange
 \end{description}
+
 
 \section{Functional Requirements}
 % Format: Substantiviertes Verb am Anfang („Bestimmen von X“, nicht „Bestimmung von X“, „Bestimme X“ oder „X bestimmen”).
