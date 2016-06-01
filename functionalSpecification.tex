@@ -372,7 +372,7 @@ A slave can be in the following states:
 	\item \glslink{maintenance mode}{maintenance}\\
 	\mamid does not monitor \glspl{slave} in maintenance mode, but also does not alter the \gls{replica set}.
 	\item \glslink{disabled mode}{disabled}\\
-	\mamid dissociates \glspl{slave} in disabled mode with any \glspl{replica set} they may be member of.
+	\mamid dissociates \glspl{slave} in disabled mode with any \glspl{replica set} they may be member of. This means all mongod instances running on the slave are shut down.
 \end{itemize}
 All state changes apart from active $\leftrightarrow$ unknown have to be triggered by the \gls{administrator}. If \ref{WK:deploy_arbiters} is implemented the state change unknown $\rightarrow$ disabled can be triggered automatically.
 
