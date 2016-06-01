@@ -6,7 +6,7 @@ JAVA ?= `which java`
 UMLET_CONVERT = $(JAVA) -jar $(UMLET_JAR) -action=convert -format=pdf -filename=$(1) -output=$(2)
 
 # Internal vars (extend as needed)
-UMLET_PDFS = module_overview.pdf state_diagram.pdf
+UMLET_PDFS = module_overview.pdf state_diagram.pdf cluster_layout.pdf hardware_layout.pdf
 
 # Targets
 all: $(UMLET_PDFS)
