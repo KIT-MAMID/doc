@@ -51,17 +51,17 @@
 }
 \newglossaryentry{active mode}{
 	name={active mode},
-	description={Marks the \gls{slave} as available for inclusion in \glspl{replica set}},
+	description={Marks the \gls{slave} as available to host \gls{MongoDB} processes that are be part of \glspl{replica set}.},
 	plural={active modes}
 }
 \newglossaryentry{maintenance mode}{
-	name={maintence mode},
-	description={Marks the \gls{slave} as unavailable, but does not affect the \gls{replica set} configuration the \gls{slave} is involved in},
+	name={maintenance mode},
+	description={Marks the \gls{slave} as unavailable \& inhibits reconfiguration through \gls{master}, but does not otherwise affect running \gls{MongoDB} instances on the \gls{host}.},
 	plural={maintenance modes}
 }
 \newglossaryentry{disabled mode}{
 	name={disabled mode},
-	description={Marks the \gls{slave} as unavailable and dissociates it with any \gls{replica set} it was a member of.},
+	description={A \gls{slave} in this mode does not run any \gls{MongoDB} instances controlled by the \gls{master}, hence has no \gls{MongoDB} instances in any \gls{replica set}.},
 	plural={disabled modes}
 }
 \newglossaryentry{physical interdependency}{
