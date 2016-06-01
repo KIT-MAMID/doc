@@ -179,6 +179,8 @@ Maintenance of individual \glspl{host}, growing \& shrinking of the cluster, etc
 \section{Objectives \& Criteria}
 \subsection{Must-Have Criteria}
 
+\subsubsection{Cluster Description by Administrator}
+% TODO analyze whether the given criteria can be phrased more abstractly \& move the details to (new) functional requirements. (-> forward lookup references from criteria to functional requirement if required)
 \begin{description}
 
 \oitem{MK}{} The \gls{administrator} interacts with \mamid through a web \acrshort{gui}.
@@ -202,7 +204,10 @@ Maintenance of individual \glspl{host}, growing \& shrinking of the cluster, etc
 \oitem{MK}{} The \acrshort{gui} visualizes the list of configured \glspl{replica set}.
 \oitem{MK}{} The \gls{administrator} can destroy a \gls{replica set}.
 \oitem{MK}{deploy_replica_set_config} The \gls{master} deploys the \gls{replica set} configuration to the cluster.
+\end{description}
 
+\subsubsection{MongoDB Configuration}
+\begin{description}
 % slaves
 \oitem{MK}{} The \gls{slave} controls \gls{MongoDB} processes on the \gls{cluster} \glspl{host}.
 
