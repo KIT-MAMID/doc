@@ -8,6 +8,8 @@
 \usepackage[toc, numberedsection]{glossaries}
 \usepackage{float}
 \usepackage{amssymb}
+\usepackage{calc}
+\usepackage{enumitem} 
 \usepackage{url}
 
 % TODO: template übersetzten
@@ -88,6 +90,16 @@
     \item[Ablauf] #3
     \item[Erwartetes Ergebnis] #4
   \end{description}
+}
+
+\newcommand{\testsequence}[3][]{
+	\begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Preconditions}]
+		\ifthenelse{\equal{#1}{}}
+		{} % optional argument #1 is empty: skip
+		{\item[Tests] #1}
+		\item[Preconditions] #2
+		\item[Steps] #3
+	\end{description}
 }
 
 \begin{document}
@@ -516,84 +528,129 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 
 \begin{description}
 
-\oitem{TS}{} Adding Machines to the Cluster\\
-Precondition: A machine $M$ with installed \gls{slave} software is connected to the \gls{cluster} network. The \gls{administrator} configures that the \gls{slave} software is started on boot.
-\begin{itemize}
-	\item The \gls{administrator} navigates to the 'slave management section' in the \hyperref[SM:GUI]{GUI}.
-	\item The \gls{administrator} adds the slave $S$ on $M$ using the 'add slave form'. %TODO ref testseq and ui
-	\item The \gls{administrator} sets $S$ from \gls{disabled mode} to \gls{active mode}.
-\end{itemize}
+\oitem{TS}{} Adding Machines to the Cluster
+\testsequence
+[]
+{
+	A machine $M$ with installed \gls{slave} software is connected to the \gls{cluster} network. The \gls{administrator} configures that the \gls{slave} software is started on boot.
+}
+{
+	\begin{itemize}
+		\item The \gls{administrator} navigates to the 'slave management section' in the \hyperref[SM:GUI]{GUI}.
+		\item The \gls{administrator} adds the slave $S$ on $M$ using the 'add slave form'. %TODO ref testseq and ui
+		\item The \gls{administrator} sets $S$ from \gls{disabled mode} to \gls{active mode}.
+	\end{itemize}
+}
 
-\oitem{TS}{} Removing Machines from the Cluster \\
-Precondition: A machine $M$ with installed \gls{slave} software shall be removed from the cluster.
-\begin{itemize}
-	\item The \gls{administrator} navigates to the 'slave management section' in the \hyperref[SM:GUI]{GUI}.
-	\item The \gls{administrator} selects the slave $S$ and sets it to \gls{disabled mode}. %TODO ref testseq and ui
-	\item The \hyperref[SM:Master]{master} determines a new cluster layout to repair $S$'s former \glspl{replica set}.
-	\item The \hyperref[SM:Master]{master} communicates the desired configuration to the appropriate \glspl{slave}.
-	\item The \hyperref[SM:GUI]{GUI} now allows the \gls{administrator} to delete the slave $S$ from the \gls{inventory}.
-	\item The \gls{administrator} deletes the slave $S$ from the \gls{inventory}. %TODO ref testseq and ui
-	\item The \gls{administrator} can now physically remove $M$ from the cluster.
-\end{itemize}
-
-\oitem{TS}{} Temporarily Unreachable Slave \\
-Precondition: A slave becomes unreachable because of broken network cable.
-\begin{itemize}
-	\item \hyperref[SM:NotificationManager]{NotificationManager} sends an e-mail notification to the \gls{administrator}.
-	\item \glslink{administrator}{Administrator} responds to e-mail notification by opening the 'error reports' section in web interface %TODO ref
-	\item \hyperref[SM:GUI]{GUI} offers to set slave into \glslink{maintenance mode}{maintenance} or \gls{disabled mode}.
-	\item \glslink{administrator}{Administrator} does not choose either of the options but replaces the broken cable.
-	\item \hyperref[SM:Master]{Master} reaches the slave again.
-	\item \hyperref[SM:Master]{Master} determines that configuration is still as expected.
-	\item \hyperref[SM:Master]{Master} removes the slave from the error report.
-\end{itemize}
-
-\oitem{TS}{} Defective Slave \\
-Precondition: A slave $S$ becomes permanently unreachable because there was a short-circuit on its mainboard which needs to be replaced. The admin has no spare mainboards left and has to wait for replacement hardware to arrive. However, there is at least one \glslink{active mode}{active} slave allowed to take over the role of the failed one.
-\begin{itemize}
-	\item After $S$ becomes unavailable the \hyperref[SM:NotificationManager]{NotificationManager} sends an e-mail notification to the \gls{administrator}.
-	\item \glslink{administrator}{Administrator} responds to e-mail notification by opening the 'error reports' section in web interface %TODO ref
-	\item \hyperref[SM:GUI]{GUI} offers to set $S$ into \glslink{maintenance mode}{maintenance} or \gls{disabled mode}.
-	\item \glslink{administrator}{Administrator} chooses \gls{disabled mode}.
-	\item \hyperref[SM:Master]{Master} selects slave $S'$ as a replacement for $S$ and communicates the appropriate configuration to $S'$
-	\item $S'$ starts a new \gls{MongoDB} process and enforces the received configuration.
-	\item \hyperref[SM:Master]{Master} detects successful configuration of $S'$.
-	\item \hyperref[SM:Master]{Master} removes $S$ from the error report.
-\end{itemize}
-
-\oitem{TS}{} System Maintenance \\
-Precondition: A slave $S$ needs to be rebooted to install security updates to the installed software.
-\begin{itemize}
-	\item The \gls{administrator} navigates to the 'slave management section' in the \hyperref[SM:GUI]{GUI}. %TODO ui ref
-	\item The \gls{administrator} selects $S$ and sets it to \gls{maintenance mode}.
-	\item The \gls{administrator} installs the security updates and reboots the machine (killing the \gls{slave} instance and all \gls{MongoDB} instances).
-	\item The \gls{slave} process $S$ is restarted by the system's service manager after reboot.
-	\item The \gls{administrator} sets $S$ back to \gls{active mode}.
-	\item The \hyperref[SM:Master]{master} communicates the desired configuration to $S$.
-	\item $S$ starts the \gls{MongoDB} processes and configures replica set membership if required by the communicated configuration.
-\end{itemize}
+\oitem{TS}{} Removing Machines from the Cluster
+\testsequence
+[]
+{
+	A machine $M$ with installed \gls{slave} software shall be removed from the cluster.
+}
+{
+	\begin{itemize}
+		\item The \gls{administrator} navigates to the 'slave management section' in the \hyperref[SM:GUI]{GUI}.
+		\item The \gls{administrator} selects the slave $S$ and sets it to \gls{disabled mode}. %TODO ref testseq and ui
+		\item The \hyperref[SM:Master]{master} determines a new cluster layout to repair $S$'s former \glspl{replica set}.
+		\item The \hyperref[SM:Master]{master} communicates the desired configuration to the appropriate \glspl{slave}.
+		\item The \hyperref[SM:GUI]{GUI} now allows the \gls{administrator} to delete the slave $S$ from the \gls{inventory}.
+		\item The \gls{administrator} deletes the slave $S$ from the \gls{inventory}. %TODO ref testseq and ui
+		\item The \gls{administrator} can now physically remove $M$ from the cluster.
+	\end{itemize}
+}
 
 
-\oitem{TS}{} Adding a Replica Set \\
-The \gls{administrator} wants to add a replica set with $p \in \mathbb{N}$ persistent members and $v \in \mathbb{N}$ volatile members. $(p+v) >= 3 \land (p+v) is odd$. Enough \glspl{slave} with sufficient free \gls{MongoDB} \hyperref[D:slave_mongod_portrange]{ports} are available.
-\begin{itemize}
-	\item Navigate to 'replica set management section' %TODO ref ui
-	\item Add a new replica set $R$ using the 'add replica set form' with constraints $p$ and $v$. %TODO ref ui and testsequence
-	\item The \hyperref[SM:Master]{master} finds appropriate \glspl{slave} for hosting members of $R$ (\hyperref[SM:master_clusterallocator]{Master::ClusterAllocator}).
-	\item The \hyperref[SM:Master]{master} communicates the desired configuration to the appropriate \glspl{slave} $Z$.
-	\item The \glspl{slave} in $Z$ apply the received configuration.
-\end{itemize}
+\oitem{TS}{} Temporarily Unreachable Slave
+\testsequence
+[]
+{
+	A slave becomes unreachable because of broken network cable.
+}
+{
+	\begin{itemize}
+		\item \hyperref[SM:NotificationManager]{NotificationManager} sends an e-mail notification to the \gls{administrator}.
+		\item \glslink{administrator}{Administrator} responds to e-mail notification by opening the 'error reports' section in web interface %TODO ref
+		\item \hyperref[SM:GUI]{GUI} offers to set slave into \glslink{maintenance mode}{maintenance} or \gls{disabled mode}.
+		\item \glslink{administrator}{Administrator} does not choose either of the options but replaces the broken cable.
+		\item \hyperref[SM:Master]{Master} reaches the slave again.
+		\item \hyperref[SM:Master]{Master} determines that configuration is still as expected.
+		\item \hyperref[SM:Master]{Master} removes the slave from the error report.
+	\end{itemize}
+}
 
-\oitem{TS}{} Destroying a Replica Set \\
-The \gls{administrator} wants to destroy a \gls{replica set}.
-\begin{itemize}
+
+\oitem{TS}{} Defective Slave
+\testsequence
+[]
+{
+	A slave $S$ becomes permanently unreachable because there was a short-circuit on its mainboard which needs to be replaced. The admin has no spare mainboards left and has to wait for replacement hardware to arrive. However, there is at least one \glslink{active mode}{active} slave allowed to take over the role of the failed one.
+}
+{
+	\begin{itemize}
+		\item After $S$ becomes unavailable the \hyperref[SM:NotificationManager]{NotificationManager} sends an e-mail notification to the \gls{administrator}.
+		\item \glslink{administrator}{Administrator} responds to e-mail notification by opening the 'error reports' section in web interface %TODO ref
+		\item \hyperref[SM:GUI]{GUI} offers to set $S$ into \glslink{maintenance mode}{maintenance} or \gls{disabled mode}.
+		\item \glslink{administrator}{Administrator} chooses \gls{disabled mode}.
+		\item \hyperref[SM:Master]{Master} selects slave $S'$ as a replacement for $S$ and communicates the appropriate configuration to $S'$
+		\item $S'$ starts a new \gls{MongoDB} process and enforces the received configuration.
+		\item \hyperref[SM:Master]{Master} detects successful configuration of $S'$.
+		\item \hyperref[SM:Master]{Master} removes $S$ from the error report.
+	\end{itemize}
+}
+
+
+\oitem{TS}{} System Maintenance
+\testsequence
+[]
+{
+	A slave $S$ needs to be rebooted to install security updates to the installed software.
+}
+{
+	\begin{itemize}
+		\item The \gls{administrator} navigates to the 'slave management section' in the \hyperref[SM:GUI]{GUI}. %TODO ui ref
+		\item The \gls{administrator} selects $S$ and sets it to \gls{maintenance mode}.
+		\item The \gls{administrator} installs the security updates and reboots the machine (killing the \gls{slave} instance and all \gls{MongoDB} instances).
+		\item The \gls{slave} process $S$ is restarted by the system's service manager after reboot.
+		\item The \gls{administrator} sets $S$ back to \gls{active mode}.
+		\item The \hyperref[SM:Master]{master} communicates the desired configuration to $S$.
+		\item $S$ starts the \gls{MongoDB} processes and configures replica set membership if required by the communicated configuration.
+	\end{itemize}
+}
+
+
+\oitem{TS}{} Adding a Replica Set
+\testsequence
+[]
+{
+	The \gls{administrator} wants to add a replica set with $p \in \mathbb{N}$ persistent members and $v \in \mathbb{N}$ volatile members. $(p+v) >= 3 \land (p+v) is odd$. Enough \glspl{slave} with sufficient free \gls{MongoDB} \hyperref[D:slave_mongod_portrange]{ports} are available.
+}
+{
+	\begin{itemize}
+		\item Navigate to 'replica set management section' %TODO ref ui
+		\item Add a new replica set $R$ using the 'add replica set form' with constraints $p$ and $v$. %TODO ref ui and testsequence
+		\item The \hyperref[SM:Master]{master} finds appropriate \glspl{slave} for hosting members of $R$ (\hyperref[SM:master_clusterallocator]{Master::ClusterAllocator}).
+		\item The \hyperref[SM:Master]{master} communicates the desired configuration to the appropriate \glspl{slave} $Z$.
+		\item The \glspl{slave} in $Z$ apply the received configuration.
+	\end{itemize}
+}
+
+\oitem{TS}{} Destroying a Replica Set
+\testsequence
+[]
+{
+	The \gls{administrator} wants to destroy a \gls{replica set}.
+}
+{
+	\begin{itemize}
 		\item Navigate to 'replica set management section' %TODO ref ui
 		\item The \gls{administrator} selects the replica set $R$ and clicks the remove button % TODO ref testseq and ui
 		\item The \hyperref[SM:GUI]{GUI} prompts the \gls{administrator} for confirmation.
 		\item The \gls{administrator} confirms the removal.
 		\item The \hyperref[SM:Master]{master} persists the change and communicates to the \glspl{slave} that host members of $R$ to kill the respective \gls{MongoDB} processes.
 		\item The \glspl{slave} apply the received instructions.
-\end{itemize}
+	\end{itemize}
+}
 
 \end{description}
 
