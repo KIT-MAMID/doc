@@ -163,8 +163,17 @@ SCC}
 
 \mamid assists the \gls{administrator} during initial setup, continuous operation, maintenance cases and expansion of the cluster.
 
-Each cluster \gls{host} runs a \gls{slave} instance of \mamid.
-A single \gls{master} instance coordinates the \glspl{slave}' membership in the \glspl{replica set}.
+The \gls{administrator} describes the \gls{cluster} \glspl{host} and the desired \gls{MongoDB} \gls{replica set}.
+
+Each \gls{host} runs a \gls{slave} application of \mamid, allowing control of the \glspl{host} from a single \gls{master} instance of \mamid.
+
+\mamid utilizes the \gls{administrator}'s description to run \gls{MongoDB} instances on the \glspl{host}.
+
+\mamid configures the \gls{MongoDB} instances to form the desired replica sets.
+
+\mamid monitors the deployed configuration continuously and informs the \gls{administrator} about problems (when they arise).
+
+Maintenance of individual \glspl{host}, growing \& shrinking of the cluster, etc. is announced to \mamid beforehand, allowing for reconfiguration of the deployed \glspl{replica set} if necessary.
 
 \section{Objectives \& Criteria}
 \subsection{Must-Have Criteria}
