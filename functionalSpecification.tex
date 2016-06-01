@@ -296,7 +296,7 @@ A single \gls{master} instance coordinates the \glspl{slave}' membership in the 
 	\oitem{SM}{} Slave::ProcessManager\\
 	Spawns and controls \gls{MongoDB} processes.
 \end{description}
-\subsection{GUI}\label{SM:GUI}
+\subsection{Graphical User Interface (GUI))}\label{SM:GUI}
 \begin{description}
 	%Angular und so...
 	\oitem{SM}{gui_model} GUI::Model\\
@@ -345,7 +345,7 @@ List of tuples containing the following data
 	\oitem{D}{} member mongod processes (list of $p+v$)
 \end{description}
 
-\subsection{MongoD processes}
+\subsection{MongoDB processes}
 %(hostname | port != slaveport) PRIMARY KEY
 List of tuples containing the following data
 
@@ -373,7 +373,7 @@ List of tuples containing the following data
 
 %TODO cli paramters + config file template wf spezifizieren
 
-\subsection{\acrfull{gui}}
+\subsection{Graphical User Interface (GUI)}
 The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:masterapiserver}. Hence, all functionality described in this subsection is realized through \acrshort{API} calls to the \gls{master}.
 \begin{description}
 	\oitem{F}{gui_crud_inventory} \acrshort{CRUD} \glspl{slave} in (\gls{inventory}).
@@ -451,7 +451,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:m
 	\oitem{F}{} Send error reports via \glslink{email}{e-mail messages} to a contact's email address.
 \end{description}
 
-\subsection{\acrlong{cli}}
+\subsection{Command Line Interface (CLI)}
 The \acrshort{cli} is an optional functional requirement. It acts as a frontend to the functionality provided by \ref{SM:masterapiserver}. Hence, all functionality described in this subsection is realized through \acrshort{API} calls to the \gls{master}.
 \begin{description}
 	\oitem{WF}{} \acrshort{CRUD} \glspl{slave} in (\gls{inventory}).
@@ -486,7 +486,7 @@ The \acrshort{cli} is an optional functional requirement. It acts as a frontend 
 	\item[Source Control Management] Git
 \end{description}
 
-\section{\acrfull{gui}}
+\section{Graphical User Interface (GUI)}
 %Form:
 %Name [: Beschreibung]
 %Beschreibung: satz ohne subjekt, also klein und ohne Punkt; Strichpunkt getrennt
