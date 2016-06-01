@@ -425,92 +425,92 @@ List of tuples containing the following data
 The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:masterapiserver}. Hence, all functionality described in this subsection is realized through \acrshort{API} calls to the \gls{master}.
 \begin{description}
 	\oitem{F}{gui_crud_inventory} \acrshort{CRUD} \glspl{slave} in (\gls{inventory}).
-	\oitem{F}{} Specify type of slave (\ref{MK:available_slave_types}) on insertion into inventory.
-	\oitem{F}{} Specify root data directory of slave (\ref{MK:root_data_directory}).
-	\oitem{F}{} \acrshort{CRUD} physical interdependencies (\ref{MK:spec_physical_interdep}) between \gls{host}.
-	\oitem{F}{} Set mode of host (\ref{MK:available_slave_modes}).
-	\oitem{F}{} \acrshort{CRUD} \gls{replica set} configurations (\ref{MK:replica_set_create}).
-	\oitem{F}{} Display error reports (\ref{F:master_api_error_reports}).
-	\oitem{WF}{} Display machine metrics of the \glspl{slave}. 
-	\oitem{WF}{} Display replication status of the configured \glspl{replica set}.
-	\oitem{WF}{} Provide interface to select auto-discovered slaves when adding to inventory (\ref{F:gui_crud_inventory}).
+	\oitem{F}{gui_set_slave_type} Specify type of slave (\ref{MK:available_slave_types}) on insertion into inventory.
+	\oitem{F}{gui_set_root_data_dir} Specify root data directory of slave (\ref{MK:root_data_directory}).
+	\oitem{F}{gui_set_phys_interdeps} \acrshort{CRUD} physical interdependencies (\ref{MK:spec_physical_interdep}) between \gls{host}.
+	\oitem{F}{gui_set_slave_mode} Set mode of host (\ref{MK:available_slave_modes}).
+	\oitem{F}{gui_crud_replica_sets} \acrshort{CRUD} \gls{replica set} configurations (\ref{MK:replica_set_create}).
+	\oitem{F}{gui_display_errors} Display error reports (\ref{F:master_api_error_reports}).
+	\oitem{WF}{gui_display_machine_metrics} Display machine metrics of the \glspl{slave}. 
+	\oitem{WF}{gui_display_repl_status} Display replication status of the configured \glspl{replica set}.
+	\oitem{WF}{gui_auto_discovery_interface} Provide interface to select auto-discovered slaves when adding to inventory (\ref{F:gui_crud_inventory}).
 \end{description}
 
 \subsection{Master}
 \begin{description}
 	% API Server
-	\oitem{F}{} Provide \acrshort{API} to \acrshort{CRUD} slaves in \gls{inventory} (\ref{MK:inventory_definition}).
-	\oitem{F}{} Provide \acrshort{API} to \acrshort{CRUD} physical interdependencies between \glspl{host}.
-	\oitem{F}{} Provide \acrshort{API} to set \gls{cluster} host mode (as defined in \ref{MK:available_slave_modes}).
-	\oitem{F}{} Provide \acrshort{API} to \acrshort{CRUD} replica set configurations (\ref{MK:replica_set_create}, \ref{MK:replica_set_config_profiles}, \ref{MK:replica_set_member_counts}).
+	\oitem{F}{master_api_crud_slaves} Provide \acrshort{API} to \acrshort{CRUD} slaves in \gls{inventory} (\ref{MK:inventory_definition}).
+	\oitem{F}{master_api_crud_phys_interdeps} Provide \acrshort{API} to \acrshort{CRUD} physical interdependencies between \glspl{host}.
+	\oitem{F}{master_api_set_slave_mode} Provide \acrshort{API} to set \gls{cluster} host mode (as defined in \ref{MK:available_slave_modes}).
+	\oitem{F}{master_api_crud_repl_set_config} Provide \acrshort{API} to \acrshort{CRUD} replica set configurations (\ref{MK:replica_set_create}, \ref{MK:replica_set_config_profiles}, \ref{MK:replica_set_member_counts}).
 	\oitem{F}{master_api_error_reports} Provide \acrshort{API} to retrieve error reports (\ref{MK:detect_slave_unexpected_behavior}).
-	\oitem{WF}{} Provide \acrshort{API} to retrieve a list of auto-discovered \glspl{slave} (\ref{WK:manual_autodiscovery}).
-	\oitem{WF}{} Provide \acrshort{API} exposing machine metrics of the \glspl{slave}.
-	\oitem{WF}{} Provide \acrshort{API} exposing replica set replication status of the configured \glspl{replica set}.
+	\oitem{WF}{master_api_get_auto_discovered_slaves} Provide \acrshort{API} to retrieve a list of auto-discovered \glspl{slave} (\ref{WK:manual_autodiscovery}).
+	\oitem{WF}{master_api_machine_metrics} Provide \acrshort{API} exposing machine metrics of the \glspl{slave}.
+	\oitem{WF}{master_api_repl_set_status} Provide \acrshort{API} exposing replica set replication status of the configured \glspl{replica set}.
 	% Monitor
-	\oitem{F}{} Monitor configuration \& state of \gls{MongoDB} instances running on \gls{cluster} hosts (\ref{MK:detect_slave_unexpected_behavior}).
-	\oitem{WF}{} Monitor reachability of \gls{cluster} hosts via \acrshort{ICMP}.
+	\oitem{F}{master_monitor_config} Monitor configuration \& state of \gls{MongoDB} instances running on \gls{cluster} hosts (\ref{MK:detect_slave_unexpected_behavior}).
+	\oitem{WF}{master_monitor_icmp} Monitor reachability of \gls{cluster} hosts via \acrshort{ICMP}.
 	% Inventory
-	\oitem{F}{} Persist and provide the cluster configuration \& state (\gls{inventory}).
+	\oitem{F}{master_inventory_persist_conf_state} Persist and provide the cluster configuration \& state (\gls{inventory}).
 	% Controller
-	\oitem{WF}{} Continuously auto-discover \glspl{slave} on the cluster network and add them to the \gls{inventory} (\ref{WK:continuous_autodiscovery}).
-	\oitem{WF}{} Auto-repair \gls{degraded} \glspl{replica set} utilizing \ref{F:layout_cluster_config}.
+	\oitem{WF}{master_controller_continuous_auto_discovery} Continuously auto-discover \glspl{slave} on the cluster network and add them to the \gls{inventory} (\ref{WK:continuous_autodiscovery}).
+	\oitem{WF}{master_controller_auto_repair} Auto-repair \gls{degraded} \glspl{replica set} utilizing \ref{F:layout_cluster_config}.
 	% Cluster Allocator
 	\oitem{F}{layout_cluster_config} Lay out the cluster configuration, i.e. decide on a \gls{replica set} configuration
 	\begin{description}
-		\oitem{F}{} respecting physical interdependencies between \gls{cluster} \glspl{host} (\ref{MK:spec_physical_interdep}).
-		\oitem{F}{} respecting constraints given by administrator regarding number of persistent \& volatile replica set members per cluster host (\ref{MK:replica_set_member_counts} and \ref{MK:available_slave_types}).
-		\oitem{F}{} respecting the mode of hosts (\ref{MK:available_slave_modes}).
-		\oitem{WF}{} adding \gls{MongoDB} \glspl{arbiter} where necessary (\ref{WK:deploy_arbiters}).
+		\oitem{F}{master_alloc_resp_phys_interdeps} respecting physical interdependencies between \gls{cluster} \glspl{host} (\ref{MK:spec_physical_interdep}).
+		\oitem{F}{master_alloc_resp_nums} respecting constraints given by administrator regarding number of persistent \& volatile replica set members per cluster host (\ref{MK:replica_set_member_counts} and \ref{MK:available_slave_types}).
+		\oitem{F}{master_alloc_resp_mode} respecting the mode of hosts (\ref{MK:available_slave_modes}).
+		\oitem{WF}{master_alloc_arbiters} adding \gls{MongoDB} \glspl{arbiter} where necessary (\ref{WK:deploy_arbiters}).
 	\end{description}
-	\oitem{F}{} Communicate the \gls{MongoDB} instance configuration to the \glspl{slave} (\ref{MK:deploy_replica_set_config}).
+	\oitem{F}{master_alloc_communicate_config} Communicate the \gls{MongoDB} instance configuration to the \glspl{slave} (\ref{MK:deploy_replica_set_config}).
 \end{description}
 
 \subsection{MasterSlaveProtocol}
 \begin{description}
-	\oitem{F}{} Transport \gls{replica set} configuration description of \gls{cluster} \glspl{host}.
-	\oitem{F}{} Transport reachability check messages.
-	\oitem{WF}{} Transport machine metrics of \glspl{slave}.
-	\oitem{WF}{} Transport \gls{replica set} replication status of \gls{MongoDB} processes on \glspl{slave}.
+	\oitem{F}{msp_trans_config} Transport \gls{replica set} configuration description of \gls{cluster} \glspl{host}.
+	\oitem{F}{msp_trans_rechability} Transport reachability check messages.
+	\oitem{WF}{msp_trans_mach_metr} Transport machine metrics of \glspl{slave}.
+	\oitem{WF}{msp_trans_repl_status} Transport \gls{replica set} replication status of \gls{MongoDB} processes on \glspl{slave}.
 	% Wunschkriterien erweiteretes Monitoring
 \end{description}
 
 \subsection{Slave}
 \begin{description}
 	% Process manager
-	\oitem{F}{} Spawn / Control / Kill \gls{MongoDB} processes.
+	\oitem{F}{slave_control_procs} Spawn / Control / Kill \gls{MongoDB} processes.
 	% MongoDB Client
-	\oitem{F}{} Communicate with \gls{MongoDB} processes using \ref{SM:mongodbclient}.
+	\oitem{F}{slave_communicate_with_mongodb} Communicate with \gls{MongoDB} processes using \ref{SM:mongodbclient}.
 	% Controller
-	\oitem{F}{} Enforce configuration description received from \gls{master} through \ref{SM:masterslaveproto} (also: \ref{MK:deploy_replica_set_config}). 
-	\oitem{F}{} Report current configuration through \ref{SM:masterslaveproto}.
-	\oitem{WF}{} Report machine metrics through \ref{SM:masterslaveproto}.
-	\oitem{WF}{} Report \gls{replica set} replication status through \ref{SM:masterslaveproto}.
+	\oitem{F}{slave_enfoce_config} Enforce configuration description received from \gls{master} through \ref{SM:masterslaveproto} (also: \ref{MK:deploy_replica_set_config}). 
+	\oitem{F}{slave_report_config} Report current configuration through \ref{SM:masterslaveproto}.
+	\oitem{WF}{slave_report_machine_metrics} Report machine metrics through \ref{SM:masterslaveproto}.
+	\oitem{WF}{slave_report_repl_status} Report \gls{replica set} replication status through \ref{SM:masterslaveproto}.
 \end{description}
 
 \subsection{NotificationManager}
 \begin{description}
 	% API Client
-	\oitem{F}{} Consume error reporting \acrshort{API} of \gls{master} \ref{F:master_api_error_reports}.
+	\oitem{F}{notifmgr_consume_errors} Consume error reporting \acrshort{API} of \gls{master} \ref{F:master_api_error_reports}.
 	% Controller
-	\oitem{F}{} Send error reports from \ref{F:master_api_error_reports} to configured list of contacts.
-	\oitem{F}{} Read configured list of contacts from a text-based configuration file.
+	\oitem{F}{notifmgr_controller_send_errors} Send error reports from \ref{F:master_api_error_reports} to configured list of contacts.
+	\oitem{F}{notifmgr_read_conf_file} Read configured list of contacts from a text-based configuration file.
 	% Mail Notifier
-	\oitem{F}{} Send error reports via \glslink{email}{e-mail messages} to a contact's email address.
+	\oitem{F}{notifmgr_send_emails} Send error reports via \glslink{email}{e-mail messages} to a contact's email address.
 \end{description}
 
 \subsection{Command Line Interface (CLI)}
 The \acrshort{cli} is an optional functional requirement. It acts as a frontend to the functionality provided by \ref{SM:masterapiserver}. Hence, all functionality described in this subsection is realized through \acrshort{API} calls to the \gls{master}.
 \begin{description}
-	\oitem{WF}{} \acrshort{CRUD} \glspl{slave} in (\gls{inventory}).
-	\oitem{WF}{} Specify type of slave (\ref{MK:available_slave_types}) on insertion into inventory.
-	\oitem{WF}{} Specify root data directory of slave (\ref{MK:root_data_directory}).
-	\oitem{WF}{} \acrshort{CRUD} physical interdependencies (\ref{MK:spec_physical_interdep}) between \gls{host}.
-	\oitem{WF}{} Set mode of host (\ref{MK:available_slave_modes}).
-	\oitem{WF}{} \acrshort{CRUD} \gls{replica set} configurations (\ref{MK:replica_set_create}).
-	\oitem{WF}{} Display error reports (\ref{F:master_api_error_reports}).
-	\oitem{WF}{} Display machine metrics of the \glspl{slave}. 
-	\oitem{WF}{} Display replication status of the configured \glspl{replica set}.
+	\oitem{WF}{cli_crud_inventory} \acrshort{CRUD} \glspl{slave} in (\gls{inventory}).
+	\oitem{WF}{cli_set_slave_type} Specify type of slave (\ref{MK:available_slave_types}) on insertion into inventory.
+	\oitem{WF}{cli_set_root_data_dir} Specify root data directory of slave (\ref{MK:root_data_directory}).
+	\oitem{WF}{cli_set_phys_interdeps} \acrshort{CRUD} physical interdependencies (\ref{MK:spec_physical_interdep}) between \gls{host}.
+	\oitem{WF}{cli_set_slave_mode} Set mode of host (\ref{MK:available_slave_modes}).
+	\oitem{WF}{cli_crud_replica_sets} \acrshort{CRUD} \gls{replica set} configurations (\ref{MK:replica_set_create}).
+	\oitem{WF}{cli_display_errors} Display error reports (\ref{F:master_api_error_reports}).
+	\oitem{WF}{cli_display_machine_metrics} Display machine metrics of the \glspl{slave}. 
+	\oitem{WF}{cli_display_repl_status} Display replication status of the configured \glspl{replica set}.
 \end{description}
 
 \section{Non-Functional Requirements and Constraints}
