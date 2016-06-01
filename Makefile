@@ -1,4 +1,4 @@
-CUTYCAPT=xvfb-run -a --server-args="-screen 0, 1920x1080x24" cutycapt --min-width=1920 --min-height=1080 
+CUTYCAPT=xvfb-run -a --server-args="-screen 0, 1920x1080x24" cutycapt --min-width=1920 --min-height=1080  --user-style-string="html, body { max-height: 1080px; overflow: hidden;}"
 SCREENSHOTS_BASE_URL=http://127.0.0.1:5000
 
 all: module_overview.pdf
@@ -10,7 +10,7 @@ all: module_overview.pdf
 module_overview.pdf: module_overview.uxf screenshots
 	java -jar `which umlet` -action=convert -format=pdf -filename=module_overview.uxf -output=module_overview.pdf
 
-screenshots screenshots/*.png:
+screenshots screenshots/:
 	mkdir screenshots
 	-$(CUTYCAPT) --url=$(SCREENSHOTS_BASE_URL) --out=screenshots/dashboard.png
 	-$(CUTYCAPT) --url=$(SCREENSHOTS_BASE_URL)/slaves --out=screenshots/slaves.png
