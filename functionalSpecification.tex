@@ -564,11 +564,16 @@ The \acrshort{cli} is an \emph{optional} functional requirement. It acts as a fr
 
 \subsection{Non-Functional Requirements}
 \begin{description}
-	\oitem{NF}{} The \gls{cluster} is resilient against unexpected failures of \glspl{slave}.
-	\oitem{NF}{} The \gls{administrator} does not need extended knowledge of \gls{MongoDB} to configure \glspl{replica set}.
-	\oitem{NF}{} \mamid supports at least 100 \glspl{slave} in the \gls{cluster}.
+	% Usability
+	\oitem{NF}{} The \gls{administrator} does not need extended knowledge of \gls{MongoDB} to configure \glspl{replica set} using \mamid.
 	\oitem{NF}{} The \acrshort{gui} needs to be intuitive to \glspl{administrator} familiar with similar tools.
+	% Reliability
+	\oitem{NF}{} \mamid can handle an unordered parallel reboot of an arbitrary of hosts in the cluster.
+	\oitem{NF}{} The \gls{cluster} is resilient against unexpected failures of \glspl{slave}.
+	% Performance
 	\oitem{NF}{} The \acrshort{gui} responds to user interaction within $500ms$.
+	\oitem{NF}{} \mamid supports at least 100 \glspl{slave} in the \gls{cluster}.
+	% Maintainability
 \end{description}
 
 \subsection{Constraints}
