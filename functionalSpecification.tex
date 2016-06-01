@@ -241,33 +241,58 @@ A single \gls{master} instance coordinates the \glspl{slave}' membership in the 
 
 \subsection{Scope of Application}
 \begin{itemize}
-\item foo
+\item MongoDB Cluster Administration
+\item High-Availibility \gls{MongoDB} Deployment
+\item \gls{MongoDB}\glslink{cluster}{Cluster} Monitoring
 \end{itemize}
 
 \subsection{Target Users}
 \begin{itemize}
-\item foo
+\item \glslink{administrator}{Administrators} of \gls{cluster} hosting \mamid deployment
 \end{itemize}
 
 \subsection{Operating Conditions}
 \begin{itemize}
-\item zu Hause (test)
+\item multi-\gls{host} \gls{cluster} on a fast \acrshort{LAN}
+\item Low maintenance cost (time, personnel)
+\item Uncomplicated takeover of deployment by a successor (flat learning curve)
 \end{itemize}
 
 \section{Environment}
-%Kevin
-
 \subsection{Software}\label{subsec:Software}
-
 \begin{itemize}
-\item Operating system: Solaris (Indiana OS), Linux
+\item Primary Target Operating System: Open Indiana Build 151a9 (Illumos Kernel)
+\item MongoDB version 3.2
 \end{itemize}
 
 \subsection{Hardware}
 
+Each of the subsequently listed requirements describes the previously defined ones.
+
+\subsubsection{Deployment of the Cluster}
 \begin{itemize}
-\item foo
+	\item \glslink{cluster}{Cluster}
+	\begin{itemize}
+		\item with \gls{cluster} \glspl{host} on an isolated \acrshort{LAN}
+		\item with at least one \gls{cluster} \glspl{host} which is
+		\begin{itemize}
+			\item connected to the \gls{cluster} \gls{host} isolated \acrshort{LAN}
+			\item connected to the external network (\acrshort{LAN} or \acrshort{WAN})
+		\end{itemize}
+	\end{itemize}
 \end{itemize}
+
+\subsubsection{Operation of Persistently Stored Replica Sets}
+\begin{itemize}
+	\item $>= 1$ \gls{host} with \gls{persistent storage}
+	\item $>= 3$ \glspl{host} in total
+\end{itemize}
+
+\subsubsection{Basic Level of Host Redundancy}
+\begin{itemize}
+	\item $>= 3$ mutually disjoint sets of \gls{cluster} \glspl{host}. \\ \glslink{host}{Hosts} in a set share a common risk of failure, e.g. being on the same power supply. \glslink{host}{Hosts} in different sets do not share this risk.
+\end{itemize}
+
 \section{System Model}
 \includegraphics[width=\textwidth]{module_overview}
 %TODO state diagram (-> Anton's laptop)
