@@ -417,6 +417,8 @@ List of tuples containing the following data
 	\oitem{DC}{} The port of a mongod process must be inside the mongod-portrange of the slave it is running on
 	\oitem{DC}{} The combination of mongod hostname and mongod port must be unique
 	\oitem{DC}{} The slave port must not be inside the mongod-portrange
+	%Arbiters
+	\oitem{DC}{} The number of nodes $p+v$ in a replica set must be odd unless \ref{WK:deploy_arbiters} is implemented
 \end{description}
 
 
