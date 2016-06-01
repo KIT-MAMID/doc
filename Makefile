@@ -1,4 +1,4 @@
-all: module_overview.pdf
+all: module_overview.pdf state_diagram.pdf
 	pdflatex functionalSpecification.tex
 	makeglossaries functionalSpecification
 	pdflatex functionalSpecification.tex
@@ -6,6 +6,9 @@ all: module_overview.pdf
 
 module_overview.pdf: module_overview.uxf
 	java -jar `which umlet` -action=convert -format=pdf -filename=module_overview.uxf -output=module_overview.pdf
+
+state_diagram.pdf: state_diagram.uxf
+	java -jar `which umlet` -action=convert -format=pdf -filename=state_diagram.uxf -output=state_diagram.pdf
 
 clean:
 	rm -f functionalSpecification.pdf
@@ -22,3 +25,4 @@ clean:
 	rm -f glossary.aux
 
 	rm -f module_overview.pdf
+	rm -f state_diagram.pdf

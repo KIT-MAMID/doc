@@ -324,7 +324,6 @@ Each of the subsequently listed requirements describes the previously defined on
 
 \section{System Model}
 \includegraphics[width=\textwidth]{module_overview}
-%TODO state diagram (-> Anton's laptop)
 \subsection{Master}\label{SM:Master}
 \begin{description}
 	\oitem{SM}{masterapiserver} Master::APIServer\\
@@ -362,7 +361,22 @@ Each of the subsequently listed requirements describes the previously defined on
 	\oitem{SM}{} Slave::ProcessManager\\
 	Spawns and controls \gls{MongoDB} processes. (\ref{F:slave_control_procs})
 \end{description}
-\subsection{Graphical User Interface (GUI))}\label{SM:GUI}
+\subsubsection{Slave states}
+\includegraphics[width=\textwidth]{state_diagram}
+A slave can be in the following states:
+\begin{itemize}
+	\item \glslink{active mode}{active}\\
+	\mamid will monitor slaves in active mode. If the slave behaves unexpectedly, i.e. is not reachable, \mamid will notify the \gls{administrator} and set its state to unknown.
+	\item unknown\\
+	\mamid will monitor slaves in unknown state and set them into active mode if they recover. The administrator can set the slave state to maintenance to stop monitoring of the slave or disabled mode to replace the slave.
+	\item \glslink{maintenance mode}{maintenance}\\
+	\mamid will not monitor slaves in maintenance mode.
+	\item \glslink{disabled mode}{disabled}\\
+	\mamid will dissociate slaves in disabled mode with any replica sets they may be member of
+\end{itemize}
+All state changes apart from active $\leftrightarrow$ unknown have to be triggered by the \gls{administrator}. If \ref{WK:deploy_arbiters} is implemented the state change unknown $\rightarrow$ disabled can be triggered automatically.
+
+\subsection{Graphical User Interface (GUI)}\label{SM:GUI}
 \begin{description}
 	%React-JS und so...
 	\oitem{SM}{gui_model} GUI::Model\\
