@@ -366,13 +366,13 @@ Each of the subsequently listed requirements describes the previously defined on
 A slave can be in the following states:
 \begin{itemize}
 	\item \glslink{active mode}{active}\\
-	\mamid will monitor slaves in active mode. If the slave behaves unexpectedly, i.e. is not reachable, \mamid will notify the \gls{administrator} and set its state to unknown.
+	\mamid will monitor \glspl{slave} in active mode. If the slave behaves unexpectedly, i.e. is not reachable, \mamid will notify the \gls{administrator} and set its state to unknown.
 	\item unknown\\
-	\mamid will monitor slaves in unknown state and set them into active mode if they recover. The administrator can set the slave state to maintenance to stop monitoring of the slave or disabled mode to replace the slave.
+	\mamid will monitor \glspl{slave} in unknown state and set them into active mode if they recover. The \gls{administrator} can set the slave state to maintenance to stop monitoring of the slave or to disabled mode to replace the slave.
 	\item \glslink{maintenance mode}{maintenance}\\
-	\mamid will not monitor slaves in maintenance mode.
+	\mamid will not monitor \glspl{slave} in maintenance mode, but will not alter any \gls{replica set}.
 	\item \glslink{disabled mode}{disabled}\\
-	\mamid will dissociate slaves in disabled mode with any replica sets they may be member of
+	\mamid will dissociate \glspl{slave} in disabled mode with any \glspl{replica set} they may be member of.
 \end{itemize}
 All state changes apart from active $\leftrightarrow$ unknown have to be triggered by the \gls{administrator}. If \ref{WK:deploy_arbiters} is implemented the state change unknown $\rightarrow$ disabled can be triggered automatically.
 
