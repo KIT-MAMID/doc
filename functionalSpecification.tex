@@ -437,8 +437,8 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:m
 \end{description}
 
 \subsection{Master}
+\subsubsection{API Server}
 \begin{description}
-	% API Server
 	\oitem{F}{master_api_crud_slaves} Provide \acrshort{API} to \acrshort{CRUD} slaves in \gls{inventory} (\ref{MK:inventory_definition}).
 	\oitem{F}{master_api_crud_phys_interdeps} Provide \acrshort{API} to \acrshort{CRUD} physical interdependencies between \glspl{host}.
 	\oitem{F}{master_api_set_slave_mode} Provide \acrshort{API} to set \gls{cluster} host mode (as defined in \ref{MK:available_slave_modes}).
@@ -447,15 +447,23 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:m
 	\oitem{WF}{master_api_get_auto_discovered_slaves} Provide \acrshort{API} to retrieve a list of auto-discovered \glspl{slave} (\ref{WK:manual_autodiscovery}).
 	\oitem{WF}{master_api_machine_metrics} Provide \acrshort{API} exposing machine metrics of the \glspl{slave}.
 	\oitem{WF}{master_api_repl_set_status} Provide \acrshort{API} exposing replica set replication status of the configured \glspl{replica set}.
-	% Monitor
+\end{description}
+\subsubsection{Monitor}
+\begin{description}
 	\oitem{F}{master_monitor_config} Monitor configuration \& state of \gls{MongoDB} instances running on \gls{cluster} hosts (\ref{MK:detect_slave_unexpected_behavior}).
 	\oitem{WF}{master_monitor_icmp} Monitor reachability of \gls{cluster} hosts via \acrshort{ICMP}.
-	% Inventory
+\end{description}
+\subsubsection{Inventory}
+\begin{description}
 	\oitem{F}{master_inventory_persist_conf_state} Persist and provide the cluster configuration \& state (\gls{inventory}).
-	% Controller
+\end{description}
+\subsubsection{Controller}
+\begin{description}
 	\oitem{WF}{master_controller_continuous_auto_discovery} Continuously auto-discover \glspl{slave} on the cluster network and add them to the \gls{inventory} (\ref{WK:continuous_autodiscovery}).
 	\oitem{WF}{master_controller_auto_repair} Auto-repair \gls{degraded} \glspl{replica set} utilizing \ref{F:layout_cluster_config}.
-	% Cluster Allocator
+\end{description}
+\subsubsection{Cluster Allocator}
+\begin{description}
 	\oitem{F}{layout_cluster_config} Lay out the cluster configuration, i.e. decide on a \gls{replica set} configuration
 	\begin{description}
 		\oitem{F}{master_alloc_resp_phys_interdeps} respecting physical interdependencies between \gls{cluster} \glspl{host} (\ref{MK:spec_physical_interdep}).
@@ -477,12 +485,13 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:m
 
 \subsection{Slave}
 \begin{description}
+	% Controller
+	\oitem{F}{slave_enfoce_config} Enforce configuration description received from \gls{master} through \ref{SM:masterslaveproto} (also: \ref{MK:deploy_replica_set_config}). 
 	% Process manager
 	\oitem{F}{slave_control_procs} Spawn / Control / Kill \gls{MongoDB} processes.
 	% MongoDB Client
 	\oitem{F}{slave_communicate_with_mongodb} Communicate with \gls{MongoDB} processes using \ref{SM:mongodbclient}.
-	% Controller
-	\oitem{F}{slave_enfoce_config} Enforce configuration description received from \gls{master} through \ref{SM:masterslaveproto} (also: \ref{MK:deploy_replica_set_config}). 
+	% Controller again
 	\oitem{F}{slave_report_config} Report current configuration through \ref{SM:masterslaveproto}.
 	\oitem{WF}{slave_report_machine_metrics} Report machine metrics through \ref{SM:masterslaveproto}.
 	\oitem{WF}{slave_report_repl_status} Report \gls{replica set} replication status through \ref{SM:masterslaveproto}.
