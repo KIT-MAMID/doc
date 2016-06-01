@@ -502,8 +502,9 @@ The \acrshort{cli} is an optional functional requirement. It acts as a frontend 
 	\oitem{WF}{} Display replication status of the configured \glspl{replica set}.
 \end{description}
 
-\section{Non-Functional Requirements and Restrictions}
+\section{Non-Functional Requirements and Constraints}
 
+\subsection{Non-Functional Requirements}
 \begin{description}
 	\oitem{NF}{} The \hyperref[SM:masterapiserver]{Master API} protocol is \acrshort{JSON} over \acrshort{HTTP}.
 	\oitem{NF}{} The \hyperref[SM:masterapiserver]{Master API} is stateless.
@@ -514,13 +515,18 @@ The \acrshort{cli} is an optional functional requirement. It acts as a frontend 
 	\oitem{NF}{} The \acrshort{gui} responds to user interaction within $500ms$
 \end{description}
 
-\subsection{Development Environment}
+\subsection{Constraints}
 \begin{description}
+	\item[Implementation Languages]
+	\begin{itemize}
+		\item Golang (\hyperref[SM:Master]{Master}, \hyperref[SM:Slave]{Slave}, \hyperref[SM:MasterSlaveProtocol]{MasterSlaveProtocol}, \hyperref[SM:NotificationManager]{NotificationManager})
+		\item HTML, CSS, JavaScript (\hyperref[SM:GUI])
+	\end{itemize}
 	\item[Team Communication] Slack, GitHub, \glslink{email}{E-Mail}
 	\item[Documentation] \LaTeX{}
 	\item[UML-Designer] UMLet
-	\item[Quality Assurance] ... %TODO
-	\item[Source Control Management] Git
+	\item[Version Control] Git
+	%TODO \item[Quality Assurance] ... %TODO
 \end{description}
 
 \section{Graphical User Interface (GUI)}
