@@ -15,10 +15,10 @@ screenshots screenshots/:
 	-$(CUTYCAPT) --url=$(SCREENSHOTS_BASE_URL) --out=screenshots/dashboard.png
 	-$(CUTYCAPT) --url=$(SCREENSHOTS_BASE_URL)/slaves --out=screenshots/slaves.png
 	-$(CUTYCAPT) --url=$(SCREENSHOTS_BASE_URL)/problems --out=screenshots/problems.png
-	-$(CUTYCAPT) --url=$(SCREENSHOTS_BASE_URL)/slaves/mksuns11/unknown --out=screenshots/slave_edit_unkown.png
-	-$(CUTYCAPT) --url=$(SCREENSHOTS_BASE_URL)/slaves/mksuns12/active --out=screenshots/slave_edit_active.png
-	-$(CUTYCAPT) --url=$(SCREENSHOTS_BASE_URL)/slaves/mksuns11/maintenance --out=screenshots/slave_edit_maintenance.png
-	-$(CUTYCAPT) --url=$(SCREENSHOTS_BASE_URL)/slaves/mksuns11/disabled --out=screenshots/slave_edit_disabled.png
+	-$(CUTYCAPT) --url=$(SCREENSHOTS_BASE_URL)/slave/mksuns11/edit/unknown --out=screenshots/slave_edit_unkown.png
+	-$(CUTYCAPT) --url=$(SCREENSHOTS_BASE_URL)/slave/mksuns12/edit/active --out=screenshots/slave_edit_active.png
+	-$(CUTYCAPT) --url=$(SCREENSHOTS_BASE_URL)/slave/mksuns11/edit/maintenance --out=screenshots/slave_edit_maintenance.png
+	-$(CUTYCAPT) --url=$(SCREENSHOTS_BASE_URL)/slave/mksuns11/edit/disabled --out=screenshots/slave_edit_disabled.png
 	-$(CUTYCAPT) --url=$(SCREENSHOTS_BASE_URL)/riskgroups --out=screenshots/risk_groups.png
 	-$(CUTYCAPT) --url=$(SCREENSHOTS_BASE_URL)/replicasets --out=screenshots/replica_sets.png
 clean:
