@@ -370,7 +370,7 @@ A slave can be in the following states:
 	\item unknown\\
 	\mamid monitors \glspl{slave} in unknown state and sets them into active state if they recover. The \gls{administrator} can set the slave state to maintenance to stop monitoring of the slave or to disabled mode to replace the slave.
 	\item \glslink{maintenance mode}{maintenance}\\
-	\mamid does not monitor \glspl{slave} in maintenance mode, but also not alter the \gls{replica set}.
+	\mamid does not monitor \glspl{slave} in maintenance mode, but also does not alter the \gls{replica set}.
 	\item \glslink{disabled mode}{disabled}\\
 	\mamid dissociates \glspl{slave} in disabled mode with any \glspl{replica set} they may be member of.
 \end{itemize}
