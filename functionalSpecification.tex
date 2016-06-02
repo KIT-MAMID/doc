@@ -199,21 +199,21 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 
 % inventory ops
 \oitem{MK}{inventory_definition} The \gls{master} maintains a list of \glspl{slave} called \gls{inventory}.
-\oitem{MK}{} The \gls{administrator} can add \glspl{slave} to the \gls{inventory}.
+\begin{description}
 \oitem{MK}{} The \acrshort{gui} visualizes the \gls{inventory}.
+\oitem{MK}{} The \gls{administrator} can add \glspl{slave} to the \gls{inventory}.
 \oitem{MK}{} The \gls{administrator} can remove a \gls{slave} that does not host any \gls{MongoDB} processes from the \gls{inventory}.
 \oitem{MK}{spec_physical_interdep} The \gls{administrator} can specify \glspl{physical interdependency} between \glspl{slave} in the \gls{inventory}.
-
+\oitem{MK}{available_slave_types} The \gls{administrator} can specify whether the \gls{slave} has \glslink{persistent storage}{persistent (typically HDD/SSD backed)} or \glslink{volatile storage}{volatile (RAM backed)} storage.
+\oitem{MK}{root_data_directory} The \gls{administrator} can specify in which filesystem directory on the \gls{host} the \gls{slave} and its \gls{MongoDB} processes store data.
 % inventory ops -> slave
 \oitem{MK}{slave_mode_active} The \gls{administrator} can announce to \mamid that a slave is ready to host MongoDB processes.
 \oitem{MK}{slave_mode_maintenance} The \gls{administrator} can announce to \mamid that a slave is under maintenance to inhibit automatic reconfiguration of its MongoDB processes.
 \oitem{MK}{slave_mode_disabled} The \gls{administrator} can announce to \mamid that a slave should not host any MongoDB processes.
-
-\oitem{MK}{available_slave_types} The \gls{administrator} can specify whether the \gls{slave} has \glslink{persistent storage}{persistent (typically HDD/SSD backed)} or \glslink{volatile storage}{volatile (RAM backed)} storage.
-\oitem{MK}{root_data_directory} The \gls{administrator} can specify in which filesystem directory on the \gls{host} the \gls{slave} and its \gls{MongoDB} processes store data.
+\end{description}
 
 % replica set ops
-\oitem{MK}{replica_set_create} The \gls{administrator} can describe a new \gls{replica set} by specifying constraints on how it should be configured by \mamid.
+\oitem{MK}{replica_set_create} The \gls{administrator} can describe a new \gls{MongoDB} \gls{replica set} by specifying constraints on how it should be configured by \mamid.
 \begin{description}
 \oitem{MK}{replica_set_config_profiles} The \gls{administrator} can --- on creation of a replica set (\ref{MK:replica_set_create}) --- specify that it must be usable as a configuration server for \gls{MongoDB} \emph{Sharding} \footnote{\url{https://docs.mongodb.com/manual/core/sharded-cluster-config-servers/\#replica-set-config-servers}}.
 \oitem{MK}{replica_set_member_total_counts} The \gls{administrator} can select the number of \gls{MongoDB} instances (members) of a replica set.
@@ -226,7 +226,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 
 \subsubsection{MongoDB Configuration \& Monitoring}
 \begin{description}
-\oitem{MK}{mongod_deployment1} \mamid asserts that the replica sets described by the administrator are configured on the cluster.
+\oitem{MK}{mongod_deployment1} \mamid asserts that the replica sets described by the administrator are configured on the cluster (see \ref{MK:replica_set_create}).
 \oitem{MK}{mongod_deployment2} To achieve \ref{MK:mongod_deployment1}, \mamid spawns \& controls \gls{MongoDB} processes on the hosts using a \gls{slave} process.
 \begin{description}
 	\oitem{MK}{mongod_redeployment} \mamid redeploys configured \gls{MongoDB} processes to hosts where the \gls{slave} process reports a situation different from what is expected by the \gls{master}.
