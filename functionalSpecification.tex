@@ -245,10 +245,10 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \oitem{WK}{api_authentication} \mamid requires authentication for administrative actions.
 	
 % inventory
-\oitem{WK}{} The \gls{master} monitors reachability of \gls{cluster} \glspl{host} via ICMP.
 \oitem{WK}{} The \gls{master} can export \& import a consistent snapshot of the \gls{inventory} for backup purposes.
 \oitem{WK}{manual_autodiscovery} \mamid auto-discovers new \glspl{slave} on the \gls{administrator}'s request.
 \oitem{WK}{continuous_autodiscovery} \mamid continuously auto-discovers new \glspl{slave}.
+\oitem{WK}{monitor_icmp} \mamid can recognize when the \gls{slave} software does not respond but the corresponding \gls{host} is still connected to the network.
 
 % slaves
 \oitem{WK}{} The \gls{administrator} can specify arbitrary \gls{MongoDB} command line parameters per \gls{slave}.
@@ -516,7 +516,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:m
 \subsubsection{Monitor}
 \begin{description}
 	\oitem{F}{master_monitor_config} Monitor configuration \& state of \gls{MongoDB} instances running on \gls{cluster} hosts (\ref{MK:detect_slave_unexpected_behavior}).
-	\oitem{WF}{master_monitor_icmp} Monitor reachability of \gls{cluster} hosts via \acrshort{ICMP}.
+	\oitem{WF}{master_monitor_icmp} Monitor reachability of \gls{cluster} hosts via \acrshort{ICMP} (\ref{WK:monitor_icmp}).
 	\oitem{WF}{master_monitor_continuous_auto_discovery} Continuously auto-discover \glspl{slave} on the \gls{cluster} network and add them to the \gls{inventory} (\ref{WK:continuous_autodiscovery}).
 \end{description}
 \subsubsection{Inventory}
