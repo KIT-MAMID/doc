@@ -253,8 +253,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \oitem{WK}{export_import_snapshot} The \gls{administrator} can backup and restore the cluster description.
 
 % slaves
-\oitem{WK}{} The \gls{administrator} can specify arbitrary \gls{MongoDB} command line parameters per \gls{slave}.
-\oitem{WK}{} The \gls{administrator} can specify a \gls{MongoDB} configuration file template for \glspl{slave}.
+\oitem{WK}{tweak_performance_parameters} The \gls{administrator} can customize performance-relevant parameters of \gls{MongoDB} processes.
 
 % automatic repair
 \oitem{WK}{} The \gls{master} automatically repairs \gls{degraded} \glspl{replica set} with \emph{suitable} \glslink{active mode}{active} \glspl{slave}.
@@ -500,6 +499,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:m
 	\oitem{WF}{gui_display_machine_metrics} Display machine metrics of the \glspl{slave}. 
 	\oitem{WF}{gui_display_repl_status} Display replication status of the configured \glspl{replica set}.
 	\oitem{WF}{gui_auto_discovery_interface} Provide interface to select auto-discovered \glspl{slave} when adding to \gls{inventory} (\ref{F:gui_crud_inventory}).
+	\oitem{WF}{gui_command_line_parameters_interface} Provide interface to specify command line parameters for \gls{MongoDB} processes (\ref{WK:tweak_performance_parameters}).
 \end{description}
 
 \subsection{Master}
@@ -514,6 +514,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:m
 	\oitem{WF}{master_api_machine_metrics} Provide \acrshort{API} exposing machine metrics of the \glspl{slave}.
 	\oitem{WF}{master_api_repl_set_status} Provide \acrshort{API} exposing \gls{replica set} replication status of the configured \glspl{replica set}.
 	\oitem{WF}{} Require authentication from clients (\ref{WK:api_authentication}).
+	\oitem{WF}{master_api_command_line_parameters} Provide API to specify command line parameters for \gls{MongoDB} processes (\ref{WK:tweak_performance_parameters}). %TODO which set of mongodb processes
 \end{description}
 \subsubsection{Monitor}
 \begin{description}
@@ -547,6 +548,8 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:m
 	\end{description}
 	\oitem{F}{master_alloc_communicate_config} Communicate the \gls{MongoDB} instance configuration to the \glspl{slave} (\ref{MK:mongod_deployment1}).
 \end{description}
+\subsubsection{Miscellaneous}
+\oitem{WK}{} Provide ability to deploy \gls{MongoDB} configuration files based on administrator-defined templates to \gls{MongoDB} processes. %TODO which set of mongodb processes
 
 \subsection{MasterSlaveProtocol}
 \begin{description}
