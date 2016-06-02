@@ -179,7 +179,7 @@ Maintenance of individual \glspl{host}, growing \& shrinking of the cluster, etc
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{cluster_layout}
-	Possible cluster layout for a single application
+	\caption{Possible cluster layout for a single application}
 \end{figure}
 
 \section{Objectives \& Criteria}
@@ -308,7 +308,7 @@ Each of the subsequently listed requirements describes the previously defined on
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{hardware_layout}
-	Possible cluster hardware layout
+	\caption{Possible cluster hardware layout}
 \end{figure}
 \begin{itemize}
 	\item \glslink{cluster}{Cluster}
@@ -334,7 +334,10 @@ Each of the subsequently listed requirements describes the previously defined on
 \end{itemize}
 
 \section{System Model}
+\begin{figure}[H]
 \includegraphics[width=\textwidth]{module_overview}
+\caption{\mamid Modules Overview}
+\end{figure}
 \subsection{Master}\label{SM:Master}
 \begin{description}
 	\oitem{SM}{masterapiserver} Master::APIServer\\
@@ -373,7 +376,11 @@ Each of the subsequently listed requirements describes the previously defined on
 	Spawns and controls \gls{MongoDB} processes. (\ref{F:slave_control_procs})
 \end{description}
 \subsubsection{Slave states}
+\begin{figure}[H]
+\centering
 \includegraphics[width=\textwidth]{state_diagram}
+\caption{Slave State Diagram}
+\end{figure}
 A slave can be in the following states:
 \begin{itemize}
 	\item \glslink{active mode}{active}\\
