@@ -213,10 +213,12 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \oitem{MK}{root_data_directory} The \gls{administrator} can specify in which filesystem directory on the \gls{host} the \gls{slave} and its \gls{MongoDB} processes store data.
 
 % replica set ops
-\oitem{MK}{replica_set_create} The \gls{administrator} can create a new \gls{replica set}.
+\oitem{MK}{replica_set_create} The \gls{administrator} can describe a new \gls{replica set} by specifying constraints on how it should be configured by \mamid.
+\begin{description}
 \oitem{MK}{replica_set_config_profiles} The \gls{administrator} can --- on creation of a replica set (\ref{MK:replica_set_create}) --- specify that it must be usable as a configuration server for \gls{MongoDB} \emph{Sharding} \footnote{\url{https://docs.mongodb.com/manual/core/sharded-cluster-config-servers/\#replica-set-config-servers}}.
 \oitem{MK}{replica_set_member_total_counts} The \gls{administrator} can select the number of \gls{MongoDB} instances (members) of a replica set.
 \oitem{MK}{replica_set_member_pv_counts} Volatile and persistent member count of a \gls{replica set} can be independently configured, under constraints described in \ref{F:master_alloc_resp_pv_counts}.
+\end{description}
 \oitem{MK}{} The \acrshort{gui} visualizes the list of configured \glspl{replica set}.
 \oitem{MK}{} The \gls{administrator} can destroy a \gls{replica set}.
 
