@@ -207,7 +207,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \oitem{MK}{slave_mode_maintenance} The \gls{administrator} can announce to \mamid that a slave is under maintenance to inhibit automatic reconfiguration of its MongoDB processes.
 \oitem{MK}{slave_mode_disabled} The \gls{administrator} can announce to \mamid that a slave should not host any MongoDB processes.
 
-\oitem{MK}{available_slave_types} The \gls{administrator} can specify whether the \gls{slave} has \glslink{persistent storage}{persistent} or \glslink{volatile storage}{volatile} storage.
+\oitem{MK}{available_slave_types} The \gls{administrator} can specify whether the \gls{slave} has \glslink{persistent storage}{persistent (typically HDD/SSD backed)} or \glslink{volatile storage}{volatile (RAM backed)} storage.
 \oitem{MK}{root_data_directory} The \gls{administrator} can specify in which filesystem directory on the \gls{host} the \gls{slave} and its \gls{MongoDB} processes store data.
 
 % replica set ops
@@ -250,7 +250,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 
 % slaves
 \oitem{WK}{} The \gls{administrator} can specify arbitrary \gls{MongoDB} command line parameters per \gls{slave}.
-\oitem{WK}{} The \gls{administrator} can specify a \gls{MongoDB} configuration file template.
+\oitem{WK}{} The \gls{administrator} can specify a \gls{MongoDB} configuration file template for \glspl{slave}.
 
 % automatic repair
 \oitem{WK}{} The \gls{master} automatically repairs \gls{degraded} \glspl{replica set} with \emph{suitable} \glslink{active mode}{active} \glspl{slave}.
