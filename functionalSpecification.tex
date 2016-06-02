@@ -245,10 +245,10 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \oitem{WK}{api_authentication} \mamid requires authentication for administrative actions.
 	
 % inventory
-\oitem{WK}{} The \gls{master} can export \& import a consistent snapshot of the \gls{inventory} for backup purposes.
 \oitem{WK}{manual_autodiscovery} \mamid auto-discovers new \glspl{slave} on the \gls{administrator}'s request.
 \oitem{WK}{continuous_autodiscovery} \mamid continuously auto-discovers new \glspl{slave}.
 \oitem{WK}{monitor_icmp} \mamid can recognize when the \gls{slave} software does not respond but the corresponding \gls{host} is still connected to the network.
+\oitem{WK}{export_import_snapshot} \mamid configuration can be backed up and restored.
 
 % slaves
 \oitem{WK}{} The \gls{administrator} can specify arbitrary \gls{MongoDB} command line parameters per \gls{slave}.
@@ -522,6 +522,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:m
 \subsubsection{Inventory}
 \begin{description}
 	\oitem{F}{master_inventory_persist_conf_state} Persist and provide the \gls{cluster} configuration \& state (\gls{inventory}).
+	\oitem{WF}{master_inventory_export_import_snapshot} Export \& import a consistent snapshot of the \gls{inventory} for backup purposes (\ref{WK:export_import_snapshot}).
 \end{description}
 \subsubsection{Controller}
 \begin{description}
