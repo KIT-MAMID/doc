@@ -240,7 +240,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \begin{description}
 	
 % master
-\oitem{WK}{api_authentication} The \gls{master} requires authentication from \acrshort{API} clients. 
+\oitem{WK}{api_authentication} \mamid requires authentication for administrative actions.
 	
 % inventory
 \oitem{WK}{manual_autodiscovery} The \gls{master} auto-discovers new \glspl{slave} on the \gls{administrator}'s request.
@@ -515,6 +515,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:m
 	\oitem{WF}{master_api_get_auto_discovered_slaves} Provide \acrshort{API} to retrieve a list of auto-discovered \glspl{slave} (\ref{WK:manual_autodiscovery}).
 	\oitem{WF}{master_api_machine_metrics} Provide \acrshort{API} exposing machine metrics of the \glspl{slave}.
 	\oitem{WF}{master_api_repl_set_status} Provide \acrshort{API} exposing \gls{replica set} replication status of the configured \glspl{replica set}.
+	\oitem{WF}{} Require authentication from clients (\ref{WK:api_authentication}).
 \end{description}
 \subsubsection{Monitor}
 \begin{description}
