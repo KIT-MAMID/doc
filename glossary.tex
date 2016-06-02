@@ -24,6 +24,10 @@
 	description={Multiple \gls{MongoDB} instances distributed over multiple \glspl{host} sharing a copy of the same data},
 	plural={replica sets}
 }
+\newglossaryentry{sharding}{
+	name={Sharding},
+	description={A type of \gls{MongoDB} deployment where data sets are spread across multiple \glspl{host} or \glspl{replica set}. \\ More information: {\small \url{https://docs.mongodb.com/manual/sharding/}}}
+}
 \newglossaryentry{administrator}{
 	name={administrator},
 	description={The person responsible for managing the hardware \& software deployed on the \gls{cluster}. Uses \mamid for \gls{MongoDB} \gls{replica set} administration},
@@ -86,7 +90,7 @@
 }
 \newglossaryentry{arbiter}{
 	name={arbiter},
-	description={In charge of breaking ties on a \gls{replica set} election\footnote{\url{https://docs.mongodb.com/manual/core/replica-set-elections/}} in case there is an even number of members},
+	description={In charge of breaking ties on a \gls{replica set} election with even number of members. More information: {\small \url{https://docs.mongodb.com/manual/core/replica-set-elections/}}},
 	plural={arbiters}
 }
 \newglossaryentry{degraded}{

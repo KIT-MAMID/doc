@@ -215,7 +215,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 % replica set ops
 \oitem{MK}{replica_set_create} The \gls{administrator} can describe a new \gls{MongoDB} \gls{replica set} by specifying constraints on how it should be configured by \mamid.
 \begin{description}
-\oitem{MK}{replica_set_config_profiles} The \gls{administrator} can --- on creation of a replica set (\ref{MK:replica_set_create}) --- specify that it must be usable as a configuration server for \gls{MongoDB} \emph{Sharding} \footnote{\url{https://docs.mongodb.com/manual/core/sharded-cluster-config-servers/\#replica-set-config-servers}}.
+\oitem{MK}{replica_set_config_profiles} The \gls{administrator} can --- on creation of a replica set (\ref{MK:replica_set_create}) --- specify that it must be usable as a configuration server for \gls{MongoDB} \gls{sharding}.
 \oitem{MK}{replica_set_member_total_counts} The \gls{administrator} can select the number of \gls{MongoDB} instances (members) of a replica set.
 \oitem{MK}{replica_set_member_pv_counts} Volatile and persistent member count of a \gls{replica set} can be independently configured, under constraints described in \ref{F:master_alloc_resp_pv_counts}.
 \end{description}
@@ -272,7 +272,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \subsection{Demarcation Criteria}
 \begin{description}
 \oitem{AK}{} The \gls{administrator} does not directly configure individual \gls{MongoDB} instances spawned \& controller by \mamid. All configuration happens through \mamid, either automatically (e.g. replica set deployment) or through a \mamid interface (e.g. GUI, CLI, HTTP API).
-\oitem{AK}{} The \gls{master} does not implement support for higher-layer \gls{MongoDB} features, e.g. \emph{Sharding}.
+\oitem{AK}{} The \gls{master} does not implement support for higher-layer \gls{MongoDB} features, e.g. \gls{sharding}.
 \oitem{AK}{} \mamid neither deploys the operating system nor other required software (such as \gls{MongoDB} binaries) to the \gls{cluster} \glspl{host}.
 \end{description}
 
@@ -449,7 +449,7 @@ List of tuples containing the following data
 	\oitem{D}{} \gls{replica set} name
 	\oitem{D}{} number of \glslink{persistent storage}{persistent} slaves $p$
 	\oitem{D}{} number of \glslink{volatile storage}{volatile} slaves $v$
-	\oitem{D}{} sharding configuration server $\in \{\text{true}, \text{false}\}$
+	\oitem{D}{} \gls{sharding} configuration server $\in \{\text{true}, \text{false}\}$
 	\oitem{D}{} member mongod processes (list of $p+v$)
 \end{description}
 
