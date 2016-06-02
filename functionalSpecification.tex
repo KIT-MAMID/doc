@@ -278,24 +278,24 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 
 \subsection{Scope of Application}
 \begin{itemize}
-\item MongoDB Cluster Administration
-\item High-Availibility \gls{MongoDB} Deployment
-\item \gls{MongoDB}\glslink{cluster}{Cluster} Monitoring
+\item \gls{MongoDB} \glslink{cluster}{Cluster} Administration
+\item High-Availibility MongoDB Deployment
+\item MongoDB Cluster Monitoring
 \end{itemize}
 
 \subsection{Target Users}
 \begin{itemize}
-\item \glslink{administrator}{Administrators} of \gls{cluster} hosting \mamid deployment
+\item Cluster \glspl{administrator} in charge of creating a MongoDB replica set deployment.
 \end{itemize}
 
 \subsection{Operating Conditions}
 \begin{itemize}
-\item multi-\gls{host} \gls{cluster} on a fast \acrshort{LAN}
-\item Low maintenance cost (time, personnel)
-\item Uncomplicated takeover of deployment by a successor (flat learning curve)
+
+\item Low maintenance capacity for the cluster (time, personnel)
+\item Uncomplicated takeover by a successor must be possible (flat learning curve)
 \end{itemize}
 
-\section{Environment}
+\section{Operational Environment}
 
 \begin{figure}[H]
 	\centering
@@ -310,36 +310,30 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \end{itemize}
 
 \subsection{Hardware}
-
-Each of the subsequently listed requirements describes the previously defined ones.
-
-\subsubsection{Cluster Hosts Hardware}
+Each of the subsequently listed requirements is an extension of the previous one.
+\subsubsection{Cluster Hosts: Hardware}
 \begin{itemize}
 	\item 64bit amd64 Instruction Set
+	\item Up to $1GB$ file storage for \mamid applications.
 	\item Sufficient \glslink{persistent storage}{persistent} or \gls{volatile storage} to hold the required \gls{MongoDB} data. \\
-	      Up to $1GB$ file storage for \mamid applications.
 	\begin{itemize}
 		\item \textbf{Note}: fewer \glspl{host} with \gls{persistent storage} may require the \gls{persistent storage} on these \glspl{host} to be larger.
 	\end{itemize}
 \end{itemize}
 
-\subsubsection{Deployment of the Cluster}
+\subsubsection{Cluster Hosts: Interconnect}
 \begin{itemize}
-	\item \glslink{cluster}{Cluster}
+	\item All hosts are interconnected through fast \acrshort{LAN}.
 	\begin{itemize}
-		\item with \gls{cluster} \glspl{host} on an isolated \acrshort{LAN}
-		\item with at least one \gls{cluster} \glspl{host} which is
-		\begin{itemize}
-			\item connected to the \gls{cluster} \gls{host} isolated \acrshort{LAN}
-			\item connected to the external network (\acrshort{LAN} or \acrshort{WAN})
-		\end{itemize}
+		\item All cluster hosts are interconnected through an isolated \acrshort{LAN}
+		\item $>= 1$ cluster host is connected to both the isolated \acrshort{LAN} and an external network (usually another \acrshort{LAN} or \acrshort{WAN}).
 	\end{itemize}
 \end{itemize}
 
 \subsubsection{Operation of Persistently Stored Replica Sets}
 \begin{itemize}
-	\item $>= 1$ \gls{host} with \gls{persistent storage}
-	\item $>= 3$ \glspl{host} in total
+	\item $>= 1$ cluster host with \gls{persistent storage}
+	\item $>= 3$ cluster hosts in total
 \end{itemize}
 
 \subsubsection{Basic Level of Host Redundancy}
