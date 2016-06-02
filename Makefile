@@ -1,15 +1,26 @@
-all: module_overview.pdf state_diagram.pdf
+# Settable
+UMLET_JAR ?= `which umlet`
+JAVA ?= `which java`
+
+# Internal commands
+UMLET_CONVERT = $(JAVA) -jar $(UMLET_JAR) -action=convert -format=pdf -filename=$(1) -output=$(2)
+
+# Internal vars (extend as needed)
+UMLET_PDFS = module_overview.pdf state_diagram.pdf
+
+# Targets
+all: $(UMLET_PDFS)
 	pdflatex functionalSpecification.tex
 	makeglossaries functionalSpecification
 	pdflatex functionalSpecification.tex
 	pdflatex functionalSpecification.tex
 
-module_overview.pdf: module_overview.uxf
-	java -jar `which umlet` -action=convert -format=pdf -filename=module_overview.uxf -output=module_overview.pdf
+# Assets
+## UMLet
+$(UMLET_PDFS): %.pdf: %.uxf
+	$(call UMLET_CONVERT,$<,$@)
 
-state_diagram.pdf: state_diagram.uxf
-	java -jar `which umlet` -action=convert -format=pdf -filename=state_diagram.uxf -output=state_diagram.pdf
-
+# Cleaning
 clean:
 	rm -f functionalSpecification.pdf
 	rm -f functionalSpecification.aux
@@ -21,8 +32,8 @@ clean:
 	rm -f functionalSpecification.ist
 	rm -f functionalSpecification.glg
 	rm -f functionalSpecification.log
-
 	rm -f glossary.aux
 
-	rm -f module_overview.pdf
-	rm -f state_diagram.pdf
+	$(foreach pdf,$(UMLET_PDFS), \
+		rm -f $(pdf); \
+	)
