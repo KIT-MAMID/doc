@@ -13,6 +13,8 @@
 \usepackage{enumitem} 
 \usepackage{url}
 \usepackage{parskip}
+% http://tex.stackexchange.com/questions/17730/newcommand-and-spacing
+\usepackage{xspace}
 
 % TODO: template übersetzten
 
@@ -127,7 +129,7 @@
 \renewcommand{\autoref}[1]{\refsymbol\oldautoref{#1}}
 
 \newcommand{\abbildung}[1]{\autoref{fig:#1}}
-\newcommand{\mamid}[0]{\textit{MAMID}}
+\newcommand{\mamid}{\textit{MAMID}\xspace}
 
 \include{glossary}
 
