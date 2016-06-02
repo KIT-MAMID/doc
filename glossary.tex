@@ -68,10 +68,10 @@
 	description={A \gls{slave} in this mode does not run any \gls{MongoDB} instances controlled by the \gls{master}, hence has no \gls{MongoDB} instances in any \gls{replica set}.},
 	plural={disabled modes}
 }
-\newglossaryentry{physical interdependency}{
-	name={physical interdependency},
-	description={A set of \glspl{slave} where each \gls{slave} only works if all other \glspl{slave} work. Example: All \glspl{slave} sharing a single power supply are physically interdependent},
-	plural={physical interdependencies}
+\newglossaryentry{risk group}{
+	name={risk group},
+	description={A set of \glspl{host} sharing a common risk of failure, e.g. a shared power supply. Modeled through sets of \glspl{slave} since a 1:1 relationship exists between hosts and slaves},
+	plural={risk groups}
 }
 \newglossaryentry{persistent storage}{
 	name={persistent storage},
