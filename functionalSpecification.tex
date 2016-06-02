@@ -560,11 +560,11 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:m
 	% Process manager
 	\oitem{F}{slave_control_procs} Spawn / Control / Kill \gls{MongoDB} processes (\ref{MK:mongod_deployment2}).
 	% MongoDB Client
-	\oitem{F}{slave_communicate_with_mongodb} Communicate with \gls{MongoDB} processes using \ref{SM:mongodbclient}.
+	\oitem{F}{slave_communicate_with_mongodb} Communicate with \gls{MongoDB} processes using \hyperref[SM:mongodbclient]{MongoDBClient}.
 	% Controller again
-	\oitem{F}{slave_report_config} Report current configuration through \ref{SM:masterslaveproto}.
-	\oitem{WF}{slave_report_machine_metrics} Report machine metrics through \ref{SM:masterslaveproto}.
-	\oitem{WF}{slave_report_repl_status} Report \gls{replica set} replication status through \ref{SM:masterslaveproto}.
+	\oitem{F}{slave_report_config} Report current configuration through \hyperref[SM:masterslaveproto]{MasterSlaveProtocol}.
+	\oitem{WF}{slave_report_machine_metrics} Report machine metrics through \hyperref[SM:masterslaveproto]{MasterSlaveProtocol}.
+	\oitem{WF}{slave_report_repl_status} Report \gls{replica set} replication status through \hyperref[SM:masterslaveproto]{MasterSlaveProtocol}.
 \end{description}
 
 \subsection{NotificationManager}
