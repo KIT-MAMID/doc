@@ -214,19 +214,23 @@ Maintenance of individual \glspl{host}, growing \& shrinking of the cluster, etc
 \oitem{MK}{replica_set_member_pv_counts} Volatile and persistent member count of a \gls{replica set} can be independently configured, under constraints described in \ref{F:master_alloc_resp_pv_counts}.
 \oitem{MK}{} The \acrshort{gui} visualizes the list of configured \glspl{replica set}.
 \oitem{MK}{} The \gls{administrator} can destroy a \gls{replica set}.
-\oitem{MK}{deploy_replica_set_config} The \gls{master} deploys the \gls{replica set} configuration to the cluster.
+
 \end{description}
 
-\subsubsection{MongoDB Configuration}
+\subsubsection{MongoDB Configuration \& Monitoring}
 \begin{description}
-% slaves
-\oitem{MK}{} The \gls{slave} controls \gls{MongoDB} processes on the \gls{cluster} \glspl{host}.
+\oitem{MK}{mongod_deployment1} \mamid asserts that the replica sets described by the administrator are configured on the cluster.
+\oitem{MK}{mongod_deployment2} To achieve \ref{MK:mongod_deployment1}, \mamid spawns \& controls \gls{MongoDB} processes on the hosts using a \gls{slave} process.
+\begin{description}
+	\oitem{MK}{mongod_redeployment} \mamid redeploys configured \gls{MongoDB} processes to hosts where the \gls{slave} process reports a situation different from what is expected by the \gls{master}.
+	\oitem{MK}{mongod_redeployment_powercycle_specific} Specifically, a host with volatile data storage can loose all data originating from the \gls{slave} process or \gls{MongoDB} and is automatically redeployed with correctly configured \gls{MongoDB} instances (\ref{MK:mongod_deployment2}).
+\end{description}
+% Todo old \oitem{MK}{} The \gls{master} deploys the \gls{replica set} configuration described by the administrator to the cluster.
 
 % monitoring features
 \oitem{MK}{detect_slave_unexpected_behavior} \mamid detects when a \gls{slave} in the \gls{inventory} behaves unexpectedly, e.g. becomes unreachable while no maintenance announced.
 \oitem{MK}{} \mamid informs the \gls{administrator} by e-mail about problems in the cluster (\ref{MK:detect_slave_unexpected_behavior}).
 \oitem{MK}{} The \acrshort{gui} visualizes \glspl{slave} behaving unexpectedly (\ref{MK:detect_slave_unexpected_behavior}).
-
 \end{description}
 
 \subsection{Optional Criteria}
@@ -537,7 +541,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:m
 			(\ref{MK:replica_set_member_pv_counts} and \ref{MK:available_slave_types})
 		\oitem{WF}{master_alloc_arbiters} adding \gls{MongoDB} \glspl{arbiter} where necessary (\ref{WK:deploy_arbiters}).
 	\end{description}
-	\oitem{F}{master_alloc_communicate_config} Communicate the \gls{MongoDB} instance configuration to the \glspl{slave} (\ref{MK:deploy_replica_set_config}).
+	\oitem{F}{master_alloc_communicate_config} Communicate the \gls{MongoDB} instance configuration to the \glspl{slave} (\ref{MK:mongod_deployment1}).
 \end{description}
 
 \subsection{MasterSlaveProtocol}
@@ -552,9 +556,9 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:m
 \subsection{Slave}
 \begin{description}
 	% Controller
-	\oitem{F}{slave_enforce_config} Enforce configuration description received from \gls{master} through \ref{SM:masterslaveproto} (also: \ref{MK:deploy_replica_set_config}). 
+	\oitem{F}{slave_enforce_config} Apply \gls{MongoDB} process configuration description received from \gls{master} through \hyperref[SM:masterslaveproto]{MasterSlaveProtocol} (\ref{MK:mongod_deployment1}).
 	% Process manager
-	\oitem{F}{slave_control_procs} Spawn / Control / Kill \gls{MongoDB} processes.
+	\oitem{F}{slave_control_procs} Spawn / Control / Kill \gls{MongoDB} processes (\ref{MK:mongod_deployment2}).
 	% MongoDB Client
 	\oitem{F}{slave_communicate_with_mongodb} Communicate with \gls{MongoDB} processes using \ref{SM:mongodbclient}.
 	% Controller again
