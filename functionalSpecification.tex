@@ -208,7 +208,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \oitem{MK}{root_data_directory} The \gls{administrator} can specify in which filesystem directory on the \gls{host} the \gls{slave} and its \gls{MongoDB} processes store data.
 % inventory ops -> slave
 \oitem{MK}{slave_mode_active} The \gls{administrator} can announce to \mamid that a slave is ready to host MongoDB processes.
-\oitem{MK}{slave_mode_maintenance} The \gls{administrator} can announce to \mamid that a slave is under maintenance to inhibit automatic reconfiguration of its MongoDB processes.
+\oitem{MK}{slave_mode_maintenance} The \gls{administrator} can announce to \mamid that a slave is in maintenance to inhibit automatic reconfiguration of its MongoDB processes.
 \oitem{MK}{slave_mode_disabled} The \gls{administrator} can announce to \mamid that a slave should not host any MongoDB processes.
 \end{description}
 
@@ -384,7 +384,7 @@ Each of the subsequently listed requirements is an extension of the previous one
 	\oitem{SM}{} Slave::ProcessManager\\
 	Spawns and controls \gls{MongoDB} processes. (\ref{F:slave_control_procs})
 \end{description}
-\subsubsection{Slave states}
+\subsubsection{Slave Modes}\label{SM:SlaveModes}
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{state_diagram}
@@ -393,15 +393,24 @@ Each of the subsequently listed requirements is an extension of the previous one
 A slave can be in the following states:
 \begin{itemize}
 	\item \glslink{active mode}{active}\\
-	\mamid monitors \glspl{slave} in active mode. If the slave behaves unexpectedly, i.e. is not reachable, \mamid notifies the \gls{administrator} and set its state to unknown.
-	\item unknown\\
-	\mamid monitors \glspl{slave} in unknown state and sets them into active state if they recover. The \gls{administrator} can set the slave state to maintenance to stop monitoring of the slave or to disabled mode to replace the slave.
+	\mamid monitors \glspl{slave} in active mode. \glslink{slave}{Slaves} in this mode behave as expected, i.e. are running MongoDB processes in the configuration determined by the \hyperref[SM:Master]{Master}.\\
+	If the slave behaves unexpectedly, e.g. is not reachable, \mamid notifies the \gls{administrator} and sets its state to \emph{unknown}.
+	\item \emph{unknown}\\
+	\mamid monitors \glspl{slave} in \emph{unknown} state and sets them back to \gls{active mode} when they recover.\\
+	\mamid can recover a slave in \emph{unknown} state automatically by respawning and configuring MongoDB processes, e.g. after power-loss on a \glslink{volatile storage}{volatile} \gls{host}.
+	The \gls{administrator} can set the slave state
+	\begin{itemize}
+		\item to \gls{maintenance mode} to stop monitoring of the slave or
+		\item to \gls{disabled mode} to trigger reallocation of all \gls{MongoDB} processes to another slave.
+	\end{itemize}
 	\item \glslink{maintenance mode}{maintenance}\\
-	\mamid does not monitor \glspl{slave} in maintenance mode, but also does not alter the \gls{replica set}.
+	\mamid ignores unexpected slave behavior if the slave is in maintenance mode.\\The running MongoDB processes on the slave are not modified / reconfigured and no reallocation to other slaves is triggered.
 	\item \glslink{disabled mode}{disabled}\\
-	\mamid dissociates \glspl{slave} in disabled mode with any \glspl{replica set} they may be member of. This means all mongod instances running on the slave are shut down.
+	A \gls{slave} in disabled mode does not run any \gls{MongoDB} process controlled by the slave process. When a \gls{slave} with MongoDB processes in a \gls{replica set} is set to disabled mode, \mamid stops all these processes and configures new ones on other \glspl{slave} to repair the temporarily degraded replica set.
 \end{itemize}
-All state changes apart from active $\leftrightarrow$ unknown have to be triggered by the \gls{administrator}. If \ref{WK:deploy_arbiters} is implemented the state change unknown $\rightarrow$ disabled can be triggered automatically.
+Slave state is tracked exclusively in the \hyperref[SM:Master]{Master}.\\
+All state changes apart from active $\leftrightarrow$ unknown are triggered by the \gls{administrator}.\\
+If \ref{WK:deploy_arbiters} is implemented the state change unknown $\rightarrow$ disabled can be triggered automatically.
 
 \subsection{Graphical User Interface (GUI)}\label{SM:GUI}
 \begin{description}
@@ -532,8 +541,8 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:m
 \begin{description}
 	\oitem{F}{layout_cluster_config} Lay out the \gls{cluster} configuration, i.e. decide on a \gls{replica set} configuration
 	\begin{description}
-		\oitem{F}{master_alloc_resp_mode} respecting the mode of hosts (\ref{MK:slave_mode_disabled}).
 		\oitem{F}{master_alloc_resp_risk_groups} respecting specified \glspl{risk group} by not configuring a replica set with \gls{MongoDB} processes on \glspl{host} sharing the same risk group. \\Only mutually disjoint sets of risk groups are allowed (\ref{MK:spec_risk_groups}).
+		\oitem{F}{master_alloc_resp_mode} respecting the mode of \glspl{slave}, following the behavior described in \ref{SM:SlaveModes}.
 		\oitem{F}{master_alloc_resp_pv_counts} respecting the administrator-configured number of $p$ persistent \& $v$ volatile \gls{replica set} members per \gls{replica set}, given that
 			\begin{flalign*} %align left
 			p \in \mathbb{N}_0 \text{ persistent members}  \\
