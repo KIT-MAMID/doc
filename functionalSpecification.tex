@@ -245,10 +245,10 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \oitem{WK}{api_authentication} \mamid requires authentication for administrative actions.
 	
 % inventory
-\oitem{WK}{continuous_autodiscovery} The \gls{master} continuously auto-discovers \glspl{slave}.
 \oitem{WK}{} The \gls{master} monitors reachability of \gls{cluster} \glspl{host} via ICMP.
 \oitem{WK}{} The \gls{master} can export \& import a consistent snapshot of the \gls{inventory} for backup purposes.
 \oitem{WK}{manual_autodiscovery} \mamid auto-discovers new \glspl{slave} on the \gls{administrator}'s request.
+\oitem{WK}{continuous_autodiscovery} \mamid continuously auto-discovers new \glspl{slave}.
 
 % slaves
 \oitem{WK}{} The \gls{administrator} can specify arbitrary \gls{MongoDB} command line parameters per \gls{slave}.
