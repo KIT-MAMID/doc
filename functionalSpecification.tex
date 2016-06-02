@@ -195,7 +195,7 @@ Maintenance of individual \glspl{host}, growing \& shrinking of the cluster, etc
 \oitem{MK}{inventory_definition} The \gls{master} maintains a list of \glspl{slave} called \gls{inventory}.
 \oitem{MK}{} The \gls{administrator} can add \glspl{slave} to the \gls{inventory}.
 \oitem{MK}{} The \acrshort{gui} visualizes the \gls{inventory}.
-\oitem{MK}{} The \gls{administrator} can remove a \gls{slave} in \gls{disabled mode} from the \gls{inventory}.
+\oitem{MK}{} The \gls{administrator} can remove a \gls{slave} that does not host any \gls{MongoDB} processes from the \gls{inventory}.
 \oitem{MK}{spec_physical_interdep} The \gls{administrator} can specify \glspl{physical interdependency} between \gls{inventory} \glspl{slave}.
 
 % inventory ops -> slave
@@ -203,7 +203,7 @@ Maintenance of individual \glspl{host}, growing \& shrinking of the cluster, etc
 \oitem{MK}{slave_mode_maintenance} The \gls{administrator} can announce to \mamid that a slave is under maintenance to inhibit automatic reconfiguration of its MongoDB processes.
 \oitem{MK}{slave_mode_disabled} The \gls{administrator} can announce to \mamid that a slave should not host any MongoDB processes.
 
-\oitem{MK}{available_slave_types} The \gls{administrator} can specify the whether the \gls{slave} has \glslink{persistent storage}{persistent} or \glslink{volatile storage}{volatile} storage.
+\oitem{MK}{available_slave_types} The \gls{administrator} can specify whether the \gls{slave} has \glslink{persistent storage}{persistent} or \glslink{volatile storage}{volatile} storage.
 \oitem{MK}{root_data_directory} The \gls{administrator} can specify in which filesystem directory on the \gls{host} the \gls{slave} and its \gls{MongoDB} processes store data.
 
 % replica set ops
