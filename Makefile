@@ -1,6 +1,8 @@
 # Settable
 UMLET_JAR ?= `which umlet`
 JAVA ?= `which java`
+PDFLATEX ?= pdflatex -synctex=1
+MAKEGLOSSARIES ?= makeglossaries
 
 # Internal commands
 UMLET_CONVERT = $(JAVA) -jar $(UMLET_JAR) -action=convert -format=pdf -filename=$(1) -output=$(2)
@@ -10,10 +12,10 @@ UMLET_PDFS = module_overview.pdf state_diagram.pdf cluster_layout.pdf hardware_l
 
 # Targets
 all: $(UMLET_PDFS)
-	pdflatex functionalSpecification.tex
-	makeglossaries functionalSpecification
-	pdflatex functionalSpecification.tex
-	pdflatex functionalSpecification.tex
+	$(PDFLATEX) functionalSpecification.tex
+	$(MAKEGLOSSARIES) functionalSpecification
+	$(PDFLATEX) functionalSpecification.tex
+	$(PDFLATEX) functionalSpecification.tex
 
 # Assets
 ## UMLet
