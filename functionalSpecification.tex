@@ -209,7 +209,7 @@ Maintenance of individual \glspl{host}, growing \& shrinking of the cluster, etc
 
 % replica set ops
 \oitem{MK}{replica_set_create} The \gls{administrator} can create a new \gls{replica set}.
-\oitem{MK}{replica_set_config_profiles} The \gls{administrator} can --- on creation of a replica set (\ref{MK:replica_set_create}) --- specify that it can be used as a configuration server for a sharded-cluster \footnote{\url{https://docs.mongodb.com/manual/core/sharded-cluster-config-servers/\#replica-set-config-servers}}.
+\oitem{MK}{replica_set_config_profiles} The \gls{administrator} can --- on creation of a replica set (\ref{MK:replica_set_create}) --- specify that it must be usable as a configuration server for \gls{MongoDB} \emph{Sharding} \footnote{\url{https://docs.mongodb.com/manual/core/sharded-cluster-config-servers/\#replica-set-config-servers}}.
 \oitem{MK}{replica_set_member_total_counts} The \gls{administrator} can select the number of \gls{MongoDB} instances (members) of a replica set.
 \oitem{MK}{replica_set_member_pv_counts} Volatile and persistent member count of a \gls{replica set} can be independently configured, under constraints described in \ref{F:master_alloc_resp_pv_counts}.
 \oitem{MK}{} The \acrshort{gui} visualizes the list of configured \glspl{replica set}.
