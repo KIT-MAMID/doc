@@ -21,6 +21,9 @@ screenshots screenshots/:
 	-$(CUTYCAPT) --url=$(SCREENSHOTS_BASE_URL)/slave/mksuns11/edit/disabled --out=screenshots/slave_edit_disabled.png
 	-$(CUTYCAPT) --url=$(SCREENSHOTS_BASE_URL)/riskgroups --out=screenshots/risk_groups.png
 	-$(CUTYCAPT) --url=$(SCREENSHOTS_BASE_URL)/replicasets --out=screenshots/replica_sets.png
+	-$(CUTYCAPT) --url=$(SCREENSHOTS_BASE_URL)/replicaset/mksuns11/edit/degraded --out=screenshots/replica_set_overview_degraded.png
+	 -$(CUTYCAPT) --url=$(SCREENSHOTS_BASE_URL)/replicaset/mksuns11/edit/active --out=screenshots/replica_set_overview_active.png
+
 clean:
 	rm -f functionalSpecification.pdf
 	rm -f functionalSpecification.aux
