@@ -14,7 +14,7 @@ CUTYCAPT=$(XVFB_RUN) $(CUTYCAPT_BIN) --min-width=1920 --min-height=1080  --user-
 # Internal vars (extend as needed)
 UMLET_PDFS = module_overview.pdf state_diagram.pdf cluster_layout.pdf hardware_layout.pdf
 
-SCREENSHOTS = dashboard slaves problems slave_edit_unknown slave_edit_active slave_edit_maintenance slave_edit_disabled risk_groups replica_sets
+SCREENSHOTS = dashboard slaves problems slave_edit_unknown slave_edit_active slave_edit_maintenance slave_edit_disabled risk_groups replica_sets replica_set_overview_degraded replica_set_overview_active
 SCREENSHOTS := $(addprefix screenshots/,$(SCREENSHOTS))
 SCREENSHOTS := $(addsuffix .png,$(SCREENSHOTS))
 
@@ -36,15 +36,17 @@ screenshots: | screenshots_dir $(SCREENSHOTS)
 screenshots_dir:
 	mkdir screenshots
 $(SCREENSHOTS): %.png: screenshots_dir
-	@if [ "$(notdir $(basename $@))" = "dashboard" ]; 		then $(call CUTYCAPT,"/","$@"); fi;
-	@if [ "$(notdir $(basename $@))" = "slaves" ]; 			then $(call CUTYCAPT,"/slaves","$@"); fi;
-	@if [ "$(notdir $(basename $@))" = "problems" ]; 		then $(call CUTYCAPT,"/problems","$@"); fi;
-	@if [ "$(notdir $(basename $@))" = "slave_edit_unknown" ]; 	then $(call CUTYCAPT,"/slave/mksuns11/edit/unknown","$@"); fi;
-	@if [ "$(notdir $(basename $@))" = "slave_edit_active" ]; 	then $(call CUTYCAPT,"/slave/mksuns11/edit/active","$@"); fi;
-	@if [ "$(notdir $(basename $@))" = "slave_edit_maintenance" ]; 	then $(call CUTYCAPT,"/slave/mksuns11/edit/maintenance","$@"); fi;
-	@if [ "$(notdir $(basename $@))" = "slave_edit_disabled" ]; 	then $(call CUTYCAPT,"/slave/mksuns11/edit/disabled","$@"); fi;
-	@if [ "$(notdir $(basename $@))" = "risk_groups" ]; 		then $(call CUTYCAPT,"/riskgroups","$@"); fi;
-	@if [ "$(notdir $(basename $@))" = "replica_sets" ]; 		then $(call CUTYCAPT,"/replicasets","$@"); fi;
+	@if [ "$(notdir $(basename $@))" = "dashboard" ]; 				then $(call CUTYCAPT,"/","$@"); fi;
+	@if [ "$(notdir $(basename $@))" = "slaves" ]; 					then $(call CUTYCAPT,"/slaves","$@"); fi;
+	@if [ "$(notdir $(basename $@))" = "problems" ]; 				then $(call CUTYCAPT,"/problems","$@"); fi;
+	@if [ "$(notdir $(basename $@))" = "slave_edit_unknown" ]; 			then $(call CUTYCAPT,"/slave/mksuns11/edit/unknown","$@"); fi;
+	@if [ "$(notdir $(basename $@))" = "slave_edit_active" ]; 			then $(call CUTYCAPT,"/slave/mksuns11/edit/active","$@"); fi;
+	@if [ "$(notdir $(basename $@))" = "slave_edit_maintenance" ]; 			then $(call CUTYCAPT,"/slave/mksuns11/edit/maintenance","$@"); fi;
+	@if [ "$(notdir $(basename $@))" = "slave_edit_disabled" ]; 			then $(call CUTYCAPT,"/slave/mksuns11/edit/disabled","$@"); fi;
+	@if [ "$(notdir $(basename $@))" = "risk_groups" ]; 				then $(call CUTYCAPT,"/riskgroups","$@"); fi;
+	@if [ "$(notdir $(basename $@))" = "replica_sets" ]; 				then $(call CUTYCAPT,"/replicasets","$@"); fi;
+	@if [ "$(notdir $(basename $@))" = "replica_set_overview_degraded" ]; 		then $(call CUTYCAPT,"/replicaset/mksuns11/edit/degraded","$@"); fi;
+	@if [ "$(notdir $(basename $@))" = "replica_set_overview_active" ]; 		then $(call CUTYCAPT,"/replicaset/mksuns11/edit/active","$@"); fi;
 
 # Cleaning
 clean: clean_screenshots
