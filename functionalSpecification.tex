@@ -767,7 +767,11 @@ Clicking the wrench icon opens the replica set modification UI (\ref{subsec:ui:m
 	\mamidscreenshot{screenshots/replica_set_remove}
 	\caption{Removing a replica set}
 \end{figure}
-
+After clicking the red \textit{Remove replica set} button in the \textit{Replica Set View}, the user is prompted for confirmation (\ref{}). %TODO reference functional requirement
+\begin{itemize}
+	\uiel{Delete replica set}{button} deletes the replica set.
+	\uiel{Cancel}{button} cancels the deletion operation and dismisses the prompt.
+\end{itemize}
 
 \subsection{Risk Groups View}
 \begin{figure}[H]
@@ -924,7 +928,7 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 	\begin{itemize}
 		\item The \gls{administrator} navigates to 'replica set management section'. %TODO ref ui
 		\item The \gls{administrator} selects $R$ and clicks the remove button. % TODO ref testseq and ui
-		\item The \hyperref[SM:GUI]{GUI} prompts the \gls{administrator} for confirmation.
+		\item The \hyperref[SM:GUI]{GUI} prompts the \gls{administrator} for confirmation. %TODO missing functional requirement
 		\item The \gls{administrator} confirms the removal.
 		\item The \hyperref[SM:Master]{master} persists the change and communicates to the \glspl{slave} that \gls{host} members of $R$ must kill the respective \gls{MongoDB} processes.
 		\item The \glspl{slave} apply the received instructions.
