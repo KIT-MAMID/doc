@@ -31,11 +31,9 @@ $(UMLET_PDFS): %.pdf: %.uxf
 	$(call UMLET_CONVERT,$<,$@)
 
 ## Screenshots
-.PHONY: screenshots_dir screenshots
-screenshots: | screenshots_dir $(SCREENSHOTS)
-screenshots_dir:
+screenshots:
 	mkdir -p screenshots
-$(SCREENSHOTS): %.png: screenshots_dir
+$(SCREENSHOTS): %.png: screenshots
 	@if [ "$(notdir $(basename $@))" = "dashboard" ]; 				then $(call CUTYCAPT,"/","$@","0"); fi;
 	@if [ "$(notdir $(basename $@))" = "slaves" ]; 					then $(call CUTYCAPT,"/slaves","$@","0"); fi;
 	@if [ "$(notdir $(basename $@))" = "problems" ]; 				then $(call CUTYCAPT,"/problems","$@","0"); fi;
