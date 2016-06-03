@@ -500,8 +500,6 @@ List of tuples containing the following data
 \section{Functional Requirements}
 % Format: Substantiviertes Verb am Anfang („Bestimmen von X“, nicht „Bestimmung von X“, „Bestimme X“ oder „X bestimmen”).
 
-%TODO cli paramters + config file template wf spezifizieren
-
 \subsection{Graphical User Interface (GUI)}
 The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:masterapiserver}. Hence, all functionality described in this subsection is realized through \acrshort{API} calls to the \gls{master}.
 \begin{description}
@@ -515,7 +513,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:m
 	\oitem{WF}{gui_display_machine_metrics} Display machine metrics of the \glspl{slave}. 
 	\oitem{WF}{gui_display_repl_status} Display replication status of the configured \glspl{replica set}.
 	\oitem{WF}{gui_auto_discovery_interface} Provide interface to select auto-discovered \glspl{slave} when adding to \gls{inventory} (\ref{F:gui_crud_inventory}).
-	\oitem{WF}{gui_command_line_parameters_interface} Provide interface to specify command line parameters for \gls{MongoDB} processes (\ref{WK:tweak_performance_parameters}).
+	\oitem{WF}{gui_command_line_parameters_interface} Provide interface to specify --- per replica set --- command line parameters for the member \gls{MongoDB} processes (\ref{WK:tweak_performance_parameters})
 \end{description}
 
 \subsection{Master}
@@ -530,7 +528,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:m
 	\oitem{WF}{master_api_machine_metrics} Provide \acrshort{API} exposing machine metrics of the \glspl{slave}.
 	\oitem{WF}{master_api_repl_set_status} Provide \acrshort{API} exposing \gls{replica set} replication status of the configured \glspl{replica set}.
 	\oitem{WF}{} Require authentication from clients (\ref{WK:api_authentication}).
-	\oitem{WF}{master_api_command_line_parameters} Provide API to specify command line parameters for \gls{MongoDB} processes (\ref{WK:tweak_performance_parameters}). %TODO which set of mongodb processes
+	\oitem{WF}{master_api_command_line_parameters} Provide API to specify --- per replica set --- command line parameters for the member \gls{MongoDB} processes (\ref{WK:tweak_performance_parameters}).
 \end{description}
 \subsubsection{Monitor}
 \begin{description}
@@ -568,7 +566,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:m
 \end{description}
 \subsubsection{Miscellaneous}
 \begin{description}
-\oitem{WK}{} Provide ability to deploy \gls{MongoDB} configuration files based on administrator-defined templates to \gls{MongoDB} processes. %TODO which set of mongodb processes
+\oitem{WK}{} Provide ability to deploy --- per replica set --- administrator-defined \gls{MongoDB} configuration file templates (\ref{WK:tweak_performance_parameters}).
 \end{description}
 
 \subsection{MasterSlaveProtocol}
