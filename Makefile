@@ -45,9 +45,9 @@ $(SCREENSHOTS): %.png: screenshots_dir
 	@if [ "$(notdir $(basename $@))" = "slave_edit_disabled" ]; 			then $(call CUTYCAPT,"/slave/mksuns11/edit/disabled","$@","0"); fi;
 	@if [ "$(notdir $(basename $@))" = "risk_groups" ]; 				then $(call CUTYCAPT,"/riskgroups","$@","0"); fi;
 	@if [ "$(notdir $(basename $@))" = "replica_sets" ]; 				then $(call CUTYCAPT,"/replicasets","$@","0"); fi;
-	@if [ "$(notdir $(basename $@))" = "replica_set_overview_degraded" ]; 		then $(call CUTYCAPT,"/replicaset/mksuns11/edit/degraded","$@","0"); fi;
-	@if [ "$(notdir $(basename $@))" = "replica_set_overview_active" ]; 		then $(call CUTYCAPT,"/replicaset/mksuns11/edit/active","$@","0"); fi;
-	@if [ "$(notdir $(basename $@))" = "replica_set_remove" ];             		then $(call CUTYCAPT,"/replicaset/mksuns11/edit/active#modal","$@","200"); fi;
+	@if [ "$(notdir $(basename $@))" = "replica_set_overview_degraded" ]; 		then $(call CUTYCAPT,"/replicaset/meteorologic_data/edit/degraded","$@","0"); fi;
+	@if [ "$(notdir $(basename $@))" = "replica_set_overview_active" ]; 		then $(call CUTYCAPT,"/replicaset/meteorologic_data/edit/active","$@","0"); fi;
+	@if [ "$(notdir $(basename $@))" = "replica_set_remove" ];             		then $(call CUTYCAPT,"/replicaset/meteorologic_data/edit/active#modal","$@","200"); fi;
 	@if [ "$(notdir $(basename $@))" = "slave_remove" ];                     	then $(call CUTYCAPT,"/slave/mksuns11/edit/disabled#modal","$@","200"); fi;
 	@if [ "$(notdir $(basename $@))" = "new_slave" ];             			then $(call CUTYCAPT,"/new/slave","$@","0"); fi;
 	@if [ "$(notdir $(basename $@))" = "new_replica_set" ];                         then $(call CUTYCAPT,"/new/replicaset","$@","0"); fi;
