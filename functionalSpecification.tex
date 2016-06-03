@@ -15,6 +15,8 @@
 \usepackage{parskip}
 % http://tex.stackexchange.com/questions/17730/newcommand-and-spacing
 \usepackage{xspace}
+% 'frame' option for figures
+\usepackage[export]{adjustbox}
 
 % TODO: template übersetzten
 
@@ -109,6 +111,8 @@
 % new page after section
 \let\oldsection\section
 \renewcommand\section{\clearpage\oldsection}
+
+\newcommand{\mamidscreenshot}[1]{\includegraphics[width=\textwidth,frame]{#1}}
 
 \begin{document}
 
@@ -652,80 +656,80 @@ The \acrshort{cli} is an \emph{optional} functional requirement. It acts as a fr
 \subsection{The Main Menus}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{screenshots/dashboard}
+	\mamidscreenshot{screenshots/dashboard}
 	\caption{The overview view}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{screenshots/slaves}
+	\mamidscreenshot{screenshots/slaves}
 	\caption{The slaves view}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{screenshots/replica_sets}
+	\mamidscreenshot{screenshots/replica_sets}
 	\caption{The replica sets view}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{screenshots/risk_groups}
+	\mamidscreenshot{screenshots/risk_groups}
 	\caption{The risk groups view}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{screenshots/problems}
+	\mamidscreenshot{screenshots/problems}
 	\caption{The problems view}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{screenshots/new_slave}
+	\mamidscreenshot{screenshots/new_slave}
 	\caption{The new slave wizard}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{screenshots/new_replica_set}
+	\mamidscreenshot{screenshots/new_replica_set}
 	\caption{The new replica set wizard}
 \end{figure}
 \subsection{Modifying a Slave}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{screenshots/slave_edit_active.png}
+	\mamidscreenshot{screenshots/slave_edit_active.png}
 	\caption{The slave edit view with a slave in 'active' state}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{screenshots/slave_edit_unknown.png}
+	\mamidscreenshot{screenshots/slave_edit_unknown.png}
 	\caption{The slave edit view with a slave in 'unknown' state}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{screenshots/slave_edit_disabled.png}
+	\mamidscreenshot{screenshots/slave_edit_disabled.png}
 	\caption{The slave edit view with a slave in 'disabled' state}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{screenshots/slave_edit_maintenance}
+	\mamidscreenshot{screenshots/slave_edit_maintenance}
 	\caption{The slave edit view with a slave in 'maintenance mode'}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{screenshots/slave_remove}
+	\mamidscreenshot{screenshots/slave_remove}
 	\caption{Removing a slave}
 \end{figure}
 
 \subsection{Modifying a Replica Set}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{screenshots/replica_set_overview_active.png}
+	\mamidscreenshot{screenshots/replica_set_overview_active.png}
 	\caption{The replica set overview with a normal operating replica set}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{screenshots/replica_set_overview_degraded}
+	\mamidscreenshot{screenshots/replica_set_overview_degraded}
 	\caption{The replica set overview with a degraded replica set}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{screenshots/replica_set_remove}
+	\mamidscreenshot{screenshots/replica_set_remove}
 	\caption{Removing a replica set}
 \end{figure}
 %Form:
