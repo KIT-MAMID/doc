@@ -818,9 +818,10 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 }
 {
 	\begin{itemize}
-		\item The \gls{administrator} navigates to the 'slave management section' in the \hyperref[SM:GUI]{GUI}.
-		\item The \gls{administrator} adds the slave $S$ on $M$ using the 'add slave form'. %TODO ref testseq and ui
+		\item The \gls{administrator} navigates to the \textit{Slaves View} in the \hyperref[SM:GUI]{GUI}.
+		\item The \gls{administrator} adds the slave $S$ on $M$ using the \textit{Add Slave View}.
 		\item The \gls{administrator} sets $S$ from \gls{disabled mode} to \gls{active mode}.
+		% TODO add step of adding a host to a risk group
 	\end{itemize}
 }
 
@@ -832,12 +833,12 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 }
 {
 	\begin{itemize}
-		\item The \gls{administrator} navigates to the 'slave management section' in the \hyperref[SM:GUI]{GUI}.
-		\item The \gls{administrator} selects the \gls{slave} $S$ and sets it to \gls{disabled mode}. %TODO ref testseq and ui
+		\item The \gls{administrator} navigates to the \textit{Slave View} in the \hyperref[SM:GUI]{GUI}.
+		\item The \gls{administrator} selects the \gls{slave} $S$ and sets it to \gls{disabled mode} (\textit{Slave View}).
 		\item The \hyperref[SM:Master]{master} determines a new \gls{cluster} layout to repair $S$'s former \glspl{replica set}.
 		\item The \hyperref[SM:Master]{master} communicates the desired configuration to the appropriate \glspl{slave}.
 		\item The \hyperref[SM:GUI]{GUI} now allows the \gls{administrator} to delete $S$ from the \gls{inventory}.
-		\item The \gls{administrator} deletes $S$ from the \gls{inventory}. %TODO ref testseq and ui
+		\item The \gls{administrator} deletes $S$ from the \gls{inventory} (in \textit{Slave View}).
 		\item The \gls{administrator} can now physically remove $M$ from the \gls{cluster}.
 	\end{itemize}
 }
@@ -917,6 +918,19 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 	\end{itemize}
 }
 
+
+\oitem{TS}{} Modifying a Replica Set
+\testsequence
+[\ref{F:gui_crud_replica_sets}]
+{
+}
+{
+	\begin{itemize}
+		\item %TODO. Sharding config server setting is not modifiable.
+	\end{itemize}
+}
+
+
 \oitem{TS}{} Destroying a Replica Set
 \testsequence
 [\ref{F:gui_crud_replica_sets}, \ref{F:master_api_crud_repl_set_config}, \ref{F:layout_cluster_config}, \ref{F:master_alloc_resp_pv_counts}, \ref{F:master_alloc_resp_mode}, \ref{F:master_alloc_communicate_config}, \ref{F:slave_control_procs}, \ref{F:slave_enforce_config}, \ref{F:msp_trans_config}]
@@ -931,6 +945,39 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 		\item The \gls{administrator} confirms the removal.
 		\item The \hyperref[SM:Master]{master} persists the change and communicates to the \glspl{slave} that \gls{host} members of $R$ must kill the respective \gls{MongoDB} processes.
 		\item The \glspl{slave} apply the received instructions.
+	\end{itemize}
+}
+
+\oitem{TS}{} Modifying a Slave
+\testsequence
+[\ref{F:gui_crud_inventory}, \ref{F:gui_set_slave_type}, \ref{F:gui_set_root_data_dir}]
+{
+}
+{
+	\begin{itemize}
+		\item %TODO. If you don't know what to test here, walk through the functional requirements referenced above.
+	\end{itemize}
+}
+
+\oitem{TS}{} Add Risk Group
+\testsequence
+[\ref{F:gui_set_risk_groups}]
+{
+}
+{
+	\begin{itemize}
+		\item %TODO. 
+	\end{itemize}
+}
+
+\oitem{TS}{} Remove Risk Group
+\testsequence
+[\ref{F:gui_set_risk_groups}]
+{
+}
+{
+	\begin{itemize}
+		\item %TODO. 
 	\end{itemize}
 }
 
