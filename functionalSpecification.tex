@@ -259,9 +259,8 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \oitem{WK}{auto_repair} \mamid supports automatic reconfiguration when detecting unexpected behavior of \glspl{slave}. The failing slave is marked as unsuitable to host \gls{MongoDB} processes and redeployment is triggered to repair the degraded replica sets (extends \ref{MK:detect_slave_unexpected_behavior}).
 
 % replica sets
-\oitem{WK}{} The \gls{master} exposes machine metrics of the \glspl{slave}.
-\oitem{WK}{} The \gls{master} exposes the \glspl{replica set}' replication status.
 \oitem{WK}{deploy_arbiters} \mamid deploys \gls{MongoDB} \glspl{arbiter} for configured \glspl{replica set} as needed, removing some restrictions in \ref{F:master_alloc_resp_pv_counts}.
+\oitem{WK}{extended_monitoring} \mamid supports extended monitoring of hosts, i.e. metrics beyond the processes managed by \mamid.
 
 % other
 \oitem{WK}{} The \gls{administrator} can interact with \mamid via a \acrshort{cli}.
@@ -526,7 +525,9 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:m
 \begin{description}
 	\oitem{F}{master_monitor_config} Monitor configuration \& state of \gls{MongoDB} instances running on \gls{cluster} hosts (\ref{MK:detect_slave_unexpected_behavior}).
 	\oitem{WF}{master_monitor_icmp} Monitor reachability of \gls{cluster} hosts via \acrshort{ICMP} (\ref{WK:monitor_icmp}).
-	\oitem{WF}{master_monitor_continuous_auto_discovery} Continuously auto-discover \glspl{slave} on the \gls{cluster} network and add them to the \gls{inventory} (\ref{WK:continuous_autodiscovery}).
+	\oitem{WF}{} Monitor machine metrics of the \glspl{slave} (load, disk usage, etc) and alert the \gls{administrator} when thresholds are exceeded (\ref{WK:extended_monitoring}).
+	\oitem{WF}{} Monitor \gls{MongoDB} log output and alert the administrator when errors are reported through the log (\ref{MK:extended_monitoring}).
+	\oitem{WF}{master_monitor_continuous_auto_discovery} Continuously auto-discover \glspl{slave} on the \gls{cluster} network and add them to the \gls{inventory} (\ref{WK:continuous_autodiscovery}). % move
 \end{description}
 \subsubsection{Inventory}
 \begin{description}
