@@ -306,6 +306,9 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \subsection{Software}\label{subsec:Software}
 \begin{itemize}
 \item Primary Target Operating System: Open Indiana Build 151a9 (Illumos Kernel, 64bit)
+\begin{itemize}
+	\item Secondary Target: All POSIX-compliant Operating Systems
+\end{itemize}
 \item MongoDB version 3.2
 \end{itemize}
 
@@ -622,6 +625,7 @@ The \acrshort{cli} is an \emph{optional} functional requirement. It acts as a fr
 	\oitem{NF}{} The \acrshort{gui} responds to user interaction within $500ms$.
 	\oitem{NF}{} \mamid supports at least 100 \glspl{slave} in the \gls{cluster}.
 	% Maintainability
+	\oitem{NF}{} \mamid should be easily portable to all of the POSIX-compliant platforms supported by the version of MongoDB specified in \ref{subsec:Software}.
 \end{description}
 
 \subsection{Constraints}
