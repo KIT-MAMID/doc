@@ -256,7 +256,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \oitem{WK}{tweak_performance_parameters} The \gls{administrator} can customize performance-relevant parameters of \gls{MongoDB} processes.
 
 % automatic repair
-\oitem{WK}{} The \gls{master} automatically repairs \gls{degraded} \glspl{replica set} with \emph{suitable} \glslink{active mode}{active} \glspl{slave}.
+\oitem{WK}{auto_repair} \mamid supports automatic reconfiguration when detecting unexpected behavior of \glspl{slave}. The failing slave is marked as unsuitable to host \gls{MongoDB} processes and redeployment is triggered to repair the degraded replica sets (extends \ref{MK:detect_slave_unexpected_behavior}).
 
 % replica sets
 \oitem{WK}{deploy_arbiters} The \gls{master} deploys \gls{MongoDB} \glspl{arbiter} for configured \glspl{replica set}, removing some restrictions in \ref{F:master_alloc_resp_pv_counts}.
@@ -354,7 +354,7 @@ Each of the subsequently listed requirements is an extension of the previous one
  	\oitem{SM}{} Master::Controller\\
 	Controls flow of events between different \gls{master} submodules.\\
 	Updates the inventory database (\ref{SM:inventory}) as state change is recognized by the monitor.\\
-	Ensures auto-repair of \gls{degraded} \glspl{replica set}. (\ref{WF:master_controller_auto_repair})
+	Implements automatic administration as explained in \ref{WF:master_controller_auto_repair}.)
 	\oitem{SM}{inventory} Master::Inventory\\
 	Database containing
 	\begin{itemize}
@@ -535,7 +535,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:m
 \end{description}
 \subsubsection{Controller}
 \begin{description}
-	\oitem{WF}{master_controller_auto_repair} Auto-repair \gls{degraded} \glspl{replica set} utilizing \ref{F:layout_cluster_config}.
+	\oitem{WF}{master_controller_auto_repair} Use spare \glslink{active mode}{active} slaves to automatically repair replica sets: redeploy members on \glslink{disabled mode}{disabled} slaves to the spare slaves. (Automates administrative decision to flag a host as \glslink{disabled mode}{disabled}. \ref{SM:SlaveModes}) (\ref{WK:auto_repair})
 \end{description}
 \subsubsection{Cluster Allocator}
 \begin{description}
