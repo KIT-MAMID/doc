@@ -665,41 +665,50 @@ The \acrshort{cli} is an \emph{optional} functional requirement. It acts as a fr
 	\mamidscreenshot{screenshots/dashboard}
 	\caption{The overview view}
 \end{figure}
-The overview page presents an overview of the current cluster state.
+The \textit{Overview} page summarizes the current state of the cluster.
 \begin{itemize}
-	\uiel{Current Problems}{section}{shows an rough insight of current slave problems and replica set problems}
-	\uiel{Slave States}{section}{displays a statistic of the current distribution of slave states in the cluster}
+	\uiel{Current Problems}{section}{lists all slave-centric problems.}
+	\uiel{Slave States}{section}{lists all replica set centric problems.}
 \end{itemize}
-\subsubsection{Slaves}
+
+
+\subsubsection{Slaves View}
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/slaves}
-	\caption{The slaves view}
+	\caption{The Slaves View}
 \end{figure}
-The slaves page enables the admin to inspect and manage all slaves.
+
+The \textit{Slaves View} provides an overview of the inventory (\ref{F:gui_crud_inventory}).\\
 \begin{itemize}
-	\uiel{Unknown}{section}{shows all slaves in unknown state}
-	\uiel{Disabled}{section}{shows all disabled slaves}
-	\uiel{Active}{section}{shows all active slaves}
-	\uiel{Edit}{button}{edit the slave in view \ref{subsec:ui:modify_slave}}
+	\uiel{Active}{section}{shows all \glslink{active mode}{active} slaves}.
+	\uiel{Unknown}{section}{shows all slaves in \hyperref{SM:SlaveModes}{unknown} state}.
+	\uiel{Maintenance}{section}{shows all slaves in \gls{maintenance mode} (not in figure)}.
+	\uiel{Disabled}{section}{shows all \glslink{disabled mode}{disabled} slaves}.
 \end{itemize}
-\subsubsection{Replica Sets}
+Clicking the wrench icon opens the slave modification UI (\ref{subsec:ui:modify_slave}).
+
+\subsubsection{Replica Sets View}
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/replica_sets}
 	\caption{The Replica Sets view}
 \end{figure}
-The replica sets page enables the admin to inspect and manage all replica sets.
+The \textit{Replica Sets View} enables inspection and management of replica set descriptions (\ref{F:gui_crud_replica_sets}).
 \begin{itemize}
-	\uiel{Degraded}{section}{shows all degraded replica sets}
-	\uiel{Disabled}{section}{shows all active replica sets}
-	\uiel{Edit}{button}{edit the rpelica set in view \ref{subsec:ui:modify_replica_set}}
+	\uiel{Degraded}{section}{lists all configured replica sets with problems, e.g. a member process running on a \gls{slave} in \gls{maintenance mode}}.
+	\uiel{Active}{section}{lists all configured replica sets without known problems}.
 \end{itemize}
+Clicking the wrench icon opens the replica set modification UI (\ref{subsec:ui:modify_replica_set}).
+
+\subsubsection{Risk Groups View}
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/risk_groups}
 	\caption{The risk groups view}
 \end{figure}
+
+\subsubsection{Problems View}
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/problems}
