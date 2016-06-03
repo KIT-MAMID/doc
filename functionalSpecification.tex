@@ -235,7 +235,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 % Todo old \oitem{MK}{} The \gls{master} deploys the \gls{replica set} configuration described by the administrator to the cluster.
 
 % monitoring features
-\oitem{MK}{detect_slave_unexpected_behavior} \mamid detects when a \gls{slave} in the \gls{inventory} behaves unexpectedly, e.g. becomes unreachable while no maintenance announced.
+\oitem{MK}{detect_slave_unexpected_behavior} \mamid detects when a \gls{slave} in the \gls{inventory} behaves unexpectedly, e.g. when it becomes unreachable and the administrator did not announce maintenance to \mamid beforehand.
 \oitem{MK}{} \mamid informs the \gls{administrator} by e-mail about problems in the cluster (\ref{MK:detect_slave_unexpected_behavior}).
 \oitem{MK}{} The \acrshort{gui} visualizes \glspl{slave} behaving unexpectedly (\ref{MK:detect_slave_unexpected_behavior}).
 \end{description}
