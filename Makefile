@@ -34,7 +34,7 @@ $(UMLET_PDFS): %.pdf: %.uxf
 .PHONY: screenshots_dir screenshots
 screenshots: | screenshots_dir $(SCREENSHOTS)
 screenshots_dir:
-	mkdir screenshots
+	mkdir -p screenshots
 $(SCREENSHOTS): %.png: screenshots_dir
 	@if [ "$(notdir $(basename $@))" = "dashboard" ]; 				then $(call CUTYCAPT,"/","$@"); fi;
 	@if [ "$(notdir $(basename $@))" = "slaves" ]; 					then $(call CUTYCAPT,"/slaves","$@"); fi;
