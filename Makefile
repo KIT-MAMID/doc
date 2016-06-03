@@ -25,12 +25,16 @@ all: $(SCREENSHOTS) $(UMLET_PDFS)
 	$(PDFLATEX) functionalSpecification.tex
 	$(PDFLATEX) functionalSpecification.tex
 
+fast: $(SCREENSHOTS) $(UMLET_PDFS)
+	$(PDFLATEX) functionalSpecification.tex
+
 # Assets
 ## UMLet
 $(UMLET_PDFS): %.pdf: %.uxf
 	$(call UMLET_CONVERT,$<,$@)
 
 ## Screenshots
+.PHONY screenshots_repo: ; git submodule update --init --remote
 screenshots:
 	mkdir -p screenshots
 $(SCREENSHOTS): %.png: screenshots
