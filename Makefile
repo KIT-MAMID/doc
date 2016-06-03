@@ -14,7 +14,7 @@ CUTYCAPT=$(XVFB_RUN) $(CUTYCAPT_BIN) --min-width=1920 --min-height=1080  --user-
 # Internal vars (extend as needed)
 UMLET_PDFS = module_overview.pdf state_diagram.pdf cluster_layout.pdf hardware_layout.pdf
 
-SCREENSHOTS = dashboard slaves problems slave_edit_unknown slave_edit_active slave_edit_maintenance slave_edit_disabled risk_groups replica_sets replica_set_overview_degraded replica_set_overview_active
+SCREENSHOTS = dashboard slaves problems slave_edit_unknown slave_edit_active slave_edit_maintenance slave_edit_disabled risk_groups replica_sets replica_set_overview_degraded replica_set_overview_active new_slave new_replica_set
 SCREENSHOTS := $(addprefix screenshots/,$(SCREENSHOTS))
 SCREENSHOTS := $(addsuffix .png,$(SCREENSHOTS))
 
@@ -47,6 +47,8 @@ $(SCREENSHOTS): %.png: screenshots_dir
 	@if [ "$(notdir $(basename $@))" = "replica_sets" ]; 				then $(call CUTYCAPT,"/replicasets","$@"); fi;
 	@if [ "$(notdir $(basename $@))" = "replica_set_overview_degraded" ]; 		then $(call CUTYCAPT,"/replicaset/mksuns11/edit/degraded","$@"); fi;
 	@if [ "$(notdir $(basename $@))" = "replica_set_overview_active" ]; 		then $(call CUTYCAPT,"/replicaset/mksuns11/edit/active","$@"); fi;
+	@if [ "$(notdir $(basename $@))" = "new_slave" ];             			then $(call CUTYCAPT,"/new/slave","$@"); fi;
+	@if [ "$(notdir $(basename $@))" = "new_replica_set" ];                         then $(call CUTYCAPT,"/new/replicaset","$@"); fi;
 
 # Cleaning
 clean: clean_screenshots
