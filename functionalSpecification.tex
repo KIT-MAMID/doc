@@ -173,21 +173,26 @@ SCC}
 
 % -------------------------------------------------------------- HIER BEGINNT DAS DOKUMENT WIRKLICH ---------------------------------
 \section{Introduction}
-\mamid is a manager for database \glspl{cluster}, facilitating creation, administration and monitoring of \gls{MongoDB} \glspl{replica set}.
+\mamid is a manager for database \glspl{cluster}, facilitating creation, administration and monitoring of a \gls{MongoDB} \gls{replica set} deployment.
 
-\mamid assists the \gls{administrator} during initial setup, continuous operation, maintenance cases and expansion of the cluster.
+\gls{MongoDB} is a document-oriented database application. \glslink{replica set}{Replica sets} are MongoDB's solution to data-redundancy and high-availability. Each replica set consists of multiple processes on different machines store the same data.\\
+After initial configuration, data replication is handled by MongoDB itself.
 
-The \gls{administrator} describes the \gls{cluster} \glspl{host} and the desired \gls{MongoDB} \glspl{replica set}.
+\mamid assists the \gls{administrator} during setup, continuous operation, maintenance situations and expansion of a \gls{MongoDB} cluster.
 
-Each \gls{host} runs a \gls{slave} application of \mamid, allowing control of the \glspl{host} from a single \gls{master} instance of \mamid.
+The \gls{administrator} describes the cluster \glspl{host} and the desired \gls{MongoDB} \glspl{replica set}.
+Limitations of individual hosts, e.g. absence of persistent storage, can be modeled.
+
+Each \gls{host} runs a \gls{slave} application of \mamid, enabling control of the entire deployment from a single \gls{master} instance of \mamid.
 
 \mamid utilizes the \gls{administrator}'s description of the cluster and replica sets to run \gls{MongoDB} instances on the \glspl{host}.
 
-\mamid configures the \gls{MongoDB} instances to form the desired replica sets.
+\mamid configures the \gls{MongoDB} instances to form the desired replica sets, asserting that administrator-defined constraints regarding redundancy \& persistence of storage are met.
 
 \mamid monitors the deployed configuration continuously and informs the \gls{administrator} about problems (when they arise).
 
-Maintenance of individual \glspl{host}, growing \& shrinking of the cluster, etc. is announced to \mamid beforehand, allowing for reconfiguration of the deployed \glspl{replica set} if necessary.
+Administrative action on individual hosts, affecting the operation of deployed MongoDB processes, is announced to \mamid beforehand.\\
+This information is used to silence alerts during downtime and to preemptively reconfigure the deployment to avoid reduced redundancy \& performance.
 
 A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 
