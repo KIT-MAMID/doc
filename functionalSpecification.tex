@@ -114,6 +114,8 @@
 
 \newcommand{\mamidscreenshot}[1]{\includegraphics[width=\textwidth,frame]{#1}}
 
+\newcommand{\uiel}[3]{\item \textbf{"#1" #2:} #3}
+
 \begin{document}
 
 % place a symbol before clickable links
@@ -649,14 +651,20 @@ The \acrshort{cli} is an \emph{optional} functional requirement. It acts as a fr
 	\oitem{NF}{} Version Control: Git
 	%TODO \item[Quality Assurance] ... %TODO
 \end{description}
-
+% \uiel{name}{type}{text} within itemize
 \section{Graphical User Interface (GUI)}
 \subsection{The Main Menus}
+\subsubsection{Overview}
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/dashboard}
 	\caption{The overview view}
 \end{figure}
+The overview page presents an overview of the current cluster state.
+\begin{itemize}
+	\uiel{Current Problems}{section}{shows an rough insight of current slave problems and replica set problems}
+	\uiel{Slave States}{section}{displays a statistic of the current distribution of slave states in the cluster}
+\end{itemize}
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/slaves}
