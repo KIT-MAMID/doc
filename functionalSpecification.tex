@@ -657,7 +657,7 @@ The \acrshort{cli} is an \emph{optional} functional requirement. It acts as a fr
 	%TODO \item[Quality Assurance] ... %TODO
 \end{description}
 % \uiel{name}{type}{text} within itemize
-\section{Graphical User Interface (GUI)}
+\section{Graphical User Interface (GUI)} %TODO refs to funct. req.
 \subsection{The Main Menus}
 \subsubsection{Overview}
 \begin{figure}[H]
@@ -683,11 +683,18 @@ The slaves page enables the admin to inspect and manage all slaves.
 	\uiel{Active}{section}{shows all active slaves}
 	\uiel{Edit}{button}{edit the slave in view \ref{subsec:ui:modify_slave}}
 \end{itemize}
+\subsubsection{Replica Sets}
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/replica_sets}
-	\caption{The replica sets view}
+	\caption{The Replica Sets view}
 \end{figure}
+The replica sets page enables the admin to inspect and manage all replica sets.
+\begin{itemize}
+	\uiel{Degraded}{section}{shows all degraded replica sets}
+	\uiel{Disabled}{section}{shows all active replica sets}
+	\uiel{Edit}{button}{edit the rpelica set in view \ref{subsec:ui:modify_replica_set}}
+\end{itemize}
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/risk_groups}
@@ -735,7 +742,7 @@ The slaves page enables the admin to inspect and manage all slaves.
 	\caption{Removing a slave}
 \end{figure}
 
-\subsection{Modifying a Replica Set}
+\subsection{Modifying a Replica Set}\label{subsec:ui:modify_replica_set}
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/replica_set_overview_active.png}
