@@ -270,27 +270,27 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \begin{description}
 	
 % master
-\oitem{WK}{api_authentication} \mamid requires authentication from the user for all operations.
+\oitem{OC}{api_authentication} \mamid requires authentication from the user for all operations.
 	
 % inventory
-\oitem{WK}{manual_autodiscovery} \mamid auto-discovers new \glspl{slave} on the \gls{administrator}'s request.
-\oitem{WK}{continuous_autodiscovery} \mamid continuously auto-discovers new \glspl{slave}.
-\oitem{WK}{monitor_icmp} \mamid recognizes when the \gls{slave} software does not respond but the corresponding \gls{host} is still connected to the network.
-\oitem{WK}{export_import_snapshot} The \gls{administrator} can backup and restore the cluster description.
+\oitem{OC}{manual_autodiscovery} \mamid auto-discovers new \glspl{slave} on the \gls{administrator}'s request.
+\oitem{OC}{continuous_autodiscovery} \mamid continuously auto-discovers new \glspl{slave}.
+\oitem{OC}{monitor_icmp} \mamid recognizes when the \gls{slave} software does not respond but the corresponding \gls{host} is still connected to the network.
+\oitem{OC}{export_import_snapshot} The \gls{administrator} can backup and restore the cluster description.
 
 % slaves
-\oitem{WK}{tweak_performance_parameters} The \gls{administrator} can customize performance-relevant parameters of \gls{MongoDB} processes.
+\oitem{OC}{tweak_performance_parameters} The \gls{administrator} can customize performance-relevant parameters of \gls{MongoDB} processes.
 
 % automatic repair
-\oitem{WK}{auto_repair} \mamid supports automatic reconfiguration when detecting unexpected behavior of \glspl{slave}. The failing slave is marked as unsuitable to host \gls{MongoDB} processes and redeployment is triggered to repair the degraded replica sets (extends \ref{MC:detect_slave_unexpected_behavior}).
+\oitem{OC}{auto_repair} \mamid supports automatic reconfiguration when detecting unexpected behavior of \glspl{slave}. The failing slave is marked as unsuitable to host \gls{MongoDB} processes and redeployment is triggered to repair the degraded replica sets (extends \ref{MC:detect_slave_unexpected_behavior}).
 
 % replica sets
-\oitem{WK}{deploy_arbiters} \mamid deploys \gls{MongoDB} \glspl{arbiter} for configured \glspl{replica set} as needed, removing the restriction to an odd count of replica set members in \ref{F:master_alloc_resp_pv_counts}.
-\oitem{WK}{extended_monitoring} \mamid supports extended monitoring of hosts, i.e. metrics beyond the processes managed by \mamid.
+\oitem{OC}{deploy_arbiters} \mamid deploys \gls{MongoDB} \glspl{arbiter} for configured \glspl{replica set} as needed, removing the restriction to an odd count of replica set members in \ref{F:master_alloc_resp_pv_counts}.
+\oitem{OC}{extended_monitoring} \mamid supports extended monitoring of hosts, i.e. metrics beyond the processes managed by \mamid.
 
 % other
-\oitem{WK}{} The \gls{administrator} can interact with \mamid via a \acrshort{cli}.
-\oitem{WK}{http_api} The \gls{administrator} can interact with \mamid via a stable, documented \acrshort{HTTP} \acrshort{API}.
+\oitem{OC}{} The \gls{administrator} can interact with \mamid via a \acrshort{cli}.
+\oitem{OC}{http_api} The \gls{administrator} can interact with \mamid via a stable, documented \acrshort{HTTP} \acrshort{API}.
 \end{description}
 
 \subsection{Demarcation Criteria}
@@ -446,7 +446,7 @@ A slave can be in the following states:
 
 \textbf{Note}: all state changes apart from \textit{active} $\leftrightarrow$ \textit{unknown} are triggered by the \gls{administrator}.
 
-If \ref{WK:auto_repair} is implemented the state change \textit{unknown} $\rightarrow$ \textit{disabled} can be triggered automatically.
+If \ref{OC:auto_repair} is implemented the state change \textit{unknown} $\rightarrow$ \textit{disabled} can be triggered automatically.
 
 \subsection{Graphical User Interface (GUI)}\label{SM:GUI}
 \begin{description}
@@ -582,7 +582,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 	\oitem{WF}{gui_display_machine_metrics} Display machine metrics of the \glspl{slave}. 
 	\oitem{WF}{gui_display_repl_status} Display replication status of the configured \glspl{replica set}.
 	\oitem{WF}{gui_auto_discovery_interface} Provide interface to select auto-discovered \glspl{slave} when adding to \gls{inventory} (\ref{F:gui_crud_inventory}).
-	\oitem{WF}{gui_command_line_parameters_interface} Provide interface to specify --- per replica set --- command line parameters for the member \gls{MongoDB} processes (\ref{WK:tweak_performance_parameters}).
+	\oitem{WF}{gui_command_line_parameters_interface} Provide interface to specify --- per replica set --- command line parameters for the member \gls{MongoDB} processes (\ref{OC:tweak_performance_parameters}).
 \end{description}
 
 \subsection{Master}
@@ -593,28 +593,28 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 	\oitem{F}{master_api_set_slave_mode} Provide \acrshort{API} to set mode of \gls{host} to \glslink{active mode}{active}, \glslink{maintenance mode}{maintenance} or \glslink{disabled mode}{disabled}.
 	\oitem{F}{master_api_crud_repl_set_config} Provide \acrshort{API} to \acrshort{CRUD} \gls{replica set} configurations (\ref{MC:replica_set_create}, \ref{MC:replica_set_config_profiles}, \ref{MC:replica_set_member_pv_counts}).
 	\oitem{F}{master_api_error_reports} Provide \acrshort{API} to retrieve error reports (\ref{MC:detect_slave_unexpected_behavior}).
-	\oitem{WF}{master_api_get_auto_discovered_slaves} Provide \acrshort{API} to retrieve a list of auto-discovered \glspl{slave} (\ref{WK:manual_autodiscovery}).
+	\oitem{WF}{master_api_get_auto_discovered_slaves} Provide \acrshort{API} to retrieve a list of auto-discovered \glspl{slave} (\ref{OC:manual_autodiscovery}).
 	\oitem{WF}{master_api_machine_metrics} Provide \acrshort{API} exposing machine metrics of the \glspl{slave}.
 	\oitem{WF}{master_api_repl_set_status} Provide \acrshort{API} exposing \gls{replica set} replication status of the configured \glspl{replica set}.
-	\oitem{WF}{} Require authentication from clients (\ref{WK:api_authentication}).
-	\oitem{WF}{master_api_command_line_parameters} Provide API to specify --- per replica set --- command line parameters for the member \gls{MongoDB} processes (\ref{WK:tweak_performance_parameters}).
+	\oitem{WF}{} Require authentication from clients (\ref{OC:api_authentication}).
+	\oitem{WF}{master_api_command_line_parameters} Provide API to specify --- per replica set --- command line parameters for the member \gls{MongoDB} processes (\ref{OC:tweak_performance_parameters}).
 \end{description}
 \subsubsection{Monitor}
 \begin{description}
 	\oitem{F}{master_monitor_config} Monitor configuration \& state of \gls{MongoDB} instances running on \gls{cluster} hosts (\ref{MC:detect_slave_unexpected_behavior}).
-	\oitem{WF}{master_monitor_icmp} Monitor reachability of \gls{cluster} hosts via \acrshort{ICMP} (\ref{WK:monitor_icmp}).
-	\oitem{WF}{} Monitor machine metrics of the \glspl{slave} (load, disk usage, etc) and alert the \gls{administrator} when thresholds are exceeded (\ref{WK:extended_monitoring}).
-	\oitem{WF}{} Monitor \gls{MongoDB} log output and alert the administrator when errors are reported through the log (\ref{WK:extended_monitoring}).
-	\oitem{WF}{master_monitor_continuous_auto_discovery} Continuously auto-discover \glspl{slave} on the \gls{cluster} network and add them to the \gls{inventory} (\ref{WK:continuous_autodiscovery}). % move
+	\oitem{WF}{master_monitor_icmp} Monitor reachability of \gls{cluster} hosts via \acrshort{ICMP} (\ref{OC:monitor_icmp}).
+	\oitem{WF}{} Monitor machine metrics of the \glspl{slave} (load, disk usage, etc) and alert the \gls{administrator} when thresholds are exceeded (\ref{OC:extended_monitoring}).
+	\oitem{WF}{} Monitor \gls{MongoDB} log output and alert the administrator when errors are reported through the log (\ref{OC:extended_monitoring}).
+	\oitem{WF}{master_monitor_continuous_auto_discovery} Continuously auto-discover \glspl{slave} on the \gls{cluster} network and add them to the \gls{inventory} (\ref{OC:continuous_autodiscovery}). % move
 \end{description}
 \subsubsection{Inventory}
 \begin{description}
 	\oitem{F}{master_inventory_persist_conf_state} Persist and provide the \gls{cluster} configuration \& state (\gls{inventory}).
-	\oitem{WF}{master_inventory_export_import_snapshot} Export \& import a consistent snapshot of the \gls{inventory} for backup purposes (\ref{WK:export_import_snapshot}).
+	\oitem{WF}{master_inventory_export_import_snapshot} Export \& import a consistent snapshot of the \gls{inventory} for backup purposes (\ref{OC:export_import_snapshot}).
 \end{description}
 \subsubsection{Controller}
 \begin{description}
-	\oitem{WF}{master_controller_auto_repair} Use spare \glslink{active mode}{active} slaves to automatically repair replica sets: redeploy members on \glslink{disabled mode}{disabled} slaves to the spare slaves (\ref{WK:auto_repair}).\\
+	\oitem{WF}{master_controller_auto_repair} Use spare \glslink{active mode}{active} slaves to automatically repair replica sets: redeploy members on \glslink{disabled mode}{disabled} slaves to the spare slaves (\ref{OC:auto_repair}).\\
 	 (Automates administrative decision to flag a host as \glslink{disabled mode}{disabled}. \ref{SM:SlaveModes})
 \end{description}
 \subsubsection{Cluster Allocator}
@@ -630,13 +630,13 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 			(p+v) >= 3 \land (p+v) \text{ odd}
 			\end{flalign*}
 			(\ref{MC:replica_set_member_pv_counts} and \ref{MC:available_slave_types})
-		\oitem{WF}{master_alloc_arbiters} adding \gls{MongoDB} \glspl{arbiter} where necessary (\ref{WK:deploy_arbiters}).
+		\oitem{WF}{master_alloc_arbiters} adding \gls{MongoDB} \glspl{arbiter} where necessary (\ref{OC:deploy_arbiters}).
 	\end{description}
 	\oitem{F}{master_alloc_communicate_config} Communicate the \gls{MongoDB} instance configuration to the \glspl{slave} (\ref{MC:mongod_deployment1}).
 \end{description}
 \subsubsection{Miscellaneous}
 \begin{description}
-\oitem{WF}{} Provide ability to deploy --- per replica set --- administrator-defined \gls{MongoDB} configuration file templates (\ref{WK:tweak_performance_parameters}).
+\oitem{WF}{} Provide ability to deploy --- per replica set --- administrator-defined \gls{MongoDB} configuration file templates (\ref{OC:tweak_performance_parameters}).
 \end{description}
 
 \subsection{MasterSlaveProtocol}
