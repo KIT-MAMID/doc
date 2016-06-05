@@ -215,7 +215,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \end{figure}
 
 \section{Objectives \& Criteria}
-\subsection{Must-Have Criteria}
+\subsection{Mandatory Criteria}\label{MandatoryCriteria}
 
 \subsubsection{Cluster Description by Administrator}
 % TODO analyze whether the given criteria can be phrased more abstractly \& move the details to (new) functional requirements. (-> forward lookup references from criteria to functional requirement if required)
@@ -266,7 +266,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \oitem{MK}{} The \acrshort{gui} visualizes \glspl{slave} behaving unexpectedly (\ref{MK:detect_slave_unexpected_behavior}).
 \end{description}
 
-\subsection{Optional Criteria}
+\subsection{Optional Criteria}\label{OptionalCriteria}
 \begin{description}
 	
 % master
@@ -559,7 +559,8 @@ Contact list for problem notifications.
 
 \section{Functional Requirements}
 % Format: Substantiviertes Verb am Anfang („Bestimmen von X“, nicht „Bestimmung von X“, „Bestimme X“ oder „X bestimmen”).
-
+\textbf{Note:} Functional requirements derived from mandatory criteria (\ref{MandatoryCriteria}) are indexed by \textbf{F}. 
+Functional requirements derived from optional criteria (\ref{OptionalCriteria}) are indexed by \textbf{WF}.
 \subsection{Graphical User Interface (GUI)}
 The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:masterapiserver}. Hence, all functionality described in this subsection is realized through \acrshort{API} calls to the \gls{master}.
 \begin{description}
