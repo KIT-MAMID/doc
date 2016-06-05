@@ -668,7 +668,7 @@ The \acrshort{cli} is an \emph{optional} functional requirement. It acts as a fr
 % \uiel{name}{type}{text} within itemize
 \section{Graphical User Interface (GUI)} %TODO refs to funct. req.
 
-\subsection{Overview}
+\subsection{Overview}\label{subsec:ui:overview} % TODO redo the dashboard description
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/dashboard}
@@ -760,7 +760,9 @@ Clicking the wrench icon opens the slave modification UI (\ref{subsec:ui:modify_
 	\mamidscreenshot{screenshots/slave_remove}
 	\caption{Removing a slave}
 \end{figure}
-After clicking the red \textit{Remove slave} button in the \textit{Slave View}, the user is prompted for confirmation (\ref{F:gui_crud_inventory_confirm_removal}).
+In the \textit{Slave View}, the user can remove the slave the inventory by clicking the red \textit{Remove Slave} button (\ref{F:gui_crud_inventory}, \ref{F:gui_crud_inventory_confirm_removal}).
+
+However, confirmation through a modal dialog is required (see above) .
 
 \subsection{Replica Sets View}\label{subsec:ui:replica_sets_view}
 \begin{figure}[H]
@@ -800,7 +802,7 @@ Clicking the wrench icon opens the replica set modification UI (\ref{subsec:ui:m
 \end{figure}
 After clicking the red \textit{Remove replica set} button in the \textit{Replica Set View}, the user is prompted for confirmation.
 \begin{itemize}
-	\uiel{Delete replica set}{button} deletes the replica set.
+	\uiel{Remove replica set}{button} deletes the replica set.
 	\uiel{Cancel}{button} cancels the deletion operation and dismisses the prompt.
 \end{itemize}
 
@@ -816,7 +818,7 @@ After clicking the red \textit{Remove replica set} button in the \textit{Replica
 
 \section{Test Scenarios}
 \subsection{Scenarios}
-Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the tester's browser. %TODO ref home page
+Unless explicitly stated, the \acrshort{gui}'s \textit{Overview} page is always opened at the beginning of a test scenario (\ref{subsec:ui:overview}).
 
 \begin{description}
 
