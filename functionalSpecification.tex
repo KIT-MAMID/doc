@@ -357,19 +357,19 @@ Each of the subsequently listed requirements is an extension of the previous one
 	\item All hosts are interconnected through fast \acrshort{LAN}.
 	\begin{itemize}
 		\item All cluster hosts are interconnected through an isolated \acrshort{LAN}.
-		\item $\geqslant 1$ cluster host is connected to both the isolated \acrshort{LAN} and an external network (usually another \acrshort{LAN} or \acrshort{WAN}).
+		\item $\geq 1$ cluster host is connected to both the isolated \acrshort{LAN} and an external network (usually another \acrshort{LAN} or \acrshort{WAN}).
 	\end{itemize}
 \end{itemize}
 
 \subsubsection{Operation of Persistently Stored Replica Sets}
 \begin{itemize}
-	\item $\geqslant 1$ cluster host with \gls{persistent storage}
-	\item $\geqslant 3$ cluster hosts in total
+	\item $\geq 1$ cluster host with \gls{persistent storage}
+	\item $\geq 3$ cluster hosts in total
 \end{itemize}
 
 \subsubsection{Basic Level of Host Redundancy}
 \begin{itemize}
-	\item $\geqslant 3$ mutually disjoint sets of \gls{cluster} \glspl{host} that can be classified as not sharing a common risk of failure (see \ref{F:master_alloc_resp_risk_groups}).
+	\item $\geq 3$ mutually disjoint sets of \gls{cluster} \glspl{host} that can be classified as not sharing a common risk of failure (see \ref{F:master_alloc_resp_risk_groups}).
 \end{itemize}
 
 \section{System Model}
@@ -629,7 +629,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 			\begin{flalign*} %align left
 			p \in \mathbb{N}_0 \text{ persistent members}  \\
 			v \in \mathbb{N}_0 \text{ volatile members} \\
-			(p+v) \geqslant 3 \land (p+v) \text{ odd}
+			(p+v) \geq 3 \land (p+v) \text{ odd}
 			\end{flalign*}
 			(\ref{MC:replica_set_member_pv_counts} and \ref{MC:available_slave_types})
 		\oitem{OF}{master_alloc_arbiters} adding \gls{MongoDB} \glspl{arbiter} where necessary (\ref{OC:deploy_arbiters}).
