@@ -19,6 +19,7 @@
 \usepackage[export]{adjustbox}
 % fancy page headers
 \usepackage{fancyhdr}
+\usepackage{xcolor}
 
 % page style
 \pagestyle{fancy}
@@ -28,7 +29,6 @@
 	\rhead{\includegraphics[width=2cm]{assets/kitlogo}}
 	\lhead{\leftmark}
 }
-
 
 % TODO: template übersetzten
 
@@ -174,8 +174,10 @@ Dr. Marek Szuba\\[1em]}
 {\Large at}\\[1em]
 {\LARGE
 Karlsruhe Institute of Technology\\
-SCC}
-
+SCC\\[2em]}
+{\color{gray}
+  \small Document Version: \input{.git/refs/heads/master}
+}
 \end{center}
 \makeatother
 \end{titlepage}
