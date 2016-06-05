@@ -841,15 +841,21 @@ Clicking the wrench icon opens the replica set modification UI (\ref{subsec:ui:m
 	\mamidscreenshot{screenshots/new_replica_set}
 	\caption{New Replica Set Wizard}
 \end{figure}
-%TODO no state selection
+The \textit{New Replica Set Wizard} is opened by clicking the corresponding button in the sidebar.
+\pagebreak % release looks ugly otherwise
 \subsubsection{Modifying a Replica Set}\label{subsec:ui:modify_replica_set}
-%TODO common for all states
+The \textit{Replica Set View} provides information on each member slave's state.
+\begin{itemize}
+	\uiel{Sharding configuration server}{checkbox}{is read-only.}
+	\uiel{Persistent / Volatile nodes}{numericfield}{can be changed.}
+	\uiel{Apply}{button}{submits the changed replica set configuration to the \hyperref[SM:Master]{Master}.}
+	\uiel{Remove}{button}{removes the replica set (prompting for confirmation first, see figure \ref{fig:replica_set_remove}).}
+\end{itemize}
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/replica_set_overview_active.png}
 	\caption{Replica Set View with a normal operating replica set}
 \end{figure}
-
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/replica_set_overview_degraded}
@@ -860,6 +866,7 @@ Clicking the wrench icon opens the replica set modification UI (\ref{subsec:ui:m
 	\centering
 	\mamidscreenshot{screenshots/replica_set_remove}
 	\caption{Removing a replica set}
+	\label{fig:replica_set_remove}
 \end{figure}
 After clicking the red \textit{Remove Replica Set} button in the \textit{Replica Set View}, the user is prompted for confirmation.
 \begin{itemize}
