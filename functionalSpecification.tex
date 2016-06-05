@@ -17,6 +17,18 @@
 \usepackage{xspace}
 % 'frame' option for figures
 \usepackage[export]{adjustbox}
+% fancy page headers
+\usepackage{fancyhdr}
+
+% page style
+\pagestyle{fancy}
+\fancyhead[R]{\includegraphics[width=2cm]{assets/kitlogo}}
+\fancyhead[L]{\leftmark}
+\fancypagestyle{plain}{
+	\rhead{\includegraphics[width=2cm]{assets/kitlogo}}
+	\lhead{\leftmark}
+}
+
 
 % TODO: template übersetzten
 
