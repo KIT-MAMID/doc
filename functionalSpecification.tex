@@ -285,7 +285,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \oitem{WK}{auto_repair} \mamid supports automatic reconfiguration when detecting unexpected behavior of \glspl{slave}. The failing slave is marked as unsuitable to host \gls{MongoDB} processes and redeployment is triggered to repair the degraded replica sets (extends \ref{MK:detect_slave_unexpected_behavior}).
 
 % replica sets
-\oitem{WK}{deploy_arbiters} \mamid deploys \gls{MongoDB} \glspl{arbiter} for configured \glspl{replica set} as needed, removing some restrictions in \ref{F:master_alloc_resp_pv_counts}.
+\oitem{WK}{deploy_arbiters} \mamid deploys \gls{MongoDB} \glspl{arbiter} for configured \glspl{replica set} as needed, removing the restriction to an odd count of replica set members in \ref{F:master_alloc_resp_pv_counts}.
 \oitem{WK}{extended_monitoring} \mamid supports extended monitoring of hosts, i.e. metrics beyond the processes managed by \mamid.
 
 % other
@@ -856,7 +856,7 @@ Unless explicitly stated, the \acrshort{gui}'s \textit{Overview} page is always 
 	\begin{itemize}
 		\item The \gls{administrator} navigates to the \textit{Slaves View} in the \hyperref[SM:GUI]{GUI}.
 		\item The \gls{administrator} adds the slave $S$ on $M$ using the \textit{Add Slave View}.
-		\item The \gls{administrator} navigates to the \textit{Risk Group Management Section}.
+		\item The \gls{administrator} navigates to the \textit{Risk Groups View}.
 		\item The \gls{administrator} assigns the slave to the correct risk group.
 		\item The \gls{administrator} navigates to the \textit{Slaves View} in the \hyperref[SM:GUI]{GUI}.
 		\item The \gls{administrator} selects $S$ and sets it from \gls{disabled mode} to \gls{active mode}.
@@ -871,14 +871,14 @@ Unless explicitly stated, the \acrshort{gui}'s \textit{Overview} page is always 
 }
 {
 	\begin{itemize}
-		\item The \gls{administrator} navigates to the \textit{Slave View} in the \hyperref[SM:GUI]{GUI}.
-		\item The \gls{administrator} selects the \gls{slave} $S$ and sets it to \gls{disabled mode} (\textit{Slave View}).
+		\item The \gls{administrator} navigates to the \textit{Slaves View} in the \hyperref[SM:GUI]{GUI}.
+		\item The \gls{administrator} selects the \gls{slave} $S$ running on $M$ and sets it to \gls{disabled mode} (\textit{Slave View}).
 		\item The \hyperref[SM:Master]{master} determines a new \gls{cluster} layout to repair $S$'s former \glspl{replica set}.
 		\item The \hyperref[SM:Master]{master} communicates the desired configuration to the appropriate \glspl{slave}.
-		\item The \hyperref[SM:GUI]{GUI} \textit{Slave View} enables the \textit{Remove button}.
-		\item The \gls{administrator} clicks the \textit{Remove button}.
+		\item The \textit{Remove} button in the \textit{Slave View} is enabled.
+		\item The \gls{administrator} clicks the \textit{Remove} button.
 		\item The \hyperref[SM:GUI]{GUI} prompts the \gls{administrator} for confirmation.
-		\item The \gls{administrator} confirms the removal by clicking the confirmation prompt's \textit{remove button} (\ref{subsec:ui:remove_replica_set}).
+		\item The \gls{administrator} confirms the removal by clicking the confirmation prompt's \textit{Remove} button (\ref{subsec:ui:remove_replica_set}).
 		\item The \hyperref[SM:Master]{master} removes the slave from the \gls{inventory} and persists the change.
 		\item The \hyperref[SM:GUI]{GUI} dismisses the \textit{Slave View} and switches back to the \textit{Slaves View}.
 		\item The \gls{administrator} can now physically remove $M$ from the \gls{cluster}.
@@ -890,17 +890,17 @@ Unless explicitly stated, the \acrshort{gui}'s \textit{Overview} page is always 
 \testsequence
 [\ref{F:master_monitor_config}, \ref{F:master_api_error_reports}, \ref{F:gui_display_errors}, \ref{F:gui_set_slave_mode}, \ref{F:msp_trans_reachability}, \ref{F:notifmgr_controller_send_errors}, \ref{F:notifmgr_send_emails}]
 {
-	A \gls{slave} $S$ becomes unreachable because of broken network cable.
+	A \gls{slave} $S$ becomes unreachable, e.g. because of a broken network cable.
 }
 {
 	\begin{itemize}
-		\item \hyperref[SM:NotificationManager]{NotificationManager} sends an e-mail notification to the \gls{administrator}.
-		\item \glslink{administrator}{Administrator} responds to the e-mail notification by opening the \hyperref[subsec:ui:problems_view]{Problems View} in the \hyperref[SM:GUI]{GUI}.
-		\item \hyperref[SM:GUI]{GUI} offers to set $S$ into \glslink{maintenance mode}{maintenance} or \gls{disabled mode}.
-		\item \glslink{administrator}{Administrator} does not choose either of the options but replaces the broken cable.
-		\item \hyperref[SM:Master]{Master} reaches $S$ again.
-		\item \hyperref[SM:Master]{Master} determines that configuration is still as expected.
-		\item \hyperref[SM:Master]{Master} removes $S$ from the error report.
+		\item The \hyperref[SM:NotificationManager]{NotificationManager} sends an e-mail notification to the \gls{administrator}.
+		\item The \gls{administrator} responds to the e-mail notification by opening the \hyperref[subsec:ui:problems_view]{Problems View} in the \hyperref[SM:GUI]{GUI}.
+		\item The \hyperref[SM:GUI]{GUI} offers to set $S$ into \glslink{maintenance mode}{maintenance} or \gls{disabled mode}.
+		\item The \gls{administrator} does not choose either of the options but replaces the broken cable.
+		\item The \hyperref[SM:Master]{Master} reaches $S$ again.
+		\item The \hyperref[SM:Master]{Master} determines that configuration is still as expected.
+		\item The \hyperref[SM:Master]{Master} removes $S$ from the error report.
 	\end{itemize}
 }
 
@@ -909,18 +909,18 @@ Unless explicitly stated, the \acrshort{gui}'s \textit{Overview} page is always 
 \testsequence
 [\ref{F:master_monitor_config}, \ref{F:master_api_error_reports}, \ref{F:gui_display_errors}, \ref{F:gui_set_slave_mode}, \ref{F:master_api_set_slave_mode}, \ref{F:master_inventory_persist_conf_state}, \ref{F:layout_cluster_config}, \ref{F:master_alloc_resp_pv_counts}, \ref{F:master_alloc_resp_mode}, \ref{F:master_alloc_communicate_config}, \ref{F:slave_control_procs}, \ref{F:slave_enforce_config}, \ref{F:slave_report_config}, \ref{F:msp_trans_config}, \ref{F:msp_trans_reachability}, \ref{F:master_monitor_config}]
 {
-	A \gls{slave} $S$ becomes permanently unreachable because there was a short-circuit on its mainboard which needs to be replaced. The admin has no spare mainboards left and has to wait for replacement hardware to arrive. However, there is at least one \glslink{active mode}{active} \gls{slave} allowed to take over the role of the failed one.
+	A \gls{slave} $S$ becomes permanently unreachable, e.g. because there was a short-circuit on its mainboard which needs to be replaced. The admin has no spare mainboards left and has to wait for replacement hardware to arrive. However, there is at least one \glslink{active mode}{active} \gls{slave} allowed to take over the role of the failed one.
 }
 {
 	\begin{itemize}
 		\item After $S$ becomes unavailable the \hyperref[SM:NotificationManager]{NotificationManager} sends an e-mail notification to the \gls{administrator}.
-		\item \glslink{administrator}{Administrator} responds to e-mail notification by opening the  \hyperref[subsec:ui:problems_view]{Problems View} in the \hyperref[SM:GUI]{GUI}.
-		\item \hyperref[SM:GUI]{GUI} offers to set $S$ into \glslink{maintenance mode}{maintenance} or \gls{disabled mode}.
-		\item \glslink{administrator}{Administrator} chooses \gls{disabled mode}.
-		\item \hyperref[SM:Master]{Master} selects a \gls{slave} $S'$ as a replacement for $S$ and communicates the appropriate configuration to $S'$
+		\item The \gls{administrator} responds to e-mail notification by opening the  \hyperref[subsec:ui:problems_view]{Problems View} in the \hyperref[SM:GUI]{GUI}.
+		\item The \hyperref[SM:GUI]{GUI} offers to set $S$ into \glslink{maintenance mode}{maintenance} or \gls{disabled mode}.
+		\item The \gls{administrator} chooses \gls{disabled mode}.
+		\item The \hyperref[SM:Master]{Master} selects a \gls{slave} $S'$ as a replacement for $S$ and communicates the appropriate configuration to $S'$
 		\item $S'$ starts a new \gls{MongoDB} process and enforces the received configuration.
 		\item $S'$ reports successful configuration to \hyperref[SM:Master]{master}.
-		\item \hyperref[SM:Master]{Master} removes $S$ from the error report.
+		\item The \hyperref[SM:Master]{Master} removes $S$ from the error report.
 	\end{itemize}
 }
 
@@ -933,7 +933,7 @@ Unless explicitly stated, the \acrshort{gui}'s \textit{Overview} page is always 
 }
 {
 	\begin{itemize}
-		\item The \gls{administrator} navigates to the \textit{Slave Management Section} in the \hyperref[SM:GUI]{GUI}.
+		\item The \gls{administrator} navigates to the \textit{Slaves View} in the \hyperref[SM:GUI]{GUI}.
 		\item The \gls{administrator} selects $S$ and sets it to \gls{maintenance mode}.
 		\item The \gls{administrator} installs the security updates and reboots the machine (killing the \gls{slave} instance and all its \gls{MongoDB} instances).
 		\item The \gls{slave} process $S$ is restarted by the system's service manager after reboot.
