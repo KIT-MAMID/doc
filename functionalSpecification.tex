@@ -187,24 +187,23 @@ SCC}
 \section{Introduction}
 \mamid is a manager for database \glspl{cluster}, facilitating creation, administration and monitoring of a \gls{MongoDB} \gls{replica set} deployment.
 
-\gls{MongoDB} is a document-oriented database application. \glslink{replica set}{Replica sets} are MongoDB's solution to data-redundancy and high-availability. Each replica set consists of multiple processes on different machines store the same data.\\
+\gls{MongoDB} is a document-oriented database application. \glslink{replica set}{Replica sets} are MongoDB's solution to data-redundancy and high-availability. Each replica set consists of multiple processes on different machines storing the same data.\\
 After initial configuration, data replication is handled by MongoDB itself.
 
 \mamid assists the \gls{administrator} during setup, continuous operation, maintenance situations and expansion of a \gls{MongoDB} cluster.
 
-The \gls{administrator} describes the cluster \glspl{host} and the desired \gls{MongoDB} \glspl{replica set}.
+The \gls{administrator} describes the cluster \glspl{host} and the desired \gls{MongoDB} \glspl{replica set} to \mamid.
 Limitations of individual hosts, e.g. absence of persistent storage, can be modeled.
 
 Each \gls{host} runs a \gls{slave} application of \mamid, enabling control of the entire deployment from a single \gls{master} instance of \mamid.
 
-\mamid utilizes the \gls{administrator}'s description of the cluster and replica sets to run \gls{MongoDB} instances on the \glspl{host}.
-
-\mamid configures the \gls{MongoDB} instances to form the desired replica sets, asserting that administrator-defined constraints regarding redundancy \& persistence of storage are met.
+\mamid utilizes the \gls{administrator}'s description of the cluster and replica sets to run \gls{MongoDB} instances on the \glspl{host}.\\
+It configures the \gls{MongoDB} instances to form the desired replica sets, asserting that administrator-defined constraints regarding redundancy \& persistence of storage are met.
 
 \mamid monitors the deployed configuration continuously and informs the \gls{administrator} about problems (when they arise).
 
-Administrative action on individual hosts, affecting the operation of deployed MongoDB processes, is announced to \mamid beforehand.\\
-This information is used to silence alerts during downtime and to preemptively reconfigure the deployment to avoid reduced redundancy \& performance.
+Maintenance \& administrative action on individual hosts is announced to \mamid beforehand.\\
+This information is used to silence alerts during downtime and to preemptively reconfigure MongoDB instances to avoid reduced redundancy \& performance.
 
 A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 
@@ -271,7 +270,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \begin{description}
 	
 % master
-\oitem{WK}{api_authentication} \mamid requires authentication for administrative actions.
+\oitem{WK}{api_authentication} \mamid requires authentication from the user for all operations.
 	
 % inventory
 \oitem{WK}{manual_autodiscovery} \mamid auto-discovers new \glspl{slave} on the \gls{administrator}'s request.
@@ -296,7 +295,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 
 \subsection{Demarcation Criteria}
 \begin{description}
-\oitem{AK}{} The \gls{administrator} does not directly configure individual \gls{MongoDB} instances spawned \& controller by \mamid. All configuration happens through \mamid, either automatically (e.g. replica set deployment) or through a \mamid interface (e.g. GUI, CLI, HTTP API).
+\oitem{AK}{} The \gls{administrator} does not directly configure individual \gls{MongoDB} instances spawned \& controlled by \mamid. All configuration happens through \mamid, either automatically (e.g. replica set deployment) or through a \mamid interface (e.g. GUI, CLI, HTTP API).
 \oitem{AK}{} \mamid does not implement support for higher-layer \gls{MongoDB} features, e.g. \gls{sharding}.
 \oitem{AK}{} \mamid neither deploys the operating system nor other required software (such as \gls{MongoDB} binaries) to the \gls{cluster} \glspl{host}.
 \end{description}
@@ -312,7 +311,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 
 \subsection{Target Users}
 \begin{itemize}
-\item Cluster \glspl{administrator} in charge of creating a MongoDB replica set deployment.
+\item Cluster \glspl{administrator} in charge of creating \& managing a MongoDB replica set deployment.
 \end{itemize}
 
 \subsection{Operating Conditions}
@@ -336,7 +335,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \begin{itemize}
 	\item Secondary Target: All POSIX-compliant Operating Systems
 \end{itemize}
-\item MongoDB version 3.2
+\item MongoDB version 3.2 or newer
 \end{itemize}
 
 \subsection{Hardware}
@@ -344,10 +343,10 @@ Each of the subsequently listed requirements is an extension of the previous one
 \subsubsection{Cluster Hosts: Hardware}
 \begin{itemize}
 	\item 64bit amd64 Instruction Set
-	\item Up to $1GB$ file storage for \mamid applications.
+	\item Up to $1GB$ file storage for \mamid application binaries \& assets.
 	\item Sufficient \glslink{persistent storage}{persistent} or \gls{volatile storage} to hold the required \gls{MongoDB} data. \\
 	\begin{itemize}
-		\item \textbf{Note}: fewer \glspl{host} with \gls{persistent storage} may require the \gls{persistent storage} on these \glspl{host} to be larger.
+		\item \textbf{Note}: fewer \glspl{host} with \gls{persistent storage} in the cluster may require more storage capacity \& \gls{MongoDB} instances per persistent host.
 	\end{itemize}
 \end{itemize}
 
@@ -355,7 +354,7 @@ Each of the subsequently listed requirements is an extension of the previous one
 \begin{itemize}
 	\item All hosts are interconnected through fast \acrshort{LAN}.
 	\begin{itemize}
-		\item All cluster hosts are interconnected through an isolated \acrshort{LAN}
+		\item All cluster hosts are interconnected through an isolated \acrshort{LAN}.
 		\item $>= 1$ cluster host is connected to both the isolated \acrshort{LAN} and an external network (usually another \acrshort{LAN} or \acrshort{WAN}).
 	\end{itemize}
 \end{itemize}
@@ -390,13 +389,13 @@ Each of the subsequently listed requirements is an extension of the previous one
 		\item list of \glspl{slave} and associated state
 		\item list of configured \glspl{replica set}.
 	\end{itemize}
-	(\ref{F:master_inventory_persist_conf_state})
+	(see \ref{F:master_inventory_persist_conf_state} and section \ref{ProductData})
 	\oitem{SM}{master_clusterallocator} Master::ClusterAllocator\\
 	It lays out the \gls{cluster}, i.e. decides the distribution of mongod instances onto \gls{cluster} \glspl{host}. (\ref{F:layout_cluster_config})\\
 	It respects constraints as described by \ref{F:master_alloc_resp_risk_groups}, \ref{F:master_alloc_resp_pv_counts}, \ref{F:master_alloc_resp_mode} and \ref{WF:master_alloc_arbiters}.\\
 	It communicates with the \glspl{slave} using \ref{SM:masterslaveproto} to enforce the \gls{cluster} layout. (\ref{F:master_alloc_communicate_config})
 	\oitem{SM}{master_monitor} Master::Monitor\\
-	Is responsible for observing whether \glspl{slave} are still alive using \ref{SM:masterslaveproto} and auto-discovery. (\ref{F:master_monitor_config}, \ref{WF:master_monitor_icmp}, \ref{WF:master_monitor_continuous_auto_discovery})
+	Is responsible for observing consistency of the deployment, i.e. checking whether the \hyperref[SM:master_clusterallocator]{ClusterAllocator}'s cluster layout is actually deployed \& running on all \glspl{slave} (\ref{F:master_monitor_config}, \ref{WF:master_monitor_icmp}, \ref{WF:master_monitor_continuous_auto_discovery}).
 \end{description}
 \subsection{MasterSlaveProtocol}\label{SM:MasterSlaveProtocol}
 \begin{description}
@@ -406,24 +405,31 @@ Each of the subsequently listed requirements is an extension of the previous one
 \subsection{Slave}\label{SM:Slave}
 \begin{description}
 	\oitem{SM}{} Slave::Controller\\
-	Dispatches instructions to the \glspl{MongoDB} client and the process manager. (\ref{F:slave_enforce_config})\\
-	It notifies via \ref{SM:masterslaveproto} whether operations failed or succeeded as well as not locally recoverable failures. (\ref{F:slave_report_config}, \ref{WF:slave_report_machine_metrics}, \ref{WF:slave_report_repl_status})
+	Dispatches instructions to the \hyperref[SM:mongodbclient]{Slave::MongoDBClient} and \hyperref[SM:processmanager]{Slave::ProcessManager}. (\ref{F:slave_enforce_config})\\
+	It notifies via \hyperref[SM:masterslaveproto]{MasterSlaveProtocol}
+	\begin{itemize}
+		\item whether operations failed or succeeded 
+		\item as well as not locally recoverable failures.
+	\end{itemize}
+	(\ref{F:slave_report_config}, \ref{WF:slave_report_machine_metrics}, \ref{WF:slave_report_repl_status})
 	\oitem{SM}{mongodbclient} Slave::MongoDBClient\\
 	Implements communication with \gls{MongoDB} processes. (\ref{F:slave_communicate_with_mongodb})
-	\oitem{SM}{} Slave::ProcessManager\\
+	\oitem{SM}{processmanager} Slave::ProcessManager\\
 	Spawns and controls \gls{MongoDB} processes. (\ref{F:slave_control_procs})
 \end{description}
 \subsubsection{Slave Modes}\label{SM:SlaveModes}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{state_diagram}
+\includegraphics[width=0.65\textwidth]{state_diagram}
 \caption{Slave State Diagram}
 \end{figure}
+The \hyperref[SM:Master]{Master} tracks a slave's state which affects error reporting \& cluster layout in the master.
+
 A slave can be in the following states:
 \begin{itemize}
 	\item \glslink{active mode}{active}\\
 	\mamid monitors \glspl{slave} in active mode. \glslink{slave}{Slaves} in this mode behave as expected, i.e. are running MongoDB processes in the configuration determined by the \hyperref[SM:Master]{Master}.\\
-	If the slave behaves unexpectedly, e.g. is not reachable, \mamid notifies the \gls{administrator} and sets its state to \emph{unknown}.
+	If the slave behaves unexpectedly, e.g. is not reachable, \mamid notifies the \gls{administrator} and sets the slave's state to \emph{unknown}.
 	\item \emph{unknown}\\
 	\mamid monitors \glspl{slave} in \emph{unknown} state and sets them back to \gls{active mode} when they recover.\\
 	\mamid can recover a slave in \emph{unknown} state automatically by respawning and configuring MongoDB processes, e.g. after power-loss on a \glslink{volatile storage}{volatile} \gls{host}.
@@ -437,9 +443,10 @@ A slave can be in the following states:
 	\item \glslink{disabled mode}{disabled}\\
 	A \gls{slave} in disabled mode does not run any \gls{MongoDB} process controlled by the slave process. When a \gls{slave} with MongoDB processes in a \gls{replica set} is set to disabled mode, \mamid stops all these processes and configures new ones on other \glspl{slave} to repair the temporarily degraded replica set.
 \end{itemize}
-Slave state is tracked exclusively in the \hyperref[SM:Master]{Master}.\\
-All state changes apart from active $\leftrightarrow$ unknown are triggered by the \gls{administrator}.\\
-If \ref{WK:auto_repair} is implemented the state change unknown $\rightarrow$ disabled can be triggered automatically.
+
+\textbf{Note}: all state changes apart from \textit{active} $\leftrightarrow$ \textit{unknown} are triggered by the \gls{administrator}.
+
+If \ref{WK:auto_repair} is implemented the state change \textit{unknown} $\rightarrow$ \textit{disabled} can be triggered automatically.
 
 \subsection{Graphical User Interface (GUI)}\label{SM:GUI}
 \begin{description}
@@ -461,7 +468,7 @@ If \ref{WK:auto_repair} is implemented the state change unknown $\rightarrow$ di
 	Uses \ref{SM:notif_apiclient} and \ref{SM:notif_mail} to implement notification of the \glspl{administrator}. (\ref{F:notifmgr_controller_send_errors}, \ref{F:notifmgr_read_conf_file})
 \end{description}
 
-\section{Product Data}
+\section{Product Data}\label{ProductData}
 
 \subsection{Inventory (contains slaves)}\label{D:Inventory}
 % hostname(PRIMARY KEY) | slaveport | mongod-portrange | persistent/volatile | root data directory | mode (active, maint, disabled)
