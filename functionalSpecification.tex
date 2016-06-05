@@ -221,49 +221,49 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 % TODO analyze whether the given criteria can be phrased more abstractly \& move the details to (new) functional requirements. (-> forward lookup references from criteria to functional requirement if required)
 \begin{description}
 
-\oitem{MK}{} The \gls{administrator} interacts with \mamid through a web \acrshort{gui}.
+\oitem{MC}{} The \gls{administrator} interacts with \mamid through a web \acrshort{gui}.
 
 % inventory ops
-\oitem{MK}{inventory_definition} The \gls{master} maintains a list of \glspl{slave} called \gls{inventory}.
+\oitem{MC}{inventory_definition} The \gls{master} maintains a list of \glspl{slave} called \gls{inventory}.
 \begin{description}
-\oitem{MK}{} The \acrshort{gui} visualizes the \gls{inventory}.
-\oitem{MK}{} The \gls{administrator} can add \glspl{slave} to the \gls{inventory}.
-\oitem{MK}{} The \gls{administrator} can remove a \gls{slave} that does not host any \gls{MongoDB} processes from the \gls{inventory}.
-\oitem{MK}{spec_risk_groups} The \gls{administrator} can model a shared risk of failure between \glspl{host}, e.g. a shared power supply.
-\oitem{MK}{available_slave_types} The \gls{administrator} can specify whether the \gls{slave} has \glslink{persistent storage}{persistent (typically HDD/SSD backed)} or \glslink{volatile storage}{volatile (RAM backed)} storage.
-\oitem{MK}{root_data_directory} The \gls{administrator} can specify in which filesystem directory on the \gls{host} the \gls{slave} and its \gls{MongoDB} processes store data.
+\oitem{MC}{} The \acrshort{gui} visualizes the \gls{inventory}.
+\oitem{MC}{} The \gls{administrator} can add \glspl{slave} to the \gls{inventory}.
+\oitem{MC}{} The \gls{administrator} can remove a \gls{slave} that does not host any \gls{MongoDB} processes from the \gls{inventory}.
+\oitem{MC}{spec_risk_groups} The \gls{administrator} can model a shared risk of failure between \glspl{host}, e.g. a shared power supply.
+\oitem{MC}{available_slave_types} The \gls{administrator} can specify whether the \gls{slave} has \glslink{persistent storage}{persistent (typically HDD/SSD backed)} or \glslink{volatile storage}{volatile (RAM backed)} storage.
+\oitem{MC}{root_data_directory} The \gls{administrator} can specify in which filesystem directory on the \gls{host} the \gls{slave} and its \gls{MongoDB} processes store data.
 % inventory ops -> slave
-\oitem{MK}{slave_mode_active} The \gls{administrator} can announce to \mamid that a slave is ready to host MongoDB processes.
-\oitem{MK}{slave_mode_maintenance} The \gls{administrator} can announce to \mamid that a slave is in maintenance to inhibit automatic reconfiguration of its MongoDB processes.
-\oitem{MK}{slave_mode_disabled} The \gls{administrator} can announce to \mamid that a slave should not host any MongoDB processes.
+\oitem{MC}{slave_mode_active} The \gls{administrator} can announce to \mamid that a slave is ready to host MongoDB processes.
+\oitem{MC}{slave_mode_maintenance} The \gls{administrator} can announce to \mamid that a slave is in maintenance to inhibit automatic reconfiguration of its MongoDB processes.
+\oitem{MC}{slave_mode_disabled} The \gls{administrator} can announce to \mamid that a slave should not host any MongoDB processes.
 \end{description}
 
 % replica set ops
-\oitem{MK}{replica_set_create} The \gls{administrator} can describe a new \gls{MongoDB} \gls{replica set} by specifying constraints on how it should be configured by \mamid.
+\oitem{MC}{replica_set_create} The \gls{administrator} can describe a new \gls{MongoDB} \gls{replica set} by specifying constraints on how it should be configured by \mamid.
 \begin{description}
-\oitem{MK}{replica_set_config_profiles} The \gls{administrator} can --- on creation of a replica set (\ref{MK:replica_set_create}) --- specify that it must be usable as a configuration server for \gls{MongoDB} \gls{sharding}.
-\oitem{MK}{replica_set_member_total_counts} The \gls{administrator} can select the number of \gls{MongoDB} instances (members) of a replica set.
-\oitem{MK}{replica_set_member_pv_counts} Volatile and persistent member count of a \gls{replica set} can be independently configured, under constraints described in \ref{F:master_alloc_resp_pv_counts}.
+\oitem{MC}{replica_set_config_profiles} The \gls{administrator} can --- on creation of a replica set (\ref{MC:replica_set_create}) --- specify that it must be usable as a configuration server for \gls{MongoDB} \gls{sharding}.
+\oitem{MC}{replica_set_member_total_counts} The \gls{administrator} can select the number of \gls{MongoDB} instances (members) of a replica set.
+\oitem{MC}{replica_set_member_pv_counts} Volatile and persistent member count of a \gls{replica set} can be independently configured, under constraints described in \ref{F:master_alloc_resp_pv_counts}.
 \end{description}
-\oitem{MK}{} The \acrshort{gui} visualizes the list of configured \glspl{replica set}.
-\oitem{MK}{} The \gls{administrator} can destroy a \gls{replica set}.
+\oitem{MC}{} The \acrshort{gui} visualizes the list of configured \glspl{replica set}.
+\oitem{MC}{} The \gls{administrator} can destroy a \gls{replica set}.
 
 \end{description}
 
 \subsubsection{MongoDB Configuration \& Monitoring}
 \begin{description}
-\oitem{MK}{mongod_deployment1} \mamid asserts that the replica sets described by the administrator are configured on the cluster (see \ref{MK:replica_set_create}).
-\oitem{MK}{mongod_deployment2} To achieve \ref{MK:mongod_deployment1}, \mamid spawns \& controls \gls{MongoDB} processes on the hosts using a \gls{slave} process.
+\oitem{MC}{mongod_deployment1} \mamid asserts that the replica sets described by the administrator are configured on the cluster (see \ref{MC:replica_set_create}).
+\oitem{MC}{mongod_deployment2} To achieve \ref{MC:mongod_deployment1}, \mamid spawns \& controls \gls{MongoDB} processes on the hosts using a \gls{slave} process.
 \begin{description}
-	\oitem{MK}{mongod_redeployment} \mamid redeploys configured \gls{MongoDB} processes to hosts where the \gls{slave} process reports a situation different from what is expected by the \gls{master}.
-	\oitem{MK}{mongod_redeployment_powercycle_specific} Specifically, a host with volatile data storage can loose all data originating from the \gls{slave} process or \gls{MongoDB} and is automatically redeployed with correctly configured \gls{MongoDB} instances (\ref{MK:mongod_deployment2}).
+	\oitem{MC}{mongod_redeployment} \mamid redeploys configured \gls{MongoDB} processes to hosts where the \gls{slave} process reports a situation different from what is expected by the \gls{master}.
+	\oitem{MC}{mongod_redeployment_powercycle_specific} Specifically, a host with volatile data storage can loose all data originating from the \gls{slave} process or \gls{MongoDB} and is automatically redeployed with correctly configured \gls{MongoDB} instances (\ref{MC:mongod_deployment2}).
 \end{description}
-% Todo old \oitem{MK}{} The \gls{master} deploys the \gls{replica set} configuration described by the administrator to the cluster.
+% Todo old \oitem{MC}{} The \gls{master} deploys the \gls{replica set} configuration described by the administrator to the cluster.
 
 % monitoring features
-\oitem{MK}{detect_slave_unexpected_behavior} \mamid detects when a \gls{slave} in the \gls{inventory} behaves unexpectedly, e.g. when it becomes unreachable and the administrator did not announce maintenance to \mamid beforehand.
-\oitem{MK}{} \mamid informs the \gls{administrator} by e-mail about problems in the cluster (\ref{MK:detect_slave_unexpected_behavior}).
-\oitem{MK}{} The \acrshort{gui} visualizes \glspl{slave} behaving unexpectedly (\ref{MK:detect_slave_unexpected_behavior}).
+\oitem{MC}{detect_slave_unexpected_behavior} \mamid detects when a \gls{slave} in the \gls{inventory} behaves unexpectedly, e.g. when it becomes unreachable and the administrator did not announce maintenance to \mamid beforehand.
+\oitem{MC}{} \mamid informs the \gls{administrator} by e-mail about problems in the cluster (\ref{MC:detect_slave_unexpected_behavior}).
+\oitem{MC}{} The \acrshort{gui} visualizes \glspl{slave} behaving unexpectedly (\ref{MC:detect_slave_unexpected_behavior}).
 \end{description}
 
 \subsection{Optional Criteria}\label{OptionalCriteria}
@@ -282,7 +282,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \oitem{WK}{tweak_performance_parameters} The \gls{administrator} can customize performance-relevant parameters of \gls{MongoDB} processes.
 
 % automatic repair
-\oitem{WK}{auto_repair} \mamid supports automatic reconfiguration when detecting unexpected behavior of \glspl{slave}. The failing slave is marked as unsuitable to host \gls{MongoDB} processes and redeployment is triggered to repair the degraded replica sets (extends \ref{MK:detect_slave_unexpected_behavior}).
+\oitem{WK}{auto_repair} \mamid supports automatic reconfiguration when detecting unexpected behavior of \glspl{slave}. The failing slave is marked as unsuitable to host \gls{MongoDB} processes and redeployment is triggered to repair the degraded replica sets (extends \ref{MC:detect_slave_unexpected_behavior}).
 
 % replica sets
 \oitem{WK}{deploy_arbiters} \mamid deploys \gls{MongoDB} \glspl{arbiter} for configured \glspl{replica set} as needed, removing the restriction to an odd count of replica set members in \ref{F:master_alloc_resp_pv_counts}.
@@ -567,14 +567,14 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 	\begin{description}
 		\oitem{F}{gui_crud_inventory_confirm_removal} Prompt for confirmation when removing a slave from the inventory.
 	\end{description}
-	\oitem{F}{gui_set_slave_type} Specify type of \gls{slave} (\ref{MK:available_slave_types}) upon insertion into \gls{inventory}.
-	\oitem{F}{gui_set_root_data_dir} Specify \gls{root data directory} of \glspl{slave} (\ref{MK:root_data_directory}).
-	\oitem{F}{gui_set_risk_groups} \acrshort{CRUD} \glspl{risk group} (\ref{MK:spec_risk_groups}).
+	\oitem{F}{gui_set_slave_type} Specify type of \gls{slave} (\ref{MC:available_slave_types}) upon insertion into \gls{inventory}.
+	\oitem{F}{gui_set_root_data_dir} Specify \gls{root data directory} of \glspl{slave} (\ref{MC:root_data_directory}).
+	\oitem{F}{gui_set_risk_groups} \acrshort{CRUD} \glspl{risk group} (\ref{MC:spec_risk_groups}).
 	\begin{description}
 		\oitem{F}{gui_crud_risk_groups_confirm_removal} Prompt for confirmation when removing a risk group.
 	\end{description}
 	\oitem{F}{gui_set_slave_mode} Set mode of \gls{slave} to \glslink{active mode}{active}, \glslink{maintenance mode}{maintenance} or \glslink{disabled mode}{disabled}.
-	\oitem{F}{gui_crud_replica_sets} \acrshort{CRUD} \gls{replica set} configurations (\ref{MK:replica_set_create}).
+	\oitem{F}{gui_crud_replica_sets} \acrshort{CRUD} \gls{replica set} configurations (\ref{MC:replica_set_create}).
 	\begin{description}
 		\oitem{F}{gui_crud_replica_sets_confirm_removal} Prompt for confirmation when removing a replica set.
 	\end{description}
@@ -588,11 +588,11 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 \subsection{Master}
 \subsubsection{API Server}
 \begin{description}
-	\oitem{F}{master_api_crud_slaves} Provide \acrshort{API} to \acrshort{CRUD} \glspl{slave} in \gls{inventory} (\ref{MK:inventory_definition}).
+	\oitem{F}{master_api_crud_slaves} Provide \acrshort{API} to \acrshort{CRUD} \glspl{slave} in \gls{inventory} (\ref{MC:inventory_definition}).
 	\oitem{F}{master_api_crud_risk_groups} Provide \acrshort{API} to \acrshort{CRUD} \glspl{risk group}.
 	\oitem{F}{master_api_set_slave_mode} Provide \acrshort{API} to set mode of \gls{host} to \glslink{active mode}{active}, \glslink{maintenance mode}{maintenance} or \glslink{disabled mode}{disabled}.
-	\oitem{F}{master_api_crud_repl_set_config} Provide \acrshort{API} to \acrshort{CRUD} \gls{replica set} configurations (\ref{MK:replica_set_create}, \ref{MK:replica_set_config_profiles}, \ref{MK:replica_set_member_pv_counts}).
-	\oitem{F}{master_api_error_reports} Provide \acrshort{API} to retrieve error reports (\ref{MK:detect_slave_unexpected_behavior}).
+	\oitem{F}{master_api_crud_repl_set_config} Provide \acrshort{API} to \acrshort{CRUD} \gls{replica set} configurations (\ref{MC:replica_set_create}, \ref{MC:replica_set_config_profiles}, \ref{MC:replica_set_member_pv_counts}).
+	\oitem{F}{master_api_error_reports} Provide \acrshort{API} to retrieve error reports (\ref{MC:detect_slave_unexpected_behavior}).
 	\oitem{WF}{master_api_get_auto_discovered_slaves} Provide \acrshort{API} to retrieve a list of auto-discovered \glspl{slave} (\ref{WK:manual_autodiscovery}).
 	\oitem{WF}{master_api_machine_metrics} Provide \acrshort{API} exposing machine metrics of the \glspl{slave}.
 	\oitem{WF}{master_api_repl_set_status} Provide \acrshort{API} exposing \gls{replica set} replication status of the configured \glspl{replica set}.
@@ -601,7 +601,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 \end{description}
 \subsubsection{Monitor}
 \begin{description}
-	\oitem{F}{master_monitor_config} Monitor configuration \& state of \gls{MongoDB} instances running on \gls{cluster} hosts (\ref{MK:detect_slave_unexpected_behavior}).
+	\oitem{F}{master_monitor_config} Monitor configuration \& state of \gls{MongoDB} instances running on \gls{cluster} hosts (\ref{MC:detect_slave_unexpected_behavior}).
 	\oitem{WF}{master_monitor_icmp} Monitor reachability of \gls{cluster} hosts via \acrshort{ICMP} (\ref{WK:monitor_icmp}).
 	\oitem{WF}{} Monitor machine metrics of the \glspl{slave} (load, disk usage, etc) and alert the \gls{administrator} when thresholds are exceeded (\ref{WK:extended_monitoring}).
 	\oitem{WF}{} Monitor \gls{MongoDB} log output and alert the administrator when errors are reported through the log (\ref{WK:extended_monitoring}).
@@ -621,7 +621,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 \begin{description}
 	\oitem{F}{layout_cluster_config} Lay out the \gls{cluster} configuration, i.e. decide on a \gls{replica set} configuration
 	\begin{description}
-		\oitem{F}{master_alloc_resp_risk_groups} respecting specified \glspl{risk group} by not configuring a replica set with \gls{MongoDB} processes on \glspl{host} sharing the same risk group. \\Only mutually disjoint sets of risk groups are allowed (\ref{MK:spec_risk_groups}).
+		\oitem{F}{master_alloc_resp_risk_groups} respecting specified \glspl{risk group} by not configuring a replica set with \gls{MongoDB} processes on \glspl{host} sharing the same risk group. \\Only mutually disjoint sets of risk groups are allowed (\ref{MC:spec_risk_groups}).
 		\oitem{F}{master_alloc_resp_mode} respecting the mode of \glspl{slave}, following the behavior described in \ref{SM:SlaveModes}.
 		\oitem{F}{master_alloc_resp_pv_counts} respecting the administrator-configured number of $p$ persistent \& $v$ volatile \gls{replica set} members per \gls{replica set}, given that
 			\begin{flalign*} %align left
@@ -629,10 +629,10 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 			v \in \mathbb{N}_0 \text{ volatile members} \\
 			(p+v) >= 3 \land (p+v) \text{ odd}
 			\end{flalign*}
-			(\ref{MK:replica_set_member_pv_counts} and \ref{MK:available_slave_types})
+			(\ref{MC:replica_set_member_pv_counts} and \ref{MC:available_slave_types})
 		\oitem{WF}{master_alloc_arbiters} adding \gls{MongoDB} \glspl{arbiter} where necessary (\ref{WK:deploy_arbiters}).
 	\end{description}
-	\oitem{F}{master_alloc_communicate_config} Communicate the \gls{MongoDB} instance configuration to the \glspl{slave} (\ref{MK:mongod_deployment1}).
+	\oitem{F}{master_alloc_communicate_config} Communicate the \gls{MongoDB} instance configuration to the \glspl{slave} (\ref{MC:mongod_deployment1}).
 \end{description}
 \subsubsection{Miscellaneous}
 \begin{description}
@@ -651,9 +651,9 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 \subsection{Slave}
 \begin{description}
 	% Controller
-	\oitem{F}{slave_enforce_config} Apply \gls{MongoDB} process configuration description received from \gls{master} through \hyperref[SM:masterslaveproto]{MasterSlaveProtocol} (\ref{MK:mongod_deployment1}).
+	\oitem{F}{slave_enforce_config} Apply \gls{MongoDB} process configuration description received from \gls{master} through \hyperref[SM:masterslaveproto]{MasterSlaveProtocol} (\ref{MC:mongod_deployment1}).
 	% Process manager
-	\oitem{F}{slave_control_procs} Spawn / Control / Kill \gls{MongoDB} processes (\ref{MK:mongod_deployment2}).
+	\oitem{F}{slave_control_procs} Spawn / Control / Kill \gls{MongoDB} processes (\ref{MC:mongod_deployment2}).
 	% MongoDB Client
 	\oitem{F}{slave_communicate_with_mongodb} Communicate with \gls{MongoDB} processes using \hyperref[SM:mongodbclient]{MongoDBClient}.
 	% Controller again
@@ -677,11 +677,11 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 The \acrshort{cli} is an \emph{optional} functional requirement. It acts as a frontend to the functionality provided by \ref{SM:masterapiserver}. Hence, all functionality described in this subsection is realized through \acrshort{API} calls to the \gls{master}.
 \begin{description}
 	\oitem{WF}{cli_crud_inventory} \acrshort{CRUD} \glspl{slave} in (\gls{inventory}).
-	\oitem{WF}{cli_set_slave_type} Specify type of slave (\ref{MK:available_slave_types}) on insertion into \gls{inventory}.
-	\oitem{WF}{cli_set_root_data_dir} Specify \gls{root data directory} of \glspl{slave} (\ref{MK:root_data_directory}).
-	\oitem{WF}{cli_set_risk_groups} \acrshort{CRUD} \glspl{risk group} (\ref{MK:spec_risk_groups})
+	\oitem{WF}{cli_set_slave_type} Specify type of slave (\ref{MC:available_slave_types}) on insertion into \gls{inventory}.
+	\oitem{WF}{cli_set_root_data_dir} Specify \gls{root data directory} of \glspl{slave} (\ref{MC:root_data_directory}).
+	\oitem{WF}{cli_set_risk_groups} \acrshort{CRUD} \glspl{risk group} (\ref{MC:spec_risk_groups})
 	\oitem{WF}{gui_set_slave_mode} Set mode of \gls{host} to \glslink{active mode}{active}, \glslink{maintenance mode}{maintenance} or \glslink{disabled mode}{disabled}.
-	\oitem{WF}{cli_crud_replica_sets} \acrshort{CRUD} \gls{replica set} configurations (\ref{MK:replica_set_create}).
+	\oitem{WF}{cli_crud_replica_sets} \acrshort{CRUD} \gls{replica set} configurations (\ref{MC:replica_set_create}).
 	\oitem{WF}{cli_display_errors} Display error reports (\ref{F:master_api_error_reports}).
 	\oitem{WF}{cli_display_machine_metrics} Display machine metrics of the \glspl{slave}. 
 	\oitem{WF}{cli_display_repl_status} Display replication status of the configured \glspl{replica set}.
