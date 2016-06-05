@@ -189,7 +189,7 @@ SCC\\[2em]}
 \section{Introduction}
 \mamid is a manager for database \glspl{cluster}, facilitating creation, administration and monitoring of a \gls{MongoDB} \gls{replica set} deployment.
 
-\gls{MongoDB} is a document-oriented database application. \glslink{replica set}{Replica sets} are MongoDB's solution to data-redundancy and high-availability. Each replica set consists of multiple processes on different machines storing the same data.\\
+\gls{MongoDB} is a document-oriented database application. \glslink{replica set}{Replica sets} are MongoDB's solution to data-redundancy and high-availability. Each Replica Set consists of multiple processes on different machines storing the same data.\\
 After initial configuration, data replication is handled by MongoDB itself.
 
 \mamid assists the \gls{administrator} during setup, continuous operation, maintenance situations and expansion of a \gls{MongoDB} cluster.
@@ -199,8 +199,8 @@ Limitations of individual hosts, e.g. absence of persistent storage, can be mode
 
 Each \gls{host} runs a \gls{slave} application of \mamid, enabling control of the entire deployment from a single \gls{master} instance of \mamid.
 
-\mamid utilizes the \gls{administrator}'s description of the cluster and replica sets to run \gls{MongoDB} instances on the \glspl{host}.\\
-It configures the \gls{MongoDB} instances to form the desired replica sets, asserting that administrator-defined constraints regarding redundancy \& persistence of storage are met.
+\mamid utilizes the \gls{administrator}'s description of the cluster and Replica Sets to run \gls{MongoDB} instances on the \glspl{host}.\\
+It configures the \gls{MongoDB} instances to form the desired Replica Sets, asserting that administrator-defined constraints regarding redundancy \& persistence of storage are met.
 
 \mamid monitors the deployed configuration continuously and informs the \gls{administrator} about problems (when they arise).
 
@@ -240,11 +240,11 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \oitem{MC}{slave_mode_disabled} The \gls{administrator} can announce to \mamid that a slave should not host any MongoDB processes.
 \end{description}
 
-% replica set ops
+% Replica Set ops
 \oitem{MC}{replica_set_create} The \gls{administrator} can describe a new \gls{MongoDB} \gls{replica set} by specifying constraints on how it should be configured by \mamid.
 \begin{description}
-\oitem{MC}{replica_set_config_profiles} The \gls{administrator} can --- on creation of a replica set (\ref{MC:replica_set_create}) --- specify that it must be usable as a configuration server for \gls{MongoDB} \gls{sharding}.
-\oitem{MC}{replica_set_member_total_counts} The \gls{administrator} can select the number of \gls{MongoDB} instances (members) of a replica set.
+\oitem{MC}{replica_set_config_profiles} The \gls{administrator} can --- on creation of a Replica Set (\ref{MC:replica_set_create}) --- specify that it must be usable as a configuration server for \gls{MongoDB} \gls{sharding}.
+\oitem{MC}{replica_set_member_total_counts} The \gls{administrator} can select the number of \gls{MongoDB} instances (members) of a Replica Set.
 \oitem{MC}{replica_set_member_pv_counts} Volatile and persistent member count of a \gls{replica set} can be independently configured, under constraints described in \ref{F:master_alloc_resp_pv_counts}.
 \end{description}
 \oitem{MC}{} The \acrshort{gui} visualizes the list of configured \glspl{replica set}.
@@ -254,7 +254,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 
 \subsubsection{MongoDB Configuration \& Monitoring}
 \begin{description}
-\oitem{MC}{mongod_deployment1} \mamid asserts that the replica sets described by the administrator are configured on the cluster (see \ref{MC:replica_set_create}).
+\oitem{MC}{mongod_deployment1} \mamid asserts that the Replica Sets described by the administrator are configured on the cluster (see \ref{MC:replica_set_create}).
 \oitem{MC}{mongod_deployment2} To achieve \ref{MC:mongod_deployment1}, \mamid spawns \& controls \gls{MongoDB} processes on the hosts using a \gls{slave} process.
 \begin{description}
 	\oitem{MC}{mongod_redeployment} \mamid redeploys configured \gls{MongoDB} processes to hosts where the \gls{slave} process reports a situation different from what is expected by the \gls{master}.
@@ -284,10 +284,10 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \oitem{OC}{tweak_performance_parameters} The \gls{administrator} can customize performance-relevant parameters of \gls{MongoDB} processes.
 
 % automatic repair
-\oitem{OC}{auto_repair} \mamid supports automatic reconfiguration when detecting unexpected behavior of \glspl{slave}. The failing slave is marked as unsuitable to host \gls{MongoDB} processes and redeployment is triggered to repair the degraded replica sets (extends \ref{MC:detect_slave_unexpected_behavior}).
+\oitem{OC}{auto_repair} \mamid supports automatic reconfiguration when detecting unexpected behavior of \glspl{slave}. The failing slave is marked as unsuitable to host \gls{MongoDB} processes and redeployment is triggered to repair the degraded Replica Sets (extends \ref{MC:detect_slave_unexpected_behavior}).
 
-% replica sets
-\oitem{OC}{deploy_arbiters} \mamid deploys \gls{MongoDB} \glspl{arbiter} for configured \glspl{replica set} as needed, removing the restriction to an odd count of replica set members in \ref{F:master_alloc_resp_pv_counts}.
+% Replica Sets
+\oitem{OC}{deploy_arbiters} \mamid deploys \gls{MongoDB} \glspl{arbiter} for configured \glspl{replica set} as needed, removing the restriction to an odd count of Replica Set members in \ref{F:master_alloc_resp_pv_counts}.
 \oitem{OC}{extended_monitoring} \mamid supports extended monitoring of hosts, i.e. metrics beyond the processes managed by \mamid.
 
 % other
@@ -297,7 +297,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 
 \subsection{Demarcation Criteria}
 \begin{description}
-\oitem{DMC}{} The \gls{administrator} does not directly configure individual \gls{MongoDB} instances spawned \& controlled by \mamid. All configuration happens through \mamid, either automatically (e.g. replica set deployment) or through a \mamid interface (e.g. GUI, CLI, HTTP API).
+\oitem{DMC}{} The \gls{administrator} does not directly configure individual \gls{MongoDB} instances spawned \& controlled by \mamid. All configuration happens through \mamid, either automatically (e.g. Replica Set deployment) or through a \mamid interface (e.g. GUI, CLI, HTTP API).
 \oitem{DMC}{} \mamid does not implement support for higher-layer \gls{MongoDB} features, e.g. \gls{sharding}.
 \oitem{DMC}{} \mamid neither deploys the operating system nor other required software (such as \gls{MongoDB} binaries) to the \gls{cluster} \glspl{host}.
 \end{description}
@@ -313,7 +313,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 
 \subsection{Target Users}
 \begin{itemize}
-\item Cluster \glspl{administrator} in charge of creating \& managing a MongoDB replica set deployment.
+\item Cluster \glspl{administrator} in charge of creating \& managing a MongoDB Replica Set deployment.
 \end{itemize}
 
 \subsection{Operating Conditions}
@@ -443,7 +443,7 @@ A slave can be in the following states:
 	\item \glslink{maintenance mode}{maintenance}\\
 	\mamid ignores unexpected slave behavior if the slave is in maintenance mode.\\The running MongoDB processes on the slave are not modified / reconfigured and no reallocation to other slaves is triggered.
 	\item \glslink{disabled mode}{disabled}\\
-	A \gls{slave} in disabled mode does not run any \gls{MongoDB} process controlled by the slave process. When a \gls{slave} with MongoDB processes in a \gls{replica set} is set to disabled mode, \mamid stops all these processes and configures new ones on other \glspl{slave} to repair the temporarily degraded replica set.
+	A \gls{slave} in disabled mode does not run any \gls{MongoDB} process controlled by the slave process. When a \gls{slave} with MongoDB processes in a \gls{replica set} is set to disabled mode, \mamid stops all these processes and configures new ones on other \glspl{slave} to repair the temporarily degraded Replica Set.
 \end{itemize}
 
 \textbf{Note}: all state changes apart from \textit{active} $\leftrightarrow$ \textit{unknown} are triggered by the \gls{administrator}.
@@ -503,15 +503,15 @@ List of tuples containing the following data
 
 \begin{description}
 	\oitem{D}{} \gls{replica set} name\\
-			  Name of the replica set. Unique among all replica sets deployed in the cluster.
+			  Name of the Replica Set. Unique among all Replica Sets deployed in the cluster.
 	\oitem{D}{} number of \glslink{persistent storage}{persistent} slaves $p$\\
 			  Required number of members (MongoDB processes) with persistently stored data (\ref{D:inv_persistence}).
 	\oitem{D}{} number of \glslink{volatile storage}{volatile} slaves $v$\\
   			  Required number of members (MongoDB processes) with volatilely stored data (\ref{D:inv_persistence}).
 	\oitem{D}{} \gls{sharding} configuration server $\in \{\text{true}, \text{false}\}$\\
-			  If $\textit{true}$, specifies that the configuration of the replica set must be compatible with the requirements host a \gls{MongoDB} \glslink{sharding}{sharding config server}.
+			  If $\textit{true}$, specifies that the configuration of the Replica Set must be compatible with the requirements host a \gls{MongoDB} \glslink{sharding}{sharding config server}.
 	\oitem{D}{} member mongod processes (list of length $p+v$)\\
-			  Only managed by \hyperref[SM:Master]{Master}, used to track the members of the replica set.
+			  Only managed by \hyperref[SM:Master]{Master}, used to track the members of the Replica Set.
 \end{description}
 
 \subsubsection{MongoDB processes}
@@ -523,8 +523,8 @@ List of tuples describing all MongoDB processes the \hyperref[SM:Master]{Master}
 			  The hostname of the machine the process is running on.
 	\oitem{D}{} port\\
 			  The port where the process listens for connections.
-	\oitem{D}{} parent replica set\\
-			  The replica set the process belongs to.
+	\oitem{D}{} parent Replica Set\\
+			  The Replica Set the process belongs to.
 \end{description}
 
 \subsubsection{Risk Groups}
@@ -541,7 +541,7 @@ Contact list for problem notifications.
 \subsection{Data Consistencies}
 \begin{description}
 	% Foreign keys
-	\oitem{DC}{} There is a $1:n$ relationship between replica sets and MongoDB processes ($n \in \mathbb{N}$).
+	\oitem{DC}{} There is a $1:n$ relationship between Replica Sets and MongoDB processes ($n \in \mathbb{N}$).
 	\oitem{DC}{} There is a $m:n$ relationship between slaves and MongoDB processes ($m,n \in \mathbb{N}$).
 	
 	%Relationship Mongod <-> host
@@ -554,7 +554,7 @@ Contact list for problem notifications.
 	\oitem{DC}{} Risk Groups must only contain \glspl{slave} (e.g. identified by their \textit{hostname}) that are defined in the \gls{inventory}.
 	
 	%Arbiters
-	\oitem{DC}{} The number of nodes $p+v$ in a replica set must be odd unless \hyperref[WK:deploy_arbiters]{automatic arbiters} are implemented.
+	\oitem{DC}{} The number of nodes $p+v$ in a Replica Set must be odd unless \hyperref[WK:deploy_arbiters]{automatic arbiters} are implemented.
 \end{description}
 
 
@@ -578,13 +578,13 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 	\oitem{F}{gui_set_slave_mode} Set mode of \gls{slave} to \glslink{active mode}{active}, \glslink{maintenance mode}{maintenance} or \glslink{disabled mode}{disabled}.
 	\oitem{F}{gui_crud_replica_sets} \acrshort{CRUD} \gls{replica set} configurations (\ref{MC:replica_set_create}).
 	\begin{description}
-		\oitem{F}{gui_crud_replica_sets_confirm_removal} Prompt for confirmation when removing a replica set.
+		\oitem{F}{gui_crud_replica_sets_confirm_removal} Prompt for confirmation when removing a Replica Set.
 	\end{description}
 	\oitem{F}{gui_display_errors} Display error reports (\ref{F:master_api_error_reports}).
 	\oitem{OF}{gui_display_machine_metrics} Display machine metrics of the \glspl{slave}. 
 	\oitem{OF}{gui_display_repl_status} Display replication status of the configured \glspl{replica set}.
 	\oitem{OF}{gui_auto_discovery_interface} Provide interface to select auto-discovered \glspl{slave} when adding to \gls{inventory} (\ref{F:gui_crud_inventory}).
-	\oitem{OF}{gui_command_line_parameters_interface} Provide interface to specify --- per replica set --- command line parameters for the member \gls{MongoDB} processes (\ref{OC:tweak_performance_parameters}).
+	\oitem{OF}{gui_command_line_parameters_interface} Provide interface to specify --- per Replica Set --- command line parameters for the member \gls{MongoDB} processes (\ref{OC:tweak_performance_parameters}).
 \end{description}
 
 \subsection{Master}
@@ -599,7 +599,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 	\oitem{OF}{master_api_machine_metrics} Provide \acrshort{API} exposing machine metrics of the \glspl{slave}.
 	\oitem{OF}{master_api_repl_set_status} Provide \acrshort{API} exposing \gls{replica set} replication status of the configured \glspl{replica set}.
 	\oitem{OF}{} Require authentication from clients (\ref{OC:api_authentication}).
-	\oitem{OF}{master_api_command_line_parameters} Provide API to specify --- per replica set --- command line parameters for the member \gls{MongoDB} processes (\ref{OC:tweak_performance_parameters}).
+	\oitem{OF}{master_api_command_line_parameters} Provide API to specify --- per Replica Set --- command line parameters for the member \gls{MongoDB} processes (\ref{OC:tweak_performance_parameters}).
 \end{description}
 \subsubsection{Monitor}
 \begin{description}
@@ -616,14 +616,14 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 \end{description}
 \subsubsection{Controller}
 \begin{description}
-	\oitem{OF}{master_controller_auto_repair} Use spare \glslink{active mode}{active} slaves to automatically repair replica sets: redeploy members on \glslink{disabled mode}{disabled} slaves to the spare slaves (\ref{OC:auto_repair}).\\
+	\oitem{OF}{master_controller_auto_repair} Use spare \glslink{active mode}{active} slaves to automatically repair Replica Sets: redeploy members on \glslink{disabled mode}{disabled} slaves to the spare slaves (\ref{OC:auto_repair}).\\
 	 (Automates administrative decision to flag a host as \glslink{disabled mode}{disabled}. \ref{SM:SlaveModes})
 \end{description}
 \subsubsection{Cluster Allocator}
 \begin{description}
 	\oitem{F}{layout_cluster_config} Lay out the \gls{cluster} configuration, i.e. decide on a \gls{replica set} configuration
 	\begin{description}
-		\oitem{F}{master_alloc_resp_risk_groups} respecting specified \glspl{risk group} by not configuring a replica set with \gls{MongoDB} processes on \glspl{host} sharing the same risk group. \\Only mutually disjoint sets of risk groups are allowed (\ref{MC:spec_risk_groups}).
+		\oitem{F}{master_alloc_resp_risk_groups} respecting specified \glspl{risk group} by not configuring a Replica Set with \gls{MongoDB} processes on \glspl{host} sharing the same risk group. \\Only mutually disjoint sets of risk groups are allowed (\ref{MC:spec_risk_groups}).
 		\oitem{F}{master_alloc_resp_mode} respecting the mode of \glspl{slave}, following the behavior described in \ref{SM:SlaveModes}.
 		\oitem{F}{master_alloc_resp_pv_counts} respecting the administrator-configured number of $p$ persistent \& $v$ volatile \gls{replica set} members per \gls{replica set}, given that
 			\begin{flalign*} %align left
@@ -638,7 +638,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 \end{description}
 \subsubsection{Miscellaneous}
 \begin{description}
-\oitem{OF}{} Provide ability to deploy --- per replica set --- administrator-defined \gls{MongoDB} configuration file templates (\ref{OC:tweak_performance_parameters}).
+\oitem{OF}{} Provide ability to deploy --- per Replica Set --- administrator-defined \gls{MongoDB} configuration file templates (\ref{OC:tweak_performance_parameters}).
 \end{description}
 
 \subsection{MasterSlaveProtocol}
@@ -732,7 +732,7 @@ The \acrshort{cli} is an \emph{optional} functional requirement. It acts as a fr
 \end{figure}
 The \textit{Overview View} summarizes the current state of the cluster.
 \begin{itemize}
-	\uiel{Current Problems}{section}{lists up to $n \in \mathbb{N}$ slaves \& replica sets with problems.}
+	\uiel{Current Problems}{section}{lists up to $n \in \mathbb{N}$ slaves \& Replica Sets with problems.}
 	\uiel{Slave States}{section}{chart visualizing the distribution of slave states among all configured slaves.}
 \end{itemize}
 
@@ -848,12 +848,12 @@ The \textit{Risk Groups View} enables CRUD of \glspl{risk group} (\ref{F:gui_set
 	\mamidscreenshot{screenshots/replica_sets}
 	\caption{The Replica Sets view}
 \end{figure}
-The \textit{Replica Sets View} enables inspection and management of replica sets (\ref{F:gui_crud_replica_sets}).
+The \textit{Replica Sets View} enables inspection and management of Replica Sets (\ref{F:gui_crud_replica_sets}).
 \begin{itemize}
-	\uiel{Degraded}{section}{lists all configured replica sets with problems, e.g. a member process running on a \gls{slave} in \gls{maintenance mode}}.
-	\uiel{Active}{section}{lists all configured replica sets without known problems}.
+	\uiel{Degraded}{section}{lists all configured Replica Sets with problems, e.g. a member process running on a \gls{slave} in \gls{maintenance mode}}.
+	\uiel{Active}{section}{lists all configured Replica Sets without known problems}.
 \end{itemize}
-Clicking the wrench icon opens the replica set modification UI (\ref{subsec:ui:modify_replica_set}).
+Clicking the wrench icon opens the Replica Set modification UI (\ref{subsec:ui:modify_replica_set}).
 
 \subsubsection{Adding a Replica Set}\label{subsec:ui:new_replica_set}
 \begin{figure}[H]
@@ -868,29 +868,29 @@ The \textit{Replica Set View} provides information on each member slave's state.
 \begin{itemize}
 	\uiel{Sharding configuration server}{checkbox}{is read-only.}
 	\uiel{Persistent / Volatile nodes}{numericfield}{can be changed.}
-	\uiel{Apply}{button}{submits the changed replica set configuration to the \hyperref[SM:Master]{Master}.}
-	\uiel{Remove}{button}{removes the replica set (prompting for confirmation first, see figure \ref{fig:replica_set_remove}).}
+	\uiel{Apply}{button}{submits the changed Replica Set configuration to the \hyperref[SM:Master]{Master}.}
+	\uiel{Remove}{button}{removes the Replica Set (prompting for confirmation first, see figure \ref{fig:replica_set_remove}).}
 \end{itemize}
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/replica_set_overview_active.png}
-	\caption{Replica Set View with a normal operating replica set}
+	\caption{Replica Set View with a normal operating Replica Set}
 \end{figure}
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/replica_set_overview_degraded}
-	\caption{Replica Set View with a degraded replica set}
+	\caption{Replica Set View with a degraded Replica Set}
 \end{figure}
 \subsubsection{Removing a Replica Set}\label{subsec:ui:remove_replica_set}
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/replica_set_remove}
-	\caption{Removing a replica set}
+	\caption{Removing a Replica Set}
 	\label{fig:replica_set_remove}
 \end{figure}
 After clicking the red \textit{Remove Replica Set} button in the \textit{Replica Set View}, the user is prompted for confirmation.
 \begin{itemize}
-	\uiel{Remove Replica Set}{button} deletes the replica set.
+	\uiel{Remove Replica Set}{button} deletes the Replica Set.
 	\uiel{Cancel}{button} cancels the deletion operation and dismisses the prompt.
 \end{itemize}
 
@@ -1028,16 +1028,16 @@ Unless explicitly stated, the \acrshort{gui}'s \textit{Overview} page is always 
 \testsequence
 [\ref{F:gui_crud_replica_sets}, \ref{F:master_api_crud_repl_set_config}, \ref{F:layout_cluster_config}, \ref{F:master_alloc_resp_pv_counts}, \ref{F:master_alloc_resp_mode}, \ref{F:master_alloc_communicate_config}, \ref{F:slave_control_procs}, \ref{F:slave_enforce_config}, \ref{F:msp_trans_config}]
 {
-	The \gls{administrator} wants to increase the number of volatile nodes in a replica set $R$ by $k \in \mathbb{N}$. Enough \glspl{slave} with sufficient free \gls{MongoDB} \hyperref[D:slave_mongod_portrange]{ports} are available.
+	The \gls{administrator} wants to increase the number of volatile nodes in a Replica Set $R$ by $k \in \mathbb{N}$. Enough \glspl{slave} with sufficient free \gls{MongoDB} \hyperref[D:slave_mongod_portrange]{ports} are available.
 }
 {
 	\begin{itemize}
 		\item The \gls{administrator} navigates to the \textit{Replica Sets View} (\ref{subsec:ui:replica_sets_view}).
-		\item The \gls{administrator} selects the replica set $R$.
+		\item The \gls{administrator} selects the Replica Set $R$.
 		\item The web interface presents the \textit{Replica Set View} (\ref{subsec:ui:modify_replica_set}).
 		%Sharding config server setting is not modifiable.
 		\item The \gls{administrator} increases the number of volatile nodes by $k$ and applies the changes.
-		\item The \hyperref[SM:Master]{master} finds appropriate \glspl{slave} for hosting the new members of the replica set (\hyperref[SM:master_clusterallocator]{Master::ClusterAllocator}).
+		\item The \hyperref[SM:Master]{master} finds appropriate \glspl{slave} for hosting the new members of the Replica Set (\hyperref[SM:master_clusterallocator]{Master::ClusterAllocator}).
 		\item The \hyperref[SM:Master]{master} communicates the desired configuration to the appropriate \glspl{slave}
 		\item The \glspl{slave} apply the received configuration.
 	\end{itemize}
@@ -1053,7 +1053,7 @@ Unless explicitly stated, the \acrshort{gui}'s \textit{Overview} page is always 
 {
 	\begin{itemize}
 		\item The \gls{administrator} navigates to the \textit{Replica Sets View} (\ref{subsec:ui:replica_sets_view}).
-		\item The \gls{administrator} selects the replica set $R$.
+		\item The \gls{administrator} selects the Replica Set $R$.
 		\item The web interface presents the \textit{Replica Set View} (\ref{subsec:ui:modify_replica_set}).
 		\item The \gls{administrator} clicks the \textit{remove button}.
 		\item The \hyperref[SM:GUI]{GUI} prompts the \gls{administrator} for confirmation (\ref{F:gui_crud_replica_sets_confirm_removal}).
@@ -1079,7 +1079,7 @@ Unless explicitly stated, the \acrshort{gui}'s \textit{Overview} page is always 
 		\item The \gls{administrator} changes the hostname on the host $H$ through a mechanism not controlled by \mamid.
 		\item The \gls{administrator} sets the slave $S$ back to active mode.
 		\item The \hyperref[SM:Master]{Master} reaches the slave under its new host name.
-		\item The \hyperref[SM:Master]{Master} updates the configuration of the replica sets with member processes hosted on slave $S$.
+		\item The \hyperref[SM:Master]{Master} updates the configuration of the Replica Sets with member processes hosted on slave $S$.
 	\end{itemize}
 }
 
