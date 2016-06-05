@@ -459,8 +459,8 @@ List of tuples containing the following data
 \begin{description}
 	\oitem{D}{} hostname
 	\oitem{D}{} \gls{slave} port $\in \mathbb{N}$
-	\oitem{D}{slave_mongod_portrange} mongod-portrange $\in \{{[i, j]} \mid i,j \in \mathbb{N}\}$ (also specifies how many mongod instances may run on the slave)
-	\oitem{D}{} persistency $\in \{\text{\glslink{persistent storage}{persistent}}, \text{\glslink{volatile storage}{volatile}}\}$
+	\oitem{D}{slave_mongod_portrange} mongod-port range $\in \{{[i, j]} \mid i,j \in \mathbb{N}\}$ (also specifies how many mongod instances may run on the slave)
+	\oitem{D}{} persistence $\in \{\text{\glslink{persistent storage}{persistent}}, \text{\glslink{volatile storage}{volatile}}\}$
 	\oitem{D}{} \gls{root data directory}
 	\oitem{D}{} mode $\in \{\text{\glslink{active mode}{active}}, \text{\glslink{maintenance mode}{maintenance}}, \text{\glslink{disabled mode}{disabled}}\}$
 \end{description}
@@ -701,7 +701,7 @@ The \textit{Risk Groups View} enables CRUD of \glspl{risk group} (\ref{F:gui_set
 	\begin{itemize}
 		\uiel{Trash Bin}{button}{Click to delete the risk group after confirmation (see below), yielding all members back to the \textit{Assignable Slaves section}.}
 	\end{itemize}
-	\uiel{Create}{button}{Click to create a new risk group with the (unique) name of textfield's contents at the left.}
+	\uiel{Create}{button}{Click to create a new risk group with the (unique) name of text field's contents at the left.}
 \end{itemize}
 \begin{figure}[H]
 	\centering
