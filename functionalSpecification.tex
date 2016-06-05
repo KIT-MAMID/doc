@@ -537,7 +537,6 @@ Contact list for problem notifications.
 \end{description}
 
 \subsection{Data Consistencies}
-
 \begin{description}
 	% Foreign keys
 	\oitem{DC}{} There is a $1:n$ relationship between replica sets and MongoDB processes ($n \in \mathbb{N}$).
@@ -693,11 +692,11 @@ The \acrshort{cli} is an \emph{optional} functional requirement. It acts as a fr
 \subsection{Non-Functional Requirements}
 \begin{description}
 	% Usability
-	\oitem{NF}{} The \gls{administrator} does not need extended knowledge of \gls{MongoDB} to configure \glspl{replica set} using \mamid.
-	\oitem{NF}{} The \acrshort{gui} needs to be intuitive to \glspl{administrator} familiar with similar tools.
+	\oitem{NF}{} The \gls{administrator} does not need extended knowledge of \gls{MongoDB} to configure \glspl{replica set} using \mamid. %todo cannot measure
+	\oitem{NF}{} The \acrshort{gui} needs to be intuitive to \glspl{administrator} familiar with similar tools. %TODO cannot measure
 	% Reliability
-	\oitem{NF}{} \mamid can handle an unordered parallel reboot of an arbitrary of hosts in the cluster.
-	\oitem{NF}{} The \gls{cluster} is resilient against unexpected failures of \glspl{slave}.
+	\oitem{NF}{} \mamid can handle an unordered parallel reboot of an arbitrary number of hosts in the cluster.
+	\oitem{NF}{} The \gls{cluster} is resilient against unexpected failures of \glspl{slave}. %todo cannot measure
 	% Performance
 	\oitem{NF}{} The \acrshort{gui} responds to user interaction within $500ms$.
 	\oitem{NF}{} \mamid supports at least 100 \glspl{slave} in the \gls{cluster}.
@@ -771,7 +770,6 @@ The \textit{Risk Groups View} enables CRUD of \glspl{risk group} (\ref{F:gui_set
 	\mamidscreenshot{screenshots/slaves}
 	\caption{The Slaves View}
 \end{figure}
-
 The \textit{Slaves View} provides an overview of the inventory (\ref{F:gui_crud_inventory}).\\
 \begin{itemize}
 	\uiel{Active}{section}{shows all \glslink{active mode}{active} slaves}.
@@ -787,28 +785,33 @@ Clicking the wrench icon opens the slave modification UI (\ref{subsec:ui:modify_
 	\mamidscreenshot{screenshots/new_slave}
 	\caption{New Slave Wizard}
 \end{figure}
-
+% TODO
 \subsubsection{Modifying a Slave}\label{subsec:ui:modify_slave}
+% TODO general stuff about modifying slaves
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/slave_edit_active.png}
 	\caption{The Slave View with a slave in 'active' state}
 \end{figure}
+%TODO active slave specific stuff
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/slave_edit_unknown.png}
 	\caption{The Slave View with a slave in 'unknown' state}
 \end{figure}
+%TODO unknown state slave specific stuff
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/slave_edit_maintenance}
 	\caption{The Slave View with a slave in 'maintenance mode'}
 \end{figure}
+%TODO maintenance slave specific stuff
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/slave_edit_disabled.png}
 	\caption{The Slave View with a slave in 'disabled' state}
 \end{figure}
+%TODO disabled slave specific stuff
 \subsubsection{Removing a Slave}\label{subsec:ui:remove_slave}
 \begin{figure}[H]
 	\centering
@@ -838,12 +841,15 @@ Clicking the wrench icon opens the replica set modification UI (\ref{subsec:ui:m
 	\mamidscreenshot{screenshots/new_replica_set}
 	\caption{New Replica Set Wizard}
 \end{figure}
+%TODO no state selection
 \subsubsection{Modifying a Replica Set}\label{subsec:ui:modify_replica_set}
+%TODO common for all states
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/replica_set_overview_active.png}
 	\caption{Replica Set View with a normal operating replica set}
 \end{figure}
+
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/replica_set_overview_degraded}
