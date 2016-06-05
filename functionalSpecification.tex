@@ -357,19 +357,19 @@ Each of the subsequently listed requirements is an extension of the previous one
 	\item All hosts are interconnected through fast \acrshort{LAN}.
 	\begin{itemize}
 		\item All cluster hosts are interconnected through an isolated \acrshort{LAN}.
-		\item $>= 1$ cluster host is connected to both the isolated \acrshort{LAN} and an external network (usually another \acrshort{LAN} or \acrshort{WAN}).
+		\item $\geqslant 1$ cluster host is connected to both the isolated \acrshort{LAN} and an external network (usually another \acrshort{LAN} or \acrshort{WAN}).
 	\end{itemize}
 \end{itemize}
 
 \subsubsection{Operation of Persistently Stored Replica Sets}
 \begin{itemize}
-	\item $>= 1$ cluster host with \gls{persistent storage}
-	\item $>= 3$ cluster hosts in total
+	\item $\geqslant 1$ cluster host with \gls{persistent storage}
+	\item $\geqslant 3$ cluster hosts in total
 \end{itemize}
 
 \subsubsection{Basic Level of Host Redundancy}
 \begin{itemize}
-	\item $>= 3$ mutually disjoint sets of \gls{cluster} \glspl{host} that can be classified as not sharing a common risk of failure (see \ref{F:master_alloc_resp_risk_groups}).
+	\item $\geqslant 3$ mutually disjoint sets of \gls{cluster} \glspl{host} that can be classified as not sharing a common risk of failure (see \ref{F:master_alloc_resp_risk_groups}).
 \end{itemize}
 
 \section{System Model}
@@ -383,7 +383,7 @@ Each of the subsequently listed requirements is an extension of the previous one
 	Provides an \acrshort{API} for \gls{cluster} status reporting and administrative activity. (\ref{F:master_api_crud_slaves}, \ref{F:master_api_crud_risk_groups}, \ref{F:master_api_set_slave_mode}, \ref{F:master_api_crud_repl_set_config}, \ref{F:master_api_error_reports}, \ref{OF:master_api_get_auto_discovered_slaves}, \ref{OF:master_api_machine_metrics}, \ref{OF:master_api_repl_set_status})
  	\oitem{SM}{} Master::Controller\\
 	Controls flow of events between different \gls{master} submodules.\\
-	Updates the inventory database (\ref{SM:inventory}) as state change is recognized by the monitor.\\
+	Updates the inventory database (\ref{SM:inventory}) as state changes are recognized by the monitor.\\
 	Implements automatic administration as explained in \ref{OF:master_controller_auto_repair}.)
 	\oitem{SM}{inventory} Master::Inventory\\
 	Database containing
@@ -629,7 +629,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 			\begin{flalign*} %align left
 			p \in \mathbb{N}_0 \text{ persistent members}  \\
 			v \in \mathbb{N}_0 \text{ volatile members} \\
-			(p+v) >= 3 \land (p+v) \text{ odd}
+			(p+v) \geqslant 3 \land (p+v) \text{ odd}
 			\end{flalign*}
 			(\ref{MC:replica_set_member_pv_counts} and \ref{MC:available_slave_types})
 		\oitem{OF}{master_alloc_arbiters} adding \gls{MongoDB} \glspl{arbiter} where necessary (\ref{OC:deploy_arbiters}).
