@@ -680,7 +680,7 @@ The \textit{Overview} page summarizes the current state of the cluster.
 	\uiel{Slave States}{section}{lists all replica set centric problems.}
 \end{itemize}
 
-\subsection{Problems View}
+\subsection{Problems View}\label{subsec:ui:problems_view}
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/problems}
@@ -760,7 +760,7 @@ Clicking the wrench icon opens the slave modification UI (\ref{subsec:ui:modify_
 	\mamidscreenshot{screenshots/slave_remove}
 	\caption{Removing a slave}
 \end{figure}
-After clicking the red \textit{Remove slave} button in the \textit{Slave View}, the user is prompted for confirmation (\ref{}). %TODO reference functional requirement
+After clicking the red \textit{Remove slave} button in the \textit{Slave View}, the user is prompted for confirmation (\ref{F:gui_crud_inventory_confirm_removal}).
 
 \subsection{Replica Sets View}\label{subsec:ui:replica_sets_view}
 \begin{figure}[H]
@@ -798,7 +798,7 @@ Clicking the wrench icon opens the replica set modification UI (\ref{subsec:ui:m
 	\mamidscreenshot{screenshots/replica_set_remove}
 	\caption{Removing a replica set}
 \end{figure}
-After clicking the red \textit{Remove replica set} button in the \textit{Replica Set View}, the user is prompted for confirmation (\ref{}). %TODO reference functional requirement
+After clicking the red \textit{Remove replica set} button in the \textit{Replica Set View}, the user is prompted for confirmation.
 \begin{itemize}
 	\uiel{Delete replica set}{button} deletes the replica set.
 	\uiel{Cancel}{button} cancels the deletion operation and dismisses the prompt.
@@ -875,14 +875,14 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 
 \oitem{TS}{} Temporarily Unreachable Slave
 \testsequence
-[\ref{F:master_monitor_config}, \ref{F:master_api_error_reports}, \ref{F:gui_display_errors}, \ref{F:gui_set_slave_mode}, \ref{F:msp_trans_reachability}]
+[\ref{F:master_monitor_config}, \ref{F:master_api_error_reports}, \ref{F:gui_display_errors}, \ref{F:gui_set_slave_mode}, \ref{F:msp_trans_reachability}, \ref{F:notifmgr_controller_send_errors}, \ref{F:notifmgr_send_emails}]
 {
 	A \gls{slave} $S$ becomes unreachable because of broken network cable.
 }
 {
 	\begin{itemize}
 		\item \hyperref[SM:NotificationManager]{NotificationManager} sends an e-mail notification to the \gls{administrator}.
-		\item \glslink{administrator}{Administrator} responds to the e-mail notification by opening the \textit{error reports} section in the web interface. %TODO ref
+		\item \glslink{administrator}{Administrator} responds to the e-mail notification by opening the \hyperref[subsec:ui:problems_view]{Problems View} in the \hyperref[SM:GUI]{GUI}.
 		\item \hyperref[SM:GUI]{GUI} offers to set $S$ into \glslink{maintenance mode}{maintenance} or \gls{disabled mode}.
 		\item \glslink{administrator}{Administrator} does not choose either of the options but replaces the broken cable.
 		\item \hyperref[SM:Master]{Master} reaches $S$ again.
@@ -901,7 +901,7 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 {
 	\begin{itemize}
 		\item After $S$ becomes unavailable the \hyperref[SM:NotificationManager]{NotificationManager} sends an e-mail notification to the \gls{administrator}.
-		\item \glslink{administrator}{Administrator} responds to e-mail notification by opening the \textit{error reports} section in web interface %TODO ref
+		\item \glslink{administrator}{Administrator} responds to e-mail notification by opening the  \hyperref[subsec:ui:problems_view]{Problems View} in the \hyperref[SM:GUI]{GUI}.
 		\item \hyperref[SM:GUI]{GUI} offers to set $S$ into \glslink{maintenance mode}{maintenance} or \gls{disabled mode}.
 		\item \glslink{administrator}{Administrator} chooses \gls{disabled mode}.
 		\item \hyperref[SM:Master]{Master} selects a \gls{slave} $S'$ as a replacement for $S$ and communicates the appropriate configuration to $S'$
@@ -920,7 +920,7 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 }
 {
 	\begin{itemize}
-		\item The \gls{administrator} navigates to the \textit{Slave Management Section} in the \hyperref[SM:GUI]{GUI}. %TODO ui ref
+		\item The \gls{administrator} navigates to the \textit{Slave Management Section} in the \hyperref[SM:GUI]{GUI}.
 		\item The \gls{administrator} selects $S$ and sets it to \gls{maintenance mode}.
 		\item The \gls{administrator} installs the security updates and reboots the machine (killing the \gls{slave} instance and all its \gls{MongoDB} instances).
 		\item The \gls{slave} process $S$ is restarted by the system's service manager after reboot.
@@ -942,8 +942,8 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 		\item The \gls{administrator} opens the \textit{New Replica Set Wizard} \ref{subsec:ui:new_replica_set}.
 		\item The \gls{administrator} fills in the fields with the appropriate values (see \textit{Preconditions}).
 		\item The \hyperref[SM:Master]{master} finds appropriate \glspl{slave} for hosting members of $R$ (\hyperref[SM:master_clusterallocator]{Master::ClusterAllocator}).
-		\item The \hyperref[SM:Master]{master} communicates the desired configuration to the appropriate \glspl{slave} $Z$.
-		\item The \glspl{slave} in $Z$ apply the received configuration.
+		\item The \hyperref[SM:Master]{master} communicates the desired configuration to the appropriate \glspl{slave}.
+		\item These \glspl{slave} apply the received configuration to the respective MongoDB processes.
 	\end{itemize}
 }
 
