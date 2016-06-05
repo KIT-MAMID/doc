@@ -511,6 +511,9 @@ List of tuples containing the following data
 The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:masterapiserver}. Hence, all functionality described in this subsection is realized through \acrshort{API} calls to the \gls{master}.
 \begin{description}
 	\oitem{F}{gui_crud_inventory} \acrshort{CRUD} \glspl{slave} in \gls{inventory}.
+	\begin{description}
+		\oitem{F}{gui_crud_inventory_confirm_removal} Prompt for confirmation when removing a slave from the inventory.
+	\end{description}
 	\oitem{F}{gui_set_slave_type} Specify type of \gls{slave} (\ref{MK:available_slave_types}) upon insertion into \gls{inventory}.
 	\oitem{F}{gui_set_root_data_dir} Specify \gls{root data directory} of \glspl{slave} (\ref{MK:root_data_directory}).
 	\oitem{F}{gui_set_risk_groups} \acrshort{CRUD} \glspl{risk group} (\ref{MK:spec_risk_groups}).
@@ -849,7 +852,7 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 
 \oitem{TS}{} Removing Machines from the Cluster
 \testsequence
-[\ref{F:gui_crud_inventory}, \ref{F:master_api_crud_slaves}, \ref{F:gui_set_slave_mode}, \ref{F:master_api_set_slave_mode}, \ref{F:master_inventory_persist_conf_state}, \ref{F:layout_cluster_config}, \ref{F:master_alloc_communicate_config}]
+[\ref{F:gui_crud_inventory}, \ref{F:gui_crud_inventory_confirm_removal}, \ref{F:master_api_crud_slaves}, \ref{F:gui_set_slave_mode}, \ref{F:master_api_set_slave_mode}, \ref{F:master_inventory_persist_conf_state}, \ref{F:layout_cluster_config}, \ref{F:master_alloc_communicate_config}]
 {
 	A machine $M$ with installed \gls{slave} software shall be removed from the cluster.
 }
@@ -859,8 +862,12 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 		\item The \gls{administrator} selects the \gls{slave} $S$ and sets it to \gls{disabled mode} (\textit{Slave View}).
 		\item The \hyperref[SM:Master]{master} determines a new \gls{cluster} layout to repair $S$'s former \glspl{replica set}.
 		\item The \hyperref[SM:Master]{master} communicates the desired configuration to the appropriate \glspl{slave}.
-		\item The \hyperref[SM:GUI]{GUI} now allows the \gls{administrator} to delete $S$ from the \gls{inventory}.
-		\item The \gls{administrator} deletes $S$ from the \gls{inventory} (in \textit{Slave View}).
+		\item The \hyperref[SM:GUI]{GUI} \textit{Slave View} enables the \textit{Remove button}.
+		\item The \gls{administrator} clicks the \textit{Remove button}.
+		\item The \hyperref[SM:GUI]{GUI} prompts the \gls{administrator} for confirmation.
+		\item The \gls{administrator} confirms the removal by clicking the confirmation prompt's \textit{remove button} (\ref{subsec:ui:remove_replica_set}).
+		\item The \hyperref[SM:Master]{master} removes the slave from the \gls{inventory} and persists the change.
+		\item The \hyperref[SM:GUI]{GUI} dismisses the \textit{Slave View} and switches back to the \textit{Slaves View}.
 		\item The \gls{administrator} can now physically remove $M$ from the \gls{cluster}.
 	\end{itemize}
 }
