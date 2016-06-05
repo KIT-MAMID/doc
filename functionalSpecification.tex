@@ -739,7 +739,7 @@ Clicking the wrench icon opens the slave modification UI (\ref{subsec:ui:modify_
 \end{figure}
 After clicking the red \textit{Remove slave} button in the \textit{Slave View}, the user is prompted for confirmation (\ref{}). %TODO reference functional requirement
 
-\subsection{Replica Sets View}
+\subsection{Replica Sets View}\label{subsec:ui:replica_sets_view}
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/replica_sets}
@@ -752,7 +752,7 @@ The \textit{Replica Sets View} enables inspection and management of replica set 
 \end{itemize}
 Clicking the wrench icon opens the replica set modification UI (\ref{subsec:ui:modify_replica_set}).
 
-\subsubsection{Adding a Replica Set}
+\subsubsection{Adding a Replica Set}\label{subsec:ui:new_replica_set}
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/new_replica_set}
@@ -769,7 +769,7 @@ Clicking the wrench icon opens the replica set modification UI (\ref{subsec:ui:m
 	\mamidscreenshot{screenshots/replica_set_overview_degraded}
 	\caption{Replica Set View with a degraded replica set}
 \end{figure}
-\subsubsection{Removing a Replica Set}
+\subsubsection{Removing a Replica Set}\label{subsec:ui:remove_replica_set}
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/replica_set_remove}
@@ -908,12 +908,12 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 \testsequence
 [\ref{F:gui_crud_replica_sets}, \ref{F:master_api_crud_repl_set_config}, \ref{F:layout_cluster_config}, \ref{F:master_alloc_resp_pv_counts}, \ref{F:master_alloc_resp_mode}, \ref{F:master_alloc_communicate_config}, \ref{F:slave_control_procs}, \ref{F:slave_enforce_config}, \ref{F:msp_trans_config}]
 {
-	The \gls{administrator} wants to add a \gls{replica set} with $p \in \mathbb{N}$ \glslink{persistent storage}{persistent} members and $v \in \mathbb{N}$ \glslink{volatile storage}{volatile} members. $(p+v) >= 3 \land (p+v) \textit{ is odd}$. Enough \glspl{slave} with sufficient free \gls{MongoDB} \hyperref[D:slave_mongod_portrange]{ports} are available.
+	The \gls{administrator} wants to add a \gls{replica set} $R$ with $p \in \mathbb{N}$ \glslink{persistent storage}{persistent} members and $v \in \mathbb{N}$ \glslink{volatile storage}{volatile} members. $(p+v) >= 3 \land (p+v) \textit{ is odd}$. Enough \glspl{slave} with sufficient free \gls{MongoDB} \hyperref[D:slave_mongod_portrange]{ports} are available.
 }
 {
 	\begin{itemize}
-		\item The \gls{administrator} navigates to \textit{Replica Set Management Section}. %TODO ref ui
-		\item The \gls{administrator} adds a new replica set $R$ using the \textit{Add Replica Set Form} with constraints $p$ and $v$. %TODO ref ui and testsequence
+		\item The \gls{administrator} opens the \textit{New Replica Set Wizard} \ref{subsec:ui:new_replica_set}.
+		\item The \gls{administrator} fills in the fields with the appropriate values (see \textit{Preconditions}).
 		\item The \hyperref[SM:Master]{master} finds appropriate \glspl{slave} for hosting members of $R$ (\hyperref[SM:master_clusterallocator]{Master::ClusterAllocator}).
 		\item The \hyperref[SM:Master]{master} communicates the desired configuration to the appropriate \glspl{slave} $Z$.
 		\item The \glspl{slave} in $Z$ apply the received configuration.
@@ -925,14 +925,15 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 \testsequence
 [\ref{F:gui_crud_replica_sets}, \ref{F:master_api_crud_repl_set_config}, \ref{F:layout_cluster_config}, \ref{F:master_alloc_resp_pv_counts}, \ref{F:master_alloc_resp_mode}, \ref{F:master_alloc_communicate_config}, \ref{F:slave_control_procs}, \ref{F:slave_enforce_config}, \ref{F:msp_trans_config}]
 {
-	The \gls{administrator} wants to increase the number of volatile nodes in a replica set. Enough \glspl{slave} with sufficient free \gls{MongoDB} \hyperref[D:slave_mongod_portrange]{ports} are available.
+	The \gls{administrator} wants to increase the number of volatile nodes in a replica set $R$ by $k \in \mathbb{N}$. Enough \glspl{slave} with sufficient free \gls{MongoDB} \hyperref[D:slave_mongod_portrange]{ports} are available.
 }
 {
 	\begin{itemize}
-		\item The \gls{administrator} navigates to \textit{Replica Set Management Section}. %TODO ref ui
-		\item The \gls{administrator} selects the replica set.
+		\item The \gls{administrator} navigates to the \textit{Replica Sets View} (\ref{subsec:ui:replica_sets_view}).
+		\item The \gls{administrator} selects the replica set $R$.
+		\item The web interface presents the \textit{Replica Set View} (\ref{subsec:ui:modify_replica_set}).
 		%Sharding config server setting is not modifiable.
-		\item The \gls{administrator} increases the number of volatile nodes by 2 and applies the changes.
+		\item The \gls{administrator} increases the number of volatile nodes by $k$ and applies the changes.
 		\item The \hyperref[SM:Master]{master} finds appropriate \glspl{slave} for hosting the new members of the replica set (\hyperref[SM:master_clusterallocator]{Master::ClusterAllocator}).
 		\item The \hyperref[SM:Master]{master} communicates the desired configuration to the appropriate \glspl{slave}
 		\item The \glspl{slave} apply the received configuration.
@@ -948,11 +949,13 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 }
 {
 	\begin{itemize}
-		\item The \gls{administrator} navigates to \textit{Replica Set Management Section}. %TODO ref ui
-		\item The \gls{administrator} selects $R$ and clicks the remove button. % TODO ref testseq and ui
-		\item The \hyperref[SM:GUI]{GUI} prompts the \gls{administrator} for confirmation. %TODO missing functional requirement
-		\item The \gls{administrator} confirms the removal.
-		\item The \hyperref[SM:Master]{master} persists the change and communicates to the \glspl{slave} that \gls{host} members of $R$ must kill the respective \gls{MongoDB} processes.
+		\item The \gls{administrator} navigates to the \textit{Replica Sets View} (\ref{subsec:ui:replica_sets_view}).
+		\item The \gls{administrator} selects the replica set $R$.
+		\item The web interface presents the \textit{Replica Set View} (\ref{subsec:ui:modify_replica_set}).
+		\item The \gls{administrator} clicks the \textit{remove button}.
+		\item The \hyperref[SM:GUI]{GUI} prompts the \gls{administrator} for confirmation (\ref{subsec:ui:remove_replica_set}). %TODO missing functional requirement
+		\item The \gls{administrator} confirms the removal by clicking the confirmation prompt's \textit{remove button}.
+		\item The \hyperref[SM:Master]{master} persists the change and communicates to the \glspl{slave} hosting members of $R$ to kill the respective \gls{MongoDB} processes.
 		\item The \glspl{slave} apply the received instructions.
 	\end{itemize}
 }
