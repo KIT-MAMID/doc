@@ -730,8 +730,8 @@ The \acrshort{cli} is an \emph{optional} functional requirement. It acts as a fr
 \end{figure}
 The \textit{Overview View} summarizes the current state of the cluster.
 \begin{itemize}
-	\uiel{Current Problems}{section}{lists all slave-centric problems.}
-	\uiel{Slave States}{section}{lists all replica set centric problems.}
+	\uiel{Current Problems}{section}{lists up to $n \in \mathbb{N}$ slaves \& replica sets with problems.}
+	\uiel{Slave States}{section}{chart visualizing the distribution of slave states among all configured slaves.}
 \end{itemize}
 
 \subsection{Problems View}\label{subsec:ui:problems_view}
@@ -753,9 +753,9 @@ The \textit{Risk Groups View} enables CRUD of \glspl{risk group} (\ref{F:gui_set
 	\uiel{Assignable Slaves}{section}{Slaves that are not member of a risk group.}
 	\item Subsequent sections: each represents a risk group. Can be clicked to expand \& view the the risk group members.
 	\begin{itemize}
-		\uiel{Trash Bin}{button}{Click to delete the risk group after confirmation (see below), yielding all members back to the \textit{Assignable Slaves section}.}
+		\uiel{Trash Bin}{button}{Click to delete the risk group after confirmation (see figure below). All members of the deleted risk group are then re-added to the \textit{Assignable Slaves section}.}
 	\end{itemize}
-	\uiel{Create}{button}{Click to create a new risk group with the (unique) name of text field's contents at the left.}
+	\uiel{Create}{button}{Click to create a new risk group with the name entered into the text field on the left of the \textit{Create button}.}
 \end{itemize}
 \begin{figure}[H]
 	\centering
@@ -818,7 +818,7 @@ Clicking the wrench icon opens the slave modification UI (\ref{subsec:ui:modify_
 	\mamidscreenshot{screenshots/slave_remove}
 	\caption{Removing a slave}
 \end{figure}
-In the \textit{Slave View}, the user can remove the slave the inventory by clicking the red \textit{Remove Slave} button (\ref{F:gui_crud_inventory}, \ref{F:gui_crud_inventory_confirm_removal}).
+In the \textit{Slave View}, the user can remove the slave from the inventory by clicking the red \textit{Remove Slave} button (\ref{F:gui_crud_inventory}, \ref{F:gui_crud_inventory_confirm_removal}).
 
 However, confirmation through a modal dialog is required (see above) .
 
@@ -828,7 +828,7 @@ However, confirmation through a modal dialog is required (see above) .
 	\mamidscreenshot{screenshots/replica_sets}
 	\caption{The Replica Sets view}
 \end{figure}
-The \textit{Replica Sets View} enables inspection and management of replica set descriptions (\ref{F:gui_crud_replica_sets}).
+The \textit{Replica Sets View} enables inspection and management of replica sets (\ref{F:gui_crud_replica_sets}).
 \begin{itemize}
 	\uiel{Degraded}{section}{lists all configured replica sets with problems, e.g. a member process running on a \gls{slave} in \gls{maintenance mode}}.
 	\uiel{Active}{section}{lists all configured replica sets without known problems}.
