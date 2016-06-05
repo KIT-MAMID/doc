@@ -583,7 +583,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 	\oitem{WF}{gui_display_machine_metrics} Display machine metrics of the \glspl{slave}. 
 	\oitem{WF}{gui_display_repl_status} Display replication status of the configured \glspl{replica set}.
 	\oitem{WF}{gui_auto_discovery_interface} Provide interface to select auto-discovered \glspl{slave} when adding to \gls{inventory} (\ref{F:gui_crud_inventory}).
-	\oitem{WF}{gui_command_line_parameters_interface} Provide interface to specify --- per replica set --- command line parameters for the member \gls{MongoDB} processes (\ref{WK:tweak_performance_parameters})
+	\oitem{WF}{gui_command_line_parameters_interface} Provide interface to specify --- per replica set --- command line parameters for the member \gls{MongoDB} processes (\ref{WK:tweak_performance_parameters}).
 \end{description}
 
 \subsection{Master}
@@ -605,7 +605,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 	\oitem{F}{master_monitor_config} Monitor configuration \& state of \gls{MongoDB} instances running on \gls{cluster} hosts (\ref{MK:detect_slave_unexpected_behavior}).
 	\oitem{WF}{master_monitor_icmp} Monitor reachability of \gls{cluster} hosts via \acrshort{ICMP} (\ref{WK:monitor_icmp}).
 	\oitem{WF}{} Monitor machine metrics of the \glspl{slave} (load, disk usage, etc) and alert the \gls{administrator} when thresholds are exceeded (\ref{WK:extended_monitoring}).
-	\oitem{WF}{} Monitor \gls{MongoDB} log output and alert the administrator when errors are reported through the log (\ref{MK:extended_monitoring}).
+	\oitem{WF}{} Monitor \gls{MongoDB} log output and alert the administrator when errors are reported through the log (\ref{WK:extended_monitoring}).
 	\oitem{WF}{master_monitor_continuous_auto_discovery} Continuously auto-discover \glspl{slave} on the \gls{cluster} network and add them to the \gls{inventory} (\ref{WK:continuous_autodiscovery}). % move
 \end{description}
 \subsubsection{Inventory}
@@ -615,7 +615,8 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 \end{description}
 \subsubsection{Controller}
 \begin{description}
-	\oitem{WF}{master_controller_auto_repair} Use spare \glslink{active mode}{active} slaves to automatically repair replica sets: redeploy members on \glslink{disabled mode}{disabled} slaves to the spare slaves. (Automates administrative decision to flag a host as \glslink{disabled mode}{disabled}. \ref{SM:SlaveModes}) (\ref{WK:auto_repair})
+	\oitem{WF}{master_controller_auto_repair} Use spare \glslink{active mode}{active} slaves to automatically repair replica sets: redeploy members on \glslink{disabled mode}{disabled} slaves to the spare slaves (\ref{WK:auto_repair}).\\
+	 (Automates administrative decision to flag a host as \glslink{disabled mode}{disabled}. \ref{SM:SlaveModes})
 \end{description}
 \subsubsection{Cluster Allocator}
 \begin{description}
@@ -636,7 +637,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 \end{description}
 \subsubsection{Miscellaneous}
 \begin{description}
-\oitem{WK}{} Provide ability to deploy --- per replica set --- administrator-defined \gls{MongoDB} configuration file templates (\ref{WK:tweak_performance_parameters}).
+\oitem{WF}{} Provide ability to deploy --- per replica set --- administrator-defined \gls{MongoDB} configuration file templates (\ref{WK:tweak_performance_parameters}).
 \end{description}
 
 \subsection{MasterSlaveProtocol}
