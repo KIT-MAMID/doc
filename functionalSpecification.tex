@@ -573,7 +573,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 	\oitem{F}{gui_set_root_data_dir} Specify \gls{root data directory} of \glspl{slave} (\ref{MC:root_data_directory}).
 	\oitem{F}{gui_set_risk_groups} \acrshort{CRUD} \glspl{risk group} (\ref{MC:spec_risk_groups}).
 	\begin{description}
-		\oitem{F}{gui_crud_risk_groups_confirm_removal} Prompt for confirmation when removing a risk group.
+		\oitem{F}{gui_crud_risk_groups_confirm_removal} Prompt for confirmation when removing a Risk Group.
 	\end{description}
 	\oitem{F}{gui_set_slave_mode} Set mode of \gls{slave} to \glslink{active mode}{active}, \glslink{maintenance mode}{maintenance} or \glslink{disabled mode}{disabled}.
 	\oitem{F}{gui_crud_replica_sets} \acrshort{CRUD} \gls{replica set} configurations (\ref{MC:replica_set_create}).
@@ -623,7 +623,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 \begin{description}
 	\oitem{F}{layout_cluster_config} Lay out the \gls{cluster} configuration, i.e. decide on a \gls{replica set} configuration
 	\begin{description}
-		\oitem{F}{master_alloc_resp_risk_groups} respecting specified \glspl{risk group} by not configuring a Replica Set with \gls{MongoDB} processes on \glspl{host} sharing the same risk group. \\Only mutually disjoint sets of risk groups are allowed (\ref{MC:spec_risk_groups}).
+		\oitem{F}{master_alloc_resp_risk_groups} respecting specified \glspl{risk group} by not configuring a Replica Set with \gls{MongoDB} processes on \glspl{host} sharing the same Risk Group. \\Only mutually disjoint sets of Risk Groups are allowed (\ref{MC:spec_risk_groups}).
 		\oitem{F}{master_alloc_resp_mode} respecting the mode of \glspl{slave}, following the behavior described in \ref{SM:SlaveModes}.
 		\oitem{F}{master_alloc_resp_pv_counts} respecting the administrator-configured number of $p$ persistent \& $v$ volatile \gls{replica set} members per \gls{replica set}, given that
 			\begin{flalign*} %align left
@@ -828,17 +828,17 @@ However, confirmation through a modal dialog is required (see above).
 \end{figure}
 The \textit{Risk Groups View} enables CRUD of \glspl{risk group} (\ref{F:gui_set_risk_groups}).
 \begin{itemize}
-	\uiel{Assignable Slaves}{section}{Slaves that are not member of a risk group.}
-	\item Subsequent sections: each represents a risk group. Can be clicked to expand \& view the the risk group members.
+	\uiel{Assignable Slaves}{section}{Slaves that are not member of a Risk Group.}
+	\item Subsequent sections: each represents a Risk Group. Can be clicked to expand \& view the the Risk Group members.
 	\begin{itemize}
-		\uiel{Trash Bin}{button}{Click to delete the risk group after confirmation (see figure below). All members of the deleted risk group are then re-added to the \textit{Assignable Slaves section}.}
+		\uiel{Trash Bin}{button}{Click to delete the Risk Group after confirmation (see figure below). All members of the deleted Risk Group are then re-added to the \textit{Assignable Slaves section}.}
 	\end{itemize}
-	\uiel{Create}{button}{Click to create a new risk group with the name entered into the text field on the left of the \textit{Create button}.}
+	\uiel{Create}{button}{Click to create a new Risk Group with the name entered into the text field on the left of the \textit{Create button}.}
 \end{itemize}
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/risk_groups_remove_confirmation}
-	\caption{The Risk Groups View prompting for confirmation on removal of a risk group}
+	\caption{The Risk Groups View prompting for confirmation on removal of a Risk Group}
 	\label{subsec:ui:risk_groups_removal_confirmation}
 \end{figure}
 
@@ -920,7 +920,7 @@ Unless explicitly stated, the \acrshort{gui}'s \textit{Overview} page is always 
 		\item The \gls{administrator} navigates to the \textit{Slaves View} in the \hyperref[SM:GUI]{GUI}.
 		\item The \gls{administrator} adds the slave $S$ on $M$ using the \textit{Add Slave View}.
 		\item The \gls{administrator} navigates to the \textit{Risk Groups View}.
-		\item The \gls{administrator} assigns the slave to the correct risk group.
+		\item The \gls{administrator} assigns the slave to the correct Risk Group.
 		\item The \gls{administrator} navigates to the \textit{Slaves View} in the \hyperref[SM:GUI]{GUI}.
 		\item The \gls{administrator} selects $S$ and sets it from \gls{disabled mode} to \gls{active mode}.
 	\end{itemize}
@@ -1087,14 +1087,14 @@ Unless explicitly stated, the \acrshort{gui}'s \textit{Overview} page is always 
 \testsequence
 [\ref{F:gui_set_risk_groups}, \ref{F:master_api_crud_risk_groups}]
 {
-	The administrator wants to model a shared risk of failure between several \glspl{slave} through risk groups.
+	The administrator wants to model a shared risk of failure between several \glspl{slave} through Risk Groups.
 }
 {
 	\begin{itemize}
 		\item The \gls{administrator} navigates to the \textit{Risk Groups View} (\ref{subsec:ui:risk_groups_crud}).
-		\item The \gls{administrator} creates a new risk group as described in \ref{subsec:ui:risk_groups_crud}.
-		\item The empty risk group appears in the \textit{Risk Groups View}.
-		\item The drop-down menu used to assign a slave to a risk group in the \textit{Risk Groups View}'s \textit{Assignable Slaves section} contains the new risk group.
+		\item The \gls{administrator} creates a new Risk Group as described in \ref{subsec:ui:risk_groups_crud}.
+		\item The empty Risk Group appears in the \textit{Risk Groups View}.
+		\item The drop-down menu used to assign a slave to a Risk Group in the \textit{Risk Groups View}'s \textit{Assignable Slaves section} contains the new Risk Group.
 	\end{itemize}
 }
 
@@ -1102,7 +1102,7 @@ Unless explicitly stated, the \acrshort{gui}'s \textit{Overview} page is always 
 \testsequence
 [\ref{F:gui_set_risk_groups}, \ref{F:master_api_crud_risk_groups}, \ref{F:gui_crud_risk_groups_confirm_removal}]
 {
-	The administrator wants to remove the risk group $G$.
+	The administrator wants to remove the Risk Group $G$.
 }
 {
 	\begin{itemize}
@@ -1110,7 +1110,7 @@ Unless explicitly stated, the \acrshort{gui}'s \textit{Overview} page is always 
 		\item The \gls{administrator} finds the section representing $G$ and clicks the corresponding \textit{trash bin button}.
 		\item The web interface presents a confirmation dialog (\ref{subsec:ui:risk_groups_removal_confirmation}).
 		\item The \gls{administrator} confirms removal of $G$ by clicking the \textit{confirmation button} (\ref{F:gui_crud_risk_groups_confirm_removal}).
-		\item The \hyperref[SM:Master]{Master} removes the risk group membership of $G$'s members and persists these changes.
+		\item The \hyperref[SM:Master]{Master} removes the Risk Group membership of $G$'s members and persists these changes.
 		\item No further reconfiguration of \gls{MongoDB} processes managed by \mamid takes place.
 		\item The \textit{Risk Groups View} presents $G$'s former members in the \textit{Assignable Slaves section}.
 	\end{itemize}
