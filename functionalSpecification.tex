@@ -742,28 +742,6 @@ The \textit{Overview View} summarizes the current state of the cluster.
 \end{figure}
 The \textit{Problems View} displays unexpected behavior and other errors detected by the \hyperref[SM:Monitor]{Monitor} (\ref{F:gui_display_errors}).
 
-\subsection{Risk Groups View}\label{subsec:ui:risk_groups_crud}
-\begin{figure}[H]
-	\centering
-	\mamidscreenshot{screenshots/risk_groups}
-	\caption{The Risk Groups View}
-\end{figure}
-The \textit{Risk Groups View} enables CRUD of \glspl{risk group} (\ref{F:gui_set_risk_groups}).
-\begin{itemize}
-	\uiel{Assignable Slaves}{section}{Slaves that are not member of a risk group.}
-	\item Subsequent sections: each represents a risk group. Can be clicked to expand \& view the the risk group members.
-	\begin{itemize}
-		\uiel{Trash Bin}{button}{Click to delete the risk group after confirmation (see figure below). All members of the deleted risk group are then re-added to the \textit{Assignable Slaves section}.}
-	\end{itemize}
-	\uiel{Create}{button}{Click to create a new risk group with the name entered into the text field on the left of the \textit{Create button}.}
-\end{itemize}
-\begin{figure}[H]
-	\centering
-	\mamidscreenshot{screenshots/risk_groups_remove_confirmation}
-	\caption{The Risk Groups View prompting for confirmation on removal of a risk group}
-	\label{subsec:ui:risk_groups_removal_confirmation}
-\end{figure}
-
 \subsection{Slaves View}\label{subsec:ui:slaves_view}
 \begin{figure}[H]
 	\centering
@@ -821,6 +799,28 @@ Clicking the wrench icon opens the slave modification UI (\ref{subsec:ui:modify_
 In the \textit{Slave View}, the user can remove the slave from the inventory by clicking the red \textit{Remove Slave} button (\ref{F:gui_crud_inventory}, \ref{F:gui_crud_inventory_confirm_removal}).
 
 However, confirmation through a modal dialog is required (see above) .
+
+\subsection{Risk Groups View}\label{subsec:ui:risk_groups_crud}
+\begin{figure}[H]
+	\centering
+	\mamidscreenshot{screenshots/risk_groups}
+	\caption{The Risk Groups View}
+\end{figure}
+The \textit{Risk Groups View} enables CRUD of \glspl{risk group} (\ref{F:gui_set_risk_groups}).
+\begin{itemize}
+	\uiel{Assignable Slaves}{section}{Slaves that are not member of a risk group.}
+	\item Subsequent sections: each represents a risk group. Can be clicked to expand \& view the the risk group members.
+	\begin{itemize}
+		\uiel{Trash Bin}{button}{Click to delete the risk group after confirmation (see figure below). All members of the deleted risk group are then re-added to the \textit{Assignable Slaves section}.}
+	\end{itemize}
+	\uiel{Create}{button}{Click to create a new risk group with the name entered into the text field on the left of the \textit{Create button}.}
+\end{itemize}
+\begin{figure}[H]
+	\centering
+	\mamidscreenshot{screenshots/risk_groups_remove_confirmation}
+	\caption{The Risk Groups View prompting for confirmation on removal of a risk group}
+	\label{subsec:ui:risk_groups_removal_confirmation}
+\end{figure}
 
 \subsection{Replica Sets View}\label{subsec:ui:replica_sets_view}
 \begin{figure}[H]
