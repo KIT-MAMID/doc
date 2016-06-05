@@ -820,7 +820,7 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 	\begin{itemize}
 		\item The \gls{administrator} navigates to the \textit{Slaves View} in the \hyperref[SM:GUI]{GUI}.
 		\item The \gls{administrator} adds the slave $S$ on $M$ using the \textit{Add Slave View}.
-		\item The \gls{administrator} navigates to the 'risk group management section'.
+		\item The \gls{administrator} navigates to the \textit{Risk Group Management Section}.
 		\item The \gls{administrator} assigns the slave to the correct risk group
 		\item The \gls{administrator} navigates to the \textit{Slaves View} in the \hyperref[SM:GUI]{GUI}.
 		\item The \gls{administrator} selects $S$ and sets it from \gls{disabled mode} to \gls{active mode}.
@@ -855,7 +855,7 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 {
 	\begin{itemize}
 		\item \hyperref[SM:NotificationManager]{NotificationManager} sends an e-mail notification to the \gls{administrator}.
-		\item \glslink{administrator}{Administrator} responds to the e-mail notification by opening the 'error reports' section in the web interface. %TODO ref
+		\item \glslink{administrator}{Administrator} responds to the e-mail notification by opening the \textit{error reports} section in the web interface. %TODO ref
 		\item \hyperref[SM:GUI]{GUI} offers to set $S$ into \glslink{maintenance mode}{maintenance} or \gls{disabled mode}.
 		\item \glslink{administrator}{Administrator} does not choose either of the options but replaces the broken cable.
 		\item \hyperref[SM:Master]{Master} reaches $S$ again.
@@ -874,7 +874,7 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 {
 	\begin{itemize}
 		\item After $S$ becomes unavailable the \hyperref[SM:NotificationManager]{NotificationManager} sends an e-mail notification to the \gls{administrator}.
-		\item \glslink{administrator}{Administrator} responds to e-mail notification by opening the 'error reports' section in web interface %TODO ref
+		\item \glslink{administrator}{Administrator} responds to e-mail notification by opening the \textit{error reports} section in web interface %TODO ref
 		\item \hyperref[SM:GUI]{GUI} offers to set $S$ into \glslink{maintenance mode}{maintenance} or \gls{disabled mode}.
 		\item \glslink{administrator}{Administrator} chooses \gls{disabled mode}.
 		\item \hyperref[SM:Master]{Master} selects a \gls{slave} $S'$ as a replacement for $S$ and communicates the appropriate configuration to $S'$
@@ -893,7 +893,7 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 }
 {
 	\begin{itemize}
-		\item The \gls{administrator} navigates to the 'slave management section' in the \hyperref[SM:GUI]{GUI}. %TODO ui ref
+		\item The \gls{administrator} navigates to the \textit{Slave Management Section} in the \hyperref[SM:GUI]{GUI}. %TODO ui ref
 		\item The \gls{administrator} selects $S$ and sets it to \gls{maintenance mode}.
 		\item The \gls{administrator} installs the security updates and reboots the machine (killing the \gls{slave} instance and all its \gls{MongoDB} instances).
 		\item The \gls{slave} process $S$ is restarted by the system's service manager after reboot.
@@ -912,8 +912,8 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 }
 {
 	\begin{itemize}
-		\item The \gls{administrator} navigates to 'replica set management section'. %TODO ref ui
-		\item The \gls{administrator} adds a new replica set $R$ using the 'add replica set form' with constraints $p$ and $v$. %TODO ref ui and testsequence
+		\item The \gls{administrator} navigates to \textit{Replica Set Management Section}. %TODO ref ui
+		\item The \gls{administrator} adds a new replica set $R$ using the \textit{Add Replica Set Form} with constraints $p$ and $v$. %TODO ref ui and testsequence
 		\item The \hyperref[SM:Master]{master} finds appropriate \glspl{slave} for hosting members of $R$ (\hyperref[SM:master_clusterallocator]{Master::ClusterAllocator}).
 		\item The \hyperref[SM:Master]{master} communicates the desired configuration to the appropriate \glspl{slave} $Z$.
 		\item The \glspl{slave} in $Z$ apply the received configuration.
@@ -925,11 +925,11 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 \testsequence
 [\ref{F:gui_crud_replica_sets}, \ref{F:master_api_crud_repl_set_config}, \ref{F:layout_cluster_config}, \ref{F:master_alloc_resp_pv_counts}, \ref{F:master_alloc_resp_mode}, \ref{F:master_alloc_communicate_config}, \ref{F:slave_control_procs}, \ref{F:slave_enforce_config}, \ref{F:msp_trans_config}]
 {
-	The \gls{administrator} wants to increase the number of volatile nodes in a replica set.
+	The \gls{administrator} wants to increase the number of volatile nodes in a replica set. Enough \glspl{slave} with sufficient free \gls{MongoDB} \hyperref[D:slave_mongod_portrange]{ports} are available.
 }
 {
 	\begin{itemize}
-		\item The \gls{administrator} navigates to 'replica set management section'. %TODO ref ui
+		\item The \gls{administrator} navigates to \textit{Replica Set Management Section}. %TODO ref ui
 		\item The \gls{administrator} selects the replica set.
 		%Sharding config server setting is not modifiable.
 		\item The \gls{administrator} increases the number of volatile nodes by 2 and applies the changes.
@@ -948,7 +948,7 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 }
 {
 	\begin{itemize}
-		\item The \gls{administrator} navigates to 'replica set management section'. %TODO ref ui
+		\item The \gls{administrator} navigates to \textit{Replica Set Management Section}. %TODO ref ui
 		\item The \gls{administrator} selects $R$ and clicks the remove button. % TODO ref testseq and ui
 		\item The \hyperref[SM:GUI]{GUI} prompts the \gls{administrator} for confirmation. %TODO missing functional requirement
 		\item The \gls{administrator} confirms the removal.
@@ -965,7 +965,7 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 }
 {
 	\begin{itemize}
-		\item The \gls{administrator} navigates to 'slave management section'.
+		\item The \gls{administrator} navigates to \textit{Slave Management Section}.
 		\item The \gls{administrator} selects a slave and clicks the edit button.
 		\item The \gls{administrator} sets the slave into maintenance mode.
 		\item The \gls{administrator} changes the hostname of the slave in the web interface.
@@ -983,7 +983,7 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 }
 {
 	\begin{itemize}
-		\item The \gls{administrator} navigates to the 'risk group management section'.
+		\item The \gls{administrator} navigates to the \textit{Risk Group Management Section}.
 		\item The \gls{administrator} adds the a new risk group using the \textit{Add Risk Group View}.
 	\end{itemize}
 }
@@ -995,7 +995,7 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 }
 {
 	\begin{itemize}
-		\item The \gls{administrator} navigates to the 'risk group management section'.
+		\item The \gls{administrator} navigates to the \textit{Risk Group Management Section}.
 		\item The \gls{administrator} removes the risk group
 	\end{itemize}
 }
