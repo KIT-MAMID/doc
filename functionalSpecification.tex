@@ -514,6 +514,9 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \ref{SM:m
 	\oitem{F}{gui_set_slave_type} Specify type of \gls{slave} (\ref{MK:available_slave_types}) upon insertion into \gls{inventory}.
 	\oitem{F}{gui_set_root_data_dir} Specify \gls{root data directory} of \glspl{slave} (\ref{MK:root_data_directory}).
 	\oitem{F}{gui_set_risk_groups} \acrshort{CRUD} \glspl{risk group} (\ref{MK:spec_risk_groups}).
+	\begin{description}
+		\oitem{F}{gui_crud_risk_groups_confirm_removal} Prompt for confirmation when removing a risk group.
+	\end{description}
 	\oitem{F}{gui_set_slave_mode} Set mode of \gls{slave} to \glslink{active mode}{active}, \glslink{maintenance mode}{maintenance} or \glslink{disabled mode}{disabled}.
 	\oitem{F}{gui_crud_replica_sets} \acrshort{CRUD} \gls{replica set} configurations (\ref{MK:replica_set_create}).
 	\begin{description}
@@ -1014,7 +1017,7 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 
 \oitem{TS}{} Remove Risk Group
 \testsequence
-[\ref{F:gui_set_risk_groups}, \ref{F:master_api_crud_risk_groups}]
+[\ref{F:gui_set_risk_groups}, \ref{F:master_api_crud_risk_groups}, \ref{F:gui_crud_risk_groups_confirm_removal}]
 {
 	The administrator wants to remove the risk group $G$.
 }
@@ -1023,7 +1026,7 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 		\item The \gls{administrator} navigates to the \textit{Risk Groups View} (\ref{subsec:ui:risk_groups_crud}).
 		\item The \gls{administrator} finds the section representing $G$ and clicks the corresponding \textit{trash bin button}.
 		\item The web interface presents a confirmation dialog (\ref{subsec:ui:risk_groups_removal_confirmation}).
-		\item The \gls{administrator} confirms removal of $G$ by clicking the \textit{confirmation button}.
+		\item The \gls{administrator} confirms removal of $G$ by clicking the \textit{confirmation button} (\ref{F:gui_crud_risk_groups_confirm_removal}).
 		\item The \hyperref[SM:Master]{Master} removes the risk group membership of $G$'s members and persists these changes.
 		\item No further reconfiguration of \gls{MongoDB} processes managed by \mamid takes place.
 		\item The \textit{Risk Groups View} presents $G$'s former members in the \textit{Assignable Slaves section}.
