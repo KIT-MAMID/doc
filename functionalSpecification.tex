@@ -470,62 +470,90 @@ If \ref{WK:auto_repair} is implemented the state change \textit{unknown} $\right
 
 \section{Product Data}\label{ProductData}
 
-\subsection{Inventory (contains slaves)}\label{D:Inventory}
+\subsection{Data}
+
+\subsubsection{Slaves}\label{D:Inventory}
 % hostname(PRIMARY KEY) | slaveport | mongod-portrange | persistent/volatile | root data directory | mode (active, maint, disabled)
 
 List of tuples containing the following data
 
 \begin{description}
-	\oitem{D}{} hostname
-	\oitem{D}{} \gls{slave} port $\in \mathbb{N}$
-	\oitem{D}{slave_mongod_portrange} mongod-port range $\in \{{[i, j]} \mid i,j \in \mathbb{N}\}$ (also specifies how many mongod instances may run on the slave)
-	\oitem{D}{} persistence $\in \{\text{\glslink{persistent storage}{persistent}}, \text{\glslink{volatile storage}{volatile}}\}$
-	\oitem{D}{} \gls{root data directory}
-	\oitem{D}{} mode $\in \{\text{\glslink{active mode}{active}}, \text{\glslink{maintenance mode}{maintenance}}, \text{\glslink{disabled mode}{disabled}}\}$
+	\oitem{D}{} hostname\\
+			 The hostname of the \gls{slave}. Must be resolvable from all cluster hosts.
+	\oitem{D}{} slave port $\in \mathbb{N}$\\
+			The port where the \gls{slave} process listens for connections from the \gls{master}.
+	\oitem{D}{slave_mongod_portrange} mongod-port range $\in \{{[i, j]} \mid i,j \in \mathbb{N} \land i < j\}$\\
+			 Port range reserved for MongoDB processes spawned by the slave process.\\
+			 Depending on the host operating system, this may be restricted to ports $i \geq 1024$.\\
+			 Also, implicitly specifies how many \gls{MongoDB} instances may run on the host.
+	\oitem{D}{} \gls{root data directory}\\
+			 Base directory holding all files of a \gls{slave} and its \gls{MongoDB} instances
+	\oitem{D}{inv_persistence} persistence $\in \{\text{\glslink{persistent storage}{persistent}}, \text{\glslink{volatile storage}{volatile}}\}$\\
+			 Specifies whether the \gls{root data directory} is backed by \glslink{persistent storage}{persistent} or \glslink{volatile storage}{volatile} storage.
+	\oitem{D}{} mode $\in \{\text{\glslink{active mode}{active}}, \text{\glslink{maintenance mode}{maintenance}}, \text{\glslink{disabled mode}{disabled}}, \text{\hyperref[SM:SlaveModes]{unknown}}\}$\\
+			  Described in detail in \ref{SM:SlaveModes}.
 \end{description}
 
-\subsection{Replica Set Configuration}
+\subsubsection{Replica Set Configuration}
 %----------------------------- ADMIN SETTABLE ------------------------------------------------------------  ---Allocator settable--  
 % replset | p = num of persistent slaves | v = num of volatile slaves | sharding config server (true|false) | p+v mongod processes 
 List of tuples containing the following data
 
 \begin{description}
-	\oitem{D}{} \gls{replica set} name
-	\oitem{D}{} number of \glslink{persistent storage}{persistent} slaves $p$
-	\oitem{D}{} number of \glslink{volatile storage}{volatile} slaves $v$
-	\oitem{D}{} \gls{sharding} configuration server $\in \{\text{true}, \text{false}\}$
-	\oitem{D}{} member mongod processes (list of $p+v$)
+	\oitem{D}{} \gls{replica set} name\\
+			  Name of the replica set. Unique among all replica sets deployed in the cluster.
+	\oitem{D}{} number of \glslink{persistent storage}{persistent} slaves $p$\\
+			  Required number of members (MongoDB processes) with persistently stored data (\ref{D:inv_persistence}).
+	\oitem{D}{} number of \glslink{volatile storage}{volatile} slaves $v$\\
+  			  Required number of members (MongoDB processes) with volatilely stored data (\ref{D:inv_persistence}).
+	\oitem{D}{} \gls{sharding} configuration server $\in \{\text{true}, \text{false}\}$\\
+			  If $\textit{true}$, specifies that the configuration of the replica set must be compatible with the requirements host a \gls{MongoDB} \glslink{sharding}{sharding config server}.
+	\oitem{D}{} member mongod processes (list of length $p+v$)\\
+			  Only managed by \hyperref[SM:Master]{Master}, used to track the members of the replica set.
 \end{description}
 
-\subsection{MongoDB processes}
+\subsubsection{MongoDB processes}
 %(hostname | port != slaveport) PRIMARY KEY
-List of tuples containing the following data
+List of tuples describing all MongoDB processes the \hyperref[SM:Master]{Master} is managing in the cluster.
 
 \begin{description}
-	\oitem{D}{} hostname
-	\oitem{D}{} port
+	\oitem{D}{} hostname\\
+			  The hostname of the machine the process is running on.
+	\oitem{D}{} port\\
+			  The port where the process listens for connections.
+	\oitem{D}{} parent replica set\\
+			  The replica set the process belongs to.
 \end{description}
 
-\subsection{Risk Groups}
+\subsubsection{Risk Groups}
 \begin{description}
 	\oitem{D}{} Mutually disjoint sets of \glspl{slave}. Membership of two \glspl{slave} in the same set denotes a shared risk of failure.
 \end{description}
 
-\subsection{Notification Contacts}
-List containing the following data
+\subsubsection{Notification Contacts}
+Contact list for problem notifications.
 \begin{description}
-	\oitem{D}{} e-mail address
+	\oitem{D}{} List of e-mail addresses.
 \end{description}
 
-\section{Product Data Consistencies}
+\subsection{Data Consistencies}
 
 \begin{description}
-	%Ports
-	\oitem{DC}{} The port of a mongod process must be inside the mongod-portrange of the slave it is running on
-	\oitem{DC}{} The combination of mongod hostname and mongod port must be unique
-	\oitem{DC}{} The slave port must not be inside the mongod-portrange
+	% Foreign keys
+	\oitem{DC}{} There is a $1:n$ relationship between replica sets and MongoDB processes ($n \in \mathbb{N}$).
+	\oitem{DC}{} There is a $m:n$ relationship between slaves and MongoDB processes ($m,n \in \mathbb{N}$).
+	
+	%Relationship Mongod <-> host
+	\oitem{DC}{} A MongoDB process's \textit{hostname} is the hostname of the \textit{slave} it is running on.
+	\oitem{DC}{} A MongoDB process's $\textit{port} \in \text{mongod-port range}$ of the \textit{slave} it is running on.
+	\oitem{DC}{} A tuple of MongoDB (\textit{hostname, port}) must be unique in the list of MongoDB processes.
+	\oitem{DC}{} A \textit{slave} port must not be $\in \text{its mongod-portrange}$. 
+	
+	% Risk groups
+	\oitem{DC}{} Risk Groups must only contain \glspl{slave} (e.g. identified by their \textit{hostname}) that are defined in the \gls{inventory}.
+	
 	%Arbiters
-	\oitem{DC}{} The number of nodes $p+v$ in a replica set must be odd unless \ref{WK:deploy_arbiters} is implemented
+	\oitem{DC}{} The number of nodes $p+v$ in a replica set must be odd unless \hyperref[WK:deploy_arbiters]{automatic arbiters} are implemented.
 \end{description}
 
 
