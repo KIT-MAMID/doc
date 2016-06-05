@@ -763,33 +763,51 @@ Clicking the wrench icon opens the slave modification UI (\ref{subsec:ui:modify_
 	\mamidscreenshot{screenshots/new_slave}
 	\caption{New Slave Wizard}
 \end{figure}
-% TODO
+In the \textit{Add Slave Wizard} the user can add a new \gls{slave} with the specified options to the \gls{inventory}.
 \subsubsection{Modifying a Slave}\label{subsec:ui:modify_slave}
-% TODO general stuff about modifying slaves
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/slave_edit_active.png}
 	\caption{The Slave View with a slave in 'active' state}
 \end{figure}
-%TODO active slave specific stuff
+In the \textit{Slave View} the user can modify the options of a slave and set it into the desired state. Depending on the state different options are available (see following figures).
+
+In \gls{active mode} the user can set the slave into
+\begin{itemize}
+	\item \gls{maintenance mode}
+	\item \gls{disabled mode}
+\end{itemize}
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/slave_edit_unknown.png}
 	\caption{The Slave View with a slave in 'unknown' state}
 \end{figure}
-%TODO unknown state slave specific stuff
+In unknown mode the user can set the slave into
+\begin{itemize}
+	\item \gls{maintenance mode}
+	\item \gls{disabled mode}
+\end{itemize}
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/slave_edit_maintenance}
 	\caption{The Slave View with a slave in 'maintenance mode'}
 \end{figure}
-%TODO maintenance slave specific stuff
+In \gls{maintenance mode} the user can set the slave into
+\begin{itemize}
+	\item \gls{active mode}
+	\item \gls{disabled mode}
+\end{itemize}
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/slave_edit_disabled.png}
 	\caption{The Slave View with a slave in 'disabled' state}
 \end{figure}
-%TODO disabled slave specific stuff
+In \gls{disabled mode} the user can set the slave into
+\begin{itemize}
+	\item \gls{active mode}
+	\item \gls{maintenance mode}
+\end{itemize}
+and also remove the slave (see \ref{subsec:ui:remove_slave}).
 \subsubsection{Removing a Slave}\label{subsec:ui:remove_slave}
 \begin{figure}[H]
 	\centering
