@@ -46,8 +46,7 @@ $(SCREENSHOTS): %.png: screenshots
 	@if [ "$(notdir $(basename $@))" = "slave_edit_maintenance" ]; 			then $(call CUTYCAPT,"/slave/mksuns11/edit/maintenance","$@","0"); fi;
 	@if [ "$(notdir $(basename $@))" = "slave_edit_disabled" ]; 			then $(call CUTYCAPT,"/slave/mksuns11/edit/disabled","$@","0"); fi;
 	@if [ "$(notdir $(basename $@))" = "risk_groups" ]; 				then $(call CUTYCAPT,"/riskgroups","$@","0"); fi;
-	# TODO temporary url, use actual implementation, i.e. change url to something like /riskgroup/cabineta/edit/delete#modal
-	@if [ "$(notdir $(basename $@))" = "risk_groups_remove_confirmation" ]; 				then $(call CUTYCAPT,"/riskgroups","$@","0"); fi;
+	@if [ "$(notdir $(basename $@))" = "risk_groups_remove_confirmation" ]; 	then $(call CUTYCAPT,"/riskgroups#modal","$@","200"); fi;
 	@if [ "$(notdir $(basename $@))" = "replica_sets" ]; 				then $(call CUTYCAPT,"/replicasets","$@","0"); fi;
 	@if [ "$(notdir $(basename $@))" = "replica_set_overview_degraded" ]; 		then $(call CUTYCAPT,"/replicaset/meteorologic_data/edit/degraded","$@","0"); fi;
 	@if [ "$(notdir $(basename $@))" = "replica_set_overview_active" ]; 		then $(call CUTYCAPT,"/replicaset/meteorologic_data/edit/active","$@","0"); fi;
