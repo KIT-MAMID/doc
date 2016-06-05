@@ -679,13 +679,27 @@ The \textit{Overview} page summarizes the current state of the cluster.
 \end{figure}
 The \textit{Problems View} displays unexpected behavior and other errors detected by the \hyperref[SM:Monitor]{Monitor} (\ref{F:gui_display_errors}).
 
-\subsection{Risk Groups View}
+\subsection{Risk Groups View}\label{subsec:ui:risk_groups_crud}
 \begin{figure}[H]
 	\centering
 	\mamidscreenshot{screenshots/risk_groups}
 	\caption{The Risk Groups View}
 \end{figure}
 The \textit{Risk Groups View} enables CRUD of \glspl{risk group} (\ref{F:gui_set_risk_groups}).
+\begin{itemize}
+	\uiel{Assignable Slaves}{section}{Slaves that are not member of a risk group.}
+	\item Subsequent sections: each represents a risk group. Can be clicked to expand \& view the the risk group members.
+	\begin{itemize}
+		\uiel{Trash Bin}{button}{Click to delete the risk group after confirmation (see below), yielding all members back to the \textit{Assignable Slaves section}.}
+	\end{itemize}
+	\uiel{Create}{button}{Click to create a new risk group with the (unique) name of textfield's contents at the left.}
+\end{itemize}
+\begin{figure}[H]
+	\centering
+	\mamidscreenshot{screenshots/risk_groups_remove_confirmation}
+	\caption{The Risk Groups View prompting for confirmation on removal of a risk group}
+	\label{subsec:ui:risk_groups_removal_confirmation}
+\end{figure}
 
 \subsection{Slaves View}\label{subsec:ui:slaves_view}
 \begin{figure}[H]
@@ -984,11 +998,14 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 \testsequence
 [\ref{F:gui_set_risk_groups}, \ref{F:master_api_crud_risk_groups}]
 {
+	The administrator wants to model a shared risk of failure between several \glspl{slave} through risk groups.
 }
 {
 	\begin{itemize}
-		\item The \gls{administrator} navigates to the \textit{Risk Group Management Section}.
-		\item The \gls{administrator} adds the a new risk group using the \textit{Add Risk Group View}.
+		\item The \gls{administrator} navigates to the \textit{Risk Groups View} (\ref{subsec:ui:risk_groups_crud}).
+		\item The \gls{administrator} creates a new risk group as described in \ref{subsec:ui:risk_groups_crud}.
+		\item The empty risk group appears in the \textit{Risk Groups View}.
+		\item The drop-down menu used to assign a slave to a risk group in the \textit{Risk Groups View}'s \textit{Assignable Slaves section} contains the new risk group.
 	\end{itemize}
 }
 
@@ -996,11 +1013,17 @@ Unless explicitly stated, the \acrshort{gui}'s home page is always opened in the
 \testsequence
 [\ref{F:gui_set_risk_groups}, \ref{F:master_api_crud_risk_groups}]
 {
+	The administrator wants to remove the risk group $G$.
 }
 {
 	\begin{itemize}
-		\item The \gls{administrator} navigates to the \textit{Risk Group Management Section}.
-		\item The \gls{administrator} removes the risk group
+		\item The \gls{administrator} navigates to the \textit{Risk Groups View} (\ref{subsec:ui:risk_groups_crud}).
+		\item The \gls{administrator} finds the section representing $G$ and clicks the corresponding \textit{trash bin button}.
+		\item The web interface presents a confirmation dialog (\ref{subsec:ui:risk_groups_removal_confirmation}).
+		\item The \gls{administrator} confirms removal of $G$ by clicking the \textit{confirmation button}.
+		\item The \hyperref[SM:Master]{Master} removes the risk group membership of $G$'s members and persists these changes.
+		\item No further reconfiguration of \gls{MongoDB} processes managed by \mamid takes place.
+		\item The \textit{Risk Groups View} presents $G$'s former members in the \textit{Assignable Slaves section}.
 	\end{itemize}
 }
 

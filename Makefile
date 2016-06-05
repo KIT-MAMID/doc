@@ -14,7 +14,7 @@ CUTYCAPT=$(XVFB_RUN) $(CUTYCAPT_BIN) --delay=$(3) --zoom=1.25 --min-width=1600 -
 # Internal vars (extend as needed)
 UMLET_PDFS = module_overview.pdf state_diagram.pdf cluster_layout.pdf hardware_layout.pdf
 
-SCREENSHOTS = dashboard slaves problems slave_edit_unknown slave_edit_active slave_edit_maintenance slave_edit_disabled risk_groups replica_sets replica_set_overview_degraded replica_set_overview_active new_slave new_replica_set slave_remove replica_set_remove
+SCREENSHOTS = dashboard slaves problems slave_edit_unknown slave_edit_active slave_edit_maintenance slave_edit_disabled risk_groups risk_groups_remove_confirmation replica_sets replica_set_overview_degraded replica_set_overview_active new_slave new_replica_set slave_remove replica_set_remove 
 SCREENSHOTS := $(addprefix screenshots/,$(SCREENSHOTS))
 SCREENSHOTS := $(addsuffix .png,$(SCREENSHOTS))
 
@@ -46,6 +46,8 @@ $(SCREENSHOTS): %.png: screenshots
 	@if [ "$(notdir $(basename $@))" = "slave_edit_maintenance" ]; 			then $(call CUTYCAPT,"/slave/mksuns11/edit/maintenance","$@","0"); fi;
 	@if [ "$(notdir $(basename $@))" = "slave_edit_disabled" ]; 			then $(call CUTYCAPT,"/slave/mksuns11/edit/disabled","$@","0"); fi;
 	@if [ "$(notdir $(basename $@))" = "risk_groups" ]; 				then $(call CUTYCAPT,"/riskgroups","$@","0"); fi;
+	# TODO temporary url, use actual implementation, i.e. change url to something like /riskgroup/cabineta/edit/delete#modal
+	@if [ "$(notdir $(basename $@))" = "risk_groups_remove_confirmation" ]; 				then $(call CUTYCAPT,"/riskgroups","$@","0"); fi;
 	@if [ "$(notdir $(basename $@))" = "replica_sets" ]; 				then $(call CUTYCAPT,"/replicasets","$@","0"); fi;
 	@if [ "$(notdir $(basename $@))" = "replica_set_overview_degraded" ]; 		then $(call CUTYCAPT,"/replicaset/meteorologic_data/edit/degraded","$@","0"); fi;
 	@if [ "$(notdir $(basename $@))" = "replica_set_overview_active" ]; 		then $(call CUTYCAPT,"/replicaset/meteorologic_data/edit/active","$@","0"); fi;
