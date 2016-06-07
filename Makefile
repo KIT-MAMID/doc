@@ -7,12 +7,12 @@ MAKEGLOSSARIES ?= makeglossaries
 XVFB_RUN ?= `which xvfb-run` -a --server-args="-screen 0, 1920x1080x24"
 CUTYCAPT_BIN ?= `which cutycapt`
 SCREENSHOTS_BASE_URL ?=http://127.0.0.1:5000
-SVG2PDF_BIN ?= `which rsvg-convert` 
+INKSCAPE_BIN ?= `which inkscape`
 
 # Internal commands
 UMLET_CONVERT = $(JAVA) -jar $(UMLET_JAR) -action=convert -format=pdf -filename=$(1) -output=$(2)
 CUTYCAPT=$(XVFB_RUN) $(CUTYCAPT_BIN) --delay=$(3) --zoom=1.25 --min-width=1600 --min-height=1200 --user-style-string="html, body { max-height: 1200px; overflow: hidden;}" --url=$(SCREENSHOTS_BASE_URL)$(1) --out=$(2)
-SVG2PDF = $(SVG2PDF_BIN) -f pdf -o $(2) $(1)
+SVG2PDF = $(INKSCAPE_BIN) -A $(2) $(1)
 
 # Internal vars (extend as needed)
 UMLET_PDFS = module_overview.pdf state_diagram.pdf cluster_layout.pdf hardware_layout.pdf
