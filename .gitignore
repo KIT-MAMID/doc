@@ -16,6 +16,7 @@
 # *.eps
 /*.pdf
 assets/cluster_hw_stepwise/*.pdf
+assets/xkcd1289.png
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl

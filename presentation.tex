@@ -21,23 +21,39 @@
 	\begin{frame}{Requirements Elicitation}
 		MongoDB Database Cluster
 		\begin{itemize}
-			\item Replica Sets
-			\item low maintenance effort
-			\item volatile storage
-			\item physical interdependencies
-			\item automation
-			\item monitoring
+			\item<2-> Replica Sets
+			\item<3-> low maintenance effort
+			\item<4-> volatile storage
+			\item<5-> physical interdependencies
+			\item<6-> automation
+			\item<7-> monitoring
 		\end{itemize}
 	\end{frame}
 	
 	
 	\begin{frame}{Requirements Analysis}
-		\begin{itemize}
-			\item descriptive approach
-			\item automatic cluster layout
-			\item automatic deployment
-			\item continuous monitoring
-		\end{itemize}
+		\begin{columns}
+			\begin{column}{0.5\linewidth}
+				Features
+				\pause
+				\begin{itemize}
+					\item<2-> declarative approach
+					\item<3-> automatic cluster layout
+					\item<4-> automatic deployment
+					\item<5-> continuous monitoring
+				\end{itemize}
+			\end{column}
+			\begin{column}{0.5\linewidth}
+				\onslide<6->{Demarcation}
+				\begin{itemize}
+					\item<7-> no manual configuration
+					\item<8-> only MongoDB
+					\item<9-> no Sharding$^*$
+				\end{itemize}
+				\vspace{1.5em} % dirty hacks
+			\end{column}
+		\end{columns}
+
 	\end{frame}
 	
 	\begin{frame}<4>[label=screenshots]
