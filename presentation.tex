@@ -5,6 +5,7 @@
 \usetheme{default}
 \usecolortheme{beaver}
 \usepackage{url}
+\usepackage[export]{adjustbox}
 
 \begin{document}
 	\author{Niklas Fuhrberg, Anton Schirg,\\ Christian Schwarz, Janis Streib, Bob Weinand}
@@ -59,9 +60,9 @@
 	\begin{frame}<4>[label=screenshots]
 		\frametitle{Walkthrough}
 		\begin{center}
-			\only<1>{\includegraphics[height=0.8\textheight]{screenshots/new_slave}}
-			\only<2>{\includegraphics[height=0.8\textheight]{screenshots/risk_groups}}
-			\only<3>{\includegraphics[height=0.8\textheight]{screenshots/new_replica_set}}
+			\only<1>{\includegraphics[height=0.8\textheight,frame]{screenshots/new_slave}}
+			\only<2>{\includegraphics[height=0.8\textheight,frame]{screenshots/risk_groups}}
+			\only<3>{\includegraphics[height=0.8\textheight,frame]{screenshots/new_replica_set}}
 		\end{center}
 	\end{frame}
 	
@@ -94,22 +95,22 @@
 		\frametitle{Failure Scenario: Power Supply Outage}
 		\only<2>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step7}}
 		\only<3>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step8}}
-		\only<4>{\centering \includegraphics[height=0.8\textheight]{screenshots/dashboard}}
-		\only<5>{\centering \includegraphics[height=0.8\textheight]{screenshots/slave_edit_unknown}}
-		\only<6>{\centering \includegraphics[height=0.8\textheight]{screenshots/replica_set_overview_degraded}}
+		\only<4>{\centering \includegraphics[height=0.8\textheight,frame]{screenshots/dashboard}}
+		\only<5>{\centering \includegraphics[height=0.8\textheight,frame]{screenshots/slave_edit_unknown}}
+		\only<6>{\centering \includegraphics[height=0.8\textheight,frame]{screenshots/replica_set_overview_degraded}}
 		\only<7>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step8}}
 		\only<8>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step9}}
 		\only<9>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step10}}
 		\only<10>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step11}}
 		\only<11>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step7}}
-		\only<12>{\centering \includegraphics[height=0.8\textheight]{screenshots/slave_edit_active}}
-		\only<13>{\centering \includegraphics[height=0.8\textheight]{screenshots/replica_set_overview_active}}
+		\only<12>{\centering \includegraphics[height=0.8\textheight,frame]{screenshots/slave_edit_active}}
+		\only<13>{\centering \includegraphics[height=0.8\textheight,frame]{screenshots/replica_set_overview_active}}
 	\end{frame}
 	
 	\begin{frame}{Questions?}
 		\centering
 		\begin{figure}
-			\includegraphics[height=0.7\textheight]{assets/xkcd1289}
+			\includegraphics[height=0.7\textheight,frame]{assets/xkcd1289}
 			\caption{\tiny Randall Munroe | CC BY-NC 2.5 | \url{https://xkcd.com/1289}}
 		\end{figure}
 		
