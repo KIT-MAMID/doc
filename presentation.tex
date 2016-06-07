@@ -1,22 +1,79 @@
-\documentclass[11pt]{beamer}
+\documentclass[11pt,aspectratio=169]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{graphicx}
 \usetheme{default}
 \usecolortheme{beaver}
 
+
 \begin{document}
-	%\author{}
-	%\title{}
-	%\subtitle{}
+	\author{Niklas Fuhrberg, Anton Schirg,\\ Christian Schwarz, Janis Streib, Bob Weinand}
+	\title{MAMID}
+	\subtitle{Monitor and Manager for In-Memory Databases\\Functional Specification}
 	%\logo{}
-	%\institute{}
-	%\date{}
-	%\subject{}
+	\institute{\textbf{Supervisor}\\Dr. Marek Szuba\\SCC}
+	\date{8 June 2016}
+	\subject{Functional Specification}
 	%\setbeamercovered{transparent}
 	%\setbeamertemplate{navigation symbols}{}
 	\frame[plain]{\maketitle}
 	
-	\begin{frame}
-		\frametitle{}
+	\begin{frame}{Requirements Elicitation}
+		\begin{itemize}
+			\item low maintenance effort
+			\item volatile storage
+			\item physical interdependencies
+			\item automation
+			\item monitoring
+		\end{itemize}
 	\end{frame}
+	
+	
+	\begin{frame}{Requirements Analysis}
+		\begin{itemize}
+			\item descriptive approach
+			\item automatic layout
+			\item automatic deployment
+			\item continous monitoring
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}<4>[label=screenshots]
+		\frametitle{Walkthrough}
+		\begin{center}
+			\only<1>{\includegraphics[height=0.8\textheight]{screenshots/new_slave}}
+			\only<2>{\includegraphics[height=0.8\textheight]{screenshots/risk_groups}}
+			\only<3>{\includegraphics[height=0.8\textheight]{screenshots/new_replica_set}}
+		\end{center}
+	\end{frame}
+	
+	\begin{frame}<8>[label=hwlayout]
+		\frametitle{Walkthrough}
+			\only<1>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step1}}
+			\only<2>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step2}}
+			\only<3>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step3}}
+			\only<4>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step4}}
+			\only<5>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step5}}
+			\only<6>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step6}}
+			\only<7>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step7}}
+			%dirty hack: repeat to avoid second blank slide
+			\only<8>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step2}}
+	\end{frame}
+	
+	\againframe<1>{screenshots}
+	\againframe<2>{hwlayout}
+	\againframe<3>{hwlayout}
+	\againframe<2>{screenshots}
+	\againframe<3>{hwlayout}
+	\againframe<4>{hwlayout}
+	\againframe<3>{screenshots}
+	\againframe<4>{hwlayout}
+	\againframe<5>{hwlayout}
+	\againframe<6>{hwlayout}
+	\againframe<7>{hwlayout}
+	
+	\begin{frame}
+		The end.
+	\end{frame}
+	
 \end{document}
