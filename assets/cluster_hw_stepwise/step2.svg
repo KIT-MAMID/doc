@@ -705,13 +705,10 @@
          id="path5632"
          style="fill:none" />
     </g>
-  </g>
-  <g
-     style="display:none"
-     id="layer4">
     <g
        transform="translate(40,490)"
-       id="g5318">
+       id="g5318"
+       style="display:inline">
       <rect
          x="0.5"
          width="128.5"
@@ -729,29 +726,19 @@
          id="text5322"
          style="font-size:14px;font-family:sans-serif;stroke:none">Master</text>
     </g>
-    <g
-       transform="translate(270,490)"
-       id="g5548">
-      <rect
-         x="0.5"
-         width="208.5"
-         height="48.5"
-         y="0.5"
-         clip-path="url(#clipPath11)"
-         id="rect5550"
-         style="fill:none" />
-      <text
-         x="85"
-         font-size="14px"
-         y="30.054701"
-         clip-path="url(#clipPath11)"
-         xml:space="preserve"
-         id="text5552"
-         style="font-size:14px;font-family:sans-serif;stroke:none">Slave</text>
-    </g>
+    <rect
+       x="0.5"
+       width="208.5"
+       height="48.5"
+       y="0.5"
+       clip-path="url(#clipPath11)"
+       id="rect5550"
+       style="display:inline;fill:none"
+       transform="translate(270,490)" />
     <g
        transform="translate(860,490)"
-       id="g5408">
+       id="g5408"
+       style="display:inline">
       <rect
          x="0.5"
          width="98.5"
@@ -771,7 +758,8 @@
     </g>
     <g
        transform="translate(740,490)"
-       id="g5438">
+       id="g5438"
+       style="display:inline">
       <rect
          x="0.5"
          width="98.5"
@@ -791,7 +779,8 @@
     </g>
     <g
        transform="translate(620,490)"
-       id="g5468">
+       id="g5468"
+       style="display:inline">
       <rect
          x="0.5"
          width="98.5"
@@ -811,7 +800,8 @@
     </g>
     <g
        transform="translate(500,490)"
-       id="g5590">
+       id="g5590"
+       style="display:inline">
       <rect
          x="0.5"
          width="98.5"
@@ -831,7 +821,8 @@
     </g>
     <g
        transform="translate(1100,490)"
-       id="g5348">
+       id="g5348"
+       style="display:inline">
       <rect
          x="0.5"
          width="98.5"
@@ -851,7 +842,8 @@
     </g>
     <g
        transform="translate(980,490)"
-       id="g5378">
+       id="g5378"
+       style="display:inline">
       <rect
          x="0.5"
          width="98.5"
@@ -869,6 +861,23 @@
          id="text5382"
          style="font-size:14px;font-family:sans-serif;stroke:none">Slave</text>
     </g>
+    <g
+       transform="translate(270,490)"
+       id="g5548"
+       style="display:inline">
+      <text
+         x="85"
+         font-size="14px"
+         y="30.054701"
+         clip-path="url(#clipPath11)"
+         xml:space="preserve"
+         id="text5552"
+         style="font-size:14px;font-family:sans-serif;stroke:none">Slave</text>
+    </g>
+  </g>
+  <g
+     style="display:inline"
+     id="layer4">
     <g
        transform="translate(980,490)"
        id="g5374"
@@ -1840,4 +1849,29 @@
          style="fill:none" />
     </g>
   </g>
+  <g
+     style="display:none"
+     id="layer9">
+    <rect
+       transform="translate(490,400)"
+       style="display:inline;fill:#161c1f;fill-opacity:0.61290325;stroke:none;stroke-opacity:0.09800002"
+       id="rect7923"
+       clip-path="url(#clipPath3)"
+       y="0.5"
+       height="358.5"
+       width="358.5"
+       x="0.5" />
+    <flowRoot
+       transform="matrix(0.30090136,0,0,0.30090136,397.79952,403.85541)"
+       style="font-style:normal;font-weight:normal;font-size:168.66830444px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="flowRoot7927"
+       xml:space="preserve"><flowRegion
+         id="flowRegion7929"><rect
+           style="fill:#ffffff;fill-opacity:1"
+           y="459.37958"
+           x="534.82483"
+           height="703.91278"
+           width="1029.2507"
+           id="rect7931" /></flowRegion><flowPara
+         id="flowPara7933">&lt;down&gt;</flowPara></flowRoot>  </g>
 </svg>
