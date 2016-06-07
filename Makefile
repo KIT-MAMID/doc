@@ -28,7 +28,11 @@ CLUSTER_HW_STEPWISE := $(addprefix assets/cluster_hw_stepwise/step,$(CLUSTER_HW_
 CLUSTER_HW_STEPWISE := $(addsuffix .pdf,$(CLUSTER_HW_STEPWISE))
 
 # Targets
-all: $(SCREENSHOTS) $(UMLET_PDFS)
+.PHONY:
+all: functionalSpecification.pdf presentation.pdf
+	
+	
+functionalSpecification.pdf: $(SCREENSHOTS) $(UMLET_PDFS) functionalSpecification.tex
 	$(PDFLATEX) functionalSpecification.tex
 	$(MAKEGLOSSARIES) functionalSpecification
 	$(PDFLATEX) functionalSpecification.tex
@@ -37,7 +41,7 @@ all: $(SCREENSHOTS) $(UMLET_PDFS)
 fast: $(SCREENSHOTS) $(UMLET_PDFS)
 	$(PDFLATEX) functionalSpecification.tex
 
-presentation.pdf: $(CLUSTER_HW_STEPWISE) $(SCREENSHOTS) assets/xkcd1289.png | presentation.tex
+presentation.pdf: $(CLUSTER_HW_STEPWISE) $(SCREENSHOTS) assets/xkcd1289.png presentation.tex
 	$(PDFLATEX) presentation.tex
 
 # Assets
@@ -88,10 +92,27 @@ clean: clean_screenshots
 	rm -f functionalSpecification.glg
 	rm -f functionalSpecification.log
 	rm -f glossary.aux
+	rm -f presentation.pdf
+	rm -f presentation.aux
+	rm -f presentation.glo
+	rm -f presentation.gls
+	rm -f presentation.out
+	rm -f presentation.toc
+	rm -f presentation.glsdefs
+	rm -f presentation.ist
+	rm -f presentation.glg
+	rm -f presentation.log
+
+	rm -f assets/xkcd1289.png
 
 	$(foreach pdf,$(UMLET_PDFS), \
 		rm -f $(pdf); \
 	)
+
+	$(foreach pdf,$(CLUSTER_HW_STEPWISE), \
+		rm -f $(pdf); \
+	)
+
 	rm -f module_overview.pdf
 
 clean_screenshots:
