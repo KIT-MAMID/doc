@@ -35,7 +35,7 @@ all: $(SCREENSHOTS) $(UMLET_PDFS)
 fast: $(SCREENSHOTS) $(UMLET_PDFS)
 	$(PDFLATEX) functionalSpecification.tex
 
-presentation.pdf: $(CLUSTER_HW_STEPWISE) $(SCREENSHOTS)
+presentation.pdf: $(CLUSTER_HW_STEPWISE) $(SCREENSHOTS) presentation.tex
 	$(PDFLATEX) presentation.tex
 
 # Assets
