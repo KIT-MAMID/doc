@@ -20,7 +20,7 @@ SCREENSHOTS = dashboard slaves problems slave_edit_unknown slave_edit_active sla
 SCREENSHOTS := $(addprefix screenshots/,$(SCREENSHOTS))
 SCREENSHOTS := $(addsuffix .png,$(SCREENSHOTS))
 
-CLUSTER_HW_STEPWISE = step1 step2 step3 step4 step5 step6 step7
+CLUSTER_HW_STEPWISE = step1 step2 step3 step4 step5 step6 step7 step8
 CLUSTER_HW_STEPWISE := $(addprefix assets/cluster_hw_stepwise/,$(CLUSTER_HW_STEPWISE))
 CLUSTER_HW_STEPWISE := $(addsuffix .pdf,$(CLUSTER_HW_STEPWISE))
 
