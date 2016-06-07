@@ -6,10 +6,12 @@ MAKEGLOSSARIES ?= makeglossaries
 XVFB_RUN ?= `which xvfb-run` -a --server-args="-screen 0, 1920x1080x24"
 CUTYCAPT_BIN ?= `which cutycapt`
 SCREENSHOTS_BASE_URL ?=http://127.0.0.1:5000
+SVG2PDF_BIN ?= `which rsvg-convert` 
 
 # Internal commands
 UMLET_CONVERT = $(JAVA) -jar $(UMLET_JAR) -action=convert -format=pdf -filename=$(1) -output=$(2)
 CUTYCAPT=$(XVFB_RUN) $(CUTYCAPT_BIN) --delay=$(3) --zoom=1.25 --min-width=1600 --min-height=1200 --user-style-string="html, body { max-height: 1200px; overflow: hidden;}" --url=$(SCREENSHOTS_BASE_URL)$(1) --out=$(2)
+SVG2PDF = $(SVG2PDF_BIN) -f pdf -o $(2) $(1)
 
 # Internal vars (extend as needed)
 UMLET_PDFS = module_overview.pdf state_diagram.pdf cluster_layout.pdf hardware_layout.pdf
@@ -17,6 +19,10 @@ UMLET_PDFS = module_overview.pdf state_diagram.pdf cluster_layout.pdf hardware_l
 SCREENSHOTS = dashboard slaves problems slave_edit_unknown slave_edit_active slave_edit_maintenance slave_edit_disabled risk_groups risk_groups_remove_confirmation replica_sets replica_set_overview_degraded replica_set_overview_active new_slave new_replica_set slave_remove replica_set_remove 
 SCREENSHOTS := $(addprefix screenshots/,$(SCREENSHOTS))
 SCREENSHOTS := $(addsuffix .png,$(SCREENSHOTS))
+
+CLUSTER_HW_STEPWISE = step1 step2 step3 step4 step5 step6 step7
+CLUSTER_HW_STEPWISE := $(addprefix assets/cluster_hw_stepwise/,$(CLUSTER_HW_STEPWISE))
+CLUSTER_HW_STEPWISE := $(addsuffix .pdf,$(CLUSTER_HW_STEPWISE))
 
 # Targets
 all: $(SCREENSHOTS) $(UMLET_PDFS)
@@ -27,6 +33,9 @@ all: $(SCREENSHOTS) $(UMLET_PDFS)
 
 fast: $(SCREENSHOTS) $(UMLET_PDFS)
 	$(PDFLATEX) functionalSpecification.tex
+
+presentation.pdf: $(CLUSTER_HW_STEPWISE) $(SCREENSHOTS)
+	$(PDFLATEX) presentation.tex
 
 # Assets
 ## UMLet
@@ -54,6 +63,10 @@ $(SCREENSHOTS): %.png: screenshots
 	@if [ "$(notdir $(basename $@))" = "slave_remove" ];                     	then $(call CUTYCAPT,"/slave/mksuns11/edit/disabled#modal","$@","200"); fi;
 	@if [ "$(notdir $(basename $@))" = "new_slave" ];             			then $(call CUTYCAPT,"/new/slave","$@","0"); fi;
 	@if [ "$(notdir $(basename $@))" = "new_replica_set" ];                         then $(call CUTYCAPT,"/new/replicaset","$@","0"); fi;
+
+# SVGs
+$(CLUSTER_HW_STEPWISE): %.pdf: %.svg
+	$(call SVG2PDF,$<,$@)
 
 # Cleaning
 clean: clean_screenshots
