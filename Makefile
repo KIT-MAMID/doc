@@ -8,11 +8,13 @@ XVFB_RUN ?= `which xvfb-run` -a --server-args="-screen 0, 1920x1080x24"
 CUTYCAPT_BIN ?= `which cutycapt`
 SCREENSHOTS_BASE_URL ?=http://127.0.0.1:5000
 INKSCAPE_BIN ?= `which inkscape`
+CURL_BIN ?= `which curl`
 
 # Internal commands
 UMLET_CONVERT = $(JAVA) -jar $(UMLET_JAR) -action=convert -format=pdf -filename=$(1) -output=$(2)
 CUTYCAPT=$(XVFB_RUN) $(CUTYCAPT_BIN) --delay=$(3) --zoom=1.25 --min-width=1600 --min-height=1200 --user-style-string="html, body { max-height: 1200px; overflow: hidden;}" --url=$(SCREENSHOTS_BASE_URL)$(1) --out=$(2)
 SVG2PDF = $(INKSCAPE_BIN) -A $(2) $(1)
+HTTPDL = $(CURL_BIN) -o $(2) '$(1)'
 
 # Internal vars (extend as needed)
 UMLET_PDFS = module_overview.pdf state_diagram.pdf cluster_layout.pdf hardware_layout.pdf
@@ -35,7 +37,7 @@ all: $(SCREENSHOTS) $(UMLET_PDFS)
 fast: $(SCREENSHOTS) $(UMLET_PDFS)
 	$(PDFLATEX) functionalSpecification.tex
 
-presentation.pdf: $(CLUSTER_HW_STEPWISE) $(SCREENSHOTS) presentation.tex
+presentation.pdf: $(CLUSTER_HW_STEPWISE) $(SCREENSHOTS) assets/xkcd1289.png | presentation.tex
 	$(PDFLATEX) presentation.tex
 
 # Assets
@@ -68,6 +70,10 @@ $(SCREENSHOTS): %.png: screenshots
 # SVGs
 $(CLUSTER_HW_STEPWISE): %.pdf: %.svg
 	$(call SVG2PDF,$<,$@)
+
+# HTTP DL
+assets/xkcd1289.png:
+	$(call HTTPDL,https://imgs.xkcd.com/comics/simple_answers.png,$@)
 
 # Cleaning
 clean: clean_screenshots

@@ -4,7 +4,7 @@
 \usepackage{graphicx}
 \usetheme{default}
 \usecolortheme{beaver}
-
+\usepackage{url}
 
 \begin{document}
 	\author{Niklas Fuhrberg, Anton Schirg,\\ Christian Schwarz, Janis Streib, Bob Weinand}
@@ -19,7 +19,9 @@
 	\frame[plain]{\maketitle}
 	
 	\begin{frame}{Requirements Elicitation}
+		MongoDB Database Cluster
 		\begin{itemize}
+			\item Replica Sets
 			\item low maintenance effort
 			\item volatile storage
 			\item physical interdependencies
@@ -32,9 +34,9 @@
 	\begin{frame}{Requirements Analysis}
 		\begin{itemize}
 			\item descriptive approach
-			\item automatic layout
+			\item automatic cluster layout
 			\item automatic deployment
-			\item continous monitoring
+			\item continuous monitoring
 		\end{itemize}
 	\end{frame}
 	
@@ -57,11 +59,11 @@
 			\only<6>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step6}}
 			\only<7>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step7}}
 			%dirty hack: repeat to avoid second blank slide
-			\only<8>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step2}}
+			\only<8>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step1}}
 	\end{frame}
-	
+
 	\againframe<1>{screenshots}
-	\againframe<2>{hwlayout}
+	\againframe<1>{hwlayout}	
 	\againframe<3>{hwlayout}
 	\againframe<2>{screenshots}
 	\againframe<3>{hwlayout}
@@ -72,20 +74,29 @@
 	\againframe<6>{hwlayout}
 	\againframe<7>{hwlayout}
 	
-	\begin{frame}[allowframebreaks]
+	\begin{frame}<1-13>
 		\frametitle{Failure Scenario: Power Supply Outage}
 		\only<2>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step7}}
-		\only<+>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step8}}
-		\only<+>{\includegraphics[height=0.8\textheight]{screenshots/dashboard}}
-		\only<+>{\includegraphics[height=0.8\textheight]{screenshots/slave_edit_unknown}}
-		\only<+>{\includegraphics[height=0.8\textheight]{screenshots/replica_set_overview_degraded}}
-		\only<+>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step8}}
-		\only<+>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step7}}
-		\only<+>{\includegraphics[height=0.8\textheight]{screenshots/slave_edit_active}}
+		\only<3>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step8}}
+		\only<4>{\centering \includegraphics[height=0.8\textheight]{screenshots/dashboard}}
+		\only<5>{\centering \includegraphics[height=0.8\textheight]{screenshots/slave_edit_unknown}}
+		\only<6>{\centering \includegraphics[height=0.8\textheight]{screenshots/replica_set_overview_degraded}}
+		\only<7>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step8}}
+		\only<8>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step9}}
+		\only<9>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step10}}
+		\only<10>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step11}}
+		\only<11>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step7}}
+		\only<12>{\centering \includegraphics[height=0.8\textheight]{screenshots/slave_edit_active}}
+		\only<13>{\centering \includegraphics[height=0.8\textheight]{screenshots/replica_set_overview_active}}
 	\end{frame}
 	
-	\begin{frame}
-		The end.
+	\begin{frame}{Questions?}
+		\centering
+		\begin{figure}
+			\includegraphics[height=0.7\textheight]{assets/xkcd1289}
+			\caption{\tiny Randall Munroe | CC BY-NC 2.5 | \url{https://xkcd.com/1289}}
+		\end{figure}
+		
 	\end{frame}
 	
 \end{document}
