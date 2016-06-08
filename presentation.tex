@@ -6,6 +6,7 @@
 \usecolortheme{beaver}
 \usepackage{url}
 \usepackage[export]{adjustbox}
+\usepackage{pdfpcnotes}
 
 \begin{document}
 	\author{Niklas Fuhrberg, Anton Schirg,\\ Christian Schwarz, Janis Streib, Bob Weinand}
@@ -20,19 +21,46 @@
 	\frame[plain]{\maketitle}
 	
 	\begin{frame}{Requirements Elicitation}
-		MongoDB Database Cluster
+		\pnote{Start with requirements elicitation phase.}
+		\pnote{Requirements derived from interview with Marek and Administrator}
+		MongoDB Database Cluster \pnote{We knew from the beginning: Manager for MongoDB}
 		\begin{itemize}
-			\item<2-> Replica Sets
-			\item<3-> low maintenance effort
-			\item<4-> volatile storage
-			\item<5-> physical interdependencies
-			\item<6-> automation
-			\item<7-> monitoring
+			\item<2-> Replica Sets 	\pnote{specifically, management of replica sets}
+			\item<3-> low maintenance effort \pnote{little time for maintaining the cluster hosts \& MongoDB deployment}
+			\item<4-> volatile storage \pnote{volatility of the host storage is the core problem (hence the title of the project)}
+			\item<5-> physical interdependencies \pnote{machines are organized in cabinets sharing power supply -> pick replica set members carefully}
+			\item<6-> automation \pnote{the admin does not want to reconfigure instances after every reboot}
+			\item<7-> monitoring \pnote{high-availibility of data is required by consumers of MongoDB deployment}
 		\end{itemize}
 	\end{frame}
 	
 	
 	\begin{frame}{Requirements Analysis}
+		\pnote{not configure, only desc functionality + constraints of the cluster}
+		\pnote{saves time} \pnote{setup is self-describing: mamid web interface is all a new admin needs to get started / existent admin does not remember config from 2 years ago\\}
+		
+		\pnote{the description of the cluster => set of constraints to the deployment}
+		\pnote{RISK GROUPS (model shared risk)}
+		\pnote{PERSISTENCE OF HOST STORAGE (models exactly this, req to guarantee persistence in case of power loss)}
+		\pnote{MEMBER COUNTS (model degree of redundancy \& performance gain through horizontal scaling)\\}
+
+		\pnote{after layout is determined, we need to actually run it}
+		\pnote{here, mamid = simple configuration engine}
+		\pnote{takes description of desired state of a host and deploys it using daemons on all cluster hosts}
+		\pnote{deploy = spawn mongods, configure replica sets, etc\\}
+
+		\pnote{once deployed, need to check whether just deployed layout is actually the one that's running}
+		\pnote{concisely = check for divergence between ideal layout and the reality}
+		\pnote{monitor that\\
+			continously monitors mongods and their configuration\\
+			notifies administrator about problems in the cluster\\
+			triggers automatic redeployment if divergence detected\\
+			=> SPECIFICALLY covers the case of a volatile host going down (come to that in a sec)\\}
+
+		\pnote{no manual config of mongod through administrator, done by mamid}
+		\pnote{only MongoDB. Parts are fairly generic, parts are specific. Design can account for this but given what we learned in the interview, other DBs are not the primary goal of the project.}
+		\pnote{sharding only in so far that we provide config-sever compatible configuration profile}
+
 		\begin{columns}
 			\begin{column}{0.5\linewidth}
 				Features
@@ -58,7 +86,7 @@
 	\end{frame}
 	
 	\begin{frame}<4>[label=screenshots]
-		\frametitle{Walkthrough}
+		\frametitle{Walkthrough} \pnote{Make you familiar with the terminology and a basic cluster setup process}
 		\begin{center}
 			\only<1>{\includegraphics[height=0.8\textheight,frame]{screenshots/new_slave}}
 			\only<2>{\includegraphics[height=0.8\textheight,frame]{screenshots/risk_groups}}
@@ -92,7 +120,7 @@
 	\againframe<7>{hwlayout}
 	
 	\begin{frame}<1-13>
-		\frametitle{Failure Scenario: Power Supply Outage}
+		\frametitle{Failure Scenario: Power Supply Outage} \pnote{Now come to the most important scenario: failure + data loss}
 		\only<2>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step7}}
 		\only<3>{\includegraphics[width=0.9\linewidth]{assets/cluster_hw_stepwise/step8}}
 		\only<4>{\centering \includegraphics[height=0.8\textheight,frame]{screenshots/dashboard}}
