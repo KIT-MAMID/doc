@@ -189,7 +189,7 @@ SCC\\[2em]}
 \section{Introduction}
 \mamid is a manager for database \glspl{cluster}, facilitating creation, administration and monitoring of a \gls{MongoDB} \gls{replica set} deployment.
 
-\gls{MongoDB} is a document-oriented database system. \glspl{replica set} are MongoDB's solution to data-redundancy and high-availability. Each Replica Set consists of multiple processes on different machines storing the same data.\\
+\gls{MongoDB} is a document-oriented database system. \glspl{replica set} are MongoDB's solution to data redundancy and high availability. Each Replica Set consists of multiple processes on different machines storing the same data.\\
 After initial configuration, data replication is handled by MongoDB itself.
 
 \mamid assists the \gls{administrator} during setup, continuous operation, maintenance situations and expansion of a \gls{MongoDB} cluster.
@@ -232,7 +232,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \oitem{MC}{} The \gls{administrator} can add \glspl{slave} to the \gls{inventory}.
 \oitem{MC}{} The \gls{administrator} can remove a \gls{slave} that does not host any \gls{MongoDB} processes from the \gls{inventory}.
 \oitem{MC}{spec_risk_groups} The \gls{administrator} can model a shared risk of failure between \glspl{host}, e.g. a shared power supply.
-\oitem{MC}{available_slave_types} The \gls{administrator} can specify whether the \gls{slave} has \glslink{persistent storage}{persistent (typically HDD/SSD backed)} or \glslink{volatile storage}{volatile (RAM backed)} storage.
+\oitem{MC}{available_slave_types} The \gls{administrator} can specify whether the \gls{slave} has \glslink{persistent storage}{persistent (typically HDD-/SSD-backed)} or \glslink{volatile storage}{volatile (RAM-backed)} storage.
 \oitem{MC}{root_data_directory} The \gls{administrator} can specify in which filesystem directory on the \gls{host} the \gls{slave} and its \gls{MongoDB} processes store data.
 % inventory ops -> slave
 \oitem{MC}{slave_mode_active} The \gls{administrator} can announce to \mamid that a slave is ready to host MongoDB processes.
@@ -434,7 +434,7 @@ A slave can be in the following states:
 	If the slave behaves unexpectedly, e.g. is not reachable, \mamid notifies the \gls{administrator} and sets the slave's state to \emph{unknown}.
 	\item \emph{unknown}\\
 	\mamid monitors \glspl{slave} in \emph{unknown} state and sets them back to \gls{active mode} when they recover.\\
-	\mamid can recover a slave in \emph{unknown} state automatically by respawning and configuring MongoDB processes, e.g. after power-loss on a \glslink{volatile storage}{volatile} \gls{host}.
+	\mamid can recover a slave in \emph{unknown} state automatically by respawning and configuring MongoDB processes, e.g. after power loss on a \glslink{volatile storage}{volatile} \gls{host}.
 	The \gls{administrator} can set the slave state
 	\begin{itemize}
 		\item to \gls{maintenance mode} to stop monitoring of the slave or
@@ -644,7 +644,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 \subsection{MasterSlaveProtocol}
 \begin{description}
 	\oitem{F}{msp_trans_config} Transport \gls{replica set} configuration description of \gls{cluster} hosts.
-	\oitem{F}{msp_trans_reachability} Transport reachability check messages.
+	\oitem{F}{msp_trans_reachability} Transport reachability-check messages.
 	\oitem{OF}{msp_trans_mach_metr} Transport machine metrics of \glspl{slave}.
 	\oitem{OF}{msp_trans_repl_status} Transport \gls{replica set} replication status of \gls{MongoDB} processes on \glspl{slave}.
 	% Wunschkriterien erweiteretes Monitoring
