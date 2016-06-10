@@ -236,7 +236,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \oitem{MC}{root_data_directory} The \gls{administrator} can specify in which filesystem directory on the \gls{host} the \gls{slave} and its \gls{MongoDB} processes store data.
 % inventory ops -> slave
 \oitem{MC}{slave_mode_active} The \gls{administrator} can announce to \mamid that a slave is ready to host MongoDB processes.
-\oitem{MC}{slave_mode_maintenance} The \gls{administrator} can announce to \mamid that a slave is in maintenance to inhibit automatic reconfiguration of its MongoDB processes.
+\oitem{MC}{slave_mode_maintenance} The \gls{administrator} can announce to \mamid that a slave is under maintenance to inhibit automatic reconfiguration of its MongoDB processes.
 \oitem{MC}{slave_mode_disabled} The \gls{administrator} can announce to \mamid that a slave should not host any MongoDB processes.
 \end{description}
 
@@ -258,7 +258,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \oitem{MC}{mongod_deployment2} To achieve \ref{MC:mongod_deployment1}, \mamid spawns \& controls \gls{MongoDB} processes on the hosts using a \gls{slave} process.
 \begin{description}
 	\oitem{MC}{mongod_redeployment} \mamid redeploys configured \gls{MongoDB} processes to hosts where the \gls{slave} process reports a situation different from what is expected by the \gls{master}.
-	\oitem{MC}{mongod_redeployment_powercycle_specific} Specifically, a host with volatile data storage can loose all data originating from the \gls{slave} process or \gls{MongoDB} and is automatically redeployed with correctly configured \gls{MongoDB} instances (\ref{MC:mongod_deployment2}).
+	\oitem{MC}{mongod_redeployment_powercycle_specific} Specifically, a host with volatile data storage can lose all data originating from the \gls{slave} process or \gls{MongoDB} and is automatically redeployed with correctly configured \gls{MongoDB} instances (\ref{MC:mongod_deployment2}).
 \end{description}
 % Todo old \oitem{MC}{} The \gls{master} deploys the \gls{replica set} configuration described by the administrator to the cluster.
 
@@ -278,7 +278,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \oitem{OC}{manual_autodiscovery} \mamid auto-discovers new \glspl{slave} on the \gls{administrator}'s request.
 \oitem{OC}{continuous_autodiscovery} \mamid continuously auto-discovers new \glspl{slave}.
 \oitem{OC}{monitor_icmp} \mamid recognizes when the \gls{slave} software does not respond but the corresponding \gls{host} is still connected to the network.
-\oitem{OC}{export_import_snapshot} The \gls{administrator} can backup and restore the cluster description.
+\oitem{OC}{export_import_snapshot} The \gls{administrator} can back up and restore the cluster description.
 
 % slaves
 \oitem{OC}{tweak_performance_parameters} The \gls{administrator} can customize performance-relevant parameters of \gls{MongoDB} processes.
@@ -299,7 +299,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \begin{description}
 \oitem{DMC}{} The \gls{administrator} does not directly configure individual \gls{MongoDB} instances spawned \& controlled by \mamid. All configuration happens through \mamid, either automatically (e.g. Replica Set deployment) or through a \mamid interface (e.g. GUI, CLI, HTTP API).
 \oitem{DMC}{} \mamid does not implement support for higher-layer \gls{MongoDB} features, e.g. \gls{sharding}.
-\oitem{DMC}{} \mamid neither deploys the operating system nor other required software (such as \gls{MongoDB} binaries) to the \gls{cluster} \glspl{host}.
+\oitem{DMC}{} \mamid deploys neither the operating system nor other required software (such as \gls{MongoDB} binaries) to the \gls{cluster} \glspl{host}.
 \end{description}
 
 \section{Product Usage}
@@ -307,7 +307,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \subsection{Scope of Application}
 \begin{itemize}
 \item \gls{MongoDB} \glslink{cluster}{Cluster} Administration
-\item High-Availibility MongoDB Deployment
+\item High-Availability MongoDB Deployment
 \item MongoDB Cluster Monitoring
 \end{itemize}
 
