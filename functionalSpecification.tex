@@ -629,7 +629,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 			\begin{flalign*} %align left
 			p \in \mathbb{N}_0 \text{ persistent members}  \\
 			v \in \mathbb{N}_0 \text{ volatile members} \\
-			(p+v) \geq 3 \land (p+v) \text{ odd}
+			(p+v) \geq 3 \land \exists n (p+v) = 2n+1
 			\end{flalign*}
 			(\ref{MC:replica_set_member_pv_counts} and \ref{MC:available_slave_types})
 		\oitem{OF}{master_alloc_arbiters} adding \gls{MongoDB} \glspl{arbiter} where necessary (\ref{OC:deploy_arbiters}).
@@ -1011,7 +1011,7 @@ Unless explicitly stated, the \acrshort{gui}'s \textit{Overview} page is always 
 \testsequence
 [\ref{F:gui_crud_replica_sets}, \ref{F:master_api_crud_repl_set_config}, \ref{F:layout_cluster_config}, \ref{F:master_alloc_resp_pv_counts}, \ref{F:master_alloc_resp_mode}, \ref{F:master_alloc_communicate_config}, \ref{F:slave_control_procs}, \ref{F:slave_enforce_config}, \ref{F:msp_trans_config}]
 {
-	The \gls{administrator} wants to add a \gls{replica set} $R$ with $p \in \mathbb{N}$ \glslink{persistent storage}{persistent} members and $v \in \mathbb{N}$ \glslink{volatile storage}{volatile} members. $(p+v) >= 3 \land (p+v) \textit{ is odd}$. Enough \glspl{slave} with sufficient free \gls{MongoDB} \hyperref[D:slave_mongod_portrange]{ports} are available.
+  The \gls{administrator} wants to add a \gls{replica set} $R$ with $p \in \mathbb{N}$ \glslink{persistent storage}{persistent} members and $v \in \mathbb{N}$ \glslink{volatile storage}{volatile} members. $(p+v) >= 3 \land \exists n (p+v) = 2n+1$. Enough \glspl{slave} with sufficient free \gls{MongoDB} \hyperref[D:slave_mongod_portrange]{ports} are available.
 }
 {
 	\begin{itemize}
