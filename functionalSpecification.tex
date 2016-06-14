@@ -159,7 +159,7 @@
 \makeatletter
 \begin{center}
 ~\\[4em]
-{\Huge MAMID}\\[.8em]\huge{Monitor and Manager for In-Memory Databases}\\[2em]
+{\Huge MAMID}\\[.8em]\huge{Monitor and Manager for In-memory Databases}\\[2em]
 {\huge Functional Specification}\\[1em]
 {\large\today}\\[2.5em]
 {\LARGE
@@ -170,7 +170,7 @@ Janis Streib\\
 Bob Weinand\\[3em]}
 {\Large supervised by}\\[2em]
 {\LARGE
-Dr. Marek Szuba\\[1em]}
+Dr Marek Szuba\\[1em]}
 {\Large at}\\[1em]
 {\LARGE
 Karlsruhe Institute of Technology\\
@@ -189,7 +189,7 @@ SCC\\[2em]}
 \section{Introduction}
 \mamid is a manager for database \glspl{cluster}, facilitating creation, administration and monitoring of a \gls{MongoDB} \gls{replica set} deployment.
 
-\gls{MongoDB} is a document-oriented database application. \glspl{replica set} are MongoDB's solution to data-redundancy and high-availability. Each Replica Set consists of multiple processes on different machines storing the same data.\\
+\gls{MongoDB} is a document-oriented database system. \glspl{replica set} are MongoDB's solution to data redundancy and high availability. Each Replica Set consists of multiple processes on different machines storing the same data.\\
 After initial configuration, data replication is handled by MongoDB itself.
 
 \mamid assists the \gls{administrator} during setup, continuous operation, maintenance situations and expansion of a \gls{MongoDB} cluster.
@@ -232,11 +232,11 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \oitem{MC}{} The \gls{administrator} can add \glspl{slave} to the \gls{inventory}.
 \oitem{MC}{} The \gls{administrator} can remove a \gls{slave} that does not host any \gls{MongoDB} processes from the \gls{inventory}.
 \oitem{MC}{spec_risk_groups} The \gls{administrator} can model a shared risk of failure between \glspl{host}, e.g. a shared power supply.
-\oitem{MC}{available_slave_types} The \gls{administrator} can specify whether the \gls{slave} has \glslink{persistent storage}{persistent (typically HDD/SSD backed)} or \glslink{volatile storage}{volatile (RAM backed)} storage.
+\oitem{MC}{available_slave_types} The \gls{administrator} can specify whether the \gls{slave} has \glslink{persistent storage}{persistent (typically HDD-/SSD-backed)} or \glslink{volatile storage}{volatile (RAM-backed)} storage.
 \oitem{MC}{root_data_directory} The \gls{administrator} can specify in which filesystem directory on the \gls{host} the \gls{slave} and its \gls{MongoDB} processes store data.
 % inventory ops -> slave
 \oitem{MC}{slave_mode_active} The \gls{administrator} can announce to \mamid that a slave is ready to host MongoDB processes.
-\oitem{MC}{slave_mode_maintenance} The \gls{administrator} can announce to \mamid that a slave is in maintenance to inhibit automatic reconfiguration of its MongoDB processes.
+\oitem{MC}{slave_mode_maintenance} The \gls{administrator} can announce to \mamid that a slave is under maintenance to inhibit automatic reconfiguration of its MongoDB processes.
 \oitem{MC}{slave_mode_disabled} The \gls{administrator} can announce to \mamid that a slave should not host any MongoDB processes.
 \end{description}
 
@@ -258,7 +258,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \oitem{MC}{mongod_deployment2} To achieve \ref{MC:mongod_deployment1}, \mamid spawns \& controls \gls{MongoDB} processes on the hosts using a \gls{slave} process.
 \begin{description}
 	\oitem{MC}{mongod_redeployment} \mamid redeploys configured \gls{MongoDB} processes to hosts where the \gls{slave} process reports a situation different from what is expected by the \gls{master}.
-	\oitem{MC}{mongod_redeployment_powercycle_specific} Specifically, a host with volatile data storage can loose all data originating from the \gls{slave} process or \gls{MongoDB} and is automatically redeployed with correctly configured \gls{MongoDB} instances (\ref{MC:mongod_deployment2}).
+	\oitem{MC}{mongod_redeployment_powercycle_specific} Specifically, a host with volatile data storage can lose all data originating from the \gls{slave} process or \gls{MongoDB} and is automatically redeployed with correctly configured \gls{MongoDB} instances (\ref{MC:mongod_deployment2}).
 \end{description}
 % Todo old \oitem{MC}{} The \gls{master} deploys the \gls{replica set} configuration described by the administrator to the cluster.
 
@@ -278,7 +278,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \oitem{OC}{manual_autodiscovery} \mamid auto-discovers new \glspl{slave} on the \gls{administrator}'s request.
 \oitem{OC}{continuous_autodiscovery} \mamid continuously auto-discovers new \glspl{slave}.
 \oitem{OC}{monitor_icmp} \mamid recognizes when the \gls{slave} software does not respond but the corresponding \gls{host} is still connected to the network.
-\oitem{OC}{export_import_snapshot} The \gls{administrator} can backup and restore the cluster description.
+\oitem{OC}{export_import_snapshot} The \gls{administrator} can back up and restore the cluster description.
 
 % slaves
 \oitem{OC}{tweak_performance_parameters} The \gls{administrator} can customize performance-relevant parameters of \gls{MongoDB} processes.
@@ -299,7 +299,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \begin{description}
 \oitem{DMC}{} The \gls{administrator} does not directly configure individual \gls{MongoDB} instances spawned \& controlled by \mamid. All configuration happens through \mamid, either automatically (e.g. Replica Set deployment) or through a \mamid interface (e.g. GUI, CLI, HTTP API).
 \oitem{DMC}{} \mamid does not implement support for higher-layer \gls{MongoDB} features, e.g. \gls{sharding}.
-\oitem{DMC}{} \mamid neither deploys the operating system nor other required software (such as \gls{MongoDB} binaries) to the \gls{cluster} \glspl{host}.
+\oitem{DMC}{} \mamid deploys neither the operating system nor other required software (such as \gls{MongoDB} binaries) to the \gls{cluster} \glspl{host}.
 \end{description}
 
 \section{Product Usage}
@@ -307,7 +307,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \subsection{Scope of Application}
 \begin{itemize}
 \item \gls{MongoDB} \glslink{cluster}{Cluster} Administration
-\item High-Availibility MongoDB Deployment
+\item High-Availability MongoDB Deployment
 \item MongoDB Cluster Monitoring
 \end{itemize}
 
@@ -369,13 +369,13 @@ Each of the subsequently listed requirements is an extension of the previous one
 
 \subsubsection{Basic Level of Host Redundancy}
 \begin{itemize}
-	\item $\geq 3$ mutually disjoint sets of \gls{cluster} \glspl{host} that can be classified as not sharing a common risk of failure (see \ref{F:master_alloc_resp_risk_groups}).
+	\item $\geq 3$ mutually disjoint sets of \gls{cluster} \glspl{host} that can be classified as not sharing a common point of failure (see \ref{F:master_alloc_resp_risk_groups}).
 \end{itemize}
 
 \section{System Model}
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{module_overview}
-\caption{\mamid Modules Overview}
+\caption{\mamid modules overview}
 \end{figure}
 \subsection{Master}\label{SM:Master}
 \begin{description}
@@ -423,7 +423,7 @@ Each of the subsequently listed requirements is an extension of the previous one
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.65\textwidth]{state_diagram}
-\caption{Slave State Diagram}
+\caption{Slave state diagram}
 \end{figure}
 The \hyperref[SM:Master]{Master} tracks a slave's state which affects error reporting \& cluster layout in the master.
 
@@ -434,7 +434,7 @@ A slave can be in the following states:
 	If the slave behaves unexpectedly, e.g. is not reachable, \mamid notifies the \gls{administrator} and sets the slave's state to \emph{unknown}.
 	\item \emph{unknown}\\
 	\mamid monitors \glspl{slave} in \emph{unknown} state and sets them back to \gls{active mode} when they recover.\\
-	\mamid can recover a slave in \emph{unknown} state automatically by respawning and configuring MongoDB processes, e.g. after power-loss on a \glslink{volatile storage}{volatile} \gls{host}.
+	\mamid can recover a slave in \emph{unknown} state automatically by respawning and configuring MongoDB processes, e.g. after power loss on a \glslink{volatile storage}{volatile} \gls{host}.
 	The \gls{administrator} can set the slave state
 	\begin{itemize}
 		\item to \gls{maintenance mode} to stop monitoring of the slave or
@@ -629,7 +629,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 			\begin{flalign*} %align left
 			p \in \mathbb{N}_0 \text{ persistent members}  \\
 			v \in \mathbb{N}_0 \text{ volatile members} \\
-			(p+v) \geq 3 \land (p+v) \text{ odd}
+			(p+v) \geq 3 \land \exists n (p+v) = 2n+1
 			\end{flalign*}
 			(\ref{MC:replica_set_member_pv_counts} and \ref{MC:available_slave_types})
 		\oitem{OF}{master_alloc_arbiters} adding \gls{MongoDB} \glspl{arbiter} where necessary (\ref{OC:deploy_arbiters}).
@@ -644,7 +644,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 \subsection{MasterSlaveProtocol}
 \begin{description}
 	\oitem{F}{msp_trans_config} Transport \gls{replica set} configuration description of \gls{cluster} hosts.
-	\oitem{F}{msp_trans_reachability} Transport reachability check messages.
+	\oitem{F}{msp_trans_reachability} Transport reachability-check messages.
 	\oitem{OF}{msp_trans_mach_metr} Transport machine metrics of \glspl{slave}.
 	\oitem{OF}{msp_trans_repl_status} Transport \gls{replica set} replication status of \gls{MongoDB} processes on \glspl{slave}.
 	% Wunschkriterien erweiteretes Monitoring
@@ -689,9 +689,9 @@ The \acrshort{cli} is an \emph{optional} functional requirement. It acts as a fr
 	\oitem{OF}{cli_display_repl_status} Display replication status of the configured \glspl{replica set}.
 \end{description}
 
-\section{Non-Functional Requirements and Constraints}
+\section{Non-functional Requirements and Constraints}
 
-\subsection{Non-Functional Requirements}
+\subsection{Non-functional Requirements}
 \begin{description}
 	% Usability
 	\oitem{NF}{} The \gls{administrator} does not need extended knowledge of \gls{MongoDB} to configure \glspl{replica set} using \mamid. %todo cannot measure
@@ -1011,7 +1011,7 @@ Unless explicitly stated, the \acrshort{gui}'s \textit{Overview} page is always 
 \testsequence
 [\ref{F:gui_crud_replica_sets}, \ref{F:master_api_crud_repl_set_config}, \ref{F:layout_cluster_config}, \ref{F:master_alloc_resp_pv_counts}, \ref{F:master_alloc_resp_mode}, \ref{F:master_alloc_communicate_config}, \ref{F:slave_control_procs}, \ref{F:slave_enforce_config}, \ref{F:msp_trans_config}]
 {
-	The \gls{administrator} wants to add a \gls{replica set} $R$ with $p \in \mathbb{N}$ \glslink{persistent storage}{persistent} members and $v \in \mathbb{N}$ \glslink{volatile storage}{volatile} members. $(p+v) >= 3 \land (p+v) \textit{ is odd}$. Enough \glspl{slave} with sufficient free \gls{MongoDB} \hyperref[D:slave_mongod_portrange]{ports} are available.
+  The \gls{administrator} wants to add a \gls{replica set} $R$ with $p \in \mathbb{N}$ \glslink{persistent storage}{persistent} members and $v \in \mathbb{N}$ \glslink{volatile storage}{volatile} members. $(p+v) >= 3 \land \exists n (p+v) = 2n+1$. Enough \glspl{slave} with sufficient free \gls{MongoDB} \hyperref[D:slave_mongod_portrange]{ports} are available.
 }
 {
 	\begin{itemize}
