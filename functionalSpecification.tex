@@ -223,12 +223,12 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 % TODO analyze whether the given criteria can be phrased more abstractly \& move the details to (new) functional requirements. (-> forward lookup references from criteria to functional requirement if required)
 \begin{description}
 
-\oitem{MC}{} The \gls{administrator} interacts with \mamid through a web \acrshort{gui}.
+\oitem{MC}{} The \gls{administrator} interacts with \mamid through a web \gls{gui}.
 
 % inventory ops
 \oitem{MC}{inventory_definition} The \gls{master} maintains a list of \glspl{slave} called \gls{inventory}.
 \begin{description}
-\oitem{MC}{} The \acrshort{gui} visualizes the \gls{inventory}.
+\oitem{MC}{} The \gls{gui} visualizes the \gls{inventory}.
 \oitem{MC}{} The \gls{administrator} can add \glspl{slave} to the \gls{inventory}.
 \oitem{MC}{} The \gls{administrator} can remove a \gls{slave} that does not host any \gls{MongoDB} processes from the \gls{inventory}.
 \oitem{MC}{spec_risk_groups} The \gls{administrator} can model a shared risk of failure between \glspl{host}, e.g. a shared power supply.
@@ -247,7 +247,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \oitem{MC}{replica_set_member_total_counts} The \gls{administrator} can select the number of \gls{MongoDB} instances (members) of a Replica Set.
 \oitem{MC}{replica_set_member_pv_counts} Volatile and persistent member count of a \gls{replica set} can be independently configured, under constraints described in \ref{F:master_alloc_resp_pv_counts}.
 \end{description}
-\oitem{MC}{} The \acrshort{gui} visualizes the list of configured \glspl{replica set}.
+\oitem{MC}{} The \gls{gui} visualizes the list of configured \glspl{replica set}.
 \oitem{MC}{} The \gls{administrator} can destroy a \gls{replica set}.
 
 \end{description}
@@ -265,7 +265,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 % monitoring features
 \oitem{MC}{detect_slave_unexpected_behavior} \mamid detects when a \gls{slave} in the \gls{inventory} behaves unexpectedly, e.g. when it becomes unreachable and the administrator did not announce maintenance to \mamid beforehand.
 \oitem{MC}{} \mamid informs the \gls{administrator} by e-mail about problems in the cluster (\ref{MC:detect_slave_unexpected_behavior}).
-\oitem{MC}{} The \acrshort{gui} visualizes \glspl{slave} behaving unexpectedly (\ref{MC:detect_slave_unexpected_behavior}).
+\oitem{MC}{} The \gls{gui} visualizes \glspl{slave} behaving unexpectedly (\ref{MC:detect_slave_unexpected_behavior}).
 \end{description}
 
 \subsection{Optional Criteria}\label{OptionalCriteria}
@@ -284,15 +284,15 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \oitem{OC}{tweak_performance_parameters} The \gls{administrator} can customize performance-relevant parameters of \gls{MongoDB} processes.
 
 % automatic repair
-\oitem{OC}{auto_repair} \mamid supports automatic reconfiguration when detecting unexpected behavior of \glspl{slave}. The failing slave is marked as unsuitable to host \gls{MongoDB} processes and redeployment is triggered to repair the degraded Replica Sets (extends \ref{MC:detect_slave_unexpected_behavior}).
+		\oitem{OC}{auto_repair} \mamid supports automatic reconfiguration when detecting unexpected behavior of \glspl{slave}. The failing slave is marked as unsuitable to host \gls{MongoDB} processes and redeployment is triggered to repair the \gls{degraded} Replica Sets (extends \ref{MC:detect_slave_unexpected_behavior}).
 
 % Replica Sets
 \oitem{OC}{deploy_arbiters} \mamid deploys \gls{MongoDB} \glspl{arbiter} for configured \glspl{replica set} as needed, removing the restriction to an odd count of Replica Set members in \ref{F:master_alloc_resp_pv_counts}.
 \oitem{OC}{extended_monitoring} \mamid supports extended monitoring of hosts, i.e. metrics beyond the processes managed by \mamid.
 
 % other
-\oitem{OC}{} The \gls{administrator} can interact with \mamid via a \acrshort{cli}.
-\oitem{OC}{http_api} The \gls{administrator} can interact with \mamid via a stable, documented \acrshort{HTTP} \acrshort{API}.
+\oitem{OC}{} The \gls{administrator} can interact with \mamid via a \gls{cli}.
+\oitem{OC}{http_api} The \gls{administrator} can interact with \mamid via a stable, documented \gls{HTTP} \gls{API}.
 \end{description}
 
 \subsection{Demarcation Criteria}
@@ -354,10 +354,10 @@ Each of the subsequently listed requirements is an extension of the previous one
 
 \subsubsection{Cluster Hosts: Interconnect}
 \begin{itemize}
-	\item All hosts are interconnected through fast \acrshort{LAN}.
+	\item All hosts are interconnected through fast \gls{LAN}.
 	\begin{itemize}
-		\item All cluster hosts are interconnected through an isolated \acrshort{LAN}.
-		\item $\geq 1$ cluster host is connected to both the isolated \acrshort{LAN} and an external network (usually another \acrshort{LAN} or \acrshort{WAN}).
+		\item All cluster hosts are interconnected through an isolated \gls{LAN}.
+		\item $\geq 1$ cluster host is connected to both the isolated \gls{LAN} and an external network (usually another \gls{LAN} or \gls{WAN}).
 	\end{itemize}
 \end{itemize}
 
@@ -380,7 +380,7 @@ Each of the subsequently listed requirements is an extension of the previous one
 \subsection{Master}\label{SM:Master}
 \begin{description}
 	\oitem{SM}{masterapiserver} Master::APIServer\\
-	Provides an \acrshort{API} for \gls{cluster} status reporting and administrative activity. (\ref{F:master_api_crud_slaves}, \ref{F:master_api_crud_risk_groups}, \ref{F:master_api_set_slave_mode}, \ref{F:master_api_crud_repl_set_config}, \ref{F:master_api_error_reports}, \ref{OF:master_api_get_auto_discovered_slaves}, \ref{OF:master_api_machine_metrics}, \ref{OF:master_api_repl_set_status})
+	Provides an \gls{API} for \gls{cluster} status reporting and administrative activity. (\ref{F:master_api_crud_slaves}, \ref{F:master_api_crud_risk_groups}, \ref{F:master_api_set_slave_mode}, \ref{F:master_api_crud_repl_set_config}, \ref{F:master_api_error_reports}, \ref{OF:master_api_get_auto_discovered_slaves}, \ref{OF:master_api_machine_metrics}, \ref{OF:master_api_repl_set_status})
  	\oitem{SM}{} Master::Controller\\
 	Controls flow of events between different \gls{master} submodules.\\
 	Updates the inventory database (\ref{SM:inventory}) as state changes are recognized by the monitor.\\
@@ -443,7 +443,7 @@ A slave can be in the following states:
 	\item \glslink{maintenance mode}{maintenance}\\
 	\mamid ignores unexpected slave behavior if the slave is in maintenance mode.\\The running MongoDB processes on the slave are not modified / reconfigured and no reallocation to other slaves is triggered.
 	\item \glslink{disabled mode}{disabled}\\
-	A \gls{slave} in disabled mode does not run any \gls{MongoDB} process controlled by the slave process. When a \gls{slave} with MongoDB processes in a \gls{replica set} is set to disabled mode, \mamid stops all these processes and configures new ones on other \glspl{slave} to repair the temporarily degraded Replica Set.
+		A \gls{slave} in disabled mode does not run any \gls{MongoDB} process controlled by the slave process. When a \gls{slave} with MongoDB processes in a \gls{replica set} is set to disabled mode, \mamid stops all these processes and configures new ones on other \glspl{slave} to repair the temporarily \gls{degraded} Replica Set.
 \end{itemize}
 
 \textbf{Note}: all state changes apart from \textit{active} $\leftrightarrow$ \textit{unknown} are triggered by the \gls{administrator}.
@@ -465,7 +465,7 @@ If \ref{OC:auto_repair} is implemented the state change \textit{unknown} $\right
 	\oitem{SM}{notif_mail} NotificationManager::MailNotifier\\
 	Sends e-mail messages. (\ref{F:notifmgr_send_emails})
 	\oitem{SM}{notif_apiclient} NotificationManager::APIClient\\
-	\acrshort{API} client for \ref{SM:masterapiserver}. (\ref{F:notifmgr_consume_errors})
+	\gls{API} client for \ref{SM:masterapiserver}. (\ref{F:notifmgr_consume_errors})
 	\oitem{SM}{notif_controller} NotificationManager::Controller\\
 	Uses \ref{SM:notif_apiclient} and \ref{SM:notif_mail} to implement notification of the \glspl{administrator}. (\ref{F:notifmgr_controller_send_errors}, \ref{F:notifmgr_read_conf_file})
 \end{description}
@@ -563,20 +563,20 @@ Contact list for problem notifications.
 \textbf{Note:} Functional requirements derived from mandatory criteria (\ref{MandatoryCriteria}) are indexed by \textbf{F}. 
 Functional requirements derived from optional criteria (\ref{OptionalCriteria}) are indexed by \textbf{OF}.
 \subsection{Graphical User Interface (GUI)}
-The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref[SM:masterapiserver]{Master::APIServer}. Hence, most functionality described in this subsection is realized through \acrshort{API} calls to the \gls{master}.
+The \gls{gui} acts as a frontend to the functionality provided by \hyperref[SM:masterapiserver]{Master::APIServer}. Hence, most functionality described in this subsection is realized through \gls{API} calls to the \gls{master}.
 \begin{description}
-	\oitem{F}{gui_crud_inventory} \acrshort{CRUD} \glspl{slave} in \gls{inventory}.
+	\oitem{F}{gui_crud_inventory} \gls{CRUD} \glspl{slave} in \gls{inventory}.
 	\begin{description}
 		\oitem{F}{gui_crud_inventory_confirm_removal} Prompt for confirmation when removing a slave from the inventory.
 	\end{description}
 	\oitem{F}{gui_set_slave_type} Specify type of \gls{slave} (\ref{MC:available_slave_types}) upon insertion into \gls{inventory}.
 	\oitem{F}{gui_set_root_data_dir} Specify \gls{root data directory} of \glspl{slave} (\ref{MC:root_data_directory}).
-	\oitem{F}{gui_set_risk_groups} \acrshort{CRUD} \glspl{risk group} (\ref{MC:spec_risk_groups}).
+	\oitem{F}{gui_set_risk_groups} \gls{CRUD} \glspl{risk group} (\ref{MC:spec_risk_groups}).
 	\begin{description}
 		\oitem{F}{gui_crud_risk_groups_confirm_removal} Prompt for confirmation when removing a Risk Group.
 	\end{description}
 	\oitem{F}{gui_set_slave_mode} Set mode of \gls{slave} to \glslink{active mode}{active}, \glslink{maintenance mode}{maintenance} or \glslink{disabled mode}{disabled}.
-	\oitem{F}{gui_crud_replica_sets} \acrshort{CRUD} \gls{replica set} configurations (\ref{MC:replica_set_create}).
+	\oitem{F}{gui_crud_replica_sets} \gls{CRUD} \gls{replica set} configurations (\ref{MC:replica_set_create}).
 	\begin{description}
 		\oitem{F}{gui_crud_replica_sets_confirm_removal} Prompt for confirmation when removing a Replica Set.
 	\end{description}
@@ -590,21 +590,21 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 \subsection{Master}
 \subsubsection{API Server}
 \begin{description}
-	\oitem{F}{master_api_crud_slaves} Provide \acrshort{API} to \acrshort{CRUD} \glspl{slave} in \gls{inventory} (\ref{MC:inventory_definition}).
-	\oitem{F}{master_api_crud_risk_groups} Provide \acrshort{API} to \acrshort{CRUD} \glspl{risk group}.
-	\oitem{F}{master_api_set_slave_mode} Provide \acrshort{API} to set mode of \gls{host} to \glslink{active mode}{active}, \glslink{maintenance mode}{maintenance} or \glslink{disabled mode}{disabled}.
-	\oitem{F}{master_api_crud_repl_set_config} Provide \acrshort{API} to \acrshort{CRUD} \gls{replica set} configurations (\ref{MC:replica_set_create}, \ref{MC:replica_set_config_profiles}, \ref{MC:replica_set_member_pv_counts}).
-	\oitem{F}{master_api_error_reports} Provide \acrshort{API} to retrieve error reports (\ref{MC:detect_slave_unexpected_behavior}).
-	\oitem{OF}{master_api_get_auto_discovered_slaves} Provide \acrshort{API} to retrieve a list of auto-discovered \glspl{slave} (\ref{OC:manual_autodiscovery}).
-	\oitem{OF}{master_api_machine_metrics} Provide \acrshort{API} exposing machine metrics of the \glspl{slave}.
-	\oitem{OF}{master_api_repl_set_status} Provide \acrshort{API} exposing \gls{replica set} replication status of the configured \glspl{replica set}.
+	\oitem{F}{master_api_crud_slaves} Provide \gls{API} to \gls{CRUD} \glspl{slave} in \gls{inventory} (\ref{MC:inventory_definition}).
+	\oitem{F}{master_api_crud_risk_groups} Provide \gls{API} to \gls{CRUD} \glspl{risk group}.
+	\oitem{F}{master_api_set_slave_mode} Provide \gls{API} to set mode of \gls{host} to \glslink{active mode}{active}, \glslink{maintenance mode}{maintenance} or \glslink{disabled mode}{disabled}.
+	\oitem{F}{master_api_crud_repl_set_config} Provide \gls{API} to \gls{CRUD} \gls{replica set} configurations (\ref{MC:replica_set_create}, \ref{MC:replica_set_config_profiles}, \ref{MC:replica_set_member_pv_counts}).
+	\oitem{F}{master_api_error_reports} Provide \gls{API} to retrieve error reports (\ref{MC:detect_slave_unexpected_behavior}).
+	\oitem{OF}{master_api_get_auto_discovered_slaves} Provide \gls{API} to retrieve a list of auto-discovered \glspl{slave} (\ref{OC:manual_autodiscovery}).
+	\oitem{OF}{master_api_machine_metrics} Provide \gls{API} exposing machine metrics of the \glspl{slave}.
+	\oitem{OF}{master_api_repl_set_status} Provide \gls{API} exposing \gls{replica set} replication status of the configured \glspl{replica set}.
 	\oitem{OF}{} Require authentication from clients (\ref{OC:api_authentication}).
 	\oitem{OF}{master_api_command_line_parameters} Provide API to specify --- per Replica Set --- command line parameters for the member \gls{MongoDB} processes (\ref{OC:tweak_performance_parameters}).
 \end{description}
 \subsubsection{Monitor}
 \begin{description}
 	\oitem{F}{master_monitor_config} Monitor configuration \& state of \gls{MongoDB} instances running on \gls{cluster} hosts (\ref{MC:detect_slave_unexpected_behavior}).
-	\oitem{OF}{master_monitor_icmp} Monitor reachability of \gls{cluster} hosts via \acrshort{ICMP} (\ref{OC:monitor_icmp}).
+	\oitem{OF}{master_monitor_icmp} Monitor reachability of \gls{cluster} hosts via \gls{ICMP} (\ref{OC:monitor_icmp}).
 	\oitem{OF}{} Monitor machine metrics of the \glspl{slave} (load, disk usage, etc) and alert the \gls{administrator} when thresholds are exceeded (\ref{OC:extended_monitoring}).
 	\oitem{OF}{} Monitor \gls{MongoDB} log output and alert the administrator when errors are reported through the log (\ref{OC:extended_monitoring}).
 	\oitem{OF}{master_monitor_continuous_auto_discovery} Continuously auto-discover \glspl{slave} on the \gls{cluster} network and add them to the \gls{inventory} (\ref{OC:continuous_autodiscovery}). % move
@@ -667,7 +667,7 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 \subsection{NotificationManager}
 \begin{description}
 	% API Client
-	\oitem{F}{notifmgr_consume_errors} Consume error reporting \acrshort{API} of \gls{master} \ref{F:master_api_error_reports}.
+	\oitem{F}{notifmgr_consume_errors} Consume error reporting \gls{API} of \gls{master} \ref{F:master_api_error_reports}.
 	% Controller
 	\oitem{F}{notifmgr_controller_send_errors} Send error reports from \ref{F:master_api_error_reports} to configured list of contacts.
 	\oitem{F}{notifmgr_read_conf_file} Read list of contacts from a text-based configuration file.
@@ -676,14 +676,14 @@ The \acrshort{gui} acts as a frontend to the functionality provided by \hyperref
 \end{description}
 
 \subsection{Command Line Interface (CLI)}
-The \acrshort{cli} is an \emph{optional} functional requirement. It acts as a frontend to the functionality provided by \ref{SM:masterapiserver}. Hence, all functionality described in this subsection is realized through \acrshort{API} calls to the \gls{master}.
+The \gls{cli} is an \emph{optional} functional requirement. It acts as a frontend to the functionality provided by \ref{SM:masterapiserver}. Hence, all functionality described in this subsection is realized through \gls{API} calls to the \gls{master}.
 \begin{description}
-	\oitem{OF}{cli_crud_inventory} \acrshort{CRUD} \glspl{slave} in (\gls{inventory}).
+	\oitem{OF}{cli_crud_inventory} \gls{CRUD} \glspl{slave} in (\gls{inventory}).
 	\oitem{OF}{cli_set_slave_type} Specify type of slave (\ref{MC:available_slave_types}) on insertion into \gls{inventory}.
 	\oitem{OF}{cli_set_root_data_dir} Specify \gls{root data directory} of \glspl{slave} (\ref{MC:root_data_directory}).
-	\oitem{OF}{cli_set_risk_groups} \acrshort{CRUD} \glspl{risk group} (\ref{MC:spec_risk_groups})
+	\oitem{OF}{cli_set_risk_groups} \gls{CRUD} \glspl{risk group} (\ref{MC:spec_risk_groups})
 	\oitem{OF}{gui_set_slave_mode} Set mode of \gls{host} to \glslink{active mode}{active}, \glslink{maintenance mode}{maintenance} or \glslink{disabled mode}{disabled}.
-	\oitem{OF}{cli_crud_replica_sets} \acrshort{CRUD} \gls{replica set} configurations (\ref{MC:replica_set_create}).
+	\oitem{OF}{cli_crud_replica_sets} \gls{CRUD} \gls{replica set} configurations (\ref{MC:replica_set_create}).
 	\oitem{OF}{cli_display_errors} Display error reports (\ref{F:master_api_error_reports}).
 	\oitem{OF}{cli_display_machine_metrics} Display machine metrics of the \glspl{slave}. 
 	\oitem{OF}{cli_display_repl_status} Display replication status of the configured \glspl{replica set}.
@@ -695,12 +695,12 @@ The \acrshort{cli} is an \emph{optional} functional requirement. It acts as a fr
 \begin{description}
 	% Usability
 	\oitem{NF}{} The \gls{administrator} does not need extended knowledge of \gls{MongoDB} to configure \glspl{replica set} using \mamid. %todo cannot measure
-	\oitem{NF}{} The \acrshort{gui} needs to be intuitive to \glspl{administrator} familiar with similar tools. %TODO cannot measure
+	\oitem{NF}{} The \gls{gui} needs to be intuitive to \glspl{administrator} familiar with similar tools. %TODO cannot measure
 	% Reliability
 	\oitem{NF}{} \mamid can handle an unordered parallel reboot of an arbitrary number of hosts in the cluster.
 	\oitem{NF}{} The \gls{cluster} is resilient against unexpected failures of \glspl{slave}. %todo cannot measure
 	% Performance
-	\oitem{NF}{} The \acrshort{gui} responds to user interaction within $500ms$.
+	\oitem{NF}{} The \gls{gui} responds to user interaction within $500ms$.
 	\oitem{NF}{} \mamid supports at least 100 \glspl{slave} in the \gls{cluster}.
 	% Maintainability
 	\oitem{NF}{} \mamid should be easily portable to all of the POSIX-compliant platforms supported by the version of MongoDB specified in \ref{subsec:Software}.
@@ -708,7 +708,7 @@ The \acrshort{cli} is an \emph{optional} functional requirement. It acts as a fr
 
 \subsection{Constraints}
 \begin{description}
-	\oitem{NF}{} The \hyperref[SM:masterapiserver]{Master API} protocol is \acrshort{JSON} over \acrshort{HTTP}.
+	\oitem{NF}{} The \hyperref[SM:masterapiserver]{Master API} protocol is \gls{JSON} over \gls{HTTP}.
 	\oitem{NF}{} The \hyperref[SM:masterapiserver]{Master API} is stateless.
 	\oitem{NF}{} Implementation Languages
 	\begin{itemize}
@@ -905,7 +905,7 @@ After clicking the red \textit{Remove Replica Set} button in the \textit{Replica
 %text...
 
 \section{Test Scenarios}
-Unless explicitly stated, the \acrshort{gui}'s \textit{Overview} page is always opened at the beginning of a test scenario (\ref{subsec:ui:overview}).
+Unless explicitly stated, the \gls{gui}'s \textit{Overview} page is always opened at the beginning of a test scenario (\ref{subsec:ui:overview}).
 
 \begin{description}
 
@@ -1130,7 +1130,6 @@ Unless explicitly stated, the \acrshort{gui}'s \textit{Overview} page is always 
   }
 }
 \makeatother
-\glsaddall
 \printglossary[type=main, title={Glossary}, toctitle={Glossary}, style=myAltlist]
 
 \end{document}
