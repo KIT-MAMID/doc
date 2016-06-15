@@ -1,12 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
-  <zoom_level>7</zoom_level>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>13</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>182</x>
-      <y>399</y>
-      <w>147</w>
-      <h>35</h>
+      <x>156</x>
+      <y>572</y>
+      <w>273</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 Persistent Host</panel_attributes>
@@ -15,10 +16,10 @@ Persistent Host</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>343</x>
-      <y>364</y>
-      <w>70</w>
-      <h>35</h>
+      <x>455</x>
+      <y>507</y>
+      <w>130</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 Slave</panel_attributes>
@@ -27,23 +28,23 @@ Slave</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>455</x>
-      <y>140</y>
-      <w>105</w>
-      <h>35</h>
+      <x>663</x>
+      <y>91</y>
+      <w>195</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 mongos
-(Sharding)</panel_attributes>
+(query router)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>455</x>
-      <y>98</y>
-      <w>105</w>
-      <h>35</h>
+      <x>663</x>
+      <y>13</y>
+      <w>195</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 Application</panel_attributes>
@@ -52,10 +53,10 @@ Application</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>343</x>
-      <y>399</y>
-      <w>70</w>
-      <h>35</h>
+      <x>455</x>
+      <y>572</y>
+      <w>130</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 Volatile Host</panel_attributes>
@@ -64,10 +65,10 @@ Volatile Host</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>182</x>
-      <y>364</y>
-      <w>147</w>
-      <h>35</h>
+      <x>156</x>
+      <y>507</y>
+      <w>273</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 Slave</panel_attributes>
@@ -76,10 +77,10 @@ Slave</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>280</x>
-      <y>329</y>
-      <w>49</w>
-      <h>35</h>
+      <x>338</x>
+      <y>442</y>
+      <w>91</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 mongod</panel_attributes>
@@ -88,10 +89,10 @@ mongod</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>231</x>
-      <y>329</y>
-      <w>49</w>
-      <h>35</h>
+      <x>247</x>
+      <y>442</y>
+      <w>91</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 mongod</panel_attributes>
@@ -100,10 +101,10 @@ mongod</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>343</x>
-      <y>329</y>
-      <w>70</w>
-      <h>35</h>
+      <x>455</x>
+      <y>442</y>
+      <w>130</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 mongod</panel_attributes>
@@ -112,10 +113,10 @@ mongod</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>273</x>
-      <y>231</y>
-      <w>84</w>
-      <h>28</h>
+      <x>325</x>
+      <y>260</y>
+      <w>156</w>
+      <h>52</h>
     </coordinates>
     <panel_attributes>Replica Set</panel_attributes>
     <additional_attributes/>
@@ -123,10 +124,10 @@ mongod</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>182</x>
-      <y>329</y>
-      <w>49</w>
-      <h>35</h>
+      <x>156</x>
+      <y>442</y>
+      <w>91</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 mongod</panel_attributes>
@@ -135,10 +136,10 @@ mongod</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>462</x>
-      <y>231</y>
-      <w>84</w>
-      <h>28</h>
+      <x>676</x>
+      <y>260</y>
+      <w>156</w>
+      <h>52</h>
     </coordinates>
     <panel_attributes>Replica Set</panel_attributes>
     <additional_attributes/>
@@ -146,10 +147,10 @@ mongod</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>644</x>
-      <y>238</y>
-      <w>112</w>
-      <h>28</h>
+      <x>1014</x>
+      <y>273</y>
+      <w>208</w>
+      <h>52</h>
     </coordinates>
     <panel_attributes>Config Replica Set</panel_attributes>
     <additional_attributes/>
@@ -157,10 +158,10 @@ mongod</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>196</x>
-      <y>252</y>
-      <w>133</w>
-      <h>91</h>
+      <x>182</x>
+      <y>299</y>
+      <w>247</w>
+      <h>169</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;110.0;170.0;10.0</additional_attributes>
@@ -168,10 +169,10 @@ mongod</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>308</x>
-      <y>252</y>
-      <w>98</w>
-      <h>91</h>
+      <x>390</x>
+      <y>299</y>
+      <w>182</w>
+      <h>169</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>120.0;110.0;10.0;10.0</additional_attributes>
@@ -179,10 +180,10 @@ mongod</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>308</x>
-      <y>252</y>
-      <w>168</w>
-      <h>91</h>
+      <x>390</x>
+      <y>299</y>
+      <w>312</w>
+      <h>169</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>220.0;110.0;10.0;10.0</additional_attributes>
@@ -190,10 +191,10 @@ mongod</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>497</x>
-      <y>252</y>
-      <w>63</w>
-      <h>91</h>
+      <x>741</x>
+      <y>299</y>
+      <w>117</w>
+      <h>169</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>70.0;110.0;10.0;10.0</additional_attributes>
@@ -201,10 +202,10 @@ mongod</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>497</x>
-      <y>252</y>
-      <w>140</w>
-      <h>91</h>
+      <x>741</x>
+      <y>299</y>
+      <w>260</w>
+      <h>169</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>180.0;110.0;10.0;10.0</additional_attributes>
@@ -212,10 +213,10 @@ mongod</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>427</x>
-      <y>364</y>
-      <w>70</w>
-      <h>35</h>
+      <x>611</x>
+      <y>507</y>
+      <w>130</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 Slave</panel_attributes>
@@ -224,10 +225,10 @@ Slave</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>427</x>
-      <y>399</y>
-      <w>70</w>
-      <h>35</h>
+      <x>611</x>
+      <y>572</y>
+      <w>130</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 Volatile Host</panel_attributes>
@@ -236,10 +237,10 @@ Volatile Host</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>427</x>
-      <y>329</y>
-      <w>70</w>
-      <h>35</h>
+      <x>611</x>
+      <y>442</y>
+      <w>130</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 mongod</panel_attributes>
@@ -248,10 +249,10 @@ mongod</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>511</x>
-      <y>364</y>
-      <w>70</w>
-      <h>35</h>
+      <x>767</x>
+      <y>507</y>
+      <w>130</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 Slave</panel_attributes>
@@ -260,10 +261,10 @@ Slave</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>511</x>
-      <y>399</y>
-      <w>70</w>
-      <h>35</h>
+      <x>767</x>
+      <y>572</y>
+      <w>130</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 Volatile Host</panel_attributes>
@@ -272,10 +273,10 @@ Volatile Host</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>511</x>
-      <y>329</y>
-      <w>70</w>
-      <h>35</h>
+      <x>767</x>
+      <y>442</y>
+      <w>130</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 mongod</panel_attributes>
@@ -284,10 +285,10 @@ mongod</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>595</x>
-      <y>364</y>
-      <w>70</w>
-      <h>35</h>
+      <x>923</x>
+      <y>507</y>
+      <w>130</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 Slave</panel_attributes>
@@ -296,10 +297,10 @@ Slave</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>595</x>
-      <y>399</y>
-      <w>70</w>
-      <h>35</h>
+      <x>923</x>
+      <y>572</y>
+      <w>130</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 Volatile Host</panel_attributes>
@@ -308,10 +309,10 @@ Volatile Host</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>595</x>
-      <y>329</y>
-      <w>70</w>
-      <h>35</h>
+      <x>923</x>
+      <y>442</y>
+      <w>130</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 mongod</panel_attributes>
@@ -320,10 +321,10 @@ mongod</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>679</x>
-      <y>364</y>
-      <w>70</w>
-      <h>35</h>
+      <x>1079</x>
+      <y>507</y>
+      <w>130</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 Slave</panel_attributes>
@@ -332,10 +333,10 @@ Slave</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>679</x>
-      <y>399</y>
-      <w>70</w>
-      <h>35</h>
+      <x>1079</x>
+      <y>572</y>
+      <w>130</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 Volatile Host</panel_attributes>
@@ -344,10 +345,10 @@ Volatile Host</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>679</x>
-      <y>329</y>
-      <w>70</w>
-      <h>35</h>
+      <x>1079</x>
+      <y>442</y>
+      <w>130</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 mongod</panel_attributes>
@@ -356,10 +357,10 @@ mongod</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>763</x>
-      <y>364</y>
-      <w>70</w>
-      <h>35</h>
+      <x>1235</x>
+      <y>507</y>
+      <w>130</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 Slave</panel_attributes>
@@ -368,10 +369,10 @@ Slave</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>763</x>
-      <y>399</y>
-      <w>70</w>
-      <h>35</h>
+      <x>1235</x>
+      <y>572</y>
+      <w>130</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 Volatile Host</panel_attributes>
@@ -380,10 +381,10 @@ Volatile Host</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>763</x>
-      <y>329</y>
-      <w>70</w>
-      <h>35</h>
+      <x>1235</x>
+      <y>442</y>
+      <w>130</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>valign=center
 mongod</panel_attributes>
@@ -392,10 +393,10 @@ mongod</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>252</x>
-      <y>252</y>
-      <w>266</w>
-      <h>91</h>
+      <x>286</x>
+      <y>299</y>
+      <w>494</w>
+      <h>169</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;110.0;360.0;10.0</additional_attributes>
@@ -403,10 +404,10 @@ mongod</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>693</x>
-      <y>259</y>
-      <w>119</w>
-      <h>84</h>
+      <x>1105</x>
+      <y>312</y>
+      <w>221</w>
+      <h>156</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>150.0;100.0;10.0;10.0</additional_attributes>
@@ -414,10 +415,10 @@ mongod</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>693</x>
-      <y>259</y>
-      <w>35</w>
-      <h>84</h>
+      <x>1105</x>
+      <y>312</y>
+      <w>65</w>
+      <h>156</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>30.0;100.0;10.0;10.0</additional_attributes>
@@ -425,10 +426,10 @@ mongod</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>301</x>
-      <y>259</y>
-      <w>413</w>
-      <h>84</h>
+      <x>377</x>
+      <y>312</y>
+      <w>767</w>
+      <h>156</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;100.0;570.0;10.0</additional_attributes>
@@ -436,10 +437,10 @@ mongod</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>308</x>
-      <y>168</y>
-      <w>210</w>
-      <h>77</h>
+      <x>390</x>
+      <y>143</y>
+      <w>390</w>
+      <h>143</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;90.0;280.0;10.0</additional_attributes>
@@ -447,10 +448,10 @@ mongod</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>497</x>
-      <y>168</y>
-      <w>21</w>
-      <h>77</h>
+      <x>741</x>
+      <y>143</y>
+      <w>39</w>
+      <h>143</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
@@ -458,21 +459,21 @@ mongod</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>497</x>
-      <y>168</y>
-      <w>224</w>
-      <h>84</h>
+      <x>845</x>
+      <y>104</y>
+      <w>312</w>
+      <h>195</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
-    <additional_attributes>300.0;100.0;10.0;10.0</additional_attributes>
+    <additional_attributes>220.0;130.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>497</x>
-      <y>126</y>
-      <w>21</w>
-      <h>28</h>
+      <x>741</x>
+      <y>65</y>
+      <w>39</w>
+      <h>52</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;20.0</additional_attributes>
@@ -480,10 +481,10 @@ mongod</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>98</x>
-      <y>203</y>
-      <w>756</w>
-      <h>189</h>
+      <x>0</x>
+      <y>208</y>
+      <w>1404</w>
+      <h>351</h>
     </coordinates>
     <panel_attributes>halign=left
 Managed by MAMID Master
@@ -493,10 +494,10 @@ layer=-1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>98</x>
-      <y>427</y>
-      <w>70</w>
-      <h>49</h>
+      <x>0</x>
+      <y>624</y>
+      <w>130</w>
+      <h>91</h>
     </coordinates>
     <panel_attributes>valign=center
 Master</panel_attributes>
@@ -505,10 +506,10 @@ Master</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>161</x>
-      <y>448</y>
-      <w>609</w>
-      <h>21</h>
+      <x>117</x>
+      <y>663</y>
+      <w>1131</w>
+      <h>39</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;10.0;850.0;10.0</additional_attributes>
@@ -516,10 +517,10 @@ Master</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>168</x>
-      <y>371</y>
-      <w>28</w>
-      <h>98</h>
+      <x>130</x>
+      <y>520</y>
+      <w>52</w>
+      <h>182</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>20.0;10.0;10.0;10.0;10.0;120.0</additional_attributes>
@@ -527,10 +528,10 @@ Master</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>329</x>
-      <y>371</y>
-      <w>28</w>
-      <h>98</h>
+      <x>429</x>
+      <y>520</y>
+      <w>52</w>
+      <h>182</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>20.0;10.0;10.0;10.0;10.0;120.0</additional_attributes>
@@ -538,10 +539,10 @@ Master</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>413</x>
-      <y>371</y>
-      <w>28</w>
-      <h>98</h>
+      <x>585</x>
+      <y>520</y>
+      <w>52</w>
+      <h>182</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>20.0;10.0;10.0;10.0;10.0;120.0</additional_attributes>
@@ -549,10 +550,10 @@ Master</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>497</x>
-      <y>371</y>
-      <w>28</w>
-      <h>98</h>
+      <x>741</x>
+      <y>520</y>
+      <w>52</w>
+      <h>182</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>20.0;10.0;10.0;10.0;10.0;120.0</additional_attributes>
@@ -560,10 +561,10 @@ Master</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>581</x>
-      <y>371</y>
-      <w>28</w>
-      <h>98</h>
+      <x>897</x>
+      <y>520</y>
+      <w>52</w>
+      <h>182</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>20.0;10.0;10.0;10.0;10.0;120.0</additional_attributes>
@@ -571,10 +572,10 @@ Master</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>665</x>
-      <y>371</y>
-      <w>28</w>
-      <h>98</h>
+      <x>1053</x>
+      <y>520</y>
+      <w>52</w>
+      <h>182</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>20.0;10.0;10.0;10.0;10.0;120.0</additional_attributes>
@@ -582,10 +583,10 @@ Master</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>749</x>
-      <y>371</y>
-      <w>28</w>
-      <h>98</h>
+      <x>1209</x>
+      <y>520</y>
+      <w>52</w>
+      <h>182</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>20.0;10.0;10.0;10.0;10.0;120.0</additional_attributes>
