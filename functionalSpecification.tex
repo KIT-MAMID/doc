@@ -298,7 +298,7 @@ A possible deployment of \mamid is depicted in Figure \ref{fig:cluster_layout}.
 \subsection{Demarcation Criteria}
 \begin{description}
 \oitem{DMC}{} The \gls{administrator} does not directly configure individual \gls{MongoDB} instances spawned \& controlled by \mamid. All configuration happens through \mamid, either automatically (e.g. Replica Set deployment) or through a \mamid interface (e.g. GUI, CLI, HTTP API).
-\oitem{DMC}{} \mamid does not implement support for higher-layer \gls{MongoDB} features, e.g. \gls{sharding}.
+\oitem{DMC}{} \mamid does not deploy MongoDB query routers.
 \oitem{DMC}{} \mamid deploys neither the operating system nor other required software (such as \gls{MongoDB} binaries) to the \gls{cluster} \glspl{host}.
 \end{description}
 
