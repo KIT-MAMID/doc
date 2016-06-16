@@ -757,6 +757,65 @@
          style="font-size:14px;font-family:sans-serif;stroke:none">Slave</text>
     </g>
     <g
+       transform="translate(1100,490)"
+       id="g5348"
+       style="display:inline">
+      <rect
+         x="0.5"
+         width="98.5"
+         height="48.5"
+         y="0.5"
+         clip-path="url(#clipPath7)"
+         id="rect5350"
+         style="fill:none" />
+      <text
+         x="30"
+         font-size="14px"
+         y="30.054701"
+         clip-path="url(#clipPath7)"
+         xml:space="preserve"
+         id="text5352"
+         style="font-size:14px;font-family:sans-serif;stroke:none">Slave</text>
+    </g>
+    <g
+       transform="translate(980,490)"
+       id="g5378"
+       style="display:inline">
+      <rect
+         x="0.5"
+         width="98.5"
+         height="48.5"
+         y="0.5"
+         clip-path="url(#clipPath7)"
+         id="rect5380"
+         style="fill:none" />
+      <text
+         x="30"
+         font-size="14px"
+         y="30.054701"
+         clip-path="url(#clipPath7)"
+         xml:space="preserve"
+         id="text5382"
+         style="font-size:14px;font-family:sans-serif;stroke:none">Slave</text>
+    </g>
+    <g
+       transform="translate(270,490)"
+       id="g5548"
+       style="display:inline">
+      <text
+         x="85"
+         font-size="14px"
+         y="30.054701"
+         clip-path="url(#clipPath11)"
+         xml:space="preserve"
+         id="text5552"
+         style="font-size:14px;font-family:sans-serif;stroke:none">Slave</text>
+    </g>
+  </g>
+  <g
+     style="display:inline"
+     id="layer11">
+    <g
        transform="translate(740,490)"
        id="g5438"
        style="display:inline">
@@ -817,61 +876,6 @@
          clip-path="url(#clipPath7)"
          xml:space="preserve"
          id="text5594"
-         style="font-size:14px;font-family:sans-serif;stroke:none">Slave</text>
-    </g>
-    <g
-       transform="translate(1100,490)"
-       id="g5348"
-       style="display:inline">
-      <rect
-         x="0.5"
-         width="98.5"
-         height="48.5"
-         y="0.5"
-         clip-path="url(#clipPath7)"
-         id="rect5350"
-         style="fill:none" />
-      <text
-         x="30"
-         font-size="14px"
-         y="30.054701"
-         clip-path="url(#clipPath7)"
-         xml:space="preserve"
-         id="text5352"
-         style="font-size:14px;font-family:sans-serif;stroke:none">Slave</text>
-    </g>
-    <g
-       transform="translate(980,490)"
-       id="g5378"
-       style="display:inline">
-      <rect
-         x="0.5"
-         width="98.5"
-         height="48.5"
-         y="0.5"
-         clip-path="url(#clipPath7)"
-         id="rect5380"
-         style="fill:none" />
-      <text
-         x="30"
-         font-size="14px"
-         y="30.054701"
-         clip-path="url(#clipPath7)"
-         xml:space="preserve"
-         id="text5382"
-         style="font-size:14px;font-family:sans-serif;stroke:none">Slave</text>
-    </g>
-    <g
-       transform="translate(270,490)"
-       id="g5548"
-       style="display:inline">
-      <text
-         x="85"
-         font-size="14px"
-         y="30.054701"
-         clip-path="url(#clipPath11)"
-         xml:space="preserve"
-         id="text5552"
          style="font-size:14px;font-family:sans-serif;stroke:none">Slave</text>
     </g>
   </g>
@@ -1100,6 +1104,35 @@
          style="fill:none" />
     </g>
     <g
+       transform="translate(250,500)"
+       id="g5678"
+       style="display:inline">
+      <path
+         d="m 20.5,10.5 -10,0"
+         clip-path="url(#clipPath17)"
+         id="path5680"
+         style="fill:none" />
+      <path
+         d="m 10.5,10.5 0,110"
+         clip-path="url(#clipPath17)"
+         id="path5682"
+         style="fill:none" />
+    </g>
+    <g
+       transform="translate(250,610)"
+       id="g5684"
+       style="display:inline">
+      <path
+         d="m 10.5,10.5 830,0"
+         clip-path="url(#clipPath18)"
+         id="path5686"
+         style="fill:none" />
+    </g>
+  </g>
+  <g
+     style="display:none"
+     id="layer12">
+    <g
        transform="translate(720,500)"
        id="g5660"
        style="display:inline">
@@ -1142,31 +1175,6 @@
          d="m 10.5,10.5 0,110"
          clip-path="url(#clipPath17)"
          id="path5676"
-         style="fill:none" />
-    </g>
-    <g
-       transform="translate(250,500)"
-       id="g5678"
-       style="display:inline">
-      <path
-         d="m 20.5,10.5 -10,0"
-         clip-path="url(#clipPath17)"
-         id="path5680"
-         style="fill:none" />
-      <path
-         d="m 10.5,10.5 0,110"
-         clip-path="url(#clipPath17)"
-         id="path5682"
-         style="fill:none" />
-    </g>
-    <g
-       transform="translate(250,610)"
-       id="g5684"
-       style="display:inline">
-      <path
-         d="m 10.5,10.5 830,0"
-         clip-path="url(#clipPath18)"
-         id="path5686"
          style="fill:none" />
     </g>
   </g>
@@ -1456,26 +1464,6 @@
          style="stroke:none" />
     </g>
     <g
-       transform="translate(740,440)"
-       id="g5418">
-      <rect
-         x="0.5"
-         width="98.5"
-         height="48.5"
-         y="0.5"
-         clip-path="url(#clipPath7)"
-         id="rect5420"
-         style="fill:none" />
-      <text
-         x="21"
-         font-size="14px"
-         y="30.054701"
-         clip-path="url(#clipPath7)"
-         xml:space="preserve"
-         id="text5422"
-         style="font-size:14px;font-family:sans-serif;stroke:none">mongod</text>
-    </g>
-    <g
        transform="translate(620,440)"
        id="g5444"
        style="fill:#ffffff;fill-opacity:0;stroke:#ffffff;stroke-opacity:0">
@@ -1487,26 +1475,6 @@
          clip-path="url(#clipPath7)"
          id="rect5446"
          style="stroke:none" />
-    </g>
-    <g
-       transform="translate(620,440)"
-       id="g5448">
-      <rect
-         x="0.5"
-         width="98.5"
-         height="48.5"
-         y="0.5"
-         clip-path="url(#clipPath7)"
-         id="rect5450"
-         style="fill:none" />
-      <text
-         x="21"
-         font-size="14px"
-         y="30.054701"
-         clip-path="url(#clipPath7)"
-         xml:space="preserve"
-         id="text5452"
-         style="font-size:14px;font-family:sans-serif;stroke:none">mongod</text>
     </g>
     <g
        transform="translate(270,440)"
@@ -1553,26 +1521,6 @@
          clip-path="url(#clipPath7)"
          id="rect5516"
          style="stroke:none" />
-    </g>
-    <g
-       transform="translate(500,440)"
-       id="g5518">
-      <rect
-         x="0.5"
-         width="98.5"
-         height="48.5"
-         y="0.5"
-         clip-path="url(#clipPath7)"
-         id="rect5520"
-         style="fill:none" />
-      <text
-         x="21"
-         font-size="14px"
-         y="30.054701"
-         clip-path="url(#clipPath7)"
-         xml:space="preserve"
-         id="text5522"
-         style="font-size:14px;font-family:sans-serif;stroke:none">mongod</text>
     </g>
     <g
        transform="translate(340,440)"
@@ -1650,15 +1598,6 @@
          style="fill:none" />
     </g>
     <g
-       transform="translate(780,340)"
-       id="g5708">
-      <path
-         d="m 10.5,100.5 220,-90"
-         clip-path="url(#clipPath24)"
-         id="path5710"
-         style="fill:none" />
-    </g>
-    <g
        transform="translate(1000,340)"
        id="g5712">
       <path
@@ -1686,15 +1625,6 @@
          style="fill:none" />
     </g>
     <g
-       transform="translate(660,330)"
-       id="g5724">
-      <path
-         d="m 10.5,110.5 60,-100"
-         clip-path="url(#clipPath28)"
-         id="path5726"
-         style="fill:none" />
-    </g>
-    <g
        transform="translate(450,330)"
        id="g5728">
       <path
@@ -1704,21 +1634,109 @@
          style="fill:none" />
     </g>
     <g
-       transform="translate(450,330)"
-       id="g5732">
-      <path
-         d="M 120.5,110.5 10.5,10.5"
-         clip-path="url(#clipPath30)"
-         id="path5734"
-         style="fill:none" />
-    </g>
-    <g
        transform="translate(290,330)"
        id="g5736">
       <path
          d="m 10.5,110.5 160,-100"
          clip-path="url(#clipPath31)"
          id="path5738"
+         style="fill:none" />
+    </g>
+  </g>
+  <g
+     style="display:none"
+     id="layer10">
+    <g
+       transform="translate(740,440)"
+       id="g5418"
+       style="display:inline">
+      <rect
+         x="0.5"
+         width="98.5"
+         height="48.5"
+         y="0.5"
+         clip-path="url(#clipPath7)"
+         id="rect5420"
+         style="fill:none" />
+      <text
+         x="21"
+         font-size="14px"
+         y="30.054701"
+         clip-path="url(#clipPath7)"
+         xml:space="preserve"
+         id="text5422"
+         style="font-size:14px;font-family:sans-serif;stroke:none">mongod</text>
+    </g>
+    <g
+       transform="translate(620,440)"
+       id="g5448"
+       style="display:inline">
+      <rect
+         x="0.5"
+         width="98.5"
+         height="48.5"
+         y="0.5"
+         clip-path="url(#clipPath7)"
+         id="rect5450"
+         style="fill:none" />
+      <text
+         x="21"
+         font-size="14px"
+         y="30.054701"
+         clip-path="url(#clipPath7)"
+         xml:space="preserve"
+         id="text5452"
+         style="font-size:14px;font-family:sans-serif;stroke:none">mongod</text>
+    </g>
+    <g
+       transform="translate(500,440)"
+       id="g5518"
+       style="display:inline">
+      <rect
+         x="0.5"
+         width="98.5"
+         height="48.5"
+         y="0.5"
+         clip-path="url(#clipPath7)"
+         id="rect5520"
+         style="fill:none" />
+      <text
+         x="21"
+         font-size="14px"
+         y="30.054701"
+         clip-path="url(#clipPath7)"
+         xml:space="preserve"
+         id="text5522"
+         style="font-size:14px;font-family:sans-serif;stroke:none">mongod</text>
+    </g>
+    <g
+       transform="translate(780,340)"
+       id="g5708"
+       style="display:inline">
+      <path
+         d="m 10.5,100.5 220,-90"
+         clip-path="url(#clipPath24)"
+         id="path5710"
+         style="fill:none" />
+    </g>
+    <g
+       transform="translate(660,330)"
+       id="g5724"
+       style="display:inline">
+      <path
+         d="m 10.5,110.5 60,-100"
+         clip-path="url(#clipPath28)"
+         id="path5726"
+         style="fill:none" />
+    </g>
+    <g
+       transform="translate(450,330)"
+       id="g5732"
+       style="display:inline">
+      <path
+         d="M 120.5,110.5 10.5,10.5"
+         clip-path="url(#clipPath30)"
+         id="path5734"
          style="fill:none" />
     </g>
   </g>
@@ -1804,13 +1822,14 @@
          id="text5582"
          style="font-size:14px;font-family:sans-serif;stroke:none">mongos</text>
       <text
+         transform="translate(-9.8196603,0)"
          x="38"
          font-size="14px"
          y="38.109402"
          clip-path="url(#clipPath12)"
          xml:space="preserve"
          id="text5584"
-         style="font-size:14px;font-family:sans-serif;stroke:none">(Sharding)</text>
+         style="font-size:14px;font-family:sans-serif;stroke:none">(query router)</text>
     </g>
     <g
        transform="translate(720,150)"
@@ -1825,6 +1844,7 @@
        transform="translate(720,210)"
        id="g5692">
       <path
+         transform="matrix(0.72804505,0,0,1.2849145,81.742988,-28.613384)"
          d="m 300.5,100.5 -290,-90"
          clip-path="url(#clipPath20)"
          id="path5694"
