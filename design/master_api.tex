@@ -1,2 +1,39 @@
+% Args: Method, URI, 
+\newcommand{\apicall}[7][]{
+	\subsubsection{\uppercase{#1} - #2}
+	\begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Return Codesaa}] %aa intentioal -  more distance
+		\item[Parameters]
+		\begin{tabularx}{\linewidth}{c|c|*1{>{\centering\arraybackslash}X}@{}}
+			\textbf{Parameter} & \textbf{Data Type} & \textbf{Description}\\
+			\hline
+			#3
+		\end{tabularx}
+		
+		\item[Returns]
+		\begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Status Codeaa}] %aa intentioal -  more distance
+			\item[Status Code] #4
+			\item[Headers] \begin{tabularx}{\linewidth}{c|*1{>{\centering\arraybackslash}X}@{}}
+				\textbf{HTTP Header} & \textbf{Content}\\
+				\hline
+				#5
+			\end{tabularx}
+			\item[Body] #6
+		\end{description}
+		
+		\item[Error Codes]
+		\begin{tabularx}{\linewidth}{c|*1{>{\centering\arraybackslash}X}@{}}
+			\textbf{HTTP Status Code} & \textbf{Reason}\\
+			\hline
+			#7
+		\end{tabularx}
+	\end{description}
+}
+
 \section{Master API}
-Bla bla
+\subsection{slaves}
+\apicall[put]{/slave}
+	{slave & slave object & slave to add}
+	{201}
+	{Location & Reference to added slave}
+	{}
+	{400 & Invalid parameter}
