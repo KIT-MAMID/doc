@@ -1,39 +1,89 @@
+
+%http://tex.stackexchange.com/questions/43002/how-to-preserve-the-same-parskip-in-minipage
+\newlength{\currentparskip}
+\newenvironment{minipageparskip}
+{\setlength{\currentparskip}{\parskip}% save the value
+	\begin{minipage}{\textwidth}% open the minipage
+		\setlength{\parskip}{0.8em}% restore the value
+	}
+	{\end{minipage}}
+
 % Args: Method, URI, 
-\newcommand{\apicall}[7][]{
-	\subsubsection{\uppercase{#1} - #2}
+\newcommand{\apicall}[8][]{
+\begin{minipageparskip}
+	\paragraph{\framebox{\uppercase{#1}} #2 - #3}
 	\begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Return Codesaa}] %aa intentioal -  more distance
 		\item[Parameters]
 		\begin{tabularx}{\linewidth}{c|c|*1{>{\centering\arraybackslash}X}@{}}
 			\textbf{Parameter} & \textbf{Data Type} & \textbf{Description}\\
 			\hline
-			#3
+			#4
 		\end{tabularx}
 		
 		\item[Returns]
 		\begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Status Codeaa}] %aa intentioal -  more distance
-			\item[Status Code] #4
-			\item[Headers] \begin{tabularx}{\linewidth}{c|*1{>{\centering\arraybackslash}X}@{}}
-				\textbf{HTTP Header} & \textbf{Content}\\
-				\hline
-				#5
-			\end{tabularx}
-			\item[Body] #6
+			\item[Status Code] #5
+			\ifthenelse{\equal{#6}{}}
+			{} % optional argument #1 is empty: skip
+			{\item[Headers] \begin{tabularx}{\linewidth}{c|*1{>{\centering\arraybackslash}X}@{}}
+					\textbf{HTTP Header} & \textbf{Content}\\
+					\hline
+					#6
+			\end{tabularx}}
+			\ifthenelse{\equal{#7}{}}
+			{\item[Body] \emph{Empty}} % optional argument #1 is empty: skip
+			{\item[Body] #7}
 		\end{description}
 		
 		\item[Error Codes]
 		\begin{tabularx}{\linewidth}{c|*1{>{\centering\arraybackslash}X}@{}}
 			\textbf{HTTP Status Code} & \textbf{Reason}\\
-			\hline
-			#7
+			\hline%
+\ifthenelse{\equal{#1}{put}}{400 & Invalid parameters in object}{}%
+\ifthenelse{\equal{#1}{get}}{404 & Object does not exist}{}%
+\ifthenelse{\equal{#1}{post}}{404 & Object does not exist\\400 & Invalid parameters in object}{}%
+\ifthenelse{\equal{#1}{delete}}{404 & Object does not exist}{}%
+\if\relax\detokenize{#8}\relax
+\else
+\\#8
+\fi
 		\end{tabularx}
 	\end{description}
+\end{minipageparskip}
+\vspace{1em}
 }
 
 \section{Master API}
-\subsection{slaves}
-\apicall[put]{/slave}
+%TODO General api description
+%Uses RESTful HTTP
+%Generic error responses
+\subsection{API Objects}
+\subsection{API Methods}
+\subsubsection{Slaves}
+\apicall[put]{/slave}{Adds a slave}
 	{slave & slave object & slave to add}
 	{201}
 	{Location & Reference to added slave}
 	{}
-	{400 & Invalid parameter}
+	{}
+	
+\apicall[get]{/slave/<id>}{Gets a slave}
+	{id & integer & id of the slave to get}
+	{200}
+	{}
+	{slave object}
+	{}
+	
+\apicall[post]{/slave/<id>}{Updates a slave}
+	{id & integer & id of the slave to update}
+	{200}
+	{}
+	{}
+	{}
+	
+\apicall[delete]{/slave/<id>}{Deletes a slave}
+	{id & integer & id of the slave to update}
+	{200}
+	{}
+	{slave object}
+	{}
