@@ -1,4 +1,4 @@
 [submodule "ui"]
-	path = ui
+	path = functional_specification/ui
 	url = ssh://git@github.com/KIT-MAMID/ui_draft.git
 	branch = master
