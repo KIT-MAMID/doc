@@ -14,11 +14,15 @@
 	\paragraph{\framebox{\uppercase{#1}} #2 - #3}
 	\begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Return Codesaa}] %aa intentioal -  more distance
 		\item[Parameters]
+		\if\relax\detokenize{#4}\relax
+		\emph{None}
+		\else
 		\begin{tabularx}{\linewidth}{c|c|*1{>{\centering\arraybackslash}X}@{}}
 			\textbf{Parameter} & \textbf{Data Type} & \textbf{Description}\\
 			\hline
 			#4
 		\end{tabularx}
+		\fi
 		
 		\item[Returns]
 		\begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Status Codeaa}] %aa intentioal -  more distance
@@ -71,8 +75,25 @@ API Objects are exchanged in JSON format.
 	"state": <string>
 }
 \end{lstlisting}
+\subsubsection{Replica Sets}
+\begin{lstlisting}
+{
+	"name": <string>,
+	"persistent_node_count": <int>,
+	"volatile_node_count": <int>,
+	"configure_as_sharding_config_server": <bool>
+}
+\end{lstlisting}
 \subsection{API Methods}
 \subsubsection{Slaves}
+%Do not add default error codes
+\apicall[get\relax]{/slaves}{Gets all slaves}
+	{}
+	{200}
+	{}
+	{array of slave objects}
+	{}
+
 \apicall[put]{/slave}{Adds a slave}
 	{slave & slave object & slave to add}
 	{201}
@@ -98,5 +119,49 @@ API Objects are exchanged in JSON format.
 	{id & integer & id of the slave to update}
 	{200}
 	{}
-	{slave object}
+	{}
+	{}
+	
+\subsubsection{Replica Sets}
+%Do not add default error codes
+\apicall[get\relax]{/replicasets}{Gets all replica sets}
+	{}
+	{200}
+	{}
+	{array of replica set objects}
+	{}
+
+\apicall[put]{/replicaset}{Adds a replica set}
+	{replicaset & replica set object & replica set to add}
+	{201}
+	{Location & Reference to added replica set}
+	{}
+	{}
+
+\apicall[get]{/replicaset/<id>}{Gets a replica set}
+	{id & integer & id of the replica set to get}
+	{200}
+	{}
+	{replica set object}
+	{}
+
+\apicall[post]{/replicaset/<id>}{Updates a replica set}
+	{id & integer & id of the replica set to update}
+	{200}
+	{}
+	{}
+	{}
+
+\apicall[delete]{/replicaset/<id>}{Deletes a replica set}
+	{id & integer & id of the replica set to update}
+	{200}
+	{}
+	{}
+	{}
+
+\apicall[get]{/replicaset/<id>/slaves}{Gets a replica sets slaves}
+	{id & integer & id of the replica set to get}
+	{200}
+	{}
+	{array of slave objects}
 	{}
