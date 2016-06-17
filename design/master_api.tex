@@ -41,7 +41,7 @@
 			\hline%
 \ifthenelse{\equal{#1}{put}}{400 & Invalid parameters in object}{}%
 \ifthenelse{\equal{#1}{get}}{404 & Object does not exist}{}%
-\ifthenelse{\equal{#1}{post}}{404 & Object does not exist\\400 & Invalid parameters in object}{}%
+\ifthenelse{\equal{#1}{post}}{404 & Object does not exist\\400 & Invalid parameters in object or parameter may not be changed}{}%
 \ifthenelse{\equal{#1}{delete}}{404 & Object does not exist}{}%
 \if\relax\detokenize{#8}\relax
 \else
@@ -58,6 +58,19 @@
 %Uses RESTful HTTP
 %Generic error responses
 \subsection{API Objects}
+API Objects are exchanged in JSON format.
+\subsubsection{Slave}
+\begin{lstlisting}
+{
+	"hostname": <string>,
+	"slave_port": <int>,
+	"mongod_port_range_begin": <int (inclusive)>,
+	"mongod_port_range_end": <int (exclusive)>,
+	"persistant_storage": <bool>,
+	"root data directory": <string>,
+	"state": <string>
+}
+\end{lstlisting}
 \subsection{API Methods}
 \subsubsection{Slaves}
 \apicall[put]{/slave}{Adds a slave}
