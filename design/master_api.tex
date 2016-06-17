@@ -66,6 +66,7 @@ API Objects are exchanged in JSON format.
 \subsubsection{Slave}
 \begin{lstlisting}
 {
+	"id": <int>,
 	"hostname": <string>,
 	"slave_port": <int>,
 	"mongod_port_range_begin": <int (inclusive)>,
@@ -75,13 +76,21 @@ API Objects are exchanged in JSON format.
 	"state": <string>
 }
 \end{lstlisting}
-\subsubsection{Replica Sets}
+\subsubsection{Replica Set}
 \begin{lstlisting}
 {
+	"id": <int>,
 	"name": <string>,
 	"persistent_node_count": <int>,
 	"volatile_node_count": <int>,
 	"configure_as_sharding_config_server": <bool>
+}
+\end{lstlisting}
+\subsubsection{Risk Group}
+\begin{lstlisting}
+{
+	"id": <int>,
+	"name": <string>
 }
 \end{lstlisting}
 \subsection{API Methods}
@@ -116,7 +125,7 @@ API Objects are exchanged in JSON format.
 	{}
 	
 \apicall[delete]{/slave/<id>}{Deletes a slave}
-	{id & integer & id of the slave to update}
+	{id & integer & id of the slave to delete}
 	{200}
 	{}
 	{}
@@ -153,15 +162,68 @@ API Objects are exchanged in JSON format.
 	{}
 
 \apicall[delete]{/replicaset/<id>}{Deletes a replica set}
-	{id & integer & id of the replica set to update}
+	{id & integer & id of the replica set to delete}
 	{200}
 	{}
 	{}
 	{}
 
 \apicall[get]{/replicaset/<id>/slaves}{Gets a replica sets slaves}
-	{id & integer & id of the replica set to get}
+	{id & integer & id of the replica set to get the slaves of}
 	{200}
 	{}
 	{array of slave objects}
+	{}
+
+\subsubsection{Risk Groups}
+%Do not add default error codes
+\apicall[get\relax]{/riskgroups}{Gets all risk groups}
+	{}
+	{200}
+	{}
+	{array of risk groups objects}
+	{}
+
+\apicall[put]{/riskgroup}{Adds a risk group}
+	{risk group & risk group object & risk group to add}
+	{201}
+	{Location & Reference to added risk group}
+	{}
+	{}
+
+\apicall[get]{/riskgroup/<id>}{Gets a risk group}
+	{id & integer & id of the risk group to get}
+	{200}
+	{}
+	{risk group object}
+	{}
+
+\apicall[post]{/riskgroup/<id>}{Updates a risk group}
+	{id & integer & id of the risk group to update}
+	{200}
+	{}
+	{}
+	{}
+
+\apicall[delete]{/riskgroup/<id>}{Deletes a risk group}
+	{id & integer & id of the risk group to delete}
+	{200}
+	{}
+	{}
+	{}
+	
+\apicall[put]{/riskgroup/<risk\_group\_id>/slave/<slave\_id>}{Assigns a slave to a risk group}
+	{risk\_group\_id & integer & id of the risk group to assign the slave to\\
+	 slave\_id & integer & id of the slave to assign to the risk group}
+	{200}
+	{}
+	{}
+	{}
+
+\apicall[delete]{/riskgroup/<risk\_group\_id>/slave/<slave\_id>}{Removes a slave from a risk group}
+	{risk\_group\_id & integer & id of the risk group to remove the the slave from\\
+	slave\_id & integer & id of the slave to remove from to the risk group}
+	{200}
+	{}
+	{}
 	{}
