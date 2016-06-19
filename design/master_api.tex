@@ -93,6 +93,15 @@ API Objects are exchanged in JSON format.
 	"name": <string>
 }
 \end{lstlisting}
+\subsubsection{Problems}
+\begin{lstlisting}
+{
+	"id": <int>,
+	"description": <string>,
+	"long_description": <string>,
+	"cause": <int> (obtional reference to other problem)
+}
+\end{lstlisting}
 \subsection{API Methods}
 \subsubsection{Slaves}
 %Do not add default error codes
@@ -232,4 +241,20 @@ API Objects are exchanged in JSON format.
 	{200}
 	{}
 	{array of slave objects}
+	{}
+	
+\subsubsection{Problems}
+%Do not add default error codes
+\apicall[get\relax]{/problems}{Gets all problems}
+	{}
+	{200}
+	{}
+	{array of problem objects}
+	{}
+	
+\apicall[get]{/problem/<id>}{Gets a problem}
+	{id & integer & id of the problem to get}
+	{200}
+	{}
+	{problem object}
 	{}
