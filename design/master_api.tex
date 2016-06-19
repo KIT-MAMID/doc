@@ -168,7 +168,7 @@ API Objects are exchanged in JSON format.
 	{}
 	{}
 
-\apicall[get]{/replicaset/<id>/slaves}{Gets a replica sets slaves}
+\apicall[get]{/replicaset/<id>/slaves}{Gets a replica set's slaves}
 	{id & integer & id of the replica set to get the slaves of}
 	{200}
 	{}
@@ -226,4 +226,10 @@ API Objects are exchanged in JSON format.
 	{200}
 	{}
 	{}
+	{}
+\apicall[get]{/riskgroup/<id>/slaves}{Gets a risk group's slaves}
+	{id & integer & id of the risk group to get the slaves of}
+	{200}
+	{}
+	{array of slave objects}
 	{}
