@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1020</x>
+      <y>470</y>
+      <w>270</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>slaveByIdController
+--
++slave:dataobjects.Slave
+--
++slaveByIdController(id:int)
++deleteSlave()
++updateSlave()
++setSlaveState()
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>730</x>
+      <y>370</y>
+      <w>210</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>mainController
+--
+--
+mainController()
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>730</x>
+      <y>490</y>
+      <w>280</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>slaveIndexController
+--
++slaves:dataobjects.Slave[]
+--
++slaveIndexController()
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1380</x>
+      <y>550</y>
+      <w>140</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Creates and updates</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1280</x>
+      <y>550</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1020</x>
+      <y>630</y>
+      <w>270</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>replicaSetByIdController
+--
++replicaSet:dataobjects.ReplicaSet
+--
++replicaSetByIdController(id:int)
++deleteReplicaSet()
++updateReplicaSet()
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>730</x>
+      <y>630</y>
+      <w>280</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>replicaSetIndexController
+--
++replicaSets:dataobjects.ReplicaSet[]
+--
++replicaSetIndexController()
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1390</x>
+      <y>710</y>
+      <w>140</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Creates and updates</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1280</x>
+      <y>710</y>
+      <w>130</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1020</x>
+      <y>780</y>
+      <w>270</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>riskGroupByIdController
+--
++riskGroup:dataobjects.RiskGroup
+--
++riskGroupByIdController(id:int)
++updateRiskGroup()
++deleteRiskGroup()
++setSlaveRiskGroup(slave:Slave)
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>730</x>
+      <y>780</y>
+      <w>280</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>riskGroupIndexController
+--
++riskGroups:dataobjects.RiskGroup[]
+--
++riskGroupIndexController()
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1390</x>
+      <y>840</y>
+      <w>140</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Creates and updates</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1280</x>
+      <y>840</y>
+      <w>130</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>690</x>
+      <y>320</y>
+      <w>880</w>
+      <h>620</h>
+    </coordinates>
+    <panel_attributes>Controller</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>120</x>
+      <y>50</y>
+      <w>1590</w>
+      <h>990</h>
+    </coordinates>
+    <panel_attributes>GUI</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
