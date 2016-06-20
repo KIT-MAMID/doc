@@ -103,6 +103,7 @@ API Objects are exchanged in JSON format.
 }
 \end{lstlisting}
 \subsection{API Methods}
+All requests and responses are made with the \emph{Content-Type}-Header set to \emph{application/json}. Requests containig any other content type are honored with the HTTP-Status-Code \emph{406 - Not Acceptable}.
 \subsubsection{Slaves}
 %Do not add default error codes
 \apicall[get\relax]{/slaves}{Gets all slaves}
