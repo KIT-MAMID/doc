@@ -48,13 +48,15 @@ The slave is installed on the individual host nodes and started by the main serv
 }
 
 \struct{Controller}{
-  Implements the MSPConsumer interface. Communicates with the ProcessManager and MongodConfigurator in order to fulfill requests.
+  Handles MSP requests by implementing the MSPConsumer interface. %TODO ref
+  Hence, it coordinates the work required to fulfill requests from the master.
+  Most importantly, it leverages ProcessManager and MongodConfigurator to spawn and configure instances of MongoDB.
 }{
-  \property{busyTable}{map[PortNumber]bool}{
-    Contains a boolean busy state per instance in order to prevent conflicts
+  \property{BusyTable}{map[PortNumber]bool}{
+    Contains a boolean busy state per instance of MongoDB to prevent concurrent configuration of a single instance.
   }
   \property{busyTableLock}{sync.Mutex}{
-    Mutex controlling access to busyTable
+    Mutex controlling access to busyTable. %TODO ref
   }
 }
 
