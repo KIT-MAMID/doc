@@ -156,9 +156,7 @@
 
 \NewDocumentCommand{\structure}{m m g g}{
   \subsection{#1}
-  \begin{description}
-    #2
-  \end{description}
+  #2
   \IfValueT{#4}{
     \subsubsection{Properties}
     \begin{itemize}
@@ -176,7 +174,7 @@
 \newcommand{\interface}[3]{\structure{Interface #1}{#2}{#3}}
 
 \NewDocumentCommand{\property}{m o m+}{
-  \item{\textbf{#1\IfValueT{#2}{: #2}}} #3
+  \item{\textbf{#1\IfValueT{#2}{: #2}} #3}
 }
 \NewDocumentCommand{\method}{m o d() m+}{
   \item[]{\textbf{#1\IfValueT{#2}{: #2}}}
@@ -185,10 +183,7 @@
       #3
     \end{itemize}
   }
-  \begin{description}
-    #4
-  \end{description}
-  
+  #4  
 }
 \NewDocumentCommand{\param}{m d<> m}{
   \item{\textbf{\IfValueT{#2}{#2: }#1} #3}
