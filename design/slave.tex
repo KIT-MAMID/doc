@@ -2,11 +2,13 @@
 The slave is installed on the individual host nodes and started by the main service manager of the operating system during the boot process.
 
 \subsection{Application / main()}{
-  The Application is the main function. It does early initialization:
+  A Go application starts by initializing the Go 'main' package and then running the \textit{main()} function.
+  This function performs early initialization of the slave's main datastructures:
   \begin{itemize}
-    \item Parses command line flags using an external CLIFlagsParser
-    \item Initializes the Controller with a concrete instance of MongodConfigurator
-    \item Initializes the MSPListener and passes it the Controller and calls its run method
+    \item Parse command line flags using an external CLIFlagsParser.
+    \item Initialize the MSPListener.
+    \item Initialize the Controller with the MSPListener instance.
+    \item Transfer control to MSPListener to wait for incoming connections.
   \end{itemize}
 }
 
