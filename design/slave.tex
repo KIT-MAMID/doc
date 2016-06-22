@@ -16,15 +16,16 @@ The slave is installed on the individual host nodes and started by the main serv
   Structure for handling communication through the MasterSlaveProtocol.
 }{
   \property{consumer}{MSPConsumer}{
-    Instance of a consumer, typically the Controller in a normal run
+    Reference to an event handler, typically a controller.
   }
 }{
-  \method{run}{
-    Responsible for guaranteeing general communication, precisely:
+  \method{Run}{
+    Start listening for connections using the MasterSlaveProtocol.
     \begin{itemize}
-      \item Waiting for a master to connect
-      \item Sending and receiving data on the socket
-      \item Dispatching incoming requests to the MSPConsumer
+      \item Listen for incoming connections from the Master.
+      \item Decode / Encode the transport format.
+      \item Validate incoming request format.
+      \item Delegate valid requests to the MSPConsumer.
     \end{itemize}
   }
 }

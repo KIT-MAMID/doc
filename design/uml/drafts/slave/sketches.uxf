@@ -84,7 +84,7 @@ fontfamily=Monospaced //possible: SansSerif,Serif,Monospaced
     <panel_attributes>MSPListener
 --
 --
-+ run()</panel_attributes>
++ Run()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
