@@ -15,6 +15,7 @@
 \usepackage{parskip}
 % http://tex.stackexchange.com/questions/17730/newcommand-and-spacing
 \usepackage{xspace}
+\usepackage{xparse}
 % 'frame' option for figures
 \usepackage[export]{adjustbox}
 % fancy page headers
@@ -152,6 +153,46 @@
 
 \newcommand{\abbildung}[1]{\autoref{fig:#1}}
 \newcommand{\mamid}{\textit{MAMID}\xspace}
+
+\NewDocumentCommand{\structure}{m m g g}{
+  \subsection{#1}
+  \begin{description}
+    #2
+  \end{description}
+  \IfValueT{#4}{
+    \subsubsection{Properties}
+    \begin{itemize}
+      #4
+    \end{itemize}
+   }
+   \IfValueT{#3}{
+      \subsubsection{Methods}
+      \begin{itemize}
+        #3
+      \end{itemize}
+    }
+}
+\NewDocumentCommand{\struct}{m m g g}{\structure{Struct #1}{#2}{#4}{#3}}
+\newcommand{\interface}[3]{\structure{Interface #1}{#2}{#3}}
+
+\NewDocumentCommand{\property}{m o m+}{
+  \item{\textbf{#1\IfValueT{#2}{: #2}}} #3
+}
+\NewDocumentCommand{\method}{m o d() m+}{
+  \item[]{\textbf{#1\IfValueT{#2}{: #2}}}
+  \IfValueT{#3}{
+    \begin{itemize}
+      #3
+    \end{itemize}
+  }
+  \begin{description}
+    #4
+  \end{description}
+  
+}
+\NewDocumentCommand{\param}{m d<> m}{
+  \item{\textbf{\IfValueT{#2}{#2: }#1} #3}
+}
 
 \include{glossary}
 
