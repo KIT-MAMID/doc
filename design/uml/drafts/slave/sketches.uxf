@@ -129,8 +129,8 @@ _   c: MSP.MongodConfiguration): error_</panel_attributes>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 MSPConsumer
 --
-- mspStatusRequest(): SlaveStatus
-- mspEstablishMongodState(m: Mongod): error</panel_attributes>
+- MSPStatusRequest(): SlaveStatus
+- MSPEstablishMongodState(m: Mongod): error</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
