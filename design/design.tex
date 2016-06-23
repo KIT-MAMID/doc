@@ -1,4 +1,4 @@
-% das Papierformat zuerst
+%% das Papierformat zuerst
 \documentclass[a4paper, 11pt]{article}
 \usepackage[margin=3cm]{geometry}
 \usepackage[utf8]{inputenc}
@@ -21,6 +21,8 @@
 % fancy page headers
 \usepackage{fancyhdr}
 \usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{listings}
 
 % page style
 \pagestyle{fancy}
@@ -98,28 +100,6 @@
   \item[\namedlabel{#1:#2}{/#1\arabic{oitem#1}/}]
 }
 \makeatother
-
-% usage: \testfall{szenario}{ablauf}{ergebnis} oder \testfall[\ref{F:getesteteFunktion}]{szenario}{ablauf}{ergebnis}
-\newcommand{\testfall}[4][]{
-  \begin{description}
-    \ifthenelse{\equal{#1}{}}
-               {} % optional argument #1 is empty: skip
-               {\item[Testet] #1}
-    \item[Vorbedingungen] #2
-    \item[Ablauf] #3
-    \item[Erwartetes Ergebnis] #4
-  \end{description}
-}
-
-\newcommand{\testsequence}[3][]{
-	\begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Preconditions}]
-		\ifthenelse{\equal{#1}{}}
-		{} % optional argument #1 is empty: skip
-		{\item[Tests] #1}
-		\item[Preconditions] #2
-		\item[Steps] #3
-	\end{description}
-}
 
 % new page after section
 \let\oldsection\section
