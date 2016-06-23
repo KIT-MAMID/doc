@@ -182,6 +182,13 @@
   \item{\textbf{#1 : #2} #3}
 }
 
+\definecolor{codeinline-gray}{gray}{0.95}
+\NewDocumentCommand{\codeinline}{m}{
+  % Specify inline code / command
+  % Markdown equivalent: `#1`
+  \colorbox{codeinline-gray}{\texttt{#1}}
+}
+
 \include{glossary}
 
 \begin{titlepage}
