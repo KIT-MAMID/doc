@@ -157,7 +157,7 @@
   \item{\textbf{#1 : #2}\\#3}
 }
 \NewDocumentCommand{\method}{m o d() m+}{
-  \item[]{\textbf{#1\IfValueT{#2}{: #2}}}
+  \item[]{\textbf{#1\IfValueT{#2}{ : #2}}}
   \IfValueT{#3}{
     \begin{description}
       #3 % should only contain \param
