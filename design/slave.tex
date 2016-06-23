@@ -15,7 +15,7 @@ The slave is installed on the individual host nodes and started by the main serv
 \struct{MSPListener}{
   Structure for handling communication through the MasterSlaveProtocol.
 }{
-  \property{consumer}{MSPConsumer}{
+  \property{consumer}[MSPConsumer]{
     Reference to an event handler, typically a controller.
   }
 }{
@@ -39,7 +39,7 @@ The slave is installed on the individual host nodes and started by the main serv
     See \ref{msp:SlaveStatus} for details on the data returned by this method.
   }
   \method{MSPEstablishMongodState}[error](
-    \param{m}{MSP.Mongod}{State description of a mongod instance that shall be established}
+    \param{m}[MSP.Mongod]{State description of a mongod instance that shall be established}
   ){
     %TODO reference request message object here -> proto specification
     Request to establish the configuration state $m$ of a MongoDB process on the slave.
@@ -52,10 +52,10 @@ The slave is installed on the individual host nodes and started by the main serv
   Hence, it coordinates the work required to fulfill requests from the master.
   Most importantly, it leverages ProcessManager and MongodConfigurator to spawn and configure instances of MongoDB.
 }{
-    \property{BusyTable}{map[PortNumber]bool}{
+    \property{BusyTable}[map[PortNumber]bool]{
     Contains a boolean busy state per instance of MongoDB to prevent concurrent configuration of a single instance.
   }
-  \property{busyTableLock}{sync.Mutex}{
+  \property{busyTableLock}[sync.Mutex]{
     Mutex controlling access to busyTable. %TODO ref
   }
 }
@@ -63,7 +63,7 @@ The slave is installed on the individual host nodes and started by the main serv
 \struct{ProcessManager}{
   Starts processes, may provide a list of alive processes and eventually kill these.
 }{
-  \property{runningProcesses}{map[PortNumber]*exec.Cmd}{
+  \property{runningProcesses}[map[PortNumber]*exec.Cmd]{
     Holds the active process controls per instance
   }
 }{
@@ -90,13 +90,13 @@ The slave is installed on the individual host nodes and started by the main serv
   Applies or returns configuration of a mongod instance by PortNumber.
 }{
   \method{MongodConfiguration}[{(MSP.MongodConfiguration, error)}](
-    \param{p}{PortNumber}{PortNumber to connect to locally}
+    \param{p}[PortNumber]{PortNumber to connect to locally}
   ){
     Reads configuration from a local MongoDB instance
   }
   \method{ApplyMongodConfiguration}[error](
-    \param{p}{PortNumber}{PortNumber to connect to locally}
-    \param{c}{MSP.MongodConfiguration}{Configuration to apply}
+    \param{p}[PortNumber]{PortNumber to connect to locally}
+    \param{c}[MSP.MongodConfiguration]{Configuration to apply}
   ){
     Connects to a local MongoDB instance on the given port and applies the configuration
   }
