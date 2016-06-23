@@ -153,10 +153,10 @@
 \NewDocumentCommand{\struct}{m m g g}{\gotype{Struct #1}{#2}{#4}{#3}}
 \newcommand{\interface}[3]{\gotype{Interface #1}{#2}{#3}}
 
-\NewDocumentCommand{\property}{m o m+}{
+\NewDocumentCommand{\property}{m o +m}{
   \item{\textbf{#1 : #2}\\#3}
 }
-\NewDocumentCommand{\method}{m o d() m+}{
+\NewDocumentCommand{\method}{m o d() +m}{
   \item[]{\textbf{#1\IfValueT{#2}{ : #2}}}
   \IfValueT{#3}{
     \begin{description}
