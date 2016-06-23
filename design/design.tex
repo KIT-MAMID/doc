@@ -151,15 +151,16 @@
   \subsection{#1}
   #2
   \IfValueT{#4}{
-    \subsubsection{Properties}
+    \subsubsection*{Properties}
     \begin{description}
-      #4
+      #4 % list of \property
     \end{description}
    }
    \IfValueT{#3}{
-      \subsubsection{Methods}
+      \subsubsection*{Methods}
       \begin{description}
-        #3
+        \setlength{\itemsep}{1em}
+        #3 %list of \method
       \end{description}
     }
 }
