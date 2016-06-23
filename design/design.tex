@@ -139,15 +139,15 @@
   #2
   \IfValueT{#4}{
     \subsubsection{Properties}
-    \begin{itemize}
+    \begin{description}
       #4
-    \end{itemize}
+    \end{description}
    }
    \IfValueT{#3}{
       \subsubsection{Methods}
-      \begin{itemize}
+      \begin{description}
         #3
-      \end{itemize}
+      \end{description}
     }
 }
 \NewDocumentCommand{\struct}{m m g g}{\structure{Struct #1}{#2}{#4}{#3}}
@@ -159,9 +159,9 @@
 \NewDocumentCommand{\method}{m o d() m+}{
   \item[]{\textbf{#1\IfValueT{#2}{: #2}}}
   \IfValueT{#3}{
-    \begin{itemize}
-      #3
-    \end{itemize}
+    \begin{description}
+      #3 % should only contain \param
+    \end{description}
   }
   #4  
 }
