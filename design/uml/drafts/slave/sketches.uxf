@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.2">
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
   <help_text>// Uncomment the following line to change the fontsize and font:
 fontsize=12
 fontfamily=Monospaced //possible: SansSerif,Serif,Monospaced
@@ -28,8 +27,8 @@ fontfamily=Monospaced //possible: SansSerif,Serif,Monospaced
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>224</x>
-      <y>672</y>
+      <x>216</x>
+      <y>96</y>
       <w>144</w>
       <h>24</h>
     </coordinates>
@@ -39,8 +38,8 @@ fontfamily=Monospaced //possible: SansSerif,Serif,Monospaced
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>224</x>
-      <y>616</y>
+      <x>216</x>
+      <y>40</y>
       <w>144</w>
       <h>16</h>
     </coordinates>
@@ -50,8 +49,8 @@ fontfamily=Monospaced //possible: SansSerif,Serif,Monospaced
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>288</x>
-      <y>624</y>
+      <x>280</x>
+      <y>48</y>
       <w>24</w>
       <h>64</h>
     </coordinates>
@@ -61,115 +60,74 @@ fontfamily=Monospaced //possible: SansSerif,Serif,Monospaced
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>24</x>
-      <y>832</y>
-      <w>200</w>
-      <h>56</h>
+      <x>16</x>
+      <y>256</y>
+      <w>312</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>Controller
 --
-- busyTable: map[PortNumber]bool
+- busyTable: map[msp.PortNumber]bool
 - busyTableLock: sync.Mutex
---</panel_attributes>
+--
++ MspStatusRequest(): ([]msp.Mongod, *SlaveError)
++ MspEstablishMongodState(m: msp.Mongod): *SlaveError</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>424</x>
-      <y>744</y>
-      <w>176</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>MSPListener
---
---
-+ Run()</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>120</x>
-      <y>1120</y>
-      <w>224</w>
+      <x>112</x>
+      <y>544</y>
+      <w>272</w>
       <h>104</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 MongodConfigurator
 --
 --
-_+ MongodConfiguration(p: PortNumber):_
-_ (MSP.MongodConfiguration, error)_
+_+ MongodConfiguration(p: msp.PortNumber):_
+_ (msp.MongodConfiguration, error)_
 _+ ApplyMongodConfiguration_
 _  (p: portNumber,_
-_   c: MSP.MongodConfiguration): error_</panel_attributes>
+_   c: msp.MongodConfiguration): error_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>216</x>
-      <y>688</y>
-      <w>128</w>
-      <h>168</h>
+      <x>288</x>
+      <y>112</y>
+      <w>88</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;initialize&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;190.0;110.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>336</x>
-      <y>840</y>
-      <w>264</w>
-      <h>96</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;interface&gt;&gt;
-MSPConsumer
---
-- MSPStatusRequest(): SlaveStatus
-- MSPEstablishMongodState(m: Mongod): error</panel_attributes>
-    <additional_attributes/>
+    <additional_attributes>10.0;180.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>512</x>
-      <y>776</y>
-      <w>64</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-m1=1
-m2=1
-r1=delegate</panel_attributes>
-    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>216</x>
-      <y>840</y>
-      <w>136</w>
-      <h>32</h>
+      <x>320</x>
+      <y>272</y>
+      <w>368</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
-&lt;&lt;implement&gt;&gt;</panel_attributes>
-    <additional_attributes>150.0;20.0;10.0;20.0</additional_attributes>
+&lt;&lt;implements&gt;&gt;</panel_attributes>
+    <additional_attributes>440.0;50.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>184</x>
-      <y>968</y>
-      <w>264</w>
+      <x>176</x>
+      <y>392</y>
+      <w>312</w>
       <h>112</h>
     </coordinates>
     <panel_attributes>ProcessManager
 --
-- runningProcesses: map[PortNumber]exec.Cmd
+- runningProcesses: map[msp.PortNumber]exec.Cmd
 --
 + spawnProcess(m: MSP.Mongod,
                dataDir: string): error
@@ -183,63 +141,23 @@ r1=delegate</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>96</x>
-      <y>880</y>
+      <x>88</x>
+      <y>328</y>
       <w>104</w>
-      <h>136</h>
+      <h>112</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=1
 r1=Manager
 m2=1
 </panel_attributes>
-    <additional_attributes>110.0;140.0;10.0;140.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>672</x>
-      <y>864</y>
-      <w>176</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>SlaveStatus
---
-+ RootDataDirectory: string
-</panel_attributes>
-    <additional_attributes/>
+    <additional_attributes>110.0;110.0;10.0;110.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>592</x>
-      <y>864</y>
-      <w>96</w>
-      <h>32</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-&lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>100.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>752</x>
-      <y>896</y>
-      <w>64</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-r1=mongods
-m1=n
-m2=1</panel_attributes>
-    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>360</x>
-      <y>664</y>
+      <x>352</x>
+      <y>88</y>
       <w>104</w>
       <h>32</h>
     </coordinates>
@@ -248,70 +166,10 @@ m2=1</panel_attributes>
     <additional_attributes>110.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
-    <id>UMLPackage</id>
-    <coordinates>
-      <x>656</x>
-      <y>808</y>
-      <w>528</w>
-      <h>304</h>
-    </coordinates>
-    <panel_attributes>MSP (MasterSlaveProtocol)
-bg=cyan
-transparency=90
-layer=-3</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>672</x>
-      <y>960</y>
-      <w>176</w>
-      <h>96</h>
-    </coordinates>
-    <panel_attributes>Mongod
---
-+ Port: PortNumber
-+ MongoCommError: error
-  // != nil only in responses</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1032</x>
-      <y>1032</y>
-      <w>136</w>
-      <h>56</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;golang-style-enum&gt;&gt;
-MongodState
---
-MongodStateNotRunning
-MongodStateRunning
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>840</x>
-      <y>1000</y>
-      <w>208</w>
-      <h>72</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
-m1=1
-m2=1
-r2=State
-</panel_attributes>
-    <additional_attributes>10.0;10.0;130.0;10.0;130.0;60.0;240.0;60.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>24</x>
-      <y>712</y>
+      <x>16</x>
+      <y>136</y>
       <w>184</w>
       <h>72</h>
     </coordinates>
@@ -325,8 +183,8 @@ applied
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>40</x>
-      <y>776</y>
+      <x>32</x>
+      <y>200</y>
       <w>24</w>
       <h>72</h>
     </coordinates>
@@ -336,8 +194,8 @@ applied
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>120</x>
-      <y>1256</y>
+      <x>112</x>
+      <y>680</y>
       <w>224</w>
       <h>40</h>
     </coordinates>
@@ -349,8 +207,8 @@ applied
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>224</x>
-      <y>1216</y>
+      <x>216</x>
+      <y>640</y>
       <w>24</w>
       <h>56</h>
     </coordinates>
@@ -360,83 +218,43 @@ applied
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>8</x>
-      <y>576</y>
+      <x>0</x>
+      <y>0</y>
       <w>608</w>
       <h>792</h>
     </coordinates>
-    <panel_attributes>Slave</panel_attributes>
+    <panel_attributes>slave</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>336</x>
-      <y>1008</y>
-      <w>680</w>
-      <h>136</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-&lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>830.0;10.0;10.0;150.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>840</x>
-      <y>976</y>
-      <w>176</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
-m1=1
-m2=1
-r2=Config
-</panel_attributes>
-    <additional_attributes>10.0;20.0;200.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1000</x>
-      <y>976</y>
-      <w>168</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>MongodConfiguration
---
-+ ReplSetName: string</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>40</x>
-      <y>880</y>
+      <x>32</x>
+      <y>328</y>
       <w>96</w>
-      <h>272</h>
+      <h>248</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>100.0;320.0;10.0;320.0;10.0;10.0</additional_attributes>
+    <additional_attributes>100.0;290.0;10.0;290.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>296</x>
-      <y>688</y>
-      <w>144</w>
-      <h>80</h>
+      <x>288</x>
+      <y>112</y>
+      <w>400</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;initialize&gt;&gt;</panel_attributes>
-    <additional_attributes>160.0;80.0;10.0;10.0</additional_attributes>
+    <additional_attributes>480.0;110.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>424</x>
-      <y>1240</y>
+      <x>416</x>
+      <y>664</y>
       <w>152</w>
       <h>72</h>
     </coordinates>
@@ -446,8 +264,8 @@ r2=Config
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>336</x>
-      <y>1264</y>
+      <x>328</x>
+      <y>688</y>
       <w>104</w>
       <h>32</h>
     </coordinates>
@@ -458,12 +276,406 @@ r2=Config
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>448</x>
-      <y>640</y>
+      <x>440</x>
+      <y>64</y>
       <w>152</w>
       <h>72</h>
     </coordinates>
     <panel_attributes>CLIFlagsParser</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>672</x>
+      <y>168</y>
+      <w>304</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>MSPListener
+--
+--
+_+ NewMSPServer(consumer: MSPConsuner): MSPServer_
++ Run()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>672</x>
+      <y>272</y>
+      <w>304</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+MSPConsumer
+--
++ MspStatusRequest(): ([]Mongod, *SlaveError)
++ MspEstablishMongodState(m: Mongod): *SlaveError</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>768</x>
+      <y>216</y>
+      <w>64</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1
+r1=consumer</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>640</x>
+      <y>40</y>
+      <w>1160</w>
+      <h>728</h>
+    </coordinates>
+    <panel_attributes>msp
+bg=cyan
+transparency=90
+layer=-3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1080</x>
+      <y>144</y>
+      <w>248</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>Mongod
+--
++ Port: PortNumber
++ DataDirectory: string
++ ReplSetName: string
++ IsShardingServer: bool
++ CurrentError: SlaveError // != nil only in responses</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1088</x>
+      <y>312</y>
+      <w>144</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enum&gt;&gt;
+MongodState
+--
+MongodStateNotRunning
+MongodStateRunning
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1152</x>
+      <y>224</y>
+      <w>48</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=1
+m2=1
+r2=State
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>968</x>
+      <y>168</y>
+      <w>128</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>140.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1464</x>
+      <y>168</y>
+      <w>304</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>MSPClient
+--
+--
++ MSPClient(target: HostPort)
++ MspStatusRequest(): ([]Mongod, error)
++ MspEstablishMongodState(m: Mongod): error</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1320</x>
+      <y>168</y>
+      <w>160</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;180.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1192</x>
+      <y>392</y>
+      <w>128</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>HostPort
+--
++ Hostname: string
++ Port: PortNumber</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>968</x>
+      <y>192</y>
+      <w>224</w>
+      <h>408</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>260.0;490.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1208</x>
+      <y>240</y>
+      <w>280</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;430.0;330.0;130.0;330.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1248</x>
+      <y>224</y>
+      <w>120</w>
+      <h>184</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=1
+m2=*
+r2=ReplicaSetMembers
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;210.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1472</x>
+      <y>448</y>
+      <w>184</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Passed around as JSON using json.En/Decoder.En/Decode()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1320</x>
+      <y>216</y>
+      <w>200</w>
+      <h>248</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;230.0;290.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1312</x>
+      <y>416</y>
+      <w>176</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;200.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1280</x>
+      <y>600</y>
+      <w>176</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>CommunicationError
+--
+- error_message: string
+--
++ Error(): string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1216</x>
+      <y>800</y>
+      <w>80</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+error</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1264</x>
+      <y>648</y>
+      <w>152</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+&lt;&lt;implements&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;190.0;170.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>888</x>
+      <y>112</y>
+      <w>616</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;calls&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;20.0;750.0;20.0;750.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1128</x>
+      <y>64</y>
+      <w>216</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>Communicate using JSON over HTTP</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1224</x>
+      <y>88</y>
+      <w>64</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1072</x>
+      <y>584</y>
+      <w>168</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>SlaveError
+--
+Identifier string
+Description: string
+LongDescription: string
+--
+Error(): string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1160</x>
+      <y>648</y>
+      <w>128</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+&lt;&lt;implements&gt;&gt;</panel_attributes>
+    <additional_attributes>110.0;190.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1384</x>
+      <y>240</y>
+      <w>152</w>
+      <h>376</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;450.0;170.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1232</x>
+      <y>480</y>
+      <w>272</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;150.0;320.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>848</x>
+      <y>656</y>
+      <w>128</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>PortNumber
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>848</x>
+      <y>784</y>
+      <w>128</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>uint16
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>904</x>
+      <y>680</y>
+      <w>24</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
