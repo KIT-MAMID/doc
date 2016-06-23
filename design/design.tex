@@ -154,7 +154,7 @@
 \newcommand{\interface}[3]{\gotype{Interface #1}{#2}{#3}}
 
 \NewDocumentCommand{\property}{m o m+}{
-  \item{\textbf{#1\IfValueT{#2}{: #2}} #3}
+  \item{\textbf{#1 : #2}\\#3}
 }
 \NewDocumentCommand{\method}{m o d() m+}{
   \item[]{\textbf{#1\IfValueT{#2}{: #2}}}
@@ -165,8 +165,8 @@
   }
   #4  
 }
-\NewDocumentCommand{\param}{m d<> m}{
-  \item{\textbf{\IfValueT{#2}{#2: }#1} #3}
+\NewDocumentCommand{\param}{m o m}{
+  \item{\textbf{#1 : #2} #3}
 }
 
 \include{glossary}
