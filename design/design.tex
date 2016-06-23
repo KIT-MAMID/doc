@@ -134,7 +134,7 @@
 \newcommand{\abbildung}[1]{\autoref{fig:#1}}
 \newcommand{\mamid}{\textit{MAMID}\xspace}
 
-\NewDocumentCommand{\structure}{m m g g}{
+\NewDocumentCommand{\gotype}{m m g g}{
   \subsection{#1}
   #2
   \IfValueT{#4}{
@@ -150,8 +150,8 @@
       \end{description}
     }
 }
-\NewDocumentCommand{\struct}{m m g g}{\structure{Struct #1}{#2}{#4}{#3}}
-\newcommand{\interface}[3]{\structure{Interface #1}{#2}{#3}}
+\NewDocumentCommand{\struct}{m m g g}{\gotype{Struct #1}{#2}{#4}{#3}}
+\newcommand{\interface}[3]{\gotype{Interface #1}{#2}{#3}}
 
 \NewDocumentCommand{\property}{m o m+}{
   \item{\textbf{#1\IfValueT{#2}{: #2}} #3}
