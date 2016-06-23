@@ -163,14 +163,14 @@
       \end{description}
     }
 }
-\NewDocumentCommand{\struct}{m m g g}{\gotype{Struct #1}{#2}{#4}{#3}}
-\newcommand{\interface}[3]{\gotype{Interface #1}{#2}{#3}}
+\NewDocumentCommand{\struct}{m m g g}{\gotype{Struct \codeinline{#1}}{#2}{#4}{#3}}
+\newcommand{\interface}[3]{\gotype{Interface \codeinline{#1}}{#2}{#3}}
 
 \NewDocumentCommand{\property}{m o +m}{
-  \item{\textbf{#1 : #2}\\#3}
+\item{\codeinline{#1\hspace{0.1cm}:\hspace{0.1cm}#2}\\#3}
 }
 \NewDocumentCommand{\method}{m o d() +m}{
-  \item[]{\textbf{#1\IfValueT{#2}{ : #2}}}
+\item{\codeinline{#1(\IfValueT{#3}{$\cdot$})\IfValueT{#2}{\hspace{0.1cm}:\hspace{0.1cm}#2}}}
   \IfValueT{#3}{
     \begin{description}
       #3 % should only contain \param
@@ -179,7 +179,7 @@
   #4  
 }
 \NewDocumentCommand{\param}{m o m}{
-  \item{\textbf{#1 : #2} #3}
+  \item{\codeinline{#1\hspace{0.1cm}:\hspace{0.1cm}#2} #3}
 }
 
 \definecolor{codeinline-gray}{gray}{0.95}
