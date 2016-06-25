@@ -64,7 +64,8 @@ API Objects are exchanged in JSON format.
 	"mongod_port_range_end": <int (exclusive)>,
 	"persistent_storage": <bool>,
 	"root data directory": <string>,
-	"state": <string>
+	"desired_state": <{active, maintenance, disabled}>
+	"observed_and_desired_state_mismatch": <bool>
 }
 \end{lstlisting}
 \subsubsection{Replica Set}
