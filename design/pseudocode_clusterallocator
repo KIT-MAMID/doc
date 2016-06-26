@@ -1,0 +1,80 @@
+R := list of replica sets
+
+foreach r in R:
+
+	r.p_effective = 0
+	r.v_effective = 0
+
+	for m in r.Mongods:
+		   if m.ObservedState.ExecutionState = Running 		#this line evaluates to false if m.ObservedState = NULL
+		   and m.DesiredState.ExecutionState = Running: 	#this line evaluates to false if m.DesiredState = NULL 
+
+			if m.ParentSlave.PersistentStorage
+				r.p_effective += 1
+			else
+				r.v_effective += 1
+
+
+	while r.p_effective > r.p_desired:
+		delete a persistent Mongod with parent slave state disabled
+		r.p_effective -= 1
+	while r.p_effective > r.p_desired:
+		delete a persistent Mongod
+		r.p_effective -= 1
+
+	while r.v_effective > r.v_desired:
+		delete a volatile Mongod with parent slave state disabled
+		r.v_effective -= 1
+	while r.v_effective > r.v_desired:
+		delete a volatile Mongod
+		r.v_effective -= 1
+
+	invariant: r has at most (p|v)_desired fully operational (p|v) Mongods as desired state
+
+
+
+	r.p_already_added = 0
+	r.v_already_added = 0
+
+	for m in r.Mongods:
+		if m.ParentSlave.ConfiguredState != SlaveStateDisabled  # 
+		   and m.DesiredState.ExecutionState != NotRunning: 	#this line evaluates to false if m.DesiredState = NULL 
+
+			if m.ParentSlave.PersistentStorage
+				r.p_already_added += 1
+			else
+				r.v_already_added += 1
+
+
+	invariant: r has (p|v)_already_added (p|v) Mongods as desired state.
+		   These Mongods will be in MongodExecutionStateRunning or MongodExecutionStateRecovering state
+
+
+# TODO need to fill the queue. only ReplicaSets which 'need' (use p_* to define what need means) are in  the queue 
+RP_p := PriorityQueue(R, "a definition of priority")
+RGPQ_p := map[RiskGroup]PriorityQueue(Slaves of RiskGroup, "a definition of priority for slaves in a risk group, e.g. 1 - used_mongod_ports/available_mongod_ports")
+
+while p = RP_p.pop(); p != nil:
+	
+	invariant: p needs a persistent member
+
+#	if have persistent slave s in a risk group g with no other Mongod of r in g: 		# risk groups are disjoint
+	g := ARGMAX({g RiskGroup | where r has no member in g}, RGPQ_p[g].peek())
+	if g != nil:
+		s := RGPQ_p[g].pop()
+		
+		add s to r.Mongods
+		compute MongodState for s and set the DesiredState variable		
+
+		if r needs a persistent member:
+			RP_p.insert(r) #(recompute priority)
+
+		RGPQ_p[g].insert(s) #(recompute priority)
+
+	else
+		yield an error, but continue
+
+
+do the same for volatile (s/p/v/)
+
+	
