@@ -43,6 +43,7 @@
 --
 -contacts: contact[]
 --
+-main(error: error)
 -readContacts(input: String)
 -control(error: error[])
 -notify(error: error)
@@ -74,7 +75,8 @@ from string, to []string, msg []byte)</panel_attributes>
       <w>120</w>
       <h>48</h>
     </coordinates>
-    <panel_attributes>/Notifier/
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+/Notifier/
 --
 +send(error: error)
 </panel_attributes>
@@ -124,7 +126,7 @@ send(error: error)</panel_attributes>
       <w>64</w>
       <h>72</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;70.0;10.0;10.0;60.0;10.0</additional_attributes>
   </element>
   <element>
@@ -135,7 +137,7 @@ send(error: error)</panel_attributes>
       <w>56</w>
       <h>80</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;80.0;50.0;80.0</additional_attributes>
   </element>
   <element>
@@ -241,7 +243,7 @@ send(error: error)</panel_attributes>
       <w>136</w>
       <h>80</h>
     </coordinates>
-    <panel_attributes>/contact/
+    <panel_attributes>contact
 --
 -id: String
 //list of ways admin wants to be notifiesd
