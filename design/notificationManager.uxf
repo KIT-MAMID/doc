@@ -46,7 +46,7 @@
 -main(error: error)
 -readContacts(input: String)
 -control(error: error[])
--notify(error: error)
+-notify(error: error, contact: Contact)
 
 
 </panel_attributes>
@@ -62,7 +62,7 @@
     </coordinates>
     <panel_attributes>EmailNotifier
 --
-send(error: error)
+send(error: error, addr: String)
 sendMail(addr string, a Auth,
 from string, to []string, msg []byte)</panel_attributes>
     <additional_attributes/>
@@ -78,8 +78,7 @@ from string, to []string, msg []byte)</panel_attributes>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 /Notifier/
 --
-+send(error: error)
-</panel_attributes>
++send(error: error, addr: String)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -243,7 +242,7 @@ send(error: error)</panel_attributes>
       <w>136</w>
       <h>80</h>
     </coordinates>
-    <panel_attributes>contact
+    <panel_attributes>Contact
 --
 -id: String
 //list of ways admin wants to be notifiesd
