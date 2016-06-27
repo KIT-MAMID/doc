@@ -1,3 +1,7 @@
+# Invariant: Algorithm(Algorithm(x)) = Algorithm(x) - otherwise oscillations could occur
+# Most interesting case: Set a slave to disabled. Then a new mongod should be spawned and recover and when it is done the old disabled one can be deleted
+
+
 R := list of replica sets
 
 foreach r in R:
@@ -48,28 +52,30 @@ foreach r in R:
 
 	invariant: r has (p|v)_already_added (p|v) Mongods as desired state.
 		   These Mongods will be in MongodExecutionStateRunning or MongodExecutionStateRecovering state
-
+end foreach
 
 # TODO need to fill the queue. only ReplicaSets which 'need' (use p_* to define what need means) are in  the queue 
 RP_p := PriorityQueue(R, "a definition of priority")
 RGPQ_p := map[RiskGroup]PriorityQueue(Slaves of RiskGroup, "a definition of priority for slaves in a risk group, e.g. 1 - used_mongod_ports/available_mongod_ports")
 
-while p = RP_p.pop(); p != nil:
+while r = RP_p.pop(); r != nil:
 	
-	invariant: p needs a persistent member
+	invariant: r needs a persistent member
 
 #	if have persistent slave s in a risk group g with no other Mongod of r in g: 		# risk groups are disjoint
-	g := ARGMAX({g RiskGroup | where r has no member in g}, RGPQ_p[g].peek())
+	g := ARGMAX({g RiskGroup | where r has no member in g}, RGPQ_p[g].peek_priority())
 	if g != nil:
 		s := RGPQ_p[g].pop()
+		invariant: s has at least one free port
 		
-		add s to r.Mongods
-		compute MongodState for s and set the DesiredState variable		
+		spawn a new mongod m on s and add it to r.Mongods
+		compute MongodState for m and set the DesiredState variable		
 
 		if r needs a persistent member:
 			RP_p.insert(r) #(recompute priority)
 
-		RGPQ_p[g].insert(s) #(recompute priority)
+		if s has free ports:
+			RGPQ_p[g].insert(s) #(recompute priority)
 
 	else
 		yield an error, but continue
