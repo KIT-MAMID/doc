@@ -3,7 +3,7 @@
 \newcommand{\apicall}[8][]{
 \begin{minipageparskip}
 	\paragraph{\framebox{\uppercase{#1}} #2 - #3}
-	\begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Return Codesaa}] %aa intentioal -  more distance
+	\begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Return Codesaa}] %aa intentional -  more distance
 		\item[Parameters]
 		\if\relax\detokenize{#4}\relax
 		\emph{None}
@@ -16,7 +16,7 @@
 		\fi
 		
 		\item[Returns]
-		\begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Status Codeaa}] %aa intentioal -  more distance
+		\begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Status Codeaa}] %aa intentional -  more distance
 			\item[Status Code] #5
 			\ifthenelse{\equal{#6}{}}
 			{} % optional argument #1 is empty: skip
@@ -94,7 +94,7 @@ API Objects are exchanged in JSON format.
 }
 \end{lstlisting}
 \subsection{API Methods}
-All requests and responses are made with the \emph{Content-Type}-Header set to \emph{application/json}. Requests containig any other content type are honored with the HTTP-Status-Code \emph{406 - Not Acceptable}.
+All requests and responses are made with the \emph{Content-Type}-Header set to \emph{application/json}. Requests containing any other content type are honored with the HTTP-Status-Code \emph{406 - Not Acceptable}.
 \subsubsection{Slaves}
 %Do not add default error codes
 \apicall[get\relax]{/slaves}{Gets all slaves}
@@ -221,7 +221,7 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 	{}
 	{}
 
-\apicall[delete]{/riskgroups/<risk\_group\_id>/slave/<slave\_id>}{Removes a slave from a risk group}
+\apicall[delete]{/riskgroups/<risk\_group\_id>/slaves/<slave\_id>}{Removes a slave from a risk group}
 	{risk\_group\_id & integer & id of the risk group to remove the the slave from\\
 	slave\_id & integer & id of the slave to remove from to the risk group}
 	{200}
