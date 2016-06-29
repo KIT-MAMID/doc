@@ -1,0 +1,140 @@
+\newcommand{\pluseq}{\mathrel{{+}{=}}}
+\newcommand{\minuseq}{\mathrel{{-}{=}}}
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKwProg{Fn}{Function}{}{}
+\SetKw{Invariant}{invariant}
+\IncMargin{0.5em}
+
+Invariant: Algorithm(Algorithm(x)) = Algorithm(x)
+
+Otherwise oscillations could occur
+
+Most interesting case: Set a slave to disabled. Then a new Mongod should be spawned and recover and when it is done the old disabled one can be deleted.
+
+\begin{algorithm}
+
+\caption{Count members of a Replica Set that are \& intended to be in stable state (running)}
+
+\Input{ReplicaSet $r$}
+\Output{Number of $p_e$ and $v_e$ member processes of $r$ that are fully operational and are planned to remain in that state.}
+\BlankLine
+\Fn{EffectiveMemberCount(r ReplicaSet)}{
+
+$p_e, v_e = 0$
+
+\For{$m \in \text{r.Mongods}$}{
+	\If{$\text{m.ObservedState.ExecutionState} = Running$ \\ 	%	#this line evaluates to false if m.ObservedState = NULL
+		$\land \text{m.DesiredState.ExecutionState} = Running$}{ %#this line evaluates to false if m.DesiredState = NULL 
+
+		\uIf{$m.ParentSlave.PersistentStorage$}{
+			$p_e \pluseq 1 $
+		}\Else{
+			$v_e \pluseq 1 $
+		}
+	}
+}
+\Return $p_e, v_e$
+}
+\end{algorithm}
+
+
+\begin{algorithm}
+\caption{Destroy members of disabled replica sets where possible without violating p/v constraints.}
+\ForEach{r in ReplicaSets}{
+	
+	$p_e, v_e \gets $ EffectiveRunningMembers(r)
+	
+	\ForEach(// same for persistent and volatile){$\textbf{x}_e \in \{p_e, v_e\}$}{
+		\While{$x_e > r.\textbf{x}$}{
+			\textbf{destroy} any $m \in r.Mongods$ where $m.ParentSlave$ is $\textbf{x} \land \textbf{disabled}$\;
+			$\textbf{x}_e \minuseq 1$
+		}
+		
+		\Invariant minimum number of disabled slaves are running members of $r$\;
+		
+		\While{$\textbf{x}_e > r.\textbf{x}$}{
+			\textbf{destroy} any $m \in r.Mongods$ where $m.ParentSlave$ is $\textbf{x}$\;
+			$\textbf{x}_e \minuseq 1$
+		}
+		
+		\Invariant at most $r.\textbf{x}$ members 
+	}
+	
+	\Invariant \textit{desired state}: at most (r.p|r.v) member processes of $r$\;
+	// desired state = the state that will be deployed
+	
+}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Count recovering and active members of a Replica Set}
+
+\Input{ReplicaSet $r$}
+\Output{Number of $p_a$ and $v_a$ member processes of $r$ that \begin{itemize}
+		\item are \textbf{recovering}, i.e. soon-to-be fully operational
+		\item fully operational (\textbf{running})
+	\end{itemize} and should actually be in that state.}
+\BlankLine
+\Fn{AlreadyAddedMemberCount(r ReplicaSet)}{
+	$p_a, v_a = 0$
+	
+	\For{$m \in \text{r.Mongods}$}{
+		\If{$\text{m.ParentSlave.ConfiguredState} != Disabled$ \\
+			$\land \text{m.DesiredState.ExecutionState} != NotRunning$}{ 
+			
+			\uIf{$m.ParentSlave.PersistentStorage$}{
+				$p_a \pluseq 1 $
+			}\Else{
+			$v_a \pluseq 1 $
+		}
+	}
+}
+\Return $p_a, v_a$
+}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Spawn Mongods on under-provisioned Replica Sets respecting RiskGroup \& p/v constraints.}
+
+$p_a, v_a \gets $ AlreadyAddedMemberCount(r)
+
+\ForEach(// same for persistent and volatile){$\textbf{x}_a \in \{p_a, v_a\}$}{
+
+	%# TODO need to fill the queue. only ReplicaSets which 'need' (use p_* to define what need means) are in  the queue 
+	$RQ \gets$ PriorityQueue(R)\;% "relative amount of missing members")\;
+	$RGSQ \gets$ map[RiskGroup]PriorityQueue(Slaves of RiskGroup)\;%, "relative amount of available Mongod ports")\;
+	
+	\While{$r = RP.pop()$; $r \neq nil$}{
+	
+		\Invariant $r$ needs a member of type $\textbf{x}$
+		
+		// find $x$-slave $s$ in a risk group $g$ with no other Mongod of $r$ in $g$\;
+		$candidates \gets \{g \mid g \in RGSQ.keys \land \text{r has no member in g}\}$\;
+		$g \gets$ ARGMAX($g \in candidates$, RGSQ[g].PeekPriority())\;
+		\uIf{$g \neq nil$}{
+			$s \gets RGSQ[g].pop()$\;
+			\Invariant $s$ has at least one free port\;
+			spawn new Mongod $m$ on $s$ and add it to $r.Mongods$\;
+			compute $MongodState$ for $m$ and set the $DesiredState$ variable\;
+			
+			\If{$r$ needs another member of type $\textbf{x}$}{
+				$RQ.insert(r)$ // recompute priority
+			}
+			
+			\If{$s$ has free ports}{
+				$RGSQ[g].insert(s)$ // recompute priority
+			}
+			
+			
+		} \Else{
+			yield error\;
+			continue\;
+		}
+		
+	
+	}
+
+}
+
+\end{algorithm}
