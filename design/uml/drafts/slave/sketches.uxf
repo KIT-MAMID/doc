@@ -23,14 +23,14 @@ fontfamily=Monospaced //possible: SansSerif,Serif,Monospaced
 
 
 // This text will be stored with each diagram;  use it for notes.</help_text>
-  <zoom_level>4</zoom_level>
+  <zoom_level>3</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>108</x>
-      <y>100</y>
-      <w>72</w>
-      <h>12</h>
+      <x>81</x>
+      <y>36</y>
+      <w>54</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>Application / main()</panel_attributes>
     <additional_attributes/>
@@ -38,10 +38,10 @@ fontfamily=Monospaced //possible: SansSerif,Serif,Monospaced
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>108</x>
-      <y>72</y>
-      <w>72</w>
-      <h>8</h>
+      <x>81</x>
+      <y>15</y>
+      <w>54</w>
+      <h>6</h>
     </coordinates>
     <panel_attributes>Start by init process.</panel_attributes>
     <additional_attributes/>
@@ -49,10 +49,10 @@ fontfamily=Monospaced //possible: SansSerif,Serif,Monospaced
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>140</x>
-      <y>76</y>
-      <w>12</w>
-      <h>32</h>
+      <x>105</x>
+      <y>18</y>
+      <w>9</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
@@ -60,10 +60,10 @@ fontfamily=Monospaced //possible: SansSerif,Serif,Monospaced
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>8</x>
-      <y>180</y>
-      <w>160</w>
-      <h>36</h>
+      <x>6</x>
+      <y>96</y>
+      <w>120</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>Controller
 --
@@ -77,10 +77,10 @@ fontfamily=Monospaced //possible: SansSerif,Serif,Monospaced
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>56</x>
-      <y>324</y>
-      <w>136</w>
-      <h>52</h>
+      <x>42</x>
+      <y>204</y>
+      <w>102</w>
+      <h>39</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 MongodConfigurator
@@ -96,10 +96,10 @@ _   c: msp.Mongod): error_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>144</x>
-      <y>108</y>
-      <w>44</w>
-      <h>80</h>
+      <x>108</x>
+      <y>42</y>
+      <w>33</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;initialize&gt;&gt;</panel_attributes>
@@ -108,10 +108,10 @@ _   c: msp.Mongod): error_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>164</x>
-      <y>188</y>
-      <w>208</w>
-      <h>28</h>
+      <x>123</x>
+      <y>102</y>
+      <w>156</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 &lt;&lt;implements&gt;&gt;</panel_attributes>
@@ -120,10 +120,10 @@ _   c: msp.Mongod): error_</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>88</x>
-      <y>248</y>
-      <w>156</w>
-      <h>64</h>
+      <x>66</x>
+      <y>147</y>
+      <w>117</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>ProcessManager
 --
@@ -141,10 +141,10 @@ _   c: msp.Mongod): error_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>44</x>
-      <y>212</y>
-      <w>52</w>
-      <h>60</h>
+      <x>33</x>
+      <y>120</y>
+      <w>39</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=1
@@ -156,10 +156,10 @@ m2=1
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>176</x>
-      <y>96</y>
-      <w>52</w>
-      <h>16</h>
+      <x>132</x>
+      <y>33</y>
+      <w>39</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -168,10 +168,10 @@ m2=1
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>8</x>
-      <y>120</y>
-      <w>92</w>
-      <h>36</h>
+      <x>6</x>
+      <y>51</y>
+      <w>69</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>Only one Mongod State may be
 applied
@@ -183,10 +183,10 @@ applied
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>16</x>
-      <y>152</y>
-      <w>12</w>
-      <h>36</h>
+      <x>12</x>
+      <y>75</y>
+      <w>9</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
@@ -194,10 +194,10 @@ applied
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>56</x>
-      <y>392</y>
-      <w>136</w>
-      <h>48</h>
+      <x>42</x>
+      <y>255</y>
+      <w>102</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>ConcreteMongodConfigurator
 --
@@ -212,10 +212,10 @@ _   c: msp.Mongod): error_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>108</x>
-      <y>372</y>
-      <w>12</w>
-      <h>28</h>
+      <x>81</x>
+      <y>240</y>
+      <w>9</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
@@ -224,9 +224,9 @@ _   c: msp.Mongod): error_</panel_attributes>
     <id>UMLPackage</id>
     <coordinates>
       <x>0</x>
-      <y>52</y>
-      <w>304</w>
-      <h>396</h>
+      <y>0</y>
+      <w>228</w>
+      <h>297</h>
     </coordinates>
     <panel_attributes>slave</panel_attributes>
     <additional_attributes/>
@@ -234,10 +234,10 @@ _   c: msp.Mongod): error_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>16</x>
-      <y>212</y>
-      <w>48</w>
-      <h>128</h>
+      <x>12</x>
+      <y>120</y>
+      <w>36</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -246,10 +246,10 @@ _   c: msp.Mongod): error_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>144</x>
-      <y>108</y>
-      <w>228</w>
-      <h>52</h>
+      <x>108</x>
+      <y>42</y>
+      <w>171</w>
+      <h>39</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;initialize&gt;&gt;</panel_attributes>
@@ -258,10 +258,10 @@ _   c: msp.Mongod): error_</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>216</x>
-      <y>384</y>
-      <w>76</w>
-      <h>36</h>
+      <x>162</x>
+      <y>249</y>
+      <w>57</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>MongoDB Client Library</panel_attributes>
     <additional_attributes/>
@@ -269,10 +269,10 @@ _   c: msp.Mongod): error_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>188</x>
-      <y>396</y>
-      <w>36</w>
-      <h>16</h>
+      <x>141</x>
+      <y>258</y>
+      <w>27</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -281,10 +281,10 @@ _   c: msp.Mongod): error_</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>220</x>
-      <y>84</y>
-      <w>76</w>
-      <h>36</h>
+      <x>165</x>
+      <y>24</y>
+      <w>57</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>CLIFlagsParser</panel_attributes>
     <additional_attributes/>
@@ -292,10 +292,10 @@ _   c: msp.Mongod): error_</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>364</x>
-      <y>136</y>
-      <w>152</w>
-      <h>28</h>
+      <x>273</x>
+      <y>63</y>
+      <w>114</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>MSPListener
 --
@@ -307,10 +307,10 @@ _+ NewMSPServer(consumer: MSPConsuner): MSPServer_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>364</x>
-      <y>188</y>
-      <w>152</w>
-      <h>36</h>
+      <x>273</x>
+      <y>102</y>
+      <w>114</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 MSPConsumer
@@ -322,10 +322,10 @@ MSPConsumer
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>412</x>
-      <y>160</y>
-      <w>32</w>
-      <h>36</h>
+      <x>309</x>
+      <y>81</y>
+      <w>24</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=1
@@ -336,10 +336,10 @@ r1=consumer</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>348</x>
-      <y>72</y>
-      <w>580</w>
-      <h>376</h>
+      <x>261</x>
+      <y>15</y>
+      <w>444</w>
+      <h>282</h>
     </coordinates>
     <panel_attributes>msp
 bg=cyan
@@ -350,26 +350,27 @@ layer=-3</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>568</x>
-      <y>124</y>
-      <w>124</w>
-      <h>36</h>
+      <x>426</x>
+      <y>54</y>
+      <w>93</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>Mongod
 --
 + Port: PortNumber
 + ReplSetName: string
 + IsShardingConfigServer: bool
-+ CurrentError: SlaveError // != nil only in responses</panel_attributes>
++ GetStatusError: SlaveError // != nil only in responses
++ LastEstablishStateError: SlaveError // != nil only in responses</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>572</x>
-      <y>192</y>
-      <w>112</w>
-      <h>48</h>
+      <x>429</x>
+      <y>105</y>
+      <w>84</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enum&gt;&gt;
 MongodExecutionState
@@ -385,25 +386,25 @@ MongodExecutionStateRunning
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>604</x>
-      <y>156</y>
-      <w>52</w>
-      <h>44</h>
+      <x>453</x>
+      <y>81</y>
+      <w>39</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m1=1
 m2=1
 r2=ExecutionState
 </panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>512</x>
-      <y>136</y>
-      <w>64</w>
-      <h>16</h>
+      <x>384</x>
+      <y>63</y>
+      <w>48</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -412,26 +413,26 @@ r2=ExecutionState
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>760</x>
-      <y>136</y>
-      <w>152</w>
-      <h>40</h>
+      <x>570</x>
+      <y>63</y>
+      <w>132</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>MSPClient
 --
 --
 + MSPClient(target: HostPort)
 + MspStatusRequest(): ([]Mongod, error)
-+ MspEstablishMongodState(m: Mongod): error</panel_attributes>
++ MspEstablishMongodState(m: Mongod): CommunicationError</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>688</x>
-      <y>136</y>
-      <w>80</w>
-      <h>16</h>
+      <x>516</x>
+      <y>63</y>
+      <w>60</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -440,10 +441,10 @@ r2=ExecutionState
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>608</x>
-      <y>268</y>
-      <w>64</w>
-      <h>28</h>
+      <x>456</x>
+      <y>162</y>
+      <w>48</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>HostPort
 --
@@ -454,10 +455,10 @@ r2=ExecutionState
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>512</x>
-      <y>148</y>
-      <w>112</w>
-      <h>204</h>
+      <x>384</x>
+      <y>72</y>
+      <w>84</w>
+      <h>153</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -466,10 +467,10 @@ r2=ExecutionState
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>632</x>
-      <y>172</y>
-      <w>140</w>
-      <h>180</h>
+      <x>474</x>
+      <y>90</y>
+      <w>105</w>
+      <h>135</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -478,25 +479,25 @@ r2=ExecutionState
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>636</x>
-      <y>156</y>
-      <w>64</w>
-      <h>120</h>
+      <x>477</x>
+      <y>81</y>
+      <w>48</w>
+      <h>87</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m1=1
 m2=*
 r2=ReplicaSetMembers
 </panel_attributes>
-    <additional_attributes>50.0;10.0;140.0;60.0;140.0;240.0;10.0;280.0</additional_attributes>
+    <additional_attributes>50.0;10.0;140.0;50.0;140.0;230.0;10.0;270.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>764</x>
-      <y>276</y>
-      <w>92</w>
-      <h>20</h>
+      <x>573</x>
+      <y>168</y>
+      <w>69</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>Passed around as JSON using json.En/Decoder.En/Decode()</panel_attributes>
     <additional_attributes/>
@@ -504,32 +505,21 @@ r2=ReplicaSetMembers
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>688</x>
-      <y>156</y>
-      <w>100</w>
-      <h>128</h>
+      <x>516</x>
+      <y>78</y>
+      <w>75</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;230.0;300.0</additional_attributes>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>668</x>
-      <y>280</y>
-      <w>104</w>
-      <h>12</h>
-    </coordinates>
-    <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;240.0;10.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>668</x>
-      <y>352</y>
-      <w>88</w>
-      <h>28</h>
+      <x>501</x>
+      <y>225</y>
+      <w>66</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>CommunicationError
 --
@@ -541,10 +531,10 @@ r2=ReplicaSetMembers
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>636</x>
-      <y>424</y>
-      <w>40</w>
-      <h>16</h>
+      <x>477</x>
+      <y>279</y>
+      <w>30</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 error</panel_attributes>
@@ -553,10 +543,10 @@ error</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>660</x>
-      <y>376</y>
-      <w>76</w>
-      <h>56</h>
+      <x>495</x>
+      <y>243</y>
+      <w>57</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 &lt;&lt;implements&gt;&gt;</panel_attributes>
@@ -565,10 +555,10 @@ error</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>472</x>
-      <y>108</y>
-      <w>308</w>
-      <h>36</h>
+      <x>354</x>
+      <y>42</y>
+      <w>231</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;calls&gt;&gt;</panel_attributes>
@@ -577,10 +567,10 @@ error</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>592</x>
-      <y>84</y>
-      <w>108</w>
-      <h>16</h>
+      <x>444</x>
+      <y>24</y>
+      <w>81</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>Communicate using JSON over HTTP</panel_attributes>
     <additional_attributes/>
@@ -588,10 +578,10 @@ error</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>640</x>
-      <y>96</y>
-      <w>32</w>
-      <h>28</h>
+      <x>480</x>
+      <y>33</y>
+      <w>24</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>60.0;10.0;10.0;50.0</additional_attributes>
@@ -599,10 +589,10 @@ error</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>564</x>
-      <y>344</y>
-      <w>84</w>
-      <h>36</h>
+      <x>423</x>
+      <y>219</y>
+      <w>63</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>SlaveError
 --
@@ -616,10 +606,10 @@ Error(): string</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>608</x>
-      <y>376</y>
-      <w>64</w>
-      <h>56</h>
+      <x>456</x>
+      <y>243</y>
+      <w>48</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 &lt;&lt;implements&gt;&gt;</panel_attributes>
@@ -628,10 +618,10 @@ Error(): string</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>720</x>
-      <y>172</y>
-      <w>76</w>
-      <h>188</h>
+      <x>540</x>
+      <y>90</y>
+      <w>57</w>
+      <h>141</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -640,10 +630,10 @@ Error(): string</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>644</x>
-      <y>292</y>
-      <w>136</w>
-      <h>68</h>
+      <x>483</x>
+      <y>180</y>
+      <w>102</w>
+      <h>51</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;150.0;320.0;10.0</additional_attributes>
@@ -651,10 +641,10 @@ Error(): string</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>452</x>
-      <y>380</y>
-      <w>64</w>
-      <h>16</h>
+      <x>339</x>
+      <y>246</y>
+      <w>48</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>PortNumber
 --
@@ -664,10 +654,10 @@ Error(): string</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>452</x>
-      <y>456</y>
-      <w>64</w>
-      <h>16</h>
+      <x>339</x>
+      <y>303</y>
+      <w>48</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>uint16
 --
@@ -677,10 +667,10 @@ Error(): string</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>480</x>
-      <y>392</y>
-      <w>12</w>
-      <h>72</h>
+      <x>360</x>
+      <y>255</y>
+      <w>9</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;160.0;10.0;10.0</additional_attributes>
@@ -688,10 +678,10 @@ Error(): string</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1180</x>
-      <y>880</y>
-      <w>72</w>
-      <h>8</h>
+      <x>885</x>
+      <y>621</y>
+      <w>54</w>
+      <h>6</h>
     </coordinates>
     <panel_attributes>Start by init process.</panel_attributes>
     <additional_attributes/>
@@ -699,10 +689,10 @@ Error(): string</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1212</x>
-      <y>848</y>
-      <w>12</w>
-      <h>40</h>
+      <x>909</x>
+      <y>597</y>
+      <w>9</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
@@ -710,10 +700,10 @@ Error(): string</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1244</x>
-      <y>848</y>
-      <w>56</w>
-      <h>48</h>
+      <x>933</x>
+      <y>597</y>
+      <w>42</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -722,10 +712,10 @@ Error(): string</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>1292</x>
-      <y>868</y>
-      <w>76</w>
-      <h>36</h>
+      <x>969</x>
+      <y>612</y>
+      <w>57</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>CLIFlagsParser</panel_attributes>
     <additional_attributes/>
@@ -733,10 +723,10 @@ Error(): string</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1160</x>
-      <y>708</y>
-      <w>112</w>
-      <h>60</h>
+      <x>870</x>
+      <y>492</y>
+      <w>84</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>ClusterAllocator
 --
@@ -749,10 +739,10 @@ Error(): string</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1004</x>
-      <y>388</y>
-      <w>40</w>
-      <h>24</h>
+      <x>753</x>
+      <y>252</y>
+      <w>30</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>DB</panel_attributes>
     <additional_attributes/>
@@ -760,10 +750,10 @@ Error(): string</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>992</x>
-      <y>856</y>
-      <w>120</w>
-      <h>52</h>
+      <x>744</x>
+      <y>603</y>
+      <w>90</w>
+      <h>39</h>
     </coordinates>
     <panel_attributes>Monitor
 --
@@ -778,10 +768,10 @@ Error(): string</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>996</x>
-      <y>372</y>
-      <w>100</w>
-      <h>56</h>
+      <x>747</x>
+      <y>240</y>
+      <w>75</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>gorm</panel_attributes>
     <additional_attributes/>
@@ -789,10 +779,10 @@ Error(): string</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1344</x>
-      <y>740</y>
-      <w>112</w>
-      <h>56</h>
+      <x>1008</x>
+      <y>516</y>
+      <w>84</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>Deployer
 --
@@ -806,24 +796,23 @@ Error(): string</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>372</x>
-      <y>644</y>
-      <w>124</w>
-      <h>32</h>
+      <x>279</x>
+      <y>444</y>
+      <w>93</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>MongodState
 --
-+ IsShardingServer: bool
-+ SlaveInternalError: SlaveError // may be nil</panel_attributes>
++ IsShardingServer: bool</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>396</x>
-      <y>672</y>
-      <w>52</w>
-      <h>52</h>
+      <x>297</x>
+      <y>465</y>
+      <w>39</w>
+      <h>39</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m1=1
@@ -835,10 +824,10 @@ r2=ExecutionState
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>468</x>
-      <y>672</y>
-      <w>60</w>
-      <h>52</h>
+      <x>351</x>
+      <y>465</y>
+      <w>45</w>
+      <h>39</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m1=1
@@ -850,10 +839,10 @@ r2=ReplicaSetMembers
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>340</x>
-      <y>716</y>
-      <w>96</w>
-      <h>48</h>
+      <x>255</x>
+      <y>498</y>
+      <w>72</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enum&gt;&gt;
 MongodExecutionState
@@ -869,10 +858,10 @@ MongodExecutionStateRunning
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>440</x>
-      <y>716</y>
-      <w>64</w>
-      <h>28</h>
+      <x>330</x>
+      <y>498</y>
+      <w>48</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>HostPort
 --
@@ -883,25 +872,10 @@ MongodExecutionStateRunning
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>724</x>
-      <y>820</y>
-      <w>84</w>
-      <h>32</h>
-    </coordinates>
-    <panel_attributes>SlaveError
---
-Description: string
-LongDescription: string
-Slave: Slave</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>420</x>
-      <y>816</y>
-      <w>64</w>
-      <h>16</h>
+      <x>315</x>
+      <y>573</y>
+      <w>48</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>PortNumber
 --
@@ -911,10 +885,10 @@ Slave: Slave</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>448</x>
-      <y>828</y>
-      <w>12</w>
-      <h>60</h>
+      <x>336</x>
+      <y>582</y>
+      <w>9</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
@@ -922,10 +896,10 @@ Slave: Slave</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>420</x>
-      <y>880</y>
-      <w>64</w>
-      <h>16</h>
+      <x>315</x>
+      <y>621</y>
+      <w>48</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>uint16
 --
@@ -935,10 +909,10 @@ Slave: Slave</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>584</x>
-      <y>520</y>
-      <w>128</w>
-      <h>60</h>
+      <x>438</x>
+      <y>351</y>
+      <w>96</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>Slave
 --
@@ -955,10 +929,10 @@ Slave: Slave</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>312</x>
-      <y>496</y>
-      <w>628</w>
-      <h>360</h>
+      <x>234</x>
+      <y>333</y>
+      <w>471</w>
+      <h>309</h>
     </coordinates>
     <panel_attributes>model</panel_attributes>
     <additional_attributes/>
@@ -966,10 +940,10 @@ Slave: Slave</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>760</x>
-      <y>540</y>
-      <w>84</w>
-      <h>28</h>
+      <x>570</x>
+      <y>366</y>
+      <w>63</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>RiskGroup
 --
@@ -981,10 +955,10 @@ Slave: Slave</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>712</x>
-      <y>632</y>
-      <w>124</w>
-      <h>48</h>
+      <x>534</x>
+      <y>435</y>
+      <w>93</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>ReplicaSet
 --
@@ -1000,10 +974,10 @@ Slave: Slave</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>492</x>
-      <y>560</y>
-      <w>100</w>
-      <h>20</h>
+      <x>369</x>
+      <y>381</y>
+      <w>75</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
@@ -1015,10 +989,10 @@ r2=Mongods</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>708</x>
-      <y>544</y>
-      <w>60</w>
-      <h>20</h>
+      <x>531</x>
+      <y>369</y>
+      <w>45</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1=1
@@ -1029,10 +1003,10 @@ r2=Slaves</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>976</x>
-      <y>0</y>
-      <w>604</w>
-      <h>964</h>
+      <x>732</x>
+      <y>216</y>
+      <w>453</w>
+      <h>468</h>
     </coordinates>
     <panel_attributes>master</panel_attributes>
     <additional_attributes/>
@@ -1040,30 +1014,31 @@ r2=Slaves</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1144</x>
-      <y>392</y>
-      <w>172</w>
-      <h>56</h>
+      <x>858</x>
+      <y>252</y>
+      <w>129</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>SlaveAPI
 --
 + DB: gorm.DB
 + BusWriteChannel: chan&lt;-
++ ClusterAllocator: ClusterAllocator
 --
-_+SlaveIndex(w: http.ResponseWriter, r *http.Request)_
-_+SlaveById(w: http.ResponseWriter, r *http.Request)_
-_+SlavePut(w: http.ResponseWriter, r *http.Request)_
-_+SlaveUpdate(w: http.ResponseWriter, r *http.Request)_
-_+SlaveDelete(w: http.ResponseWriter, r *http.Request)_</panel_attributes>
++SlaveIndex(w: http.ResponseWriter, r *http.Request)
++SlaveById(w: http.ResponseWriter, r *http.Request)
++SlavePut(w: http.ResponseWriter, r *http.Request)
++SlaveUpdate(w: http.ResponseWriter, r *http.Request)
++SlaveDelete(w: http.ResponseWriter, r *http.Request)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>696</x>
-      <y>416</y>
-      <w>456</w>
-      <h>112</h>
+      <x>522</x>
+      <y>273</y>
+      <w>342</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -1072,31 +1047,32 @@ _+SlaveDelete(w: http.ResponseWriter, r *http.Request)_</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1144</x>
-      <y>456</y>
-      <w>192</w>
-      <h>64</h>
+      <x>858</x>
+      <y>300</y>
+      <w>144</w>
+      <h>51</h>
     </coordinates>
     <panel_attributes>ReplicaSetAPI
 --
 + DB: gorm.DB
 + BusWriteChannel: chan&lt;-
++ ClusterAllocator: ClusterAllocator
 --
-_+ReplicaSetIndex(w: http.ResponseWriter, r *http.Request)_
-_+ReplicaSetById(w: http.ResponseWriter, r *http.Request)_
-_+ReplicaSetPut(w: http.ResponseWriter, r *http.Request)_
-_+ReplicaSetUpdate(w: http.ResponseWriter, r *http.Request)_
-_+ReplicaSetDelete(w: http.ResponseWriter, r *http.Request)_
-_+ReplicaSetGetSlaves(w: http.ResponseWriter, r *http.Request)_</panel_attributes>
++ReplicaSetIndex(w: http.ResponseWriter, r *http.Request)
++ReplicaSetById(w: http.ResponseWriter, r *http.Request)
++ReplicaSetPut(w: http.ResponseWriter, r *http.Request)
++ReplicaSetUpdate(w: http.ResponseWriter, r *http.Request)
++ReplicaSetDelete(w: http.ResponseWriter, r *http.Request)
++ReplicaSetGetSlaves(w: http.ResponseWriter, r *http.Request)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>820</x>
-      <y>476</y>
-      <w>332</w>
-      <h>164</h>
+      <x>615</x>
+      <y>318</y>
+      <w>249</w>
+      <h>123</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -1105,32 +1081,32 @@ _+ReplicaSetGetSlaves(w: http.ResponseWriter, r *http.Request)_</panel_attribute
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1144</x>
-      <y>524</y>
-      <w>192</w>
-      <h>68</h>
+      <x>858</x>
+      <y>354</y>
+      <w>144</w>
+      <h>51</h>
     </coordinates>
     <panel_attributes>RiskGroupAPI
 --
 + DB: gorm.DB
 + BusWriteChannel: chan&lt;-
 --
-_+RiskGroupIndex(w: http.ResponseWriter, r *http.Request)_
-_+RiskGroupById(w: http.ResponseWriter, r *http.Request)_
-_+RiskGroupPut(w: http.ResponseWriter, r *http.Request)_
-_+RiskGroupUpdate(w: http.ResponseWriter, r *http.Request)_
-_+RiskGroupDelete(w: http.ResponseWriter, r *http.Request)_
-_+RiskGroupGetSlaves(w: http.ResponseWriter, r *http.Request)_
-_+RiskGroupAssignSlave(w: http.ResponseWriter, r *http.Request)_</panel_attributes>
++RiskGroupIndex(w: http.ResponseWriter, r *http.Request)
++RiskGroupById(w: http.ResponseWriter, r *http.Request)
++RiskGroupPut(w: http.ResponseWriter, r *http.Request)
++RiskGroupUpdate(w: http.ResponseWriter, r *http.Request)
++RiskGroupDelete(w: http.ResponseWriter, r *http.Request)
++RiskGroupGetSlaves(w: http.ResponseWriter, r *http.Request)
++RiskGroupAssignSlave(w: http.ResponseWriter, r *http.Request)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>840</x>
-      <y>548</y>
-      <w>312</w>
-      <h>16</h>
+      <x>630</x>
+      <y>372</y>
+      <w>234</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -1139,10 +1115,10 @@ _+RiskGroupAssignSlave(w: http.ResponseWriter, r *http.Request)_</panel_attribut
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>708</x>
-      <y>476</y>
-      <w>444</w>
-      <h>56</h>
+      <x>531</x>
+      <y>318</y>
+      <w>333</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -1151,10 +1127,10 @@ _+RiskGroupAssignSlave(w: http.ResponseWriter, r *http.Request)_</panel_attribut
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>708</x>
-      <y>548</y>
-      <w>444</w>
-      <h>40</h>
+      <x>531</x>
+      <y>372</y>
+      <w>333</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -1163,15 +1139,16 @@ _+RiskGroupAssignSlave(w: http.ResponseWriter, r *http.Request)_</panel_attribut
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1380</x>
-      <y>428</y>
-      <w>84</w>
-      <h>32</h>
+      <x>1035</x>
+      <y>276</y>
+      <w>63</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>MasterAPIServer
 --
 + DB: gorm.DB
 + BusWriteChannel: chan&lt;-
++ ClusterAllocator: ClusterAllocator
 --
 + Run()
 </panel_attributes>
@@ -1180,10 +1157,10 @@ _+RiskGroupAssignSlave(w: http.ResponseWriter, r *http.Request)_</panel_attribut
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1312</x>
-      <y>408</y>
-      <w>76</w>
-      <h>40</h>
+      <x>984</x>
+      <y>267</y>
+      <w>57</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -1192,10 +1169,10 @@ _+RiskGroupAssignSlave(w: http.ResponseWriter, r *http.Request)_</panel_attribut
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1332</x>
-      <y>444</y>
-      <w>56</w>
-      <h>48</h>
+      <x>999</x>
+      <y>294</y>
+      <w>42</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -1204,10 +1181,10 @@ _+RiskGroupAssignSlave(w: http.ResponseWriter, r *http.Request)_</panel_attribut
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1332</x>
-      <y>456</y>
-      <w>64</w>
-      <h>96</h>
+      <x>999</x>
+      <y>303</y>
+      <w>48</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -1216,10 +1193,10 @@ _+RiskGroupAssignSlave(w: http.ResponseWriter, r *http.Request)_</panel_attribut
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1408</x>
-      <y>472</y>
-      <w>56</w>
-      <h>28</h>
+      <x>1056</x>
+      <y>315</y>
+      <w>42</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>Uses gorilla mux to route calls to correct methods</panel_attributes>
     <additional_attributes/>
@@ -1227,10 +1204,10 @@ _+RiskGroupAssignSlave(w: http.ResponseWriter, r *http.Request)_</panel_attribut
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1432</x>
-      <y>456</y>
-      <w>12</w>
-      <h>24</h>
+      <x>1074</x>
+      <y>303</y>
+      <w>9</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
@@ -1238,28 +1215,28 @@ _+RiskGroupAssignSlave(w: http.ResponseWriter, r *http.Request)_</panel_attribut
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>760</x>
-      <y>704</y>
-      <w>124</w>
-      <h>52</h>
+      <x>582</x>
+      <y>480</y>
+      <w>93</w>
+      <h>39</h>
     </coordinates>
     <panel_attributes>Problem
 --
 +Id: uint
 +Description: string
 +LongDescription: string
-+Slave: Slave
-+ReplicaSet: ReplicaSet
-+Mongod: Mongod</panel_attributes>
++Slave: *Slave
++ReplicaSet: *ReplicaSet
++Mongod: *Mongod</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>640</x>
-      <y>724</y>
-      <w>100</w>
-      <h>24</h>
+      <x>492</x>
+      <y>495</y>
+      <w>75</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>Description may contain tag to reference objects e.g. &lt;replicaset:123&gt;</panel_attributes>
     <additional_attributes/>
@@ -1267,10 +1244,10 @@ _+RiskGroupAssignSlave(w: http.ResponseWriter, r *http.Request)_</panel_attribut
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>736</x>
-      <y>732</y>
-      <w>32</w>
-      <h>12</h>
+      <x>564</x>
+      <y>501</y>
+      <w>24</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
@@ -1278,26 +1255,26 @@ _+RiskGroupAssignSlave(w: http.ResponseWriter, r *http.Request)_</panel_attribut
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1144</x>
-      <y>596</y>
-      <w>192</w>
-      <h>36</h>
+      <x>858</x>
+      <y>408</y>
+      <w>144</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>ProblemAPI
 --
 + DB: gorm.DB
 --
-_+ProblemIndex(w: http.ResponseWriter, r *http.Request)_
-_+ProblemById(w: http.ResponseWriter, r *http.Request)_</panel_attributes>
++ProblemIndex(w: http.ResponseWriter, r *http.Request)
++ProblemById(w: http.ResponseWriter, r *http.Request)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1332</x>
-      <y>456</y>
-      <w>76</w>
-      <h>168</h>
+      <x>999</x>
+      <y>303</y>
+      <w>57</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -1306,22 +1283,22 @@ _+ProblemById(w: http.ResponseWriter, r *http.Request)_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>880</x>
-      <y>608</y>
-      <w>272</w>
-      <h>120</h>
+      <x>672</x>
+      <y>417</y>
+      <w>192</w>
+      <h>81</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>660.0;10.0;10.0;280.0</additional_attributes>
+    <additional_attributes>620.0;10.0;10.0;250.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>1116</x>
-      <y>372</y>
-      <w>376</w>
-      <h>312</h>
+      <x>837</x>
+      <y>240</y>
+      <w>282</w>
+      <h>234</h>
     </coordinates>
     <panel_attributes>masterapi</panel_attributes>
     <additional_attributes/>
@@ -1329,27 +1306,27 @@ _+ProblemById(w: http.ResponseWriter, r *http.Request)_</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>372</x>
-      <y>564</y>
-      <w>124</w>
-      <h>40</h>
+      <x>279</x>
+      <y>384</y>
+      <w>93</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>Mongod
 --
-ObservationError: error
 Port: PortNumber
 ReplSetName: string
-
+ObservationError: error
+LastEstablishStateError: SlaveError
 --</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
-      <y>600</y>
-      <w>44</w>
-      <h>52</h>
+      <x>300</x>
+      <y>411</y>
+      <w>33</w>
+      <h>39</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m1=1
@@ -1361,10 +1338,10 @@ r2=DesiredState
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>464</x>
-      <y>600</y>
-      <w>48</w>
-      <h>52</h>
+      <x>348</x>
+      <y>411</y>
+      <w>36</w>
+      <h>39</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m1=1
@@ -1376,10 +1353,10 @@ r2=ObservedState
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>492</x>
-      <y>572</y>
-      <w>228</w>
-      <h>108</h>
+      <x>369</x>
+      <y>390</y>
+      <w>171</w>
+      <h>81</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
@@ -1391,10 +1368,10 @@ r2=Mongods</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>828</x>
-      <y>588</y>
-      <w>80</w>
-      <h>16</h>
+      <x>621</x>
+      <y>402</y>
+      <w>60</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>All RiskGroup are mutually
 disjoint sets of slaves.</panel_attributes>
@@ -1403,10 +1380,10 @@ disjoint sets of slaves.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>840</x>
-      <y>556</y>
-      <w>36</w>
-      <h>40</h>
+      <x>630</x>
+      <y>378</y>
+      <w>27</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>70.0;80.0;10.0;10.0</additional_attributes>
@@ -1414,10 +1391,10 @@ disjoint sets of slaves.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>612</x>
-      <y>612</y>
-      <w>84</w>
-      <h>36</h>
+      <x>459</x>
+      <y>420</y>
+      <w>63</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enum&gt;&gt;
 SlaveState
@@ -1430,10 +1407,10 @@ SlaveStateDisabled</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>648</x>
-      <y>576</y>
-      <w>56</w>
-      <h>44</h>
+      <x>486</x>
+      <y>393</y>
+      <w>42</w>
+      <h>33</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m1=1
@@ -1445,10 +1422,10 @@ ConfiguredState
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1084</x>
-      <y>628</y>
-      <w>112</w>
-      <h>92</h>
+      <x>813</x>
+      <y>432</y>
+      <w>84</w>
+      <h>69</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -1457,10 +1434,10 @@ ConfiguredState
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1172</x>
-      <y>820</y>
-      <w>108</w>
-      <h>32</h>
+      <x>879</x>
+      <y>576</y>
+      <w>81</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>Application / main()
 --
@@ -1473,10 +1450,10 @@ ConfiguredState
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>320</x>
-      <y>524</y>
-      <w>128</w>
-      <h>28</h>
+      <x>240</x>
+      <y>354</y>
+      <w>96</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>PRIMARY KEY (ParentSlave,Port,ReplSetName)
 UNIQUE(Port,ReplSetName)</panel_attributes>
@@ -1485,44 +1462,21 @@ UNIQUE(Port,ReplSetName)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>424</x>
-      <y>548</y>
-      <w>12</w>
-      <h>24</h>
+      <x>318</x>
+      <y>372</y>
+      <w>9</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
   </element>
   <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>556</x>
-      <y>760</y>
-      <w>164</w>
-      <h>84</h>
-    </coordinates>
-    <panel_attributes>Possible problems:
-
-Mongod:
-Mongod state mismatch
-Establish state error - Deleted if no state mismatch
-
-Replica set:
-Replica set degraded
-
-Slave:
-Communication error
-
-Cluster allocator cannot satisfy constraints</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
-      <x>144</x>
-      <y>108</y>
-      <w>68</w>
-      <h>148</h>
+      <x>108</x>
+      <y>42</y>
+      <w>51</w>
+      <h>111</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;initialize&gt;&gt;</panel_attributes>
@@ -1531,10 +1485,10 @@ Cluster allocator cannot satisfy constraints</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1312</x>
-      <y>824</y>
-      <w>120</w>
-      <h>40</h>
+      <x>984</x>
+      <y>579</y>
+      <w>90</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>Bus
 --
@@ -1547,10 +1501,10 @@ Cluster allocator cannot satisfy constraints</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1276</x>
-      <y>840</y>
-      <w>44</w>
-      <h>16</h>
+      <x>957</x>
+      <y>591</y>
+      <w>33</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -1559,10 +1513,10 @@ Cluster allocator cannot satisfy constraints</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1108</x>
-      <y>836</y>
-      <w>72</w>
-      <h>32</h>
+      <x>831</x>
+      <y>588</y>
+      <w>54</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;initializes&gt;&gt;</panel_attributes>
@@ -1571,10 +1525,10 @@ Cluster allocator cannot satisfy constraints</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1276</x>
-      <y>764</y>
-      <w>80</w>
-      <h>76</h>
+      <x>957</x>
+      <y>534</y>
+      <w>60</w>
+      <h>57</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;initializes&gt;&gt;</panel_attributes>
@@ -1583,10 +1537,10 @@ Cluster allocator cannot satisfy constraints</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1232</x>
-      <y>764</y>
-      <w>64</w>
-      <h>64</h>
+      <x>924</x>
+      <y>534</y>
+      <w>48</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;initializes&gt;&gt;</panel_attributes>
@@ -1595,10 +1549,10 @@ Cluster allocator cannot satisfy constraints</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1272</x>
-      <y>456</y>
-      <w>144</w>
-      <h>372</h>
+      <x>954</x>
+      <y>303</y>
+      <w>108</w>
+      <h>279</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;initializes&gt;&gt;</panel_attributes>
@@ -1607,25 +1561,10 @@ Cluster allocator cannot satisfy constraints</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>376</x>
-      <y>776</y>
-      <w>56</w>
-      <h>32</h>
-    </coordinates>
-    <panel_attributes>StateMatchResult
---
-mongod: Mongod
-matching: bool
---</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1008</x>
-      <y>712</y>
-      <w>128</w>
-      <h>64</h>
+      <x>744</x>
+      <y>495</y>
+      <w>108</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>ProblemManager
 --
@@ -1633,7 +1572,7 @@ matching: bool
 + BusChannel: chan interface {}
 --
 + Run()
-- generateProblem(e: ErrorContext): Problem
+- generateProblem(e: StatusMessage): Problem
 - updateProblem(p: Problem)
 - removeProblem(d: Mongod)</panel_attributes>
     <additional_attributes/>
@@ -1641,10 +1580,10 @@ matching: bool
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1132</x>
-      <y>752</y>
-      <w>72</w>
-      <h>76</h>
+      <x>849</x>
+      <y>525</y>
+      <w>54</w>
+      <h>57</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;initializes&gt;&gt;</panel_attributes>
@@ -1653,73 +1592,47 @@ matching: bool
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>448</x>
-      <y>776</y>
-      <w>56</w>
-      <h>32</h>
+      <x>477</x>
+      <y>543</y>
+      <w>87</w>
+      <h>27</h>
     </coordinates>
-    <panel_attributes>ApiChange
+    <panel_attributes>MongodMatchStatus
 --
-
---</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>736</x>
-      <y>784</y>
-      <w>72</w>
-      <h>32</h>
-    </coordinates>
-    <panel_attributes>MismatchError
---
-Description: string
-LongDescription: string
+Mismatch: bool
 Mongod: Mongod</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>840</x>
-      <y>812</y>
-      <w>48</w>
-      <h>16</h>
+      <x>630</x>
+      <y>570</y>
+      <w>36</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
-ErrorContext</panel_attributes>
+StatusMessage</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>804</x>
-      <y>800</y>
-      <w>44</w>
+      <x>561</x>
+      <y>555</y>
+      <w>75</w>
       <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>90.0;40.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>804</x>
-      <y>820</y>
-      <w>44</w>
-      <h>28</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>90.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>230.0;60.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>892</x>
-      <y>832</y>
-      <w>36</w>
-      <h>16</h>
+      <x>669</x>
+      <y>585</y>
+      <w>27</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>To be sent
 over bus</panel_attributes>
@@ -1728,10 +1641,10 @@ over bus</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>884</x>
-      <y>824</y>
-      <w>16</w>
-      <h>16</h>
+      <x>663</x>
+      <y>579</y>
+      <w>12</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;20.0;20.0</additional_attributes>
@@ -1739,60 +1652,61 @@ over bus</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>884</x>
-      <y>740</y>
-      <w>132</w>
-      <h>84</h>
+      <x>663</x>
+      <y>516</y>
+      <w>87</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;190.0;310.0;10.0</additional_attributes>
+    <additional_attributes>10.0;190.0;270.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>820</x>
-      <y>764</y>
-      <w>72</w>
-      <h>28</h>
+      <x>591</x>
+      <y>534</y>
+      <w>81</w>
+      <h>27</h>
     </coordinates>
-    <panel_attributes>ReplicaSetDegraded
+    <panel_attributes>DesiredReplicaSetConstraintStatus
 --
-Description: string
-LongDescription: string
-ReplicaSet: ReplicaSet</panel_attributes>
+Unsatisfied: bool
+ReplicaSet: ReplicaSet
+ActualVolatileCount: uint
+ActualPersistentCount: uint</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>856</x>
-      <y>788</y>
-      <w>12</w>
-      <h>32</h>
+      <x>618</x>
+      <y>558</y>
+      <w>36</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+    <additional_attributes>100.0;40.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>880</x>
-      <y>728</y>
-      <w>136</w>
-      <h>20</h>
+      <x>672</x>
+      <y>498</y>
+      <w>78</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;320.0;30.0</additional_attributes>
+    <additional_attributes>10.0;10.0;240.0;60.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1032</x>
-      <y>788</y>
-      <w>76</w>
-      <h>36</h>
+      <x>774</x>
+      <y>552</y>
+      <w>57</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>Listens on the bus for errors, creates Problems when they occur and removes them when they are resolved</panel_attributes>
     <additional_attributes/>
@@ -1800,10 +1714,10 @@ ReplicaSet: ReplicaSet</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>996</x>
-      <y>916</y>
-      <w>112</w>
-      <h>28</h>
+      <x>747</x>
+      <y>648</y>
+      <w>84</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>Asks slaves for mongod states and compares the observed state to the desired. Publishes StateMatchResult and error objects on the bus.</panel_attributes>
     <additional_attributes/>
@@ -1811,10 +1725,10 @@ ReplicaSet: ReplicaSet</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1160</x>
-      <y>904</y>
-      <w>84</w>
-      <h>40</h>
+      <x>870</x>
+      <y>639</y>
+      <w>63</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>Initializes all parts of the master with channels to the bus and runs them asynchonously</panel_attributes>
     <additional_attributes/>
@@ -1822,10 +1736,10 @@ ReplicaSet: ReplicaSet</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1476</x>
-      <y>748</y>
-      <w>84</w>
-      <h>40</h>
+      <x>1107</x>
+      <y>522</y>
+      <w>63</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>Listens on the bus for state mismatches and tries to solve them by pushing the desired state to the Mongod</panel_attributes>
     <additional_attributes/>
@@ -1833,10 +1747,10 @@ ReplicaSet: ReplicaSet</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1088</x>
-      <y>772</y>
-      <w>12</w>
-      <h>24</h>
+      <x>816</x>
+      <y>540</y>
+      <w>9</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
@@ -1844,10 +1758,10 @@ ReplicaSet: ReplicaSet</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1024</x>
-      <y>904</y>
-      <w>12</w>
-      <h>20</h>
+      <x>768</x>
+      <y>639</y>
+      <w>9</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
@@ -1855,10 +1769,10 @@ ReplicaSet: ReplicaSet</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1164</x>
-      <y>848</y>
-      <w>32</w>
-      <h>64</h>
+      <x>873</x>
+      <y>597</y>
+      <w>24</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>60.0;10.0;10.0;140.0</additional_attributes>
@@ -1866,12 +1780,112 @@ ReplicaSet: ReplicaSet</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1452</x>
-      <y>764</y>
-      <w>32</w>
-      <h>12</h>
+      <x>1089</x>
+      <y>534</y>
+      <w>24</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>606</x>
+      <y>603</y>
+      <w>81</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>ObservedReplicaSetConstraintStatus
+--
+Unsatisfied: bool
+ReplicaSet: ReplicaSet
+ActualVolatileCount: uint
+ActualPersistentCount: uint</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>648</x>
+      <y>579</y>
+      <w>12</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;20.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>465</x>
+      <y>594</y>
+      <w>99</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>ConnectionStatus
+--
+Unreachable: bool
+Slave: Slave
+CommunicationError: msp.CommunicationError</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>561</x>
+      <y>579</y>
+      <w>90</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>280.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>630</x>
+      <y>111</y>
+      <w>60</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>If the slave cannot determine what Mongods are running this error is a SlaveError and the array is empty</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>648</x>
+      <y>75</y>
+      <w>12</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=.
+</panel_attributes>
+    <additional_attributes>20.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>90</y>
+      <w>81</w>
+      <h>519</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;250.0;1710.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>696</x>
+      <y>90</y>
+      <w>363</w>
+      <h>432</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;1190.0;1420.0</additional_attributes>
   </element>
 </diagram>
