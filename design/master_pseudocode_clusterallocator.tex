@@ -105,7 +105,7 @@ $p_a, v_a \gets $ AlreadyAddedMemberCount(r)
 	$RQ \gets$ PriorityQueue(R)\;% "relative amount of missing members")\;
 	$RGSQ \gets$ map[RiskGroup]PriorityQueue(Slaves of RiskGroup)\;%, "relative amount of available Mongod ports")\;
 	
-	\While{$r = RP.pop()$; $r \neq nil$}{
+	\While{$r = RQ.pop()$; $r \neq nil$}{
 	
 		\Invariant $r$ needs a member of type $\textbf{x}$
 		
