@@ -1,12 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
-  <zoom_level>8</zoom_level>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>16</x>
-      <y>0</y>
-      <w>816</w>
-      <h>448</h>
+      <x>0</x>
+      <y>280</y>
+      <w>1560</w>
+      <h>680</h>
     </coordinates>
     <panel_attributes>NotificationManager</panel_attributes>
     <additional_attributes/>
@@ -14,14 +15,14 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>32</x>
-      <y>32</y>
-      <w>280</w>
-      <h>120</h>
+      <x>160</x>
+      <y>380</y>
+      <w>350</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>APIClient
 --
-+Receive(): []Problem
+_+ Receive(host string): []Problem_
 
 
 
@@ -31,20 +32,19 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>128</x>
-      <y>184</y>
-      <w>248</w>
-      <h>112</h>
+      <x>280</x>
+      <y>510</y>
+      <w>350</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>Controller
 --
--contacts: []contact
--old: []Problem
--current: []Problem
+- lastProblems: []Problem
 --
-+Main()
--readContacts(input: String)
--notify(problem: Problem)
++ main()
+- diffProblems(received: []Problem) : []Problem 
+ // returns new problems 
+- notify(problem: Problem)
 
 
 </panel_attributes>
@@ -53,54 +53,40 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>560</x>
-      <y>280</y>
-      <w>232</w>
-      <h>88</h>
+      <x>1000</x>
+      <y>820</y>
+      <w>290</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>EmailNotifier
 --
-+ Addresses: []string
++ Contacts: []EmailContact
 --
-+ send(problem: Problem)
-- sendMail(addr string, a Auth,
-from string, to []string, msg []byte)</panel_attributes>
++ Send(problem: Problem)
+- sendMailToContacts(msg []byte)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>432</x>
-      <y>184</y>
-      <w>224</w>
-      <h>64</h>
+      <x>1000</x>
+      <y>510</y>
+      <w>290</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
-/Notifier/
+Notifier
 --
-+send(problem: Problem)</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>560</x>
-      <y>72</y>
-      <w>224</w>
-      <h>56</h>
-    </coordinates>
-    <panel_attributes>AnotherNotifier
---
-send(problem: Problem, addr: String)</panel_attributes>
++Send(problem: Problem)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>552</x>
-      <y>472</y>
-      <w>88</w>
-      <h>56</h>
+      <x>990</x>
+      <y>1020</y>
+      <w>120</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>smtp</panel_attributes>
     <additional_attributes/>
@@ -108,80 +94,74 @@ send(problem: Problem, addr: String)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>560</x>
-      <y>360</y>
-      <w>72</w>
-      <h>128</h>
+      <x>1000</x>
+      <y>920</y>
+      <w>70</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
-&lt;&lt;import&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>520</x>
-      <y>104</y>
-      <w>56</w>
-      <h>96</h>
+      <x>1120</x>
+      <y>580</y>
+      <w>30</w>
+      <h>260</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;100.0;10.0;10.0;50.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>520</x>
-      <y>240</y>
-      <w>56</w>
-      <h>96</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;100.0;50.0;100.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;240.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>424</x>
-      <y>72</y>
-      <w>80</w>
-      <h>56</h>
+      <x>650</x>
+      <y>370</y>
+      <w>120</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>Problem
-</panel_attributes>
+--
+replace with
+model.Problem
+bg=red</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>440</x>
-      <y>120</y>
-      <w>64</w>
-      <h>80</h>
+      <x>760</x>
+      <y>390</y>
+      <w>410</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+    <additional_attributes>10.0;20.0;390.0;20.0;390.0;120.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>368</x>
-      <y>200</y>
-      <w>80</w>
-      <h>32</h>
+      <x>620</x>
+      <y>530</y>
+      <w>400</w>
+      <h>50</h>
     </coordinates>
-    <panel_attributes>lt=&lt;.
-&lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>80.0;20.0;10.0;20.0</additional_attributes>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+r1=notifiers
+m1=n
+m2=1</panel_attributes>
+    <additional_attributes>380.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>312</x>
-      <y>80</y>
-      <w>128</w>
-      <h>120</h>
+      <x>510</x>
+      <y>380</y>
+      <w>160</w>
+      <h>150</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -190,10 +170,10 @@ send(problem: Problem, addr: String)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>304</x>
-      <y>64</y>
-      <w>136</w>
-      <h>32</h>
+      <x>500</x>
+      <y>360</y>
+      <w>170</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -202,39 +182,22 @@ send(problem: Problem, addr: String)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>216</x>
-      <y>144</y>
-      <w>64</w>
-      <h>56</h>
+      <x>390</x>
+      <y>460</y>
+      <w>70</w>
+      <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;.
+    <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
     <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
   </element>
   <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>264</x>
-      <y>328</y>
-      <w>144</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>Contact
---
--name: string
-//list of ways admin wants to be notifiesd
--data: map[string]string
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>64</x>
-      <y>472</y>
-      <w>80</w>
-      <h>56</h>
+      <x>200</x>
+      <y>1010</y>
+      <w>100</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>os</panel_attributes>
     <additional_attributes/>
@@ -242,10 +205,10 @@ send(problem: Problem, addr: String)</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>152</x>
-      <y>472</y>
-      <w>80</w>
-      <h>56</h>
+      <x>310</x>
+      <y>1010</y>
+      <w>100</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>io</panel_attributes>
     <additional_attributes/>
@@ -253,10 +216,10 @@ send(problem: Problem, addr: String)</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>240</x>
-      <y>472</y>
-      <w>80</w>
-      <h>56</h>
+      <x>420</x>
+      <y>1010</y>
+      <w>100</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>fmt</panel_attributes>
     <additional_attributes/>
@@ -264,47 +227,47 @@ send(problem: Problem, addr: String)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>72</x>
-      <y>360</y>
-      <w>80</w>
-      <h>128</h>
+      <x>210</x>
+      <y>730</y>
+      <w>100</w>
+      <h>300</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 </panel_attributes>
-    <additional_attributes>80.0;20.0;10.0;20.0;10.0;140.0</additional_attributes>
+    <additional_attributes>80.0;20.0;10.0;20.0;10.0;280.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>88</x>
-      <y>384</y>
-      <w>184</w>
-      <h>104</h>
+      <x>230</x>
+      <y>760</y>
+      <w>230</w>
+      <h>270</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 
-&lt;&lt;import&gt;&gt;</panel_attributes>
-    <additional_attributes>60.0;10.0;10.0;10.0;10.0;50.0;210.0;50.0;210.0;110.0</additional_attributes>
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;10.0;10.0;50.0;210.0;50.0;210.0;250.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>80</x>
-      <y>376</y>
-      <w>104</w>
-      <h>112</h>
+      <x>220</x>
+      <y>750</y>
+      <w>130</w>
+      <h>280</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 </panel_attributes>
-    <additional_attributes>70.0;10.0;10.0;10.0;10.0;70.0;110.0;70.0;110.0;120.0</additional_attributes>
+    <additional_attributes>70.0;10.0;10.0;10.0;10.0;70.0;110.0;70.0;110.0;260.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>136</x>
-      <y>568</y>
-      <w>112</w>
-      <h>56</h>
+      <x>290</x>
+      <y>1130</y>
+      <w>140</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>Imports needed to read a file</panel_attributes>
     <additional_attributes/>
@@ -312,10 +275,10 @@ send(problem: Problem, addr: String)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>88</x>
-      <y>520</y>
-      <w>64</w>
-      <h>96</h>
+      <x>230</x>
+      <y>1070</y>
+      <w>80</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;100.0;60.0;100.0</additional_attributes>
@@ -323,10 +286,10 @@ send(problem: Problem, addr: String)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>240</x>
-      <y>520</y>
-      <w>56</w>
-      <h>96</h>
+      <x>420</x>
+      <y>1070</y>
+      <w>70</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>50.0;10.0;50.0;100.0;10.0;100.0</additional_attributes>
@@ -334,10 +297,10 @@ send(problem: Problem, addr: String)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>184</x>
-      <y>520</y>
-      <w>24</w>
-      <h>64</h>
+      <x>350</x>
+      <y>1070</y>
+      <w>30</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
@@ -345,38 +308,146 @@ send(problem: Problem, addr: String)</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>136</x>
-      <y>328</y>
-      <w>120</w>
-      <h>80</h>
+      <x>290</x>
+      <y>690</y>
+      <w>270</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>Parser
 --
-readDoc(): []contact</panel_attributes>
+_+ Parse(path string): ([]Contact) : error_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>176</x>
-      <y>288</y>
-      <w>64</w>
-      <h>56</h>
+      <x>340</x>
+      <y>640</y>
+      <w>70</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
     <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
   </element>
   <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>650</x>
+      <y>820</y>
+      <w>230</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>EmailContact
+--
+- Address: string
+--
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>650</x>
+      <y>690</y>
+      <w>230</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Contact
+--
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
     <id>Relation</id>
     <coordinates>
-      <x>722</x>
-      <y>684</y>
-      <w>209</w>
-      <h>190</h>
+      <x>750</x>
+      <y>740</y>
+      <w>30</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1370</x>
+      <y>860</y>
+      <w>180</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>SMTPRelay
+--
++ Hostname: string
++ MailFrom: string
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1280</x>
+      <y>850</y>
+      <w>110</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+r1=Relay
+m2=1
+m1=1</panel_attributes>
+    <additional_attributes>90.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>550</x>
+      <y>690</y>
+      <w>120</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>90.0;80.0;10.0;10.0</additional_attributes>
+    <additional_attributes>100.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>870</x>
+      <y>830</y>
+      <w>150</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+r1=Contacts
+m1=n
+m2=1</panel_attributes>
+    <additional_attributes>10.0;20.0;130.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>20</x>
+      <y>530</y>
+      <w>190</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>CLIFlagsParser</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>200</x>
+      <y>560</y>
+      <w>100</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;80.0;20.0</additional_attributes>
   </element>
 </diagram>
