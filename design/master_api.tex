@@ -132,6 +132,13 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 	{}
 	{}
 	
+\apicall[get]{/slaves/<id>/problems}{Gets the problems of a slave and its mongods}
+	{id & integer & id of the slave to get the problems of}
+	{200}
+	{}
+	{}
+	{}
+	
 \subsubsection{Replica Sets}
 %Do not add default error codes
 \apicall[get\relax]{/replicasets}{Gets all replica sets}
@@ -174,6 +181,13 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 	{200}
 	{}
 	{array of slave objects}
+	{}
+
+\apicall[get]{/replicasets/<id>/problems}{Gets the problems of a replica set}
+	{id & integer & id of the replica set to get the problems of}
+	{200}
+	{}
+	{}
 	{}
 
 \subsubsection{Risk Groups}
