@@ -6,6 +6,53 @@
 \renewcommand{\gocurpackage}{model}
 \renewcommand{\gocurpackage}{master}
 
+\struct{Deployer}{
+	The \refstruct{Deployer} listens on the bus for \refgo{model.MongodMismatchStatus} objects with \refgo{Mismatch} set to true and deployes the desired state of the affected mongod using the \refgo{msp.MSPClient}
+}{
+	\property{DB}[gorm.DB]{Initialized handle to the database.}
+	\property{BusChannel}[chan interface\{\}]{Initialized channel to the application bus.}
+}{
+	\method{Run}{Waits for \refgo{model.MongodMismatchStatus} objects and runs \refmethod{pushMongodState} when a mismatch occurrs.}
+	\method{pushMongodState}
+	(
+		\param{mongod}[model.Mongod]{The mongod to push the state to.}
+	){
+		Gets the desired state of \refparam{mongod} from the database and pushes it using the \refgo{msp.MSPClient}.
+	}
+}
+
+\struct{Monitor}{
+	The \refstruct{Monitor} uses the \refgo{msp.MSPClient} to ask all slaves for their mongod's states, saves the observed state in the database and compares the observed state to the desired state from the database. It publishes \refgo{model.MongodMismatchStatus} objects with the result of each comparison on the bus.
+}{
+	\property{DB}[gorm.DB]{Initialized handle to the database.}
+	\property{BusChannel}[chan interface\{\}]{Initialized channel to the application bus.}
+}{
+	\method{Run}{Periodically fetches the mongods' states from the slaves, saves it in the database, compares it to the desired state using \refmethod{compareStates} and publishes the result on the bus as a \refgo{model.MongodMismatchStatus} object.}
+	\method{compareStates}[MongodMatchStatus]
+	(
+		\param{mongod}[model.Mongod]{The mongod to compare the state of}
+	){
+		Compares the \refgo{model.Mongod.ObservedState} and \refgo{model.Mongod.DesiredState} for mismatches and returns the result as a \refgo{model.MongodMismatchStatus}.
+	}
+}
+
+\struct{ProblemManager}{
+	The \refstruct{ProblemManager} listens on the bus for \refgo{model.StatusMessage}s, checks if they represent an error and generates or removes a problem and saves the changes in the database.
+}{
+	\property{DB}[gorm.DB]{Initialized handle to the database.}
+	\property{BusChannel}[chan interface\{\}]{Initialized channel to the application bus.}
+}{
+	\method{Run}{Listens for \refgo{model.StatusMessage}s on the bus and checks if they respresent an error.
+		If they do, generates a problem using \refmethod{generateProblem} and stores it in the database.
+		It they don't, checks if the database contains a problem of the same type for the same object and removes it.}
+	\method{generateProblem}[Problem]
+	(
+		\param{e}[StatusMessage]{}
+	){
+		
+	}
+}
+
 \struct{ClusterAllocator}{
   The \refstruct{ClusterAllocator} determines the layout of the cluster managed by \mamid.
 
@@ -33,7 +80,7 @@
 
 }{
   \property{DB}[gorm.DB]{Initialized handle to the database.}
-  \property{BusChannel}[chan interface{}]{Initialized channel to the application bus.} %TODO ref}
+  \property{BusChannel}[chan interface\{\}]{Initialized channel to the application bus.} %TODO ref}
 }{
   \method{LayoutCluster}{Lay out the cluster as described above.}
 }

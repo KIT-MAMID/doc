@@ -761,7 +761,7 @@ Error(): string</panel_attributes>
 + BusChannel: chan interface {}
 --
 + Run()
-- compareStates([]Mongod)
+- compareStates(mongod: Mongod): MongodMatchStatus
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -790,7 +790,7 @@ Error(): string</panel_attributes>
 + BusChannel: chan interface{}
 --
 + Run()
-- pushMongodStates(slave: model.Slave)</panel_attributes>
+- pushMongodState(mongod: model.Mongod)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
