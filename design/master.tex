@@ -1,10 +1,45 @@
 \newtheorem{theorem}{Theorem}
 
 
-\section{master}
+\section{Master: Model}% cannot use subsections here because helpers macros have fixed sectioning-hierarchy
+
+encapsulates all datastructures used to model the cluster managed by mamid
+
+stored in database:
+  RiskGroup
+  Slave
+  SlaveState
+  ReplicaSet
+  Mongod
+  MongodState
+  MongodExecutionState
+  HostPort
+  Problem
+
+data transfer objects (used to communicate via the master.Bus)
+
+  DesiredReplicaSetConstraintStatus
+  MongodMatchStatus
+  ConnectionStatus
+  ObservedReplicaSetConstraintStatus
 
 \renewcommand{\gocurpackage}{model}
+
+\section{Master: Main Package}
 \renewcommand{\gocurpackage}{master}
+
+The Master is the most complex component of \mamid.
+
+fulfills many diff tasks, running in separate goroutines
+
+different tasks need to communicate with each other
+  shared persistent database with ORM abstraction 'gorm' => see model for which objcets
+  status information (similar to observer pattern), realized through a Bus that leverages Golang's channels
+    messages sent over bus are structs suffixed with .*Status
+    generally, bus messages are sent repeatedly => != edge-triggered notifications
+    encapsulate enough information about a type of status of an object in the database
+      other components on the bus can react to information
+=> loose coupling of components
 
 \struct{Deployer}{
 	The \refstruct{Deployer} listens on the bus for \refgo{model.MongodMismatchStatus} objects with \refgo{Mismatch} set to true and deployes the desired state of the affected mongod using the \refgo{msp.MSPClient}
