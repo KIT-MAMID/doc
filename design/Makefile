@@ -17,7 +17,7 @@ HTTPDL = $(CURL_BIN) -o $(2) '$(1)'
 all: design.pdf
 	
 
-design.pdf: design.tex slave.tex
+design.pdf: *.tex
 	$(PDFLATEX) design.tex
 	$(MAKEGLOSSARIES) design
 	$(PDFLATEX) design
