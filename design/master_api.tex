@@ -49,7 +49,11 @@
 }
 
 \section{Master API}
+\renewcommand{\gocurpackage}{masterapi}
 %TODO General api description
+The Master API is used by the GUI to CRUD Slaves, Replica Sets, Risk Groups and display Problems.
+
+It is also used by the Notifier to get the current problems.
 %Uses RESTful HTTP
 %Generic error responses
 \subsection{API Objects}
@@ -91,6 +95,10 @@ API Objects are exchanged in JSON format.
 	"id": <int>,
 	"description": <string>,
 	"long_description": <string>,
+	"first_occurred": 
+		<Combined date and time in UTC according to ISO 8601>
+	"last_updated": 
+		<Combined date and time in UTC according to ISO 8601>
 	"slave_id": <int>,
 	"replica_set_id": <int>
 }

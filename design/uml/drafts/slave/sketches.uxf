@@ -1220,13 +1220,15 @@ r2=Slaves</panel_attributes>
       <x>1552</x>
       <y>1280</y>
       <w>248</w>
-      <h>104</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>Problem
 --
 +Id: uint
 +Description: string
 +LongDescription: string
++FirstOccurred: time.Time
++LastUpdated: time.Time
 +Slave: *Slave
 +ReplicaSet: *ReplicaSet
 +Mongod: *Mongod</panel_attributes>
