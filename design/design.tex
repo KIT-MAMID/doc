@@ -23,6 +23,8 @@
 \usepackage{xcolor}
 \usepackage{tabularx}
 \usepackage{listings}
+\usepackage{hyperref}
+\usepackage{xstring}
 \usepackage[lined,boxed,commentsnumbered]{algorithm2e}
 
 % page style
@@ -147,49 +149,149 @@
         \end{minipage}
 }
 
+\NewDocumentCommand{\refgo}{m}{%
+  \IfHasLabel{#1}{%
+    \hyperref[#1]{\codeinline{\refgosymboltext{#1}}}%
+  }{%
+   % \codeinline{#1}%
+   \colorbox{red}{\texttt{#1}}%
+  }%
+  \let\refdisplaytext\undefined%
+}
 
-\NewDocumentCommand{\gotype}{m m g g}{
-  \subsection{#1}
-  #2
-  \IfValueT{#4}{
+% used to produce symbol names relative to the current scope
+\NewDocumentCommand{\refgosymboltext}{m}{%
+  % nibble the scope hierarchy: .gocurpackage.gocurtype.gocurmethod%
+  \StrLen{\gocurpackage.}[\gocurlen]%
+  \StrLeft{#1}{\gocurlen}[\refgosymbolCurComponent]%
+  \IfStrEq{\refgosymbolCurComponent}{\gocurpackage.}{%
+    % we are in scope of the package  %
+      \StrGobbleLeft{#1}{\gocurlen}[\gocurremainingpath]%
+      %
+      \StrLen{\gocurtype.}[\gocurlen]%
+      \StrLeft{\gocurremainingpath}{\gocurlen}[\refgosymbolCurComponent]%
+      \IfStrEq{\refgosymbolCurComponent}{\gocurtype.}{%
+        % we are in class scope       %
+        \StrGobbleLeft{\gocurremainingpath}{\gocurlen}[\gocurremainingpath]%
+        %
+        \StrLen{\gocurmethod.}[\gocurlen]%
+        \StrLeft{\gocurremainingpath}{\gocurlen}[\refgosymbolCurComponent]%
+        \IfStrEq{\refgosymbolCurComponent}{\gocurmethod.}{%
+          %
+          \StrGobbleLeft{\gocurremainingpath}{\gocurlen}[\gocurremainingpath]%
+          \gocurremainingpath%
+        }{%
+          \gocurremainingpath%
+        }%
+      }{%
+        \gocurremainingpath%
+      }%
+  }{%
+    % we are not in scope of the package%
+    #1%
+  }%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       Util-commands that are dirty hacks
+%                       to enable the helper commands
+
+% evaluate #2 if the label #1 exists, else #3.
+\makeatletter
+\newcommand{\IfHasLabel}[3]{%
+  \@ifundefined{r@#1}% declaring a label xyz defines r@xyz
+               {#3}%
+               {#2}%
+}
+\makeatother
+
+% Styling of inline 'code', e.g. types.
+\definecolor{codeinline-gray}{gray}{0.95}
+\NewDocumentCommand{\codeinline}{m}{%
+  % Specify inline code / command
+  % Markdown equivalent: `#1`
+  \colorbox{codeinline-gray}{\texttt{#1}}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                               Helper Commands
+% ... defining types, methods, paramters, etc
+
+% redefine \gocurpackage to the package name that the
+%   subsequent \struct, \property, \method, etc belong too
+\newcommand{\gocurpackage}{none}
+\newcommand{\gocurtype}{}
+\newcommand{\gocurmethod}{}
+
+% an abstraction for declaring types, i.e. \struc or \interface
+% #1: the type of type, i.e Struct or Interface
+% #2: the name of the type
+% #3: prologue
+% #4: properties. list of \property
+% #5: methods. list of \method
+%
+\NewDocumentCommand{\gotype}{m m +m +g +g}{
+  \subsection{#1 \codeinline{#2}}\label{\gocurpackage.#2}
+  % Make the current type name available in the scope of the class.
+  % Useful for making labels.
+  \renewcommand{\gocurtype}[0]{#2}% 
+  #3
+  \IfValueT{#5}{
     \subsubsection*{Properties}
     \begin{description}
-      #4 % list of \property
+      #5 % list of \property
     \end{description}
    }
-   \IfValueT{#3}{
+   \IfValueT{#4}{
       \subsubsection*{Methods}
       \begin{description}
-        \setlength{\itemsep}{1em}
-        #3 %list of \method
+        %\setlength{\itemsep}{1em}
+        #4 %list of \method
       \end{description}
     }
+    \renewcommand\gocurtype[0]{}%
 }
-\NewDocumentCommand{\struct}{m m g g}{\gotype{Struct \codeinline{#1}}{#2}{#4}{#3}}
-\newcommand{\interface}[3]{\gotype{Interface \codeinline{#1}}{#2}{#3}}
+\NewDocumentCommand{\struct}{m +m +g +g}{\gotype{Struct}{#1}{#2}{#4}{#3}}
+\NewDocumentCommand{\interface}{m +m +m}{\gotype{Interface}{#1}{#2}{#3}}
 
+% \property is used to declare fields of a struct
 \NewDocumentCommand{\property}{m o +m}{
-\item{\codeinline{#1\hspace{0.1cm}:\hspace{0.1cm}#2}\\#3}
+  \item[\codeinline{#1\hspace{0.1cm}:\hspace{0.1cm}#2}]\label{\gocurpackage.\gocurtype.#1}\hfill %(line break for the poor)
+  \par
+  #3
 }
+
+% \method is used to declare a struct's method set.
 \NewDocumentCommand{\method}{m o d() +m}{
-\item{\codeinline{#1(\IfValueT{#3}{$\cdot$})\IfValueT{#2}{\hspace{0.1cm}:\hspace{0.1cm}#2}}}
+\renewcommand\gocurmethod[0]{#1}%
+\item[\codeinline{#1(\IfValueT{#3}{$\cdot$})\IfValueT{#2}{\hspace{0.1cm}:\hspace{0.1cm}#2}}]\label{\gocurpackage.\gocurtype.#1}\hfill %(line break for the poor)
   \IfValueT{#3}{
     \begin{description}
       #3 % should only contain \param
     \end{description}
   }
-  #4  
-}
-\NewDocumentCommand{\param}{m o m}{
-  \item{\codeinline{#1\hspace{0.1cm}:\hspace{0.1cm}#2} #3}
+  \par
+  #4
+  \renewcommand\gocurmethod[0]{}%
 }
 
-\definecolor{codeinline-gray}{gray}{0.95}
-\NewDocumentCommand{\codeinline}{m}{
-  % Specify inline code / command
-  % Markdown equivalent: `#1`
-  \colorbox{codeinline-gray}{\texttt{#1}}
+% \param is used to declare paramters of a \method -> check \method for details
+\NewDocumentCommand{\param}{m o +m}{%
+  \item[\texttt{#1\hspace{0.1cm}:\hspace{0.1cm}#2}]\label{\gocurpackage.\gocurtype.\gocurmethod.#1} #3
 }
+
+\NewDocumentCommand{\refgoparam}{m}{
+  \refgo{\gocurpackage.\gocurtype.\gocurmethod.#1}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \include{glossary}
 
@@ -223,6 +325,7 @@ SCC\\[2em]}
 \tableofcontents
 \newpage
 
+\include{demo_helpers}
 \include{master}
 \include{master_api}
 \include{slave}
