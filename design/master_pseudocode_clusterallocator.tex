@@ -6,15 +6,11 @@
 \SetKw{Invariant}{invariant}
 \IncMargin{0.5em}
 
-Invariant: Algorithm(Algorithm(x)) = Algorithm(x)
+We start with the removal of superflous Replica Set members.\\
+However, in order to determine how many Replica Set members can be removed, we need to examine the observed situation.
 
-Otherwise oscillations could occur
-
-Most interesting case: Set a slave to disabled. Then a new Mongod should be spawned and recover and when it is done the old disabled one can be deleted.
-
-\begin{algorithm}
-
-\caption{Count members of a Replica Set that are \& intended to be in stable state (running)}
+\begin{algorithm}[H]
+\caption{Count members of a Replica Set that are \& intended to be in stable state (running)}\label{alg:EffectiveMemberCount}
 
 \Input{ReplicaSet $r$}
 \Output{Number of $p_e$ and $v_e$ member processes of $r$ that are fully operational and are planned to remain in that state.}
@@ -38,8 +34,9 @@ $p_e, v_e = 0$
 }
 \end{algorithm}
 
+Given \ref{alg:EffectiveMemberCount}, we can now proceed with removal of superflous Replica Set members.
 
-\begin{algorithm}
+\begin{algorithm}[H]
 \caption{Destroy members of disabled replica sets where possible without violating p/v constraints.}
 \ForEach{r in ReplicaSets}{
 	
@@ -67,9 +64,13 @@ $p_e, v_e = 0$
 }
 \end{algorithm}
 
-\begin{algorithm}
-\caption{Count recovering and active members of a Replica Set}
+With all superflous members removed, we now approach the other side of the problem
+and add new members to Replica Sets that need them.\\
+Again, we need to examine the current state of the cluster.
 
+\begin{algorithm}[H]
+\caption{Count recovering and active members of a Replica Set}
+\label{alg:AlreadyAddedMemberCount}
 \Input{ReplicaSet $r$}
 \Output{Number of $p_a$ and $v_a$ member processes of $r$ that \begin{itemize}
 		\item are \textbf{recovering}, i.e. soon-to-be fully operational
@@ -94,7 +95,23 @@ $p_e, v_e = 0$
 }
 \end{algorithm}
 
-\begin{algorithm}
+Knowing the needs of individual replica sets, we spawn new Mongod processes as needed.\\
+Spawning of processes is constrained by
+\begin{itemize}
+  \item the Risk Group memberships of the slaves
+  \item the length of the Mongod port range configured for the slave
+\end{itemize}
+
+The following algorithm utilizes \texttt{PriorityQueues}
+\begin{description}
+  \item[\texttt{RQ}] to prioritize heavier-degraded Replica Sets (i.e. those with the most missing members)
+  \item[\texttt{RGSQ}] to prioritize little-used slaves as hosts for new Mongods (i.e. those slaves with the most unused capacity)
+\end{description} 
+
+The \texttt{ARGMAX} returns the element from the left operand whose metric (right operand) is the maxium for all elements of the left operand.
+
+\begin{algorithm}[H]
+\label{alg:addmongods}
 \caption{Spawn Mongods on under-provisioned Replica Sets respecting RiskGroup \& p/v constraints.}
 
 $p_a, v_a \gets $ AlreadyAddedMemberCount(r)
@@ -138,3 +155,16 @@ $p_a, v_a \gets $ AlreadyAddedMemberCount(r)
 }
 
 \end{algorithm}
+
+It is crucial to the implementation of \ref{alg:addmongods} that Mongods in \refgo{model.MongodExecutionState.Recovering}
+\begin{itemize}
+  \item are counting toward the \texttt{AlreadyAddedMemberCount} (\ref{alg:AlreadyAddedMemberCount})
+  \item are not not counting toward the \texttt{EffectiveMemberCount} (\ref{alg:EffectiveMemberCount})
+\end{itemize}
+
+If this were not the case, the following failure scenarios would be possible:
+\begin{itemize}
+  \item Oscillation, violating the fundamental requirement to the algorithm stated in the theorem on \hyperref[theorem:idempotence_clusterallocator]{Idempotence of the ClusterAllocator}
+  \item Invisible degradation (members in \refgo{model.MongodExecutionState.Recovering} do not hold all Replica Set data yet)
+  \item Data Loss (as a result of Oscillation + Invisible degradation)
+\end{itemize}
