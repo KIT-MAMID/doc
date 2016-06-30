@@ -90,7 +90,9 @@ API Objects are exchanged in JSON format.
 {
 	"id": <int>,
 	"description": <string>,
-	"long_description": <string>
+	"long_description": <string>,
+	"slave_id": <int>,
+	"replica_set_id": <int>
 }
 \end{lstlisting}
 \subsection{API Methods}
@@ -136,7 +138,7 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 	{id & integer & id of the slave to get the problems of}
 	{200}
 	{}
-	{}
+	{array of problem objects}
 	{}
 	
 \subsubsection{Replica Sets}
@@ -187,7 +189,7 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 	{id & integer & id of the replica set to get the problems of}
 	{200}
 	{}
-	{}
+	{array of problem objects}
 	{}
 
 \subsubsection{Risk Groups}
