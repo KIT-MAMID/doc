@@ -49,7 +49,7 @@ While studying the algorithms below, the reader should keep in mind that
   \item the \refgo{model.Mongod.ObservedState} may change after an arbitrary amount or even never.\\
   \item changes to a ReplicaSet must not violate or further worsen the high-availibility constraints,
         in particular \refgo{model.ReplicaSet}'s \refgo{VolatileNodeCount} \& \refgo{PersistentNodeCount}\\
-        $\impl$ Mongods in \refgo{model.MongodExecutionState.Recovering} are an important special-case.
+        $\implies$ Mongods in \refgo{model.MongodExecutionState.Recovering} are an important special-case.
 \end{itemize}
 
 \input{master_pseudocode_clusterallocator}
