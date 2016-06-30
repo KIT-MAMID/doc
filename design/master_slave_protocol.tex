@@ -1,0 +1,39 @@
+\section{MasterSlaveProtocol}
+\renewcommand{\gocurpackage}{msp}
+
+\struct{MSPListener}{
+  Structure for handling communication through the MasterSlaveProtocol.
+}{
+  \property{consumer}[MSPConsumer]{
+    Reference to an event handler, typically a controller.
+  }
+}{
+  \method{Run}{
+    Start listening for connections using the MasterSlaveProtocol.
+    \begin{itemize}
+      \item Listen for incoming connections from the Master.
+      \item Decode / Encode the transport format.
+      \item Validate incoming request format.
+      \item Delegate valid requests to the MSPConsumer.
+    \end{itemize}
+  }
+}
+
+\interface{MSPConsumer}{
+  An MSPConsumer handles MasterSlaveProtocol requests received by an instance of \ref{slave:MSPListener}.
+}{
+  \method{MSPStatusRequest}[SlaveStatus]{
+    %TODO reference request message object here -> proto specification
+    Request to provide a status report of the slave's state.
+    See \ref{msp:SlaveStatus} for details on the data returned by this method.
+  }
+  \method{MSPEstablishMongodState}[error](
+    \param{m}[MSP.Mongod]{State description of a mongod instance that shall be established}
+  ){
+    %TODO reference request message object here -> proto specification
+    Request to establish the configuration state $m$ of a MongoDB process on the slave.
+    May return an error in case the state could not be established.
+  }
+}
+
+
