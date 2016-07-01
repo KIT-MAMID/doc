@@ -2,8 +2,9 @@
 
 
 \section{Master: Model}% cannot use subsections here because helpers macros have fixed sectioning-hierarchy
+\renewcommand{\gocurpackage}{model}
 
-encapsulates all datastructures used to model the cluster managed by mamid
+The \refgo{model} package encapsulates all datastructures used to model the cluster managed by mamid
 
 stored in database:
   RiskGroup
@@ -23,12 +24,11 @@ data transfer objects (used to communicate via the master.Bus)
   ConnectionStatus
   ObservedReplicaSetConstraintStatus
 
-\renewcommand{\gocurpackage}{model}
 
 \section{Master: Main Package}
 \renewcommand{\gocurpackage}{master}
 
-The Master is the most complex component of \mamid.
+The Master (\refgo{master}) is the most complex component of \mamid.
 
 fulfills many diff tasks, running in separate goroutines
 
