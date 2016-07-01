@@ -121,15 +121,16 @@ $p_a, v_a \gets $ AlreadyAddedMemberCount(r)
 
 	%# TODO need to fill the queue. only ReplicaSets which 'need' (use p_* to define what need means) are in  the queue 
 	$RQ \gets$ PriorityQueue(R)\;% "relative amount of missing members")\;
-	$RGSQ \gets$ map[RiskGroup]PriorityQueue(Slaves of RiskGroup)\;%, "relative amount of available Mongod ports")\;
+        $S_{avail} \gets \text{all \textbf{active} slaves with} \geq \textbf{1 free port}$\;
+        $RGSQ \gets$ map[RiskGroup]PriorityQueue(Slaves $\in S_{avail}$ by RiskGroup)\;%, "relative amount of available Mongod ports")\;
 	
 	\While{$r = RQ.pop()$; $r \neq nil$}{
 	
 		\Invariant $r$ needs a member of type $\textbf{x}$
 		
 		// find slave $s$ of type $x$ in a risk group $g$ with no other Mongod of $r$ in $g$\;
-		$candidates \gets \{g \mid g \in RGSQ.keys \land \text{r has no member in g}\}$\;
-		$g \gets$ ARGMAX($g \in candidates$, RGSQ[g].PeekPriority())\;
+                $G_{candidates}\gets \{g \mid g \in RGSQ.keys \land \text{r has no member in g}\}$\;
+                $g \gets$ ARGMAX($g \in G_{candidates}$, RGSQ[g].PeekPriority())\;
 		\uIf{$g \neq nil$}{
 			$s \gets RGSQ[g].pop()$\;
 			\Invariant $s$ has at least one free port\;
