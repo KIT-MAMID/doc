@@ -4,7 +4,9 @@
 \section{Master: Model}% cannot use subsections here because helpers macros have fixed sectioning-hierarchy
 \renewcommand{\gocurpackage}{model}
 
-The \refgo{model} package encapsulates all datastructures used to model the cluster managed by mamid
+The \refgo{model} package contains all datastructures used to model the cluster managed by \mamid.
+
+All datastructures in \refgo{model} are designed to be fully serializable \& usable with a database abstraction layer.
 
 stored in database:
 \struct{Slave}{
