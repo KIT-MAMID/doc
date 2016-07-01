@@ -116,6 +116,29 @@ stored in database:
   \property{Port}[PortNumber]{The port on the host identified by \refproperty{Hostname} on which the
                               Replica Set member is listening.}
 }
+
+\struct{Problem}{
+  Representation of a problem or error that occurred during operation of the \refgo{master}.
+
+  The references to \refstruct{Slave}, \refstruct{ReplicaSet} and \refstruct{Mongod} enable searchability
+  of the \refstruct{Problem} list.
+  If all references are \codeinline{nil}, the problem is still legitimate and should be reported by a user interface or alerting system.
+
+  See \refgo{master.ProblemManager} for the transformation from errors to \refgo{master.Problem}.
+}{
+  \property{Id}[uint]{Unique ID of the problem. If the \emph{same} problem occurrs after it was resolved before,
+                      its different incarnations are distinguishable by their \refproperty{Id}.}
+                      %TODO really necessary? problem is uniquely identified by (Slave, ReplicaSet, Mongod)
+  \property{Description}[string]{Short human-readable description of the problem, suitable for subject lines of error messages.}
+  \property{LongDescription}[string]{Long human-readable description of the problem.\\
+                                     Can contain the \codeinline{error.Error()} of one or more underlying errors.}
+  \property{FirstOccurred}[time.Time]{The point in time when the particular problem first occurred.}
+  \property{LastUpdated}[time.Time]{The point in time when the particular problem was last observed, e.g. the time of the last monitor run.}
+  \property{Slave}[*Slave]{A reference to a \refstruct{Slave} from which the problem originated. May be \codeinline{nil}}
+  \property{ReplicaSet}[*ReplicaSet]{A reference to a \refstruct{ReplicaSet} form which the problem originated. May be \codeinline{nil}}
+  \property{Mongod}[*Mongod]{A reference to a \refstruct{Mongod} from where the problem originated. May be \codeinline{nil}}
+}
+
 data transfer objects (used to communicate via the master.Bus)
 
   DesiredReplicaSetConstraintStatus
