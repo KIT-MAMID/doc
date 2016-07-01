@@ -10,15 +10,15 @@ stored in database:
 \struct{Slave}{
 	A \refstruct{Slave} models an instance of the \mamid slave application running on a host.
 }{
-	\property{Id}[uint]{Unique id.}
-	\property{Hostname}[string]{Hostname of the host the slave is running on.}
-	\property{Port}[uint]{Port where the slave listens for connections from the master.}
-	\property{MongodPortRangeBegin}[uint]{Beginning of the range of ports spawned \refstruct{Mongod} may listen on (inclusive).}
-	\property{MongodPortRangeEnd}[uint]{End of the range of ports spawned \refstruct{Mongod} may listen on (exclusive). Implicitly specifies together with \refproperty{MongodPortRangeBegin} how many \refstruct{Mongod}s may be spawned on the slave.}
-	\property{PersistentStorage}[bool]{Whether the slaves data directory is on persistent storage or volatile storage.}
-	\property{ConfiguredState}[\refenum{SlaveState}]{The state of the slave set by the user.}
-	\property{RiskGroup}[\refstruct{RiskGroup}]{The risk group the slave is in.}
-	\property{Mongods}[[]\refstruct{Mongod}]{The \refstruct{Mongod}s that are running or should run on this slave.}
+  \property{Id}[uint]{Unique id.}
+  \property{Hostname}[string]{Hostname of the host the slave is running on. \refproperty{Hostname} uniquely identifies a host in the cluster.} 
+  \property{Port}[uint]{Port where the slave listens for connections from the master.}
+  \property{MongodPortRangeBegin}[uint]{Beginning of the range of ports spawned \refstruct{Mongod} may listen on (inclusive).}
+  \property{MongodPortRangeEnd}[uint]{End of the range of ports spawned \refstruct{Mongod} may listen on (exclusive). Implicitly specifies together with \refproperty{MongodPortRangeBegin} how many \refstruct{Mongod}s may be spawned on the slave.}
+  \property{PersistentStorage}[bool]{Whether the slaves data directory is on persistent storage or volatile storage.}
+  \property{ConfiguredState}[\refenum{SlaveState}]{The state of the slave set by the user.}
+  \property{RiskGroup}[\refstruct{RiskGroup}]{The risk group the slave is in.}
+  \property{Mongods}[[]\refstruct{Mongod}]{The \refstruct{Mongod}s that are running or should run on this slave.}
 }
 
 \goenum{SlaveState}
@@ -30,20 +30,20 @@ stored in database:
 }
 
 \struct{RiskGroup}{
-	A \refstruct{RiskGroup} models a set of slaves sharing a common risk of failure. A \refstruct{Slave} belongs to one \refstruct{RiskGroups}.
+  A \refstruct{RiskGroup} models a set of slaves sharing a common risk of failure. A \refstruct{Slave} belongs to one \refstruct{RiskGroups}.
 }{
-	\property{Id}[uint]{Unique id.}
-	\property{Name}[string]{Name of the risk group.}
-	\property{Slaves}[[]\refstruct{Slave}]{The \refstruct{Slave}s belonging to this \refstruct{RiskGroup}.}
+  \property{Id}[uint]{Unique id.}
+  \property{Name}[string]{Name of the risk group.}
+  \property{Slaves}[[]\refstruct{Slave}]{The \refstruct{Slave}s belonging to this \refstruct{RiskGroup}}
 }
 
 \struct{ReplicaSet}{
 	A \refstruct{ReplicaSet} models a MongoDB replica set consisting of multiple \refstruct{Mongod}s.
 }{
-	\property{Id}[uint]{Unique id.}
-	\property{Name}[string]{Name of the replica set.}
-	\property{PersistentMemberCount}[uint]{Number of persistent \refstruct{Mongod}s that should be part of this \refstruct{ReplicaSet}.}
-	\property{VolatileMemberCount}[uint]{Number of volatile \refstruct{Mongod}s that should be part of this \refstruct{ReplicaSet}.}
+  \property{Id}[uint]{Unique id.}
+  \property{Name}[string]{Name of the replica set.}
+  \property{PersistentMemberCount}[uint]{Number of persistent \refstruct{Mongod}s that should be part of this \refstruct{ReplicaSet}.}
+  \property{VolatileMemberCount}[uint]{Number of volatile \refstruct{Mongod}s that should be part of this \refstruct{ReplicaSet}.}
 }
   MongodExecutionState
   HostPort
@@ -104,6 +104,17 @@ stored in database:
   \goenumitem{Recovering}{Mongod running but not available for reads because data needs to be synced from other Replica Set members.
                           Common when adding new members to an existing Replica Set.}
   \goenumitem{Running}{Mongod running and in sync with other Replica Set members. }
+}
+
+\struct{HostPort}{
+  Tuple of $(hostname, port)$ that is a Mongod's identifier for Replica Set members.
+}{
+  \property{Hostname}[string]{The hostname of the Replica Set member.\\
+                              For a given \refgo{model.HostPort.gostname} a \refgo{model.Slave}
+                              with the same \codeinline{Hostname} should exist.\\
+                              Otherwise, there exists a Mongod in the cluster that is not managed by \mamid.}
+  \property{Port}[PortNumber]{The port on the host identified by \refproperty{Hostname} on which the
+                              Replica Set member is listening.}
 }
 data transfer objects (used to communicate via the master.Bus)
 
