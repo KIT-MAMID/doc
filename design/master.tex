@@ -8,19 +8,23 @@ The \refgo{model} package contains all datastructures used to model the cluster 
 
 All datastructures in \refgo{model} are designed to be fully serializable \& usable with a database abstraction layer.
 
-stored in database:
 \struct{Slave}{
 	A \refstruct{Slave} models an instance of the \mamid slave application running on a host.
 }{
   \property{Id}[uint]{Unique id.}
   \property{Hostname}[string]{Hostname of the host the slave is running on. \refproperty{Hostname} uniquely identifies a host in the cluster.} 
-  \property{Port}[uint]{Port where the slave listens for connections from the master.}
-  \property{MongodPortRangeBegin}[uint]{Beginning of the range of ports spawned \refstruct{Mongod} may listen on (inclusive).}
-  \property{MongodPortRangeEnd}[uint]{End of the range of ports spawned \refstruct{Mongod} may listen on (exclusive). Implicitly specifies together with \refproperty{MongodPortRangeBegin} how many \refstruct{Mongod}s may be spawned on the slave.}
-  \property{PersistentStorage}[bool]{Whether the slaves data directory is on persistent storage or volatile storage.}
+  \property{Port}[uint]{Port on which the slave listens for connections from the master.}
+  \property{MongodPortRangeBegin}[uint]{Beginning of the range of ports \refstruct{Mongod} spawned by the slave may listen on (inclusive).}
+  \property{MongodPortRangeEnd}[uint]{End of the range of ports \refstruct{Mongod} spawned by the slave may listen on (exclusive).
+      Implicitly specifies --- in combination with \refproperty{MongodPortRangeBegin} ---
+      how many concurrently running \refstruct{Mongod}s can be spawned by a slave.}
+  \property{PersistentStorage}[bool]{Flag indicating whether the slave's data directory is located on persistent or volatile storage.}
+      %todo ref location where it is mentioned that a slave is spawned with root data directory as a flag
   \property{ConfiguredState}[\refenum{SlaveState}]{The state of the slave set by the user.}
-  \property{RiskGroup}[\refstruct{RiskGroup}]{The risk group the slave is in.}
-  \property{Mongods}[[]\refstruct{Mongod}]{The \refstruct{Mongod}s that are running or should run on this slave.}
+  \property{RiskGroup}[\refstruct{RiskGroup}]{The risk group the slave is a member of.}
+  \property{Mongods}[[]\refstruct{Mongod}]{The \refstruct{Mongod}s that are running or should be running on this slave.
+      Note that there may exist \refstruct{Mongods} that do not have a \refstruct{ParentSlave}.}
+      %todo ref location where it is mentioned that the monitor may create Mongod instances, too.
 }
 
 \goenum{SlaveState}
@@ -28,28 +32,33 @@ stored in database:
 {
 	\goenumitem{Active}{Slaves in active mode are available to host Mongod instances. They are monitored and the administrator is notified of problems on the slave.}
 	\goenumitem{Maintenance}{Slaves in maintenance mode are not monitored but running Mongods will not be stopped.}
-	\goenumitem{Disabled}{Slaves in disabled mode are not monitored. The Mongod instances running on disabled slaves will be migrated to active slaves.}
+	\goenumitem{Disabled}{Slaves in disabled mode are not monitored.
+            The \refgo{master.CluserAllocator} attempts to migrate Mongod instances from disabled slaves migrated to active slaves.\\
+            However, it will not violate or worsen availibility constraints imposed by the administrator.}
 }
 
 \struct{RiskGroup}{
-  A \refstruct{RiskGroup} models a set of slaves sharing a common risk of failure. A \refstruct{Slave} belongs to one \refstruct{RiskGroups}.
+  A \refstruct{RiskGroup} models a set of slaves sharing a common risk of failure.
+  
+  A \refstruct{Slave} always belongs to exactly one \refstruct{RiskGroups}.
+  Hence, \codeinline{RiskGroup}s are mutually disjoint.
 }{
   \property{Id}[uint]{Unique id.}
-  \property{Name}[string]{Name of the risk group.}
-  \property{Slaves}[[]\refstruct{Slave}]{The \refstruct{Slave}s belonging to this \refstruct{RiskGroup}}
+  \property{Name}[string]{Unique name of the risk group.}
+  \property{Slaves}[[]\refstruct{Slave}]{The \refstruct{Slave}s that are members of a the given instance of \refstruct{RiskGroup}.}
 }
 
 \struct{ReplicaSet}{
-	A \refstruct{ReplicaSet} models a MongoDB replica set consisting of multiple \refstruct{Mongod}s.
+	A \refstruct{ReplicaSet} models a MongoDB Replica Set consisting of multiple \refstruct{Mongod}s.
+
+        The degree of desired availbility \& redundancy of data stored in the Replica Set is modeled through 
+        \refproperty{PersistentMemberCount} and \refproperty{VolatileMemberCount}.
 }{
   \property{Id}[uint]{Unique id.}
-  \property{Name}[string]{Name of the replica set.}
+  \property{Name}[string]{Name of the Replica Set.}
   \property{PersistentMemberCount}[uint]{Number of persistent \refstruct{Mongod}s that should be part of this \refstruct{ReplicaSet}.}
   \property{VolatileMemberCount}[uint]{Number of volatile \refstruct{Mongod}s that should be part of this \refstruct{ReplicaSet}.}
 }
-  MongodExecutionState
-  HostPort
-  Problem
 
 \struct{Mongod}{
   An instance of \refstruct{Mongod} is uniquely identified by
