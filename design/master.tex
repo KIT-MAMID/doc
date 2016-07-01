@@ -92,6 +92,18 @@ stored in database:
   \property{ExecutionState}[MongodExecutionState]{execution state of the Mongod process.}
   \property{ReplicaSetMembers}[HostPort]{Replica Set members as reported by the Mongod process.}
 }
+
+
+\goenum{MongodExecutionState}{
+  The different states of a Mongod that are relevant to the implementation of \mamid.
+
+  The following value definitions are ordered by availibility of data in the particular state.
+}{
+  \goenumitem{Destroyed}{Mongod data directory not present and Mongod not running.}
+  \goenumitem{NotRunning}{Data directory present but not Mongod running.}
+  \goenumitem{Recovering}{Mongod running but not available for reads because data needs to be synced from other Replica Set members. Common when adding new members to an existing Replica Set.}
+  \goenumitem{Running}{Mongod running and in sync with other Replica Set members. }
+}
 data transfer objects (used to communicate via the master.Bus)
 
   DesiredReplicaSetConstraintStatus
