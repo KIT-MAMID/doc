@@ -141,10 +141,47 @@ stored in database:
 
 data transfer objects (used to communicate via the master.Bus)
 
-  DesiredReplicaSetConstraintStatus
-  MongodMatchStatus
-  ConnectionStatus
-  ObservedReplicaSetConstraintStatus
+\struct{DesiredReplicaSetConstraintStatus}
+{
+  Represents whether the \refgo{master.ClusterAllocator} can satisfy the constraints on a replica set given by
+  \begin{itemize}
+    \item the persistent and volatile member counts of the \refstruct{ReplicaSet}
+    \item the maximum number of \refstruct{Mongod}s on the \refstruct{Slave}s
+    \item the \refstruct{RiskGroup}s
+  \end{itemize}
+}{
+  \property{Unsatisfied}[bool]{Whether the constraint cannot be satisfied.}
+  \property{ReplicaSet}[\refstruct{ReplicaSet}]{The replica set whose constraints can/cannot be fulfilled}
+  \property{ActualVolatileCount}[uint]{The count of volatile members the replica set now has because the constraints are not fulfilled. If they are fullfilled this is the same as \refstruct{ReplicaSet.VolatileMemberCount}.}
+  \property{ActualPersistentCount}[uint]{The count of persistent members the replica set now has because the constraints are not fulfilled. If they are fullfilled this is the same as \refstruct{ReplicaSet.PersistentMemberCount}.}
+}
+
+\struct{MongodMatchStatus}
+{
+  Represents whether the observed and desired state of a \refstruct{Mongod} do not match.
+}{
+  \property{Mismatch}[bool]{Whether the stated do not match.}
+  \property{Mongod}[\refstruct{Mongod}]{The mongod whose states do/do not match}
+}
+
+\struct{ConnectionStatus}
+{
+  Represents whether a \refstruct{Slave} cannot be reached from the master.
+}{
+  \property{Mismatch}[bool]{Whether the slave cannot be reached.}
+  \property{Slave}[\refstruct{Mongod}]{The slave that can/cannot be reached}
+  \property{CommunicationError}[\refgo{msp.CommunicationError}]{The error that occurred when trying to reach the slave. \codeinline{nil} if slave can be reached}
+}
+
+\struct{ObservedReplicaSetConstraintStatus}
+{
+  Represents whether the observed member counts of a \refstruct{ReplicaSet} do not match \refstruct{ReplicaSet.VolatileMemberCount} and \refstruct{ReplicaSet.PersistentMemberCount}
+}{
+  \property{Unsatisfied}[bool]{Whether the counts do not match.}
+  \property{ReplicaSet}[\refstruct{ReplicaSet}]{The replica set whose counts do not match.}
+  \property{ActualVolatileCount}[uint]{The observed volatile member count of the replica set.}
+  \property{ActualPersistentCount}[uint]{The observed persistent member count of the replica set.}
+}
 
 
 \section{Master: Main Package}
