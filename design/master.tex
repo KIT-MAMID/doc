@@ -76,11 +76,11 @@ stored in database:
 }{
   \property{Port}[PortNumber]{Port number the Mongod is listening on.}
   \property{ReplSetName}[string]{Name of the Mongods replica set. A Mongod is always in exactly one replica set.}
-  \property{ObservationError}[error]{Latest error that occured when attempting to update the \refproperty{Mongod.ObservedState}.\\
-                                     \codeinline{nil} if no error occured on last attempt.}
+  \property{ObservationError}[error]{Latest error that occurred when attempting to update the \refproperty{Mongod.ObservedState}.\\
+                                     \codeinline{nil} if no error occurred on last attempt.}
   \property{LastEstablishStateError}[SlaveError]{Latest error reported by the slave when attempting to establish
                                                 the \refproperty{Mongod.DesiredState}.\\
-                                                \codeinline{nil} if no error occured on last attempt.}
+                                                \codeinline{nil} if no error occurred on last attempt.}
 \property{DesiredState}[MongodState]{State the Mongod should be in. \codeinline{nil} if no desired state has been set.}
   \property{ObservedState}[MongodState]{State the Mongod was last observed to be in. \codeinline{nil} if no observation has been made.}
 }
