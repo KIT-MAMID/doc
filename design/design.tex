@@ -232,36 +232,47 @@
 % #4: properties. list of \property
 % #5: methods. list of \method
 %
-\NewDocumentCommand{\gotype}{m m +m +g +g}{
-  \subsection{#1 \codeinline{#2}}\label{\gocurpackage.#2}
+\NewDocumentCommand{\gotype}{m m +m +g +g +d<>}{%
+  \subsection{#1 \codeinline{#2}}\label{\gocurpackage.#2}%
   % Make the current type name available in the scope of the class.
   % Useful for making labels.
   \renewcommand{\gocurtype}[0]{#2}% 
-  #3
-  \IfValueT{#5}{
-    \subsubsection*{Properties}
-    \begin{description}
-      #5 % list of \property
-    \end{description}
-   }
-   \IfValueT{#4}{
-      \subsubsection*{Methods}
-      \begin{description}
+  #3%
+  \IfValueT{#5}{%
+    \subsubsection*{Properties}%
+    \begin{description}%
+      #5% list of \property
+    \end{description}%
+   }%
+   \IfValueT{#4}{%
+      \subsubsection*{Methods}%
+      \begin{description}%
         %\setlength{\itemsep}{1em}
-        #4 %list of \method
-      \end{description}
-    }
-    \renewcommand\gocurtype[0]{}%
+        #4%list of \method
+      \end{description}%
+   }%
+   \IfValueT{#6}{%
+      \subsection*{Enum Values}%
+      \begin{description}%
+          #6% list of \goenumitem
+      \end{description}%
+   }%
+   \renewcommand\gocurtype[0]{}%
 }
 \NewDocumentCommand{\struct}{m +m +g +g}{\gotype{Struct}{#1}{#2}{#4}{#3}}
 \NewDocumentCommand{\refstruct}{m}{\refgo{\gocurpackage.#1}}
 \NewDocumentCommand{\interface}{m +m +m}{\gotype{Interface}{#1}{#2}{#3}}
+\NewDocumentCommand{\goenum}{m +m +m}{\gotype{Enum}{#1}{#2}<#3>}
 
 % \property is used to declare fields of a struct
 \NewDocumentCommand{\property}{m o +m}{
   \item[\codeinline{#1\hspace{0.1cm}:\hspace{0.1cm}#2}]\label{\gocurpackage.\gocurtype.#1}\hfill %(line break for the poor)
   \par
   #3
+}
+
+\NewDocumentCommand{\goenumitem}{m +m}{
+  \item [\codeinline{#1}]\label{\gocurpackage.\gocurtype.#1} #2
 }
 
 % \method is used to declare a struct's method set.
