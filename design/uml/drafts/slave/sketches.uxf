@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.2">
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
   <help_text>// Uncomment the following line to change the fontsize and font:
 fontsize=12
 fontfamily=Monospaced //possible: SansSerif,Serif,Monospaced
@@ -804,7 +803,7 @@ Error(): string</panel_attributes>
     </coordinates>
     <panel_attributes>MongodState
 --
-+ IsShardingServer: bool</panel_attributes>
++ IsShardingConfigServer: bool</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -913,7 +912,7 @@ MongodExecutionStateRunning
       <x>973</x>
       <y>819</y>
       <w>224</w>
-      <h>105</h>
+      <h>91</h>
     </coordinates>
     <panel_attributes>Slave
 --
@@ -923,7 +922,6 @@ MongodExecutionStateRunning
 +MongodPortRangeBegin: uint
 +MongodPortRangeEnd: uint
 +PersistantStorage: bool
-+RootDataDirectory: string
 --</panel_attributes>
     <additional_attributes/>
   </element>
@@ -965,8 +963,8 @@ MongodExecutionStateRunning
 --
 +Id: uint
 +Name: string
-+PersistentNodeCount: uint
-+VolatileNodeCount: uint
++PersistentMemberCount: uint
++VolatileMemberCount: uint
 +ConfigureAsShardingConfigServer: bool
 --
 </panel_attributes>
@@ -1107,13 +1105,13 @@ r2=Slaves</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1421</x>
-      <y>861</y>
+      <y>868</y>
       <w>595</w>
-      <h>35</h>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>830.0;20.0;10.0;30.0</additional_attributes>
+    <additional_attributes>830.0;10.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -1133,11 +1131,11 @@ r2=Slaves</panel_attributes>
       <x>1190</x>
       <y>868</y>
       <w>826</w>
-      <h>70</h>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>1160.0;10.0;10.0;80.0</additional_attributes>
+    <additional_attributes>1160.0;10.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -1376,7 +1374,7 @@ r2=Mongods</panel_attributes>
       <x>1400</x>
       <y>938</y>
       <w>140</w>
-      <h>28</h>
+      <h>42</h>
     </coordinates>
     <panel_attributes>All RiskGroup are mutually
 disjoint sets of slaves.</panel_attributes>
@@ -1413,16 +1411,16 @@ SlaveStateDisabled</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1085</x>
-      <y>917</y>
+      <y>903</y>
       <w>98</w>
-      <h>77</h>
+      <h>91</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m1=1
 m2=1
 ConfiguredState
 </panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
