@@ -131,7 +131,7 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 	{}
 
 \apicall[put]{/slaves}{Adds a slave}
-	{slave & slave object & slave to add}
+	{<body> & slave object & slave to add}
 	{201}
 	{Location & Reference to added slave}
 	{}
@@ -145,7 +145,8 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 	{}
 	
 \apicall[post]{/slaves/<id>}{Updates a slave}
-	{id & integer & id of the slave to update}
+	{id & integer & id of the slave to update\\
+	 <body> & slave object & the content of the updated slave}
 	{200}
 	{}
 	{}
@@ -175,7 +176,7 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 	{}
 
 \apicall[put]{/replicasets}{Adds a replica set}
-	{replicaset & replica set object & replica set to add}
+	{<body> & replica set object & replica set to add}
 	{201}
 	{Location & Reference to added replica set}
 	{}
@@ -189,7 +190,8 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 	{}
 
 \apicall[post]{/replicasets/<id>}{Updates a replica set}
-	{id & integer & id of the replica set to update}
+	{id & integer & id of the replica set to update\\
+	 <body> & replica set object & content of the updated replica set}
 	{200}
 	{}
 	{}
@@ -226,7 +228,7 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 	{}
 
 \apicall[put]{/riskgroups}{Adds a risk group}
-	{risk group & risk group object & risk group to add}
+	{<body> & risk group object & risk group to add}
 	{201}
 	{Location & Reference to added risk group}
 	{}
@@ -240,7 +242,8 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 	{}
 
 \apicall[post]{/riskgroups/<id>}{Updates a risk group}
-	{id & integer & id of the risk group to update}
+	{id & integer & id of the risk group to update\\
+	 <body> & risk group object & content of the updated risk group}
 	{200}
 	{}
 	{}
