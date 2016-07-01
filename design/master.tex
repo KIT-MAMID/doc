@@ -11,11 +11,39 @@ stored in database:
   Slave
   SlaveState
   ReplicaSet
-  Mongod
   MongodState
   MongodExecutionState
   HostPort
   Problem
+
+\struct{Mongod}{
+  An instance of \refstruct{Mongod} is uniquely identified by
+  \begin{itemize}
+    \item its parent slave (the machine it is running on)
+    \item the port it is listening on
+    \item the replica set it belongs to.
+  \end{itemize}
+
+  The two attributes \refproperty{DesiredState} and \refproperty{ObservedState} are both optional.
+
+  The role of a Mongod process depends on the permutations of \codeinline{nil} and $\not=\codeinline{nil}$
+    assignments and is depicted in the table below:
+ 
+  \begin{figure}[H]
+  \centering
+  \begin{tabularx}{0.6\linewidth}{|c|X|X|}
+          \hline
+          \diaghead{lengthofthediagheads}{\codeinline{DesiredState}}{\codeinline{ObservedState}} & $=\codeinline{nil}$ & $\not= \codeinline{nil}$ \\\hline
+          $=\codeinline{nil}$       & \text{not existent} & zombie  \\\hline
+          $\not= \codeinline{nil}$  & not spawned & present \\\hline
+  \end{tabularx}
+  \caption{Mongod role by \codeinline{DesiredState} \& \codeinline{ObservedState}}
+  \end{figure}
+
+}{
+  \property{DesiredState}[MongodState]{State the Mongod should be in. \codeinline{nil} if no desired state has been set.}
+  \property{ObservedState}[MongodState]{State the Mongod was last observed to be in. \codeinline{nil} if no observation has been made.}
+}
 
 data transfer objects (used to communicate via the master.Bus)
 
