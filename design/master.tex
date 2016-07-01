@@ -45,7 +45,6 @@ stored in database:
 	\property{PersistentMemberCount}[uint]{Number of persistent \refstruct{Mongod}s that should be part of this \refstruct{ReplicaSet}.}
 	\property{VolatileMemberCount}[uint]{Number of volatile \refstruct{Mongod}s that should be part of this \refstruct{ReplicaSet}.}
 }
-  MongodState
   MongodExecutionState
   HostPort
   Problem
@@ -79,6 +78,13 @@ stored in database:
   \property{ObservedState}[MongodState]{State the Mongod was last observed to be in. \codeinline{nil} if no observation has been made.}
 }
 
+\struct{MongodState}{
+        Description of state of a particular \refstruct{Mongod} that is not already contained in \refgo{model.Mongod}.
+}{
+  \property{IsShardingConfigServer}[bool]{indicates whether the Mongod is configured as a Sharding config server.}
+  \property{ExecutionState}[MongodExecutionState]{execution state of the Mongod process.}
+  \property{ReplicaSetMembers}[HostPort]{Replica Set members as reported by the Mongod process.}
+}
 data transfer objects (used to communicate via the master.Bus)
 
   DesiredReplicaSetConstraintStatus
