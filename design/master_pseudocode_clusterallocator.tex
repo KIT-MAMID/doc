@@ -6,14 +6,15 @@
 \SetKw{Invariant}{invariant}
 \IncMargin{0.5em}
 
-We start with the removal of superflous Replica Set members.\\
+We start with the removal of superfluous Replica Set members.\\
 However, in order to determine how many Replica Set members can be removed, we need to examine the observed situation.
 
 \begin{algorithm}[H]
 \caption{Count members of a Replica Set that are \& intended to be in stable state (running)}\label{alg:EffectiveMemberCount}
 
 \Input{ReplicaSet $r$}
-\Output{Number of $p_e$ and $v_e$ member processes of $r$ that are fully operational and are planned to remain in that state.}
+\Output{Number of $p_e$ (\emph{persistent}) and $v_e$ (\emph{volatile}) member processes of $r$
+        that are fully operational and are planned to remain in that state.}
 \BlankLine
 \Fn{EffectiveMemberCount(r ReplicaSet)}{
 
@@ -34,7 +35,7 @@ $p_e, v_e = 0$
 }
 \end{algorithm}
 
-Given \ref{alg:EffectiveMemberCount}, we can now proceed with removal of superflous Replica Set members.
+Given Algorithm \ref{alg:EffectiveMemberCount}, we can now proceed with the removal of superfluous Replica Set members.
 
 \begin{algorithm}[H]
 \caption{Destroy members of disabled replica sets where possible without violating p/v constraints.}
@@ -42,20 +43,20 @@ Given \ref{alg:EffectiveMemberCount}, we can now proceed with removal of superfl
 	
 	$p_e, v_e \gets $ EffectiveRunningMembers(r)
 	
-	\ForEach(// same for persistent and volatile){$\textbf{x}_e \in \{p_e, v_e\}$}{
+        \ForEach(// \textbf{x} is symbolic placeholder for \textbf{p} or \textbf{v}){$\textbf{x}_e \in \{p_e, v_e\}$}{
 		\While{$x_e > r.\textbf{x}$}{
-			\textbf{destroy} any $m \in r.Mongods$ where $m.ParentSlave$ is $\textbf{x} \land \textbf{disabled}$\;
+			\textbf{destroy} any $m \in r.Mongods$ where $m.ParentSlave$ is of type $\textbf{x} \land \textbf{disabled}$\;
 			$\textbf{x}_e \minuseq 1$
 		}
 		
 		\Invariant minimum number of disabled slaves are running members of $r$\;
 		
 		\While{$\textbf{x}_e > r.\textbf{x}$}{
-			\textbf{destroy} any $m \in r.Mongods$ where $m.ParentSlave$ is $\textbf{x}$\;
+			\textbf{destroy} any $m \in r.Mongods$ where $m.ParentSlave$ is of type $\textbf{x}$\;
 			$\textbf{x}_e \minuseq 1$
 		}
 		
-		\Invariant at most $r.\textbf{x}$ members 
+		\Invariant at most $r.\textbf{x}$ fully operational members 
 	}
 	
 	\Invariant \textit{desired state}: at most (r.p|r.v) member processes of $r$\;
@@ -81,8 +82,8 @@ Again, we need to examine the current state of the cluster.
 	$p_a, v_a = 0$
 	
 	\For{$m \in \text{r.Mongods}$}{
-		\If{$\text{m.ParentSlave.ConfiguredState} != Disabled$ \\
-			$\land \text{m.DesiredState.ExecutionState} != NotRunning$}{ 
+		\If{$\text{m.ParentSlave.ConfiguredState} \not= Disabled$ \\
+                        $\land \text{m.DesiredState.ExecutionState} \not\in \{ NotRunning, Destroyed\}$}{ 
 			
 			\uIf{$m.ParentSlave.PersistentStorage$}{
 				$p_a \pluseq 1 $
@@ -116,7 +117,7 @@ The \texttt{ARGMAX} returns the element from the left operand whose metric (righ
 
 $p_a, v_a \gets $ AlreadyAddedMemberCount(r)
 
-\ForEach(// same for persistent and volatile){$\textbf{x}_a \in \{p_a, v_a\}$}{
+\ForEach(// \textbf{x} is symbolic placeholder for \textbf{p} or \textbf{v}){$\textbf{x}_a \in \{p_a, v_a\}$}{
 
 	%# TODO need to fill the queue. only ReplicaSets which 'need' (use p_* to define what need means) are in  the queue 
 	$RQ \gets$ PriorityQueue(R)\;% "relative amount of missing members")\;
@@ -126,7 +127,7 @@ $p_a, v_a \gets $ AlreadyAddedMemberCount(r)
 	
 		\Invariant $r$ needs a member of type $\textbf{x}$
 		
-		// find $x$-slave $s$ in a risk group $g$ with no other Mongod of $r$ in $g$\;
+		// find slave $s$ of type $x$ in a risk group $g$ with no other Mongod of $r$ in $g$\;
 		$candidates \gets \{g \mid g \in RGSQ.keys \land \text{r has no member in g}\}$\;
 		$g \gets$ ARGMAX($g \in candidates$, RGSQ[g].PeekPriority())\;
 		\uIf{$g \neq nil$}{
@@ -135,17 +136,19 @@ $p_a, v_a \gets $ AlreadyAddedMemberCount(r)
 			spawn new Mongod $m$ on $s$ and add it to $r.Mongods$\;
 			compute $MongodState$ for $m$ and set the $DesiredState$ variable\;
 			
-			\If{$r$ needs another member of type $\textbf{x}$}{
+			\uIf{$r$ needs another member of type $\textbf{x}$}{
 				$RQ.insert(r)$ // recompute priority
-			}
-			
+                        }\Else{
+                                // r.\textbf{x} constraint has been fulfilled
+                        }
+
 			\If{$s$ has free ports}{
 				$RGSQ[g].insert(s)$ // recompute priority
 			}
 			
 			
 		} \Else{
-			yield error\;
+                        // r.\textbf{x} constraint cannot be fulfilled
 			continue\;
 		}
 		
@@ -156,10 +159,10 @@ $p_a, v_a \gets $ AlreadyAddedMemberCount(r)
 
 \end{algorithm}
 
-It is crucial to the implementation of \ref{alg:addmongods} that Mongods in \refgo{model.MongodExecutionState.Recovering}
+It is crucial to the implementation of Algorithm \ref{alg:addmongods} that Mongods in \refgo{model.MongodExecutionState.Recovering}
 \begin{itemize}
-  \item are counting toward the \texttt{AlreadyAddedMemberCount} (\ref{alg:AlreadyAddedMemberCount})
-  \item are not not counting toward the \texttt{EffectiveMemberCount} (\ref{alg:EffectiveMemberCount})
+  \item are counting toward the \texttt{AlreadyAddedMemberCount} (Algorithm \ref{alg:AlreadyAddedMemberCount})
+  \item are not not counting toward the \texttt{EffectiveMemberCount} (Algorithm \ref{alg:EffectiveMemberCount})
 \end{itemize}
 
 If this were not the case, the following failure scenarios would be possible:

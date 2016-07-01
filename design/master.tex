@@ -128,7 +128,7 @@ Hence, it is worth defining the implementation of \refgo{master.ClusterAllocator
 While studying the algorithms below, the reader should keep in mind that
 \begin{itemize}
   \item changes in the cluster layout $\equiv$ change or creation of \refgo{model.Mongod.DesiredState} 
-  \item the \refgo{model.Mongod.ObservedState} may change after an arbitrary amount or even never.\\
+  \item the \refgo{model.Mongod.ObservedState} may change after an arbitrary amount of time or even not at all
   \item changes to a ReplicaSet must not violate or further worsen the high-availibility constraints,
         in particular \refgo{model.ReplicaSet}'s \refgo{VolatileNodeCount} \& \refgo{PersistentNodeCount}\\
         $\implies$ Mongods in \refgo{model.MongodExecutionState.Recovering} are an important special-case.
