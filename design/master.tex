@@ -65,7 +65,7 @@ All datastructures in \refgo{model} are designed to be fully serializable \& usa
   \begin{itemize}
     \item its parent slave (the machine it is running on)
     \item the port it is listening on
-    \item the replica set it belongs to.
+    \item the Replica Set it belongs to.
   \end{itemize}
 
   The two attributes \refproperty{DesiredState} and \refproperty{ObservedState} are both optional.
@@ -86,7 +86,7 @@ All datastructures in \refgo{model} are designed to be fully serializable \& usa
 
 }{
   \property{Port}[PortNumber]{Port number the Mongod is listening on.}
-  \property{ReplSetName}[string]{Name of the Mongods replica set. A Mongod is always in exactly one replica set.}
+  \property{ReplSetName}[string]{Name of the Mongods Replica Set. A Mongod is always in exactly one Replica Set.}
   \property{ObservationError}[error]{Latest error that occurred when attempting to update the \refproperty{Mongod.ObservedState}.\\
                                      \codeinline{nil} if no error occurred on last attempt.}
   \property{LastEstablishStateError}[SlaveError]{Latest error reported by the slave when attempting to establish
@@ -154,7 +154,7 @@ data transfer objects (used to communicate via the master.Bus)
 
 \struct{DesiredReplicaSetConstraintStatus}
 {
-  Represents whether the \refgo{master.ClusterAllocator} can satisfy the constraints on a replica set given by
+  Represents whether the \refgo{master.ClusterAllocator} can satisfy the constraints on a Replica Set given by
   \begin{itemize}
     \item the persistent and volatile member counts of the \refstruct{ReplicaSet}
     \item the maximum number of \refstruct{Mongod}s on the \refstruct{Slave}s
@@ -162,9 +162,9 @@ data transfer objects (used to communicate via the master.Bus)
   \end{itemize}
 }{
   \property{Unsatisfied}[bool]{Whether the constraint cannot be satisfied.}
-  \property{ReplicaSet}[\refstruct{ReplicaSet}]{The replica set whose constraints can/cannot be fulfilled}
-  \property{ActualVolatileCount}[uint]{The count of volatile members the replica set now has because the constraints are not fulfilled. If they are fullfilled this is the same as \refstruct{ReplicaSet.VolatileMemberCount}.}
-  \property{ActualPersistentCount}[uint]{The count of persistent members the replica set now has because the constraints are not fulfilled. If they are fullfilled this is the same as \refstruct{ReplicaSet.PersistentMemberCount}.}
+  \property{ReplicaSet}[\refstruct{ReplicaSet}]{The Replica Set whose constraints can/cannot be fulfilled}
+  \property{ActualVolatileCount}[uint]{The count of volatile members the Replica Set now has because the constraints are not fulfilled. If they are fullfilled this is the same as \refstruct{ReplicaSet.VolatileMemberCount}.}
+  \property{ActualPersistentCount}[uint]{The count of persistent members the Replica Set now has because the constraints are not fulfilled. If they are fullfilled this is the same as \refstruct{ReplicaSet.PersistentMemberCount}.}
 }
 
 \struct{MongodMatchStatus}
@@ -189,9 +189,9 @@ data transfer objects (used to communicate via the master.Bus)
   Represents whether the observed member counts of a \refstruct{ReplicaSet} do not match \refstruct{ReplicaSet.VolatileMemberCount} and \refstruct{ReplicaSet.PersistentMemberCount}
 }{
   \property{Unsatisfied}[bool]{Whether the counts do not match.}
-  \property{ReplicaSet}[\refstruct{ReplicaSet}]{The replica set whose counts do not match.}
-  \property{ActualVolatileCount}[uint]{The observed volatile member count of the replica set.}
-  \property{ActualPersistentCount}[uint]{The observed persistent member count of the replica set.}
+  \property{ReplicaSet}[\refstruct{ReplicaSet}]{The Replica Set whose counts do not match.}
+  \property{ActualVolatileCount}[uint]{The observed volatile member count of the Replica Set.}
+  \property{ActualPersistentCount}[uint]{The observed persistent member count of the Replica Set.}
 }
 
 
