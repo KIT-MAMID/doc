@@ -18,9 +18,9 @@ All datastructures in \refgo{model} are designed to be fully serializable \& usa
 }{
   \property{Id}[uint]{Unique id.}
   \property{Hostname}[string]{Hostname of the host the slave is running on. \refproperty{Hostname} uniquely identifies a host in the cluster.} 
-  \property{Port}[uint]{Port on which the slave listens for connections from the master.}
-  \property{MongodPortRangeBegin}[uint]{Beginning of the range of ports \reftype{Mongod} spawned by the slave may listen on (inclusive).}
-  \property{MongodPortRangeEnd}[uint]{End of the range of ports \reftype{Mongod} spawned by the slave may listen on (exclusive).
+  \property{Port}[PortNumber]{Port on which the slave listens for connections from the master.}
+  \property{MongodPortRangeBegin}[PortNumber]{Beginning of the range of ports \reftype{Mongod} spawned by the slave may listen on (inclusive).}
+  \property{MongodPortRangeEnd}[PortNumber]{End of the range of ports \reftype{Mongod} spawned by the slave may listen on (exclusive).
       Implicitly specifies --- in combination with \refproperty{MongodPortRangeBegin} ---
       how many concurrently running \reftype{Mongod}s can be spawned by a slave.}
   \property{PersistentStorage}[bool]{Flag indicating whether the slave's data directory is located on persistent or volatile storage.}
