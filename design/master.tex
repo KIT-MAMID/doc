@@ -137,9 +137,9 @@ The other structures in \refgo{model} are stored in the database using a databas
                               Replica Set member is listening.}
 }
 
-\subsection{Type Alias \codeinline{PortNumber $\equiv$ uint16}}\label{\gocurpackage.PortNumber}
-
-A TCP port number as specified in \href{https://tools.ietf.org/html/rfc793#section-3.1}{RFC 793 Section 3.1}.
+\typealias{PortNumber}[uint16]{
+  A TCP port number as specified in \href{https://tools.ietf.org/html/rfc793\#section-3.1}{RFC 793 Section 3.1}.
+}
 
 \struct{Problem}{
   Representation of a problem or error that occurred during operation of the \refgo{master}.
