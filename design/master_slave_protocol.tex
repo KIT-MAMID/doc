@@ -96,10 +96,10 @@ Hence, duplication of datastructures is a necessary tradeoff in order to sustain
 }
 
 \struct{HostPort}{
-  Container for a hostname\&port pair.
+  Tuple of $(hostname, port)$.
 }{
-  \property{Hostname}[string]
-  \property{Port}[\reftype{PortNumber}]
+  \property{Hostname}[string]{The unique hostname of a machine resolvable by the slave.}
+  \property{Port}[PortNumber]{The TCP port on the host identified by \refproperty{Hostname}}
 }
 
 \typealias{PortNumber}[uint16]{
