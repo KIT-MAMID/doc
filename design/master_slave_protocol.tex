@@ -9,8 +9,8 @@
 The MasterSlaveProtocol \refgo{msp} implements communication between \refgo{slave} and \refgo{master}.\\
 There are two structures which may be sent directly over HTTP as request body, represented with JSON:
 \begin{itemize}
-  \item \codeinline{[]\reftype{Mongod}} An array of descriptions of all mongod instances of that \refgo{slave}.
-  \item \codeinline{\reftype{SlaveError}} Sent (only) by \refgo{slave} in case there are general problems preventing observation of any running mongod instances.
+  \item \codeinline{[]\reftype{Mongod}} An array of descriptions of all Mongod instances of that \refgo{slave}.
+  \item \codeinline{\reftype{SlaveError}} Sent (only) by \refgo{slave} in case there are general problems preventing observation of any running Mongod instances.
 \end{itemize}
 
 For several datastructures in \refgo{msp}, similar ones exist in  \refgo{model}. The reasoning behind this is the desire to have a
@@ -45,7 +45,7 @@ Hence, duplication of datastructures is a necessary tradeoff in order to sustain
     See \reftype{Mongod} for details on the data returned by this method.
   }
   \method{EstablishMongodState}[*\reftype{SlaveError}](
-    \param{m}[\reftype{Mongod}]{State description of a mongod instance that shall be established}
+    \param{m}[\reftype{Mongod}]{State description of a Mongod instance that shall be established.}
   ){
     %TODO reference request message object here -> proto specification
     Request to establish the configuration state $m$ of a MongoDB process on the slave.
@@ -73,15 +73,17 @@ Hence, duplication of datastructures is a necessary tradeoff in order to sustain
 
 % protocol specific structures
 \struct{Mongod}{
-  Description of a mongod instance.
+  Datastructure describing a Mongod instance controlled by the slave.
 }{
-  \property{Port}[\reftype{PortNumber}]{The port the mongod instance listens on}
-  \property{ReplicaSetName}[string]{Identifier for the replica set the mongod instance participates in}
-  \property{ShardingConfigServer}[bool]
-  \property{StatusError}[*\reftype{SlaveError}]{Set by \refgo{slave} when the described mongod instance errored}
-  \property{LastEstablishStateError}[*\reftype{SlaveError}]{The last \reftype{SlaveError} created upon trying to establish state (\codeinline{nil} when sent by \refgo{master} or when state has successfully been established since the last establish request)}
-  \property{State}[\reftype{MongodState}]{State the mongod instance is in}
-  \property{ReplicaSetMembers}[[]\reftype{HostPort}]{Targets to connect the ReplicaSet to}
+  \property{Port}[\reftype{PortNumber}]{The port the Mongod instance listens on.}
+  \property{ReplicaSetName}[string]{Identifier for the Replica Set the Mongod instance participates in.}
+  \property{ShardingConfigServer}[bool]{If \codeinline{true}, the Mongod's configuration should be such that it can work in a MongoDB Sharding Config Server Replica Set.}
+  \property{StatusError}[*\reftype{SlaveError}]{Set by \refgo{slave} when retrieving the status of the Mongod instance resulted in an error.}
+  \property{LastEstablishStateError}[*\reftype{SlaveError}]{The last \reftype{SlaveError} created upon executing \refgo{msp.MSPConsumer.EstablishMongodState}.\\
+       (\codeinline{nil} when sent by \refgo{master} or when state has successfully been established since the last establish request).}
+  \property{State}[\reftype{MongodState}]{State the Mongod instance is / should be in.}
+  \property{ReplicaSetMembers}[[]\reftype{HostPort}]{Members of the Mongod's Replica Set.\\
+      When sent in response to \refgo{msp.MSPConsumer.RequestStatus}, \refparam{ReplicaSetMembers} is based on what is reported by the running Mongod instance.}
 }
 
 \goenum{MongodState}{
