@@ -31,7 +31,7 @@ model_classes.pdf: class_diagram.pdf
 master_classes.pdf: class_diagram.pdf
 	pdfcrop --bbox "2400 0 4000 700"  class_diagram.pdf $@
 
-design.pdf: *.tex class_diagram.pdf slave_classes.pdf msp_classes.pdf model_classes.pdf
+design.pdf: *.tex class_diagram.pdf slave_classes.pdf msp_classes.pdf model_classes.pdf master_classes.pdf
 	$(PDFLATEX) design.tex
 	$(MAKEGLOSSARIES) design
 	$(PDFLATEX) design
