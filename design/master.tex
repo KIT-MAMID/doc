@@ -4,6 +4,11 @@
 \section{Master: Model}% cannot use subsections here because helpers macros have fixed sectioning-hierarchy
 \renewcommand{\gocurpackage}{model}
 
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{model_classes}
+	\caption{Model}
+\end{figure}
+
 The \refgo{model} package contains all datastructures used to model the cluster managed by \mamid.
 
 All datastructures in \refgo{model} are designed to be fully serializable \& usable with a database abstraction layer.
@@ -201,6 +206,11 @@ data transfer objects (used to communicate via the master.Bus)
 
 \section{Master: Main Package}
 \renewcommand{\gocurpackage}{master}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{master_classes}
+	\caption{Master}
+\end{figure}
 
 The Master (\refgo{master}) is the most complex component of \mamid.
 
