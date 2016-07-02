@@ -11,7 +11,9 @@
 
 The \refgo{model} package contains all datastructures used to model the cluster managed by \mamid.
 
-All datastructures in \refgo{model} are designed to be fully serializable \& usable with a database abstraction layer.
+The structures implementing the \codeinline{StatusMessage} interface are used to pass status information on the application internal bus (\refgo{master.Bus}).
+
+The other structures in \refgo{model} are stored in the database using a database abstraction layer.
 
 \struct{Slave}{
   A \reftype{Slave} models an instance of the \mamid slave application running on a host.
@@ -216,16 +218,34 @@ data transfer objects (used to communicate via the master.Bus)
 
 The Master (\refgo{master}) is the most complex component of \mamid.
 
-fulfills many diff tasks, running in separate goroutines
+It fulfills many different tasks, running in separate goroutines.
 
-different tasks need to communicate with each other
-  shared persistent database with ORM abstraction 'gorm' => see model for which objcets
-  status information (similar to observer pattern), realized through a Bus that leverages Golang's channels
-    messages sent over bus are structs suffixed with .*Status
-    generally, bus messages are sent repeatedly => != edge-triggered notifications
-    encapsulate enough information about a type of status of an object in the database
-      other components on the bus can react to information
-=> loose coupling of components
+Different tasks need to communicate with each other. We use two mechanisms for that:
+\begin{itemize}
+	\item A shared persistent database with an ORM abstraction layer => see model for which objects
+	\item A \reftype{Bus} that leverages golang's channels to send status updates. => *Status Objects %TODO
+\end{itemize}
+This helps couple the different components loosely.
+
+\struct{Bus}{
+	The \reftype{Bus} is used by the different components of the master to share and react to status updates.
+	At the start of the application channels for all the components are created and passed into the components.
+	The components can then use this channel to broadcast messages to the other components and receive messages
+	from the Bus from which they can filter the ones they are interested in.
+	
+	All messages sent over the bus carry the current state not state changes and are
+	sent repeatedly not just on state change (i.e. level triggered instead of edge triggered).
+	
+	\begin{figure}[H]
+		\includegraphics[width=\textwidth]{activity_diagram}
+		\caption{Communication inside the master over the Bus}
+	\end{figure}
+}{
+	\property{channels}[[]chan interface\{\}]{The channels the Bus will broadcast the messages to.}
+}{
+	\method{GetNewChannel}[chan interface\{\}]{Creates a new channel that is attached to the Bus.
+		The new channel will be added to \refproperty{channels} and returned to the caller}
+}
 
 \struct{Deployer}{
 	The \reftype{Deployer} listens on the bus for \refgo{model.MongodMismatchStatus} objects with \refgo{Mismatch} set to true and deployes the desired state of the affected mongod using the \refgo{msp.MSPClient}
