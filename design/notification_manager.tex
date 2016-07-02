@@ -1,4 +1,60 @@
-\section{Notification Manager}
-\renewcommand{\gocurpackage}{notifier}
+\section{Notifier}
+\renewcommand{\gocurpackage}{Notifier}
+The Notifier is installed with the master.
 
-The NotificationManager (package name: \refgo{notifier}) implements notification of a predefined list of contacts when a Problem occurs.
+\struct{Controller}{
+	\property{lastProblems}[[]Problem]
+}{
+	\method{main}[]
+	\method{diffProblems}[[]Problem]
+		\param{received}[[]Problems]
+	\method{notify}[]
+		\param{problem}[Problem]
+}
+
+\struct{Parser}{
+	\mathod{Parse}[[]Contact, error]
+		\param{path}[string]
+	
+}
+
+\struct{APIClient}{
+	\method{Receive}[[]Problem]
+		\param{host}[string]	
+}
+
+\struct{CLIFlagsParser}{
+
+	
+}
+\interface{Notifier}{
+	\method{Send}[]
+		\param{problem}[Problem]
+	
+}
+
+\struct{EmailNotifier}{
+	Implements Notifier to send Emails to List of EmailContacts.
+	\property{Contact}[[]EmailContact]
+}{
+	\method{Send}[]
+		\param{problem}[Problem]
+	\method{sendMailToContacts}[]
+		\param{msg}[[]byte]
+	
+}
+\interface{Contact}{
+	
+	
+}
+
+\struct{EmailContact}{
+	Implements Contact.
+	\property{Address}[string]
+	
+}
+\struct{SMTPRelay}{
+	\property{Hostname}[string]
+	\property{MailFrom}[string]
+	
+}
