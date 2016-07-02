@@ -5,6 +5,7 @@ JAVA ?= `which java`
 PDFLATEX ?= pdflatex -synctex=1
 MAKEGLOSSARIES ?= makeglossaries
 INKSCAPE_BIN ?= `which inkscape`
+PDFCROP_BIN ?= `which pdfcrop`
 CURL_BIN ?= `which curl`
 
 # Internal commands
@@ -20,16 +21,16 @@ class_diagram.pdf: uml/drafts/slave/sketches.uxf
 	$(call UMLET_CONVERT,$<,$@)
 
 slave_classes.pdf: class_diagram.pdf
-	pdfcrop --bbox "0 1300 800 2320"  class_diagram.pdf $@
+	$(PDFCROP_BIN) --bbox "0 1300 800 2320"  class_diagram.pdf $@
 
 msp_classes.pdf: class_diagram.pdf
-	pdfcrop --bbox "700 1300 4000 2400"  class_diagram.pdf $@
+	$(PDFCROP_BIN) --bbox "700 1300 4000 2400"  class_diagram.pdf $@
 
 model_classes.pdf: class_diagram.pdf
-	pdfcrop --bbox "700 140 2400 1200"  class_diagram.pdf $@
+	$(PDFCROP_BIN) --bbox "700 140 2400 1200"  class_diagram.pdf $@
 
 master_classes.pdf: class_diagram.pdf
-	pdfcrop --bbox "2400 0 4000 700"  class_diagram.pdf $@
+	$(PDFCROP_BIN) --bbox "2400 0 4000 700"  class_diagram.pdf $@
 
 design.pdf: *.tex class_diagram.pdf slave_classes.pdf msp_classes.pdf model_classes.pdf master_classes.pdf
 	$(PDFLATEX) design.tex
