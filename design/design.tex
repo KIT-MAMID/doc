@@ -261,15 +261,17 @@
    \renewcommand\gocurtype[0]{}%
 }
 \NewDocumentCommand{\struct}{m +m +g +g}{\gotype{Struct}{#1}{#2}{#4}{#3}}
-\NewDocumentCommand{\interface}{m +m +m}{\gotype{Interface}{#1}{#2}{#3}}
+\NewDocumentCommand{\interface}{m +m +g}{\gotype{Interface}{#1}{#2}{#3}}
 \NewDocumentCommand{\goenum}{m +m +m}{\gotype{Enum}{#1}{#2}<#3>}
 \NewDocumentCommand{\reftype}{m}{\refgo{\gocurpackage.#1}}
 
 % \property is used to declare fields of a struct
-\NewDocumentCommand{\property}{m o +m}{
+\NewDocumentCommand{\property}{m o +g}{
   \item[\codeinline{#1\hspace{0.1cm}:\hspace{0.1cm}#2}]\label{\gocurpackage.\gocurtype.#1}\hfill %(line break for the poor)
-  \par
-  #3
+  \IfValueT{#3}{%
+    \par
+    #3
+  }%
 }
 \NewDocumentCommand{\refproperty}{m}{\refgo{\gocurpackage.\gocurtype.#1}}
 
@@ -296,7 +298,7 @@
 
 % \param is used to declare paramters of a \method -> check \method for details
 \NewDocumentCommand{\param}{m o +m}{%
-  \item[\texttt{#1\hspace{0.1cm}:\hspace{0.1cm}#2}]\label{\gocurpackage.\gocurtype.\gocurmethod.#1} #3
+  \item[\codeinline{#1\hspace{0.1cm}:\hspace{0.1cm}#2}]\label{\gocurpackage.\gocurtype.\gocurmethod.#1} #3
 }
 
 \NewDocumentCommand{\refparam}{m}{
