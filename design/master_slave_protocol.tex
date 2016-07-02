@@ -81,12 +81,14 @@ There are two structures which may be sent directly over HTTP as request body, r
 }
 
 \goenum{MongodState}{
-  Describes the state of the mongod instance.
+  Describes the state of a Mongod instance controlled by the slave.
+
 }{
-  \goenumitem{MongodStateDestroyed}{The mongod instance shall be killed on the \refgo{slave}; only sent by \refgo{master}}
-  \goenumitem{MongodStateNotRunning}{The mongod instance was not (successfully) stated by the \refgo{slave}}
-  \goenumitem{MongodStateRecovering}{The mongod instance is currently in process of applying a state change; only sent by \refgo{slave}}
-  \goenumitem{MongodStateRunning}{Normal operation of the mongod instance}
+  \goenumitem{MongodStateDestroyed}{The Mongod instance is not running and all related data stored on the \refgo{slave} host is deleted. (only sent by \refgo{master})}
+  \goenumitem{MongodStateNotRunning}{The Mongod instance is not running but related data may be stored on the \refgo{slave}.}
+  \goenumitem{MongodStateRecovering}{The Mongod is running but not available for reads because data needs to be synced from other Replica Set members.
+                                     This is a common case when adding new members to an existing Replica Set. (only sent by \refgo{slave})}
+  \goenumitem{MongodStateRunning}{The Mongod instance is running and in sync with other Replica Set members.}
 }
 
 \struct{HostPort}{
