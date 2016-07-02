@@ -918,9 +918,9 @@ MongodExecutionStateRunning
 --
 +Id: uint
 +Hostname: string
-+Port: uint
-+MongodPortRangeBegin: uint
-+MongodPortRangeEnd: uint
++Port: PortNumber
++MongodPortRangeBegin: PortNumber
++MongodPortRangeEnd: PortNumber
 +PersistantStorage: bool
 --</panel_attributes>
     <additional_attributes/>
