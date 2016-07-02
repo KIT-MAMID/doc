@@ -261,10 +261,9 @@
    \renewcommand\gocurtype[0]{}%
 }
 \NewDocumentCommand{\struct}{m +m +g +g}{\gotype{Struct}{#1}{#2}{#4}{#3}}
-\NewDocumentCommand{\refstruct}{m}{\refgo{\gocurpackage.#1}}
 \NewDocumentCommand{\interface}{m +m +m}{\gotype{Interface}{#1}{#2}{#3}}
 \NewDocumentCommand{\goenum}{m +m +m}{\gotype{Enum}{#1}{#2}<#3>}
-\NewDocumentCommand{\refenum}{m}{\refgo{\gocurpackage.#1}}
+\NewDocumentCommand{\reftype}{m}{\refgo{\gocurpackage.#1}}
 
 % \property is used to declare fields of a struct
 \NewDocumentCommand{\property}{m o +m}{
@@ -272,9 +271,7 @@
   \par
   #3
 }
-\NewDocumentCommand{\refproperty}{m}{
-	\refgo{\gocurpackage.\gocurtype.#1}
-}
+\NewDocumentCommand{\refproperty}{m}{\refgo{\gocurpackage.\gocurtype.#1}}
 
 \NewDocumentCommand{\goenumitem}{m +m}{
   \item [\codeinline{#1}]\label{\gocurpackage.\gocurtype.#1} #2
@@ -304,10 +301,6 @@
 
 \NewDocumentCommand{\refparam}{m}{
   \refgo{\gocurpackage.\gocurtype.\gocurmethod.#1}
-}
-
-\NewDocumentCommand{\refgoparam}{m}{ %TODO: Deprecated - use refparam
-	\refparam{#1}
 }
 
 
@@ -355,7 +348,7 @@ SCC\\[2em]}
 \include{master}
 \include{master_api}
 \include{gui}
-\include{notification_manager}
+%\include{notification_manager}
 
 \glsaddallunused
 \makeatletter

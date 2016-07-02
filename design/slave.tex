@@ -20,40 +20,38 @@ The \refgo{slave} is installed on the individual host nodes and started by the m
 }
 
 \struct{Controller}{
-  Handles MSP requests by implementing the MSPConsumer interface. %TODO ref
+  Handles MSP requests by implementing the \refgo{msp.Consumer} interface.
   Hence, it coordinates the work required to fulfill requests from the master.
-  Most importantly, it leverages ProcessManager and MongodConfigurator to spawn and configure instances of MongoDB.
+  Most importantly, it leverages the \reftype{ProcessManager} and \reftype{MongodConfigurator} to spawn and configure instances of MongoDB.
 }{
-    \property{BusyTable}[map[PortNumber]bool]{
+  \property{BusyTable}[map[\refgo{msp.PortNumber}]bool]{
     Contains a boolean busy state per instance of MongoDB to prevent concurrent configuration of a single instance.
   }
   \property{busyTableLock}[sync.Mutex]{
-    Mutex controlling access to busyTable. %TODO ref
+    Mutex controlling access to \refproperty{BusyTable}.
   }
 }
 
 \struct{ProcessManager}{
   Starts processes, may provide a list of alive processes and eventually kill these.
 }{
-  \property{runningProcesses}[map[PortNumber]*exec.Cmd]{
-    Holds the active process controls per instance
-  }
+  \property{runningProcesses}[map[\refgo{msp.PortNumber}]*exec.Cmd]{Holds the active process controls per instance}
 }{
-  \method{spawnProcess}[error](
-    \param{m}[MSP.MongoD]{Mongod information about what exactly to spawn}
+  \method{spawnProcess}[*\refgo{msp.SlaveError}](
+    \param{m}[\refgo{msp.Mongod}]{Mongod information about what exactly to spawn}
     \param{dataDir}[string]{Root directory of MongoDB data}
   ){
     Spawns a Mongod process as requested by the given Mongod inside the data root directory
   }
-  \method{runningProcesses}[[]PortNumber]{
+  \method{runningProcesses}[[]\refgo{msp.PortNumber}]{
     Returns the PortNumbers of the currently running processes
   }
-  \method{killProcess}[error](
-    \param{p}[PortNumber]{PortNumber to identify process}
+  \method{killProcess}[*\refgo{msp.SlaveError}](
+    \param{p}[\refgo{msp.PortNumber}]{PortNumber to identify process}
   ){
-    Kills process by given PortNumber. Does not error if the process is already dead, only if it could not be killed.
+    Kills process by given \refgo{msp.PortNumber}. Does not error if the process is already dead, only if it could not be killed.
   }
-  \method{killProcesses}[error]{
+  \method{killProcesses}[*\refgo{msp.SlaveError}]{
     Kills all remaining Processes. Errors if it could not kill some processes.
   }
 }
@@ -61,14 +59,14 @@ The \refgo{slave} is installed on the individual host nodes and started by the m
 \interface{MongodConfigurator}{
   Applies or returns configuration of a mongod instance by PortNumber.
 }{
-  \method{MongodConfiguration}[{(MSP.MongodConfiguration, error)}](
-    \param{p}[PortNumber]{PortNumber to connect to locally}
+  \method{MongodConfiguration}[{(\refgo{msp.MongodConfiguration}, \refgo{msp.SlaveError})}](
+    \param{p}[\refgo{msp.PortNumber}]{PortNumber to connect to locally}
   ){
     Reads configuration from a local MongoDB instance
   }
-  \method{ApplyMongodConfiguration}[error](
-    \param{p}[PortNumber]{PortNumber to connect to locally}
-    \param{c}[MSP.MongodConfiguration]{Configuration to apply}
+  \method{ApplyMongodConfiguration}[*\refgo{msp.SlaveError}](
+    \param{p}[\refgo{msp.PortNumber}]{PortNumber to connect to locally}
+    \param{c}[\refgo{msp.MongodConfiguration}]{Configuration to apply}
   ){
     Connects to a local MongoDB instance on the given port and applies the configuration
   }
