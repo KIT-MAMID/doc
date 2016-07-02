@@ -13,6 +13,10 @@ There are two structures which may be sent directly over HTTP as request body, r
   \item \codeinline{\reftype{SlaveError}} Sent (only) by \refgo{slave} in case there are general problems preventing observation of any running mongod instances.
 \end{itemize}
 
+For several datastructures in \refgo{msp}, similar ones exist in  \refgo{model}. The reasoning behind this is the desire to have a
+stable protocol format for the \refgo{msp}: the JSON objects are auto-generated during runtime via reflection.
+Hence, duplication of datastructures is a necessary tradeoff in order to sustain the principle of information hiding.
+
 % server (slave) side structures
 \struct{Listener}{
   Structure for handling communication through the MasterSlaveProtocol on the \refgo{slave} side.
