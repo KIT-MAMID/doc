@@ -292,9 +292,10 @@ different tasks need to communicate with each other
     \item is a minimal change in comparison to the previous layout
   \end{itemize}
 
-  \begin{theorem}{Idempotence of the ClusterAllocator}
+  \begin{theorem}[Idempotence of the ClusterAllocator]
     \label{theorem:idempotence_clusterallocator}
-    Let $l$ be a layout of the cluster. Then $ClusterAllocator(ClusterAllocator(l)) = ClusterAllocator(l)$.
+    Let $l$ be a layout of the cluster. Then
+          \[\text{ClusterAllocator}(\text{ClusterAllocator}(l)) =\text{ ClusterAllocator}(l)\].
   \end{theorem}
 
 }{
