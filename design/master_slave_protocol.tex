@@ -54,13 +54,8 @@ There are two structures which may be sent directly over HTTP as request body, r
 \struct{Client}{
   Structure for handling communication through the MasterSlaveProtocol on the \refgo{master} side.
 }{
-  \property{Target}[\reftype{HostPort}]{Remote endpoint it holds a connection to}
+  \item \textit{none}
 }{
-  \method{Connect}(
-    \param{target}[\reftype{HostPort}]{Remote endpoint to connect to}
-  ){
-    Establish the connection to the server on the \refgo{slave} side.
-  }
   \method{RequestStatus}[{([]\reftype{Mongod}, \reftype{error})}]{
     Send a status request to the \refgo{slave} to retrieve all the running \reftype{Mongod} instances. May return an instance of \reftype{error} in case overall retrieving failed.
   }

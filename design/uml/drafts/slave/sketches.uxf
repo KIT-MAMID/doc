@@ -419,13 +419,12 @@ r2=State
       <x>1330</x>
       <y>147</y>
       <w>308</w>
-      <h>70</h>
+      <h>63</h>
     </coordinates>
     <panel_attributes>Client
 --
 + Target: HostPort
 --
-+ Connect(target: HostPort)
 + RequestStatus(): ([]Mongod, error)
 + EstablishMongodState(m: Mongod): *CommunicationError</panel_attributes>
     <additional_attributes/>
@@ -472,13 +471,13 @@ r2=State
     <id>Relation</id>
     <coordinates>
       <x>1106</x>
-      <y>210</y>
+      <y>203</y>
       <w>245</w>
-      <h>315</h>
+      <h>322</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;430.0;330.0;130.0;330.0;10.0</additional_attributes>
+    <additional_attributes>10.0;440.0;330.0;140.0;330.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -619,13 +618,13 @@ error</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1260</x>
-      <y>210</y>
+      <y>203</y>
       <w>133</w>
-      <h>329</h>
+      <h>336</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;450.0;170.0;10.0</additional_attributes>
+    <additional_attributes>10.0;460.0;170.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -1866,24 +1865,24 @@ CommunicationError: msp.CommunicationError</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1603</x>
-      <y>210</y>
+      <y>203</y>
       <w>189</w>
-      <h>1211</h>
+      <h>1218</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;250.0;1710.0</additional_attributes>
+    <additional_attributes>10.0;10.0;250.0;1720.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>1624</x>
-      <y>210</y>
+      <y>203</y>
       <w>847</w>
-      <h>1008</h>
+      <h>1015</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;1190.0;1420.0</additional_attributes>
+    <additional_attributes>10.0;10.0;1190.0;1430.0</additional_attributes>
   </element>
 </diagram>

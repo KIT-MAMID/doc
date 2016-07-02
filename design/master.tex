@@ -96,12 +96,15 @@ The other structures in \refgo{model} are stored in the database using a databas
 }{
   \property{Port}[PortNumber]{TCP Port number the Mongod is listening on.}
   \property{ReplSetName}[string]{Name of the Mongods Replica Set. A Mongod is always in exactly one Replica Set.}
-  \property{ObservationError}[error]{Latest error that occurred when attempting to update the \refproperty{Mongod.ObservedState}.\\
-                                     \codeinline{nil} if no error occurred on last attempt.}
-  \property{LastEstablishStateError}[SlaveError]{Latest error reported by the slave when attempting to establish
-                                                the \refproperty{Mongod.DesiredState}.\\
-                                                \codeinline{nil} if no error occurred on last attempt.}
-\property{DesiredState}[MongodState]{State the Mongod should be in. \codeinline{nil} if no desired state has been set.}
+  \property{ObservationError}[error]{
+    Latest error that occurred when attempting to update the \refproperty{ObservedState}.\\
+    \codeinline{nil} if no error occurred on last attempt.
+  }
+  \property{LastEstablishStateError}[SlaveError]{
+    Latest error reported by the slave when attempting to establish the \refproperty{DesiredState}.\\
+    \codeinline{nil} if no error occurred on last attempt.
+  }
+  \property{DesiredState}[MongodState]{State the Mongod should be in. \codeinline{nil} if no desired state has been set.}
   \property{ObservedState}[MongodState]{State the Mongod was last observed to be in. \codeinline{nil} if no observation has been made.}
 }
 
@@ -129,12 +132,14 @@ The other structures in \refgo{model} are stored in the database using a databas
 \struct{HostPort}{
   Tuple of $(hostname, port)$ that is a Mongod's identifier for Replica Set members.
 }{
-  \property{Hostname}[string]{The hostname of the Replica Set member.\\
-                              For a given \refgo{model.HostPort.gostname} a \refgo{model.Slave}
-                              with the same \codeinline{Hostname} should exist.\\
-                              Otherwise, there exists a Mongod in the cluster that is not managed by \mamid.}
-  \property{Port}[PortNumber]{The port on the host identified by \refproperty{Hostname} on which the
-                              Replica Set member is listening.}
+  \property{Hostname}[string]{
+    The hostname of the Replica Set member.\\
+    For a given \codeinline{Hostname} a \refgo{model.Slave} with the same \codeinline{Hostname} should exist.\\
+    Otherwise, there exists a Mongod in the cluster that is not managed by \mamid.
+  }
+  \property{Port}[PortNumber]{
+    The port on the host identified by \refproperty{Hostname} on which theReplica Set member is listening.
+  }
 }
 
 \typealias{PortNumber}[uint16]{
@@ -148,18 +153,19 @@ The other structures in \refgo{model} are stored in the database using a databas
   of the \reftype{Problem} list.
   If all references are \codeinline{nil}, the problem is still legitimate and should be reported by a user interface or alerting system.
 
-  See \refgo{master.ProblemManager} for the transformation from errors to \refgo{master.Problem}.
+  See \refgo{master.ProblemManager} for the transformation from errors to this structure.
 }{
-  \property{Id}[uint]{Unique ID of the problem. If the \emph{same} problem occurrs after it was resolved before,
-                      its different incarnations are distinguishable by their \refproperty{Id}.}
-                      %TODO really necessary? problem is uniquely identified by (Slave, ReplicaSet, Mongod)
+  \property{Id}[uint]{
+    Unique ID of the problem. If the \emph{same} problem occurrs after it was resolved before,
+    its different incarnations are distinguishable by their \refproperty{Id}.
+  }
+  %TODO really necessary? problem is uniquely identified by (Slave, ReplicaSet, Mongod)
   \property{Description}[string]{Short human-readable description of the problem, suitable for subject lines of error messages.}
-  \property{LongDescription}[string]{Long human-readable description of the problem.\\
-                                     Can contain the \codeinline{error.Error()} of one or more underlying errors.}
+  \property{LongDescription}[string]{Long human-readable description of the problem.}
   \property{FirstOccurred}[time.Time]{The point in time when the particular problem first occurred.}
   \property{LastUpdated}[time.Time]{The point in time when the particular problem was last observed, e.g. the time of the last monitor run.}
   \property{Slave}[*Slave]{A reference to a \reftype{Slave} from which the problem originated. May be \codeinline{nil}}
-  \property{ReplicaSet}[*ReplicaSet]{A reference to a \reftype{ReplicaSet} form which the problem originated. May be \codeinline{nil}}
+  \property{ReplicaSet}[*\reftype{ReplicaSet}]{A reference to a \reftype{ReplicaSet} form which the problem originated. May be \codeinline{nil}}
   \property{Mongod}[*Mongod]{A reference to a \reftype{Mongod} from where the problem originated. May be \codeinline{nil}}
 }
 
