@@ -8,34 +8,35 @@
 
 The MasterSlaveProtocol \refgo{msp} implements communication between \refgo{slave} and \refgo{master}.
 
-\struct{MSPListener}{
-  Structure for handling communication through the MasterSlaveProtocol.
+% server (slave) side structures
+\struct{Listener}{
+  Structure for handling communication through the MasterSlaveProtocol on the \refgo{slave} side.
 }{
-  \property{consumer}[MSPConsumer]{
+  \property{Consumer}[\reftype{Consumer}]{
     Reference to an event handler, typically a controller.
   }
 }{
   \method{Run}{
     Start listening for connections using the MasterSlaveProtocol.
     \begin{itemize}
-      \item Listen for incoming connections from the Master.
+      \item Listen for incoming connections from the \refgo{master}.
       \item Decode / Encode the transport format.
       \item Validate incoming request format.
-      \item Delegate valid requests to the MSPConsumer.
+      \item Delegate valid requests to the \reftype{Consumer}.
     \end{itemize}
   }
 }
 
-\interface{MSPConsumer}{
-  An MSPConsumer handles MasterSlaveProtocol requests received by an instance of \ref{slave:MSPListener}.
+\interface{Consumer}{
+  A Consumer handles MasterSlaveProtocol requests received by an instance of \reftype{Listener}.
 }{
-  \method{MSPStatusRequest}[SlaveStatus]{
+  \method{RequestStatus}[(\reftype{SlaveStatus}, \reftype{SlaveError})]{
     %TODO reference request message object here -> proto specification
     Request to provide a status report of the slave's state.
-    See \ref{msp:SlaveStatus} for details on the data returned by this method.
+    See \reftype{Mongod} for details on the data returned by this method.
   }
-  \method{MSPEstablishMongodState}[error](
-    \param{m}[MSP.Mongod]{State description of a mongod instance that shall be established}
+  \method{EstablishMongodState}[*\reftype{SlaveError}](
+    \param{m}[\reftype{Mongod}]{State description of a mongod instance that shall be established}
   ){
     %TODO reference request message object here -> proto specification
     Request to establish the configuration state $m$ of a MongoDB process on the slave.
@@ -44,3 +45,26 @@ The MasterSlaveProtocol \refgo{msp} implements communication between \refgo{slav
 }
 
 
+% client (master) side structures
+\struct{Client}{
+  Structure for handling communication through the MasterSlaveProtocol on the \refgo{master} side.
+}{
+  \property{Target}[\reftype{HostPort}]{Remote endpoint it holds a connection to}
+}{
+  \method{Connect}(
+    \param{target}[\reftype{HostPort}]{Remote endpoint to connect to}
+  ){
+    Establish the connection to the server on the \refgo{slave} side.
+  }
+  \method{RequestStatus}[([]\reftype{Mongod}, \reftype{error})]{
+    Send a status request to the \refgo{slave} to retrieve all the running \reftype{Mongod} instances. May return an instance of \reftype{error} in case overall retrieving failed.
+  }
+  \method{EstablishMongodState}[*\reftype{CommunicationError}](
+    \param{m}[[]\reftype{Mongod}]{Array of \reftype{Mongod} instances to establish}
+  ){
+    Sends the array of \reftype{Mongod} instances to the \refgo{slave} which is tasked with creating and configuring the described processes.
+  }
+}
+
+
+% protocol specific structures
