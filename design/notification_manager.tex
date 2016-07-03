@@ -1,11 +1,11 @@
-\section{notifier}
+\section{Notifier}
 \renewcommand{\gocurpackage}{notifier}
 
 The notifier is installed with the master. 
-A predefined list of contacts will be notified whenever a new Problem occurs.
+Notifies a predefined list of contacts whenever a new \refgo{master.Problem} occurs.
 
 \struct{Controller}{
-	Imports CLIFFagParser to parse the path to the contacts file.
+	Imports CLIFFagParser to parse command line parameters, such as the path to the contact file.
 	Imports os, io and fmt to parse the contacts file.
 	Receives problems via \reftype{APIClient}.\\
 	Determines which problems should be send.\\
@@ -19,16 +19,16 @@ A predefined list of contacts will be notified whenever a new Problem occurs.
 	{
 		A Go application starts by initializing the Go 'main' package and then running the \textit{main()} function.
 		\begin{itemize}
-		\item Receives problems trough the \reftype{APIClien}.
-		\item Uses diffProblems to decide which should be send.
-		\item Uses notify to hand over problems to a \reftype{Notifier}.
+			\item Receives problems through the \reftype{APIClient}.
+			\item Uses reftype{diffProblems} to decide which should be send.
+			\item Uses reftype{notify} to hand over problems to a \reftype{Notifier}.
 		\end{itemize}
 	}
 	\method{diffProblems}[[]Problem](
 		\param{received}[[]Problems]{List of recently send problems}
 		){
 		Compares \refproperty{lastProblems} to the problems currently staged for notification.
-		To prevent spam only new Problems will be send
+		To prevent spam only a new \refgo{master.Problem} will be send
 	}
 	\method{notify}(
 		\param{problem}[Problem]{The problem to be send}
@@ -68,19 +68,19 @@ A predefined list of contacts will be notified whenever a new Problem occurs.
 
 \struct{EmailNotifier}{
 	Imports smtp.
-	Implements Notifier to send emails via smtp to a list of EmailContacts.
+	Implements \reftype{Notifier} to send emails via smtp to a list of EmailContacts.
 }{
 	\property{Contact}[[]EmailContact]
 }{
 	\method{Send}(
-		\param{problem}[Problem]{The problem to be send}
+		\param{problem}[Problem]{The \refgo{master.Problem} to be send}
 		){
 			Translates the problem into an email message.
 		}
 	\method{sendMailToContacts}[](
 		\param{msg}[[]byte]{}
 		){
-			Sends the messages created by Send(...) to a list of email contacts.
+			Sends the messages created by \refmethod{Send} to a list of email contacts.
 			Uses the GO smtp package.
 		}
 }
