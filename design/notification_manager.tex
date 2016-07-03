@@ -77,8 +77,8 @@ However, in the basic implementation, only email notifications are supported.
 	 \property{LongDescription}[string]{Long human-readable description of the problem.}
 	 \property{FirstOccurred}[time.Time]{The point in time when the particular problem first occurred.}
 	 \property{LastUpdated}[time.Time]{The point in time when the particular problem was last observed, e.g. the time of the last monitor run.}
-	 \property{Slave}[*Slave]{A reference to a \reftype{Slave} from which the problem originated. May be \codeinline{nil}}
-	 \property{ReplicaSet}[*\reftype{ReplicaSet}]{A reference to a \reftype{ReplicaSet} form which the problem originated. May be \codeinline{nil}}
+	 \property{Slave}[uint]{A reference to a \refgo{model.Slave} from which the problem originated. May be \codeinline{nil}}
+	 \property{ReplicaSet}[uint]{A reference to a \refgo{model.ReplicaSet} form which the problem originated. May be \codeinline{nil}}
 }
 
 \interface{Notifier}{

@@ -2456,8 +2456,8 @@ Notifier
 +LongDescription: string
 +FirstOccurred: time.Time
 +LastUpdated: time.Time
-+Slave: *Slave
-+ReplicaSet: *ReplicaSet</panel_attributes>
++Slave: uint
++ReplicaSet: uint</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
