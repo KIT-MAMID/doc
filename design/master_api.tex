@@ -293,3 +293,13 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 	{}
 	{problem object}
 	{}
+
+\struct{MasterAPIServer}
+{
+	% _an_ HTTP Server http://blog.apastyle.org/apastyle/2012/04/using-a-or-an-with-acronyms-and-abbreviations.html
+	Starts an HTTP Server, listens for requests and routes them to the appropriate handler Methods.
+}{
+	\property{DB}[gorm.DB]{Initialized handle to the database.}
+	\property{BusChannel}[chan interface\{\}]{Initialized channel to the application bus.}
+	\property{ClusterAllocator}[\refgo{master.ClusterAllocator}]{Reference to the \codeinline{ClusterAllocator} used to trigger a recalculation when the User changes a replica set or a slave}
+}
