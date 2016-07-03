@@ -172,8 +172,16 @@ The other structures in \refgo{model} are stored in the database using a databas
 
 %data transfer objects (used to communicate via the master.Bus)
 
+\interface{StatusMessage}{
+  \refgo{StatusMessage} is the interface implemented by all message objects that are used to communicate state between different \refgo{master} components.
+  
+  Since receiving messages from the \refgo{master.Bus} is implemented via Go type assertions which cannot be modeled in UML, the authors chose
+  an empty interface for grouping the message objects in UML.
+}
+
 \struct{DesiredReplicaSetConstraintStatus}
 {
+  A message object implementing \reftype{StatusMessage}.
   Represents whether the \refgo{master.ClusterAllocator} can satisfy the constraints on a Replica Set given by
   \begin{itemize}
     \item the persistent and volatile member counts of the \reftype{ReplicaSet}
@@ -189,7 +197,8 @@ The other structures in \refgo{model} are stored in the database using a databas
 
 \struct{MongodMatchStatus}
 {
-  Represents whether the observed and desired state of a \reftype{Mongod} do not match.
+  A message object implementing \reftype{StatusMessage}.
+Represents whether the observed and desired state of a \reftype{Mongod} do not match.
 }{
   \property{Mismatch}[bool]{Whether the stated do not match.}
   \property{Mongod}[\reftype{Mongod}]{The Mongod whose states do/do not match}
@@ -197,7 +206,8 @@ The other structures in \refgo{model} are stored in the database using a databas
 
 \struct{ConnectionStatus}
 {
-  Represents whether a \reftype{Slave} cannot be reached from the master.
+  A message object implementing \reftype{StatusMessage}.
+Represents whether a \reftype{Slave} cannot be reached from the master.
 }{
   \property{Mismatch}[bool]{Whether the slave cannot be reached.}
   \property{Slave}[\reftype{Mongod}]{The slave that can/cannot be reached}
@@ -206,6 +216,7 @@ The other structures in \refgo{model} are stored in the database using a databas
 
 \struct{ObservedReplicaSetConstraintStatus}
 {
+A message object implementing \reftype{StatusMessage}.
   Represents whether the observed member counts of a \reftype{ReplicaSet} do not match \reftype{ReplicaSet.VolatileMemberCount} and \reftype{ReplicaSet.PersistentMemberCount}
 }{
   \property{Unsatisfied}[bool]{Whether the counts do not match.}
