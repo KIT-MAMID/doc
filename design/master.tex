@@ -226,12 +226,12 @@ The Master (\refgo{master}) is the most complex component of \mamid.
 
 It fulfills many different tasks, running in separate goroutines.
 
-Different tasks need to communicate with each other. We use two mechanisms for that:
+These tasks need to communicate with each other. Two different mechanism are employed to achieve this:
 \begin{itemize}
-	\item A shared persistent database with an ORM abstraction layer => see model for which objects
-	\item A \reftype{Bus} that leverages Go's channels to send status updates. => *Status Objects %TODO
+	\item A shared persistent database with an ORM abstraction layer
+	\item A \reftype{Bus} that leverages Go's channels to send status updates
 \end{itemize}
-This helps couple the different components loosely.
+This results in loose coupling of the \refgo{master} components and increases maintainability of the code base.
 
 \struct{Bus}{
 	The \reftype{Bus} is used by the different components of the master to share and react to status updates.
@@ -239,8 +239,8 @@ This helps couple the different components loosely.
 	The components can then use this channel to broadcast messages to the other components and receive messages
 	from the Bus from which they can filter the ones they are interested in.
 	
-	All messages sent over the bus carry the current state not state changes and are
-	sent repeatedly not just on state change (i.e. level triggered instead of edge triggered).
+	All messages sent over the bus carry the current state --- not state changes --- and are
+	sent repeatedly (i.e. level processing, not edge processing).
 	
 	\begin{figure}[H]
 		\includegraphics[width=\textwidth]{activity_diagram}
@@ -269,7 +269,7 @@ This helps couple the different components loosely.
 }
 
 \struct{Monitor}{
-	The \reftype{Monitor} uses the \refgo{msp.Client} to ask all slaves for their Mongod's states, saves the observed state in the database and compares the observed state to the desired state from the database. It publishes \refgo{model.MongodMatchStatus} objects with the result of each comparison on the bus.
+	The \reftype{Monitor} uses the \refgo{msp.Client} to query all slaves for their Mongod's states, saves the observed state in the database and compares the observed state to the desired state from the database. It publishes \refgo{model.MongodMatchStatus} objects with the result of each comparison on the bus.
 }{
 	\property{DB}[gorm.DB]{Initialized handle to the database.}
 	\property{BusChannel}[chan interface\{\}]{Initialized channel to the application bus.}

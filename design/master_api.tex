@@ -51,9 +51,9 @@
 \section{Master API}
 \beginpackage{masterapi}
 %TODO General api description
-The Master API (\refgo{masterapi}) is used by the GUI to CRUD Slaves, Replica Sets, Risk Groups and display Problems.
+The Master API (\refgo{masterapi}) is used by the GUI to CRUD Slaves, Replica Sets, Risk Groups and to display Problems.
 
-It is also used by the Notifier to get the current problems.
+It is also used by the \refgo{notifier} to get the current list of Problems.
 
 The reader should recognize that --- aside from \reftype{MasterAPIServer} --- this document does not describe the interface
 of the structs of the package.
@@ -67,7 +67,7 @@ There exists a 1:1 mapping between
 Hence, a definition of the HTTP REST Interface is
 \begin{itemize}
   \item sufficient to specify the behavior of the \refgo{masterapi} package
-  \item closer to the actual usage by other components of \mamid
+  \item closer to the actual usage by other components of \mamid.
 \end{itemize}
 
 %Uses RESTful HTTP

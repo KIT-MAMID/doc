@@ -87,7 +87,7 @@ As the manager of such distributed systems with high-availibility requirements, 
   \item resilience against unexpected failures of the above 
   \item finding a deployment layout that fulfills a set of availibility requirements
   \item monitoring \& state tracking of the deployed MongoDB processes
-  \item abstraction of the above complexity from the administrator
+  \item abstraction from the above complexity, resulting in simple administration
   %TODO more?
 \end{itemize}
 
@@ -97,16 +97,16 @@ In order to achieve these goals, a distributed architecture is necessary.
 testability of individual components.
 
 As specified in the \emph{Functional Specification}, the language of choice for all components but the GUI is Go.
-While Go can be considered a object-oriented language, it differs from languages like \emph{Java} in certain critical approaches:
+While Go can be considered an object-oriented language, it differs from languages like \emph{Java} in certain critical approaches:
 \begin{itemize}
   \item no generics
   \item no classes, only \codeinline{struct} with \emph{method sets}
-  \item this is most notable in the lack of \emph{Constructors} and \emph{inheritance}
+  \item no \emph{constructors} and no \emph{inheritance}
   \item however, inhertance can be simulated to a certain degree through \emph{embedding} %TODO ref go spec
 \end{itemize}
 
 Overall, this leads to a situation where many traditional design patterns do not apply as well (as e.g. to Java) and hence need
-to be adopted.
+to be adopted to Go.
 
 Given these constraints, \mamid still employs a variety of design patterns across its different components:
 
