@@ -17,6 +17,19 @@ application design:
   \item the naming of \mamid components as described in the \emph{System Model}.
 \end{itemize}
 
+\subsection{Note: UML and Go}
+
+The authors found it difficult to apply certain concepts of the \emph{Unified Modeling Language} to a Go application design.
+
+The following conventions were employed during the design phase:
+
+\begin{itemize}
+        \item UML \codeinline{<<enum>>} does not exist in Go. However, it can be simulated using package constants with the \codeinline{<<enum>>} type as \textbf{shared unique prefix}. 
+
+                \textbf{Example}: \codeinline{EnumType.Item1} maps to \codeinline{EnumTypeItem1} in the Go implementation.
+        %TODO more?
+\end{itemize}
+
 \section{Deviation from the Functional Specification}
 
 The design phase revealed flaws in the \emph{Functional Specification} that have been addressed as follows.
