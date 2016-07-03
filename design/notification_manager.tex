@@ -1,11 +1,10 @@
-\section{Notifier}
+7\section{Notifier}
 \beginpackage{notifier}
 
-\begin{figure}[H]
-	\includegraphics[width=\textwidth]{notifier_classes}
-	\caption{Notifier}
-\end{figure}
-
+%\begin{figure}[H]
+%	\includegraphics[width=\textwidth]{notifier_classes}
+%	\caption{Notifier}
+%\end{figure}
 
 The \refgo{notifier} polls the \refgo{masterapi} for problems (see Section \ref{masterapi:problems}).
 
@@ -30,8 +29,8 @@ However, in the basic implementation, only email notifications are supported.
 		A Go application starts by initializing the Go 'main' package and then running the \textit{main()} function.
 		\begin{itemize}
 			\item Receives problems through the \reftype{APIClient}.
-			\item Uses \reftype{diffProblems} to decide which should be sent.
-			\item Uses \reftype{notify} to handle delivery of notifications via a \reftype{Notifier}.
+			\item Uses \refmethod{diffProblems} to decide which should be sent.
+			\item Uses \refmethod{notify} to handle delivery of notifications via a \reftype{Notifier}.
 		\end{itemize}
 	}
 	\method{diffProblems}[[]Problem](
@@ -41,9 +40,9 @@ However, in the basic implementation, only email notifications are supported.
 		To prevent repeated alerts on the same problem only a new \reftype{Problem} will be sent.
 	}
 	\method{notify}(
-		\param{problem}[Problem]{The problem to be send}
+		\param{problem}[\reftype{Problem}]{Problem currenty staged for notification}
 	){
-		Hands over problems to a \reftype{Notifier}.
+		Handles delivery of notifications via a \reftype{Notifier}.
 	}
 }
 
@@ -54,7 +53,7 @@ However, in the basic implementation, only email notifications are supported.
 		\param{path}[string]{Path of the contacts file}
 		){
 			Parses the contacts file.
-			Returns an array of contacts.	
+			Returns an array of contacts.
 		}
 }
 
@@ -69,16 +68,17 @@ However, in the basic implementation, only email notifications are supported.
 		}
 }
 
-\struct{Problem}{
-        A Problem object as specified in section \ref{masterapi:problems} of \refgo{masterapi}.		
+\struct{Problem}{		
+     A Problem object as specified in section \ref{masterapi:problems} of \refgo{masterapi}.
 }{
-	\param{Id}[uint]{Problem ID}
-	\param{Description}[string]{short despcription of the Problem}
-	\param{LongDescription}[string]{long description of the Problem}
-	\param{FirstOccurrence}[time.Time]{First occurence of the Problem}
-	\param{LastUpdated}[time.Time]
-	\param{Slave}[*Slave]{Slave the Problem occured in}
-	\param{ReplicaSet}[*ReplicaSet]{ReplicaSet the Problem occured in}
+	 \property{Id}[uint]{Unique ID of the problem. If the \emph{same} problem occurrs after it was resolved before,
+		its different incarnations are distinguishable by their \refproperty{Id}.}
+	 \property{Description}[string]{Short human-readable description of the problem, suitable for subject lines of error messages.}
+	 \property{LongDescription}[string]{Long human-readable description of the problem.}
+	 \property{FirstOccurred}[time.Time]{The point in time when the particular problem first occurred.}
+	 \property{LastUpdated}[time.Time]{The point in time when the particular problem was last observed, e.g. the time of the last monitor run.}
+	 \property{Slave}[*Slave]{A reference to a \reftype{Slave} from which the problem originated. May be \codeinline{nil}}
+	 \property{ReplicaSet}[*\reftype{ReplicaSet}]{A reference to a \reftype{ReplicaSet} form which the problem originated. May be \codeinline{nil}}
 }
 
 \interface{Notifier}{
