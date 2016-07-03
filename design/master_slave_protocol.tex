@@ -39,7 +39,7 @@ Hence, duplication of datastructures is a necessary tradeoff in order to sustain
 \interface{Consumer}{
   A Consumer handles MasterSlaveProtocol requests received by an instance of \reftype{Listener}.
 }{
-  \method{RequestStatus}[{(\reftype{SlaveStatus}, \reftype{SlaveError})}]{
+  \method{RequestStatus}[{([]\reftype{Mongod}, \reftype{SlaveError})}]{
     %TODO reference request message object here -> proto specification
     Request to provide a status report of the slave's state.
     See \reftype{Mongod} for details on the data returned by this method.
