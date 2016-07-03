@@ -3,62 +3,37 @@
 % NOTE Declaring the current package
 \renewcommand{\gocurpackage}{legend}
 
-This is some text about the package.
+This is a legend package explaining the formatting of the following packages.
 
 \struct{AStruct}{
-    Overall description of \refgo{legend.AStruct}.
-  
-    Multi-paragraph descriptions are supported.
+    Overall description of a \refgo{legend.AStruct}.
+    It implements \refgo{legend.AnInterface}.
 }{
     \property{variable}[Type]{The description of the struct's field \emph{variable}}
     \property{fieldtwo}[Type2]{
       The description of the struct's field \refgo{legend.AStruct.fieldtwo}.
-  
-      Multi-paragraph (\textbackslash long) descriptions are supported.
     }
 }{
     \method{Methodname}[ReturnType]{Method without parameters}
     \method{Methodname2}[ReturnType](%% NOTE the parentheses ()
         \param{pname}[ParamType]{Description of the parameter}
-        \param{p2name}[ParamType]{
-          Description of the parameter.
-          Cannot be multi-paragraph. 
-        }
     ){
         Description of the method \refgo{legend.AStruct.Methodname2}.
-        
-        We can \emph{reference} parameters using absolute identifiers \refgo{legend.AStruct.Methodname2.pname} or relative identifiers \refparam{p2name}.
+        The dot in the parentheses symbolizes that this method expects parameters.
     }
 }
 
 \interface{AnInterface}{
   Overall description of the Interface. An interface has no fields, hence there is no section for fields.
 
-  Multi-paragraph descriptions are supported. References to other types, e.g. \refgo{legend.AStruct} are possible.
+  References to other types, e.g. \refgo{legend.AStruct} are possible.
+  When referencing another package the package name is shown, e.g. \refgo{master.ClusterAllocator}
 }{
   \method{Methodname}[ReturnType]{Method without parameters}
   \method{Methodname2}[ReturnType]( %% NOTE the parentheses ()
     \param{pname}[ParamType]{Description of the parameter}
-    \param{p2name}[ParamType]{
-      Description of the parameter.
-      Cannot be multi-paragraph. 
-    }
   ){
-    Description of the method \refgo{legend.AnInterface.Methodname}.
-   
-    Multi-paragraph descriptions are supported.
-
-    Referencing the package: 
-    \refgo{legend}
-  
-    Referencing the interface: 
-    \refgo{legend.AnInterface}
-  
-    Referencing the method: 
-    \refgo{legend.AnInterface.Methodname2}
-  
-    Referencing the method parameter: 
-    \refgo{legend.AnInterface.Methodname2.pname}
+    Description of the method \refgo{legend.AnInterface.Methodname2}.
   }
 }
 
