@@ -33,11 +33,22 @@ Neither alternative is desirable.
 Furthermore, changing the value is usually related to manual administrative action on the specific slave host.\\
 Hence, moving the parameter to the command line flags of the slave simplifies both implementation and administrative work.
 
-%TODO
+\subsection{Slave Mode \emph{unknown} \& Slave Error Handling (Section 5.3.1)}
 
-gekuerzte wunschkriterien? was koennen wir sicher nicht mit diesem design? was verschieben wir auf die implementierung?
+The \emph{Functional Specification} declares four slave modes: \emph{active, maintenance, disabled, unknown}.\\
+The \emph{unknown} mode would be presented to the user in case of
+\begin{itemize}
+  \item state mismatch
+  \item monitoring errors
+  \item communication errors
+  \item deployment errors
+\end{itemize}
 
-(all components are designed with extensibility in mind. for many optional criteria, it is mostly a question of time constraints during the implementation phase, not a question of whether they are feasible or not)
+The error handling architecture described in this document is more transparent and allows for actual debugging of an error.
+
+Hence, the \emph{unknown} state is replaced by more fine grained error reporting.
+Since it was a state only set by the master, this change has fairly low impact on other parts of the design.
+
 
 \section{Overview}
 
