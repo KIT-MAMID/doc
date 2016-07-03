@@ -1896,7 +1896,7 @@ the array is empty</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;110.0;10.0;110.0;1330.0;1100.0;1330.0;1160.0;1470.0</additional_attributes>
+    <additional_attributes>10.0;10.0;110.0;10.0;110.0;1330.0;1160.0;1330.0;1160.0;1470.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
