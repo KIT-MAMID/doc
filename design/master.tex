@@ -49,7 +49,7 @@ The other structures in \refgo{model} are stored in the database using a databas
 \struct{RiskGroup}{
   A \reftype{RiskGroup} models a set of slaves sharing a common risk of failure.
   
-  A \reftype{Slave} always belongs to exactly one \reftype{RiskGroups}.
+  A \reftype{Slave} always belongs to exactly one \reftype{RiskGroup}.
   Hence, \codeinline{RiskGroup}s are mutually disjoint.
 }{
   \property{Id}[uint]{Unique id.}
@@ -255,32 +255,32 @@ This helps couple the different components loosely.
 }
 
 \struct{Deployer}{
-	The \reftype{Deployer} listens on the bus for \refgo{model.MongodMismatchStatus} objects with \refgo{Mismatch} set to true and deployes the desired state of the affected mongod using the \refgo{msp.MSPClient}
+	The \reftype{Deployer} listens on the bus for \refgo{model.MongodMatchStatus} objects with \refgoalt{model.MongodMatchStatus.Mismatch}{Mismatch} set to true and deployes the desired state of the affected mongod using the \refgo{msp.Client}
 }{
 	\property{DB}[gorm.DB]{Initialized handle to the database.}
 	\property{BusChannel}[chan interface\{\}]{Initialized channel to the application bus.}
 }{
-	\method{Run}{Waits for \refgo{model.MongodMismatchStatus} objects and runs \refmethod{pushMongodState} when a mismatch occurrs.}
+	\method{Run}{Waits for \refgo{model.MongodMatchStatus} objects and runs \refmethod{pushMongodState} when a mismatch occurrs.}
 	\method{pushMongodState}
 	(
 		\param{mongod}[model.Mongod]{The mongod to push the state to.}
 	){
-		Gets the desired state of \refparam{mongod} from the database and pushes it using the \refgo{msp.MSPClient}.
+		Gets the desired state of \refparam{mongod} from the database and pushes it using the \refgo{msp.Client}.
 	}
 }
 
 \struct{Monitor}{
-	The \reftype{Monitor} uses the \refgo{msp.MSPClient} to ask all slaves for their mongod's states, saves the observed state in the database and compares the observed state to the desired state from the database. It publishes \refgo{model.MongodMismatchStatus} objects with the result of each comparison on the bus.
+	The \reftype{Monitor} uses the \refgo{msp.Client} to ask all slaves for their mongod's states, saves the observed state in the database and compares the observed state to the desired state from the database. It publishes \refgo{model.MongodMatchStatus} objects with the result of each comparison on the bus.
 }{
 	\property{DB}[gorm.DB]{Initialized handle to the database.}
 	\property{BusChannel}[chan interface\{\}]{Initialized channel to the application bus.}
 }{
-	\method{Run}{Periodically fetches the mongods' states from the slaves, saves it in the database, compares it to the desired state using \refmethod{compareStates} and publishes the result on the bus as a \refgo{model.MongodMismatchStatus} object.}
+	\method{Run}{Periodically fetches the mongods' states from the slaves, saves it in the database, compares it to the desired state using \refmethod{compareStates} and publishes the result on the bus as a \refgo{model.MongodMatchStatus} object.}
 	\method{compareStates}[MongodMatchStatus]
 	(
 		\param{mongod}[model.Mongod]{The mongod to compare the state of}
 	){
-		Compares the \refgo{model.Mongod.ObservedState} and \refgo{model.Mongod.DesiredState} for mismatches and returns the result as a \refgo{model.MongodMismatchStatus}.
+		Compares the \refgo{model.Mongod.ObservedState} and \refgo{model.Mongod.DesiredState} for mismatches and returns the result as a \refgo{model.MongodMatchStatus}.
 	}
 }
 
@@ -306,10 +306,10 @@ This helps couple the different components loosely.
 
   It attempts to fulfill the constraints defined through the model objects, in particular
   \begin{itemize}
-    \item A \refgo{model.ReplicaSet}'s \refgo{VolatileNodeCount} \& \refgo{PersistentNodeCount}
+    \item A \refgo{model.ReplicaSet}'s \refgoalt{model.ReplicaSet.VolatileMemberCount}{VolatileMemberCount} \& \refgoalt{model.ReplicaSet.PersistentMemberCount}{PersistentMemberCount}
     \item The \refgo{model.Slave}'s allowed number of Mongod instances
-          (\refgo{MongodPortRangeBegin} to \refgo{MongodPortRangeEnd}).
-    \item The \refgo{model.Slave.SlaveState}
+          (\refgoalt{model.Slave.MongodPortRangeBegin}{MongodPortRangeBegin} to \refgoalt{model.Slave.MongodPortRangeEnd}{MongodPortRangeEnd}).
+    \item The \refgo{model.Slave.ConfiguredState}
     \item The configured \refgo{model.RiskGroup}s.
   \end{itemize}
 
@@ -336,7 +336,7 @@ This helps couple the different components loosely.
 
 \subsubsection{Pseudocode}
 
-The \reftype{master.ClusterAllocator} is crucial to the stable operation of the \mamid-managed cluster.\\
+The \refgo{master.ClusterAllocator} is crucial to the stable operation of the \mamid-managed cluster.\\
 Hence, it is worth defining the implementation of \refgo{master.ClusterAllocator.LayoutCluster} through pseudocode. %TODO parentheses
 
 While studying the algorithms below, the reader should keep in mind that
@@ -344,7 +344,7 @@ While studying the algorithms below, the reader should keep in mind that
   \item changes in the cluster layout $\equiv$ change or creation of \refgo{model.Mongod.DesiredState} 
   \item the \refgo{model.Mongod.ObservedState} may change after an arbitrary amount of time or even not at all
   \item changes to a ReplicaSet must not violate or further worsen the high-availibility constraints,
-        in particular \refgo{model.ReplicaSet}'s \refgo{VolatileNodeCount} \& \refgo{PersistentNodeCount}\\
+        in particular \refgo{model.ReplicaSet}'s \refgoalt{model.ReplicaSet.VolatileMemberCount}{VolatileMemberCount} \& \refgoalt{model.ReplicaSet.PersistentMemberCount}{PersistentMemberCount}\\
         $\implies$ Mongods in \refgo{model.MongodExecutionState.Recovering} are an important special-case.
 \end{itemize}
 
