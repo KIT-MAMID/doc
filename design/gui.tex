@@ -4,7 +4,7 @@
 	\includegraphics[width=\textwidth]{gui_classes}
 	\caption{GUI}
 \end{figure}
-The \refgo{gui} is built with AngularJS.
+The \refgo{gui} is built with AngularJS. The model is defined by the returned JSON object structure of the master API (see \ref{masterapi:apiobjects}).
 %TODO remark about AngularJS in the beginning of the package description
 
 \jsview{Main}{Displays the main page.}
@@ -23,15 +23,31 @@ The \refgo{gui} is built with AngularJS.
 
 \jscontroller{main}{}
 
-\jscontroller{slaveIndex}{}
+\jscontroller{slaveIndex}{
+	\begin{itemize}
+		\item Uses \refgo{masterapi.slaves.getAll} to get all slaves.
+	\end{itemize}
+}
 
-\jscontroller{replicaSetIndex}{}
+\jscontroller{replicaSetIndex}{
+		\begin{itemize}
+			\item Uses \refgo{masterapi.replicasets.getAll} to get all replica sets.
+		\end{itemize}
+}
 
-\jscontroller{problemIndex}{}
+\jscontroller{problemIndex}{
+	\begin{itemize}
+		\item Uses \refgo{masterapi.problems.getAll} to get all problems.
+	\end{itemize}
+}
 
 \jscontroller{slaveById}{}
 
 \jscontroller{replicaSetById}{}
 
-\jscontroller{riskGroupIndex}{}
+\jscontroller{riskGroupIndex}{
+	\begin{itemize}
+		\item Uses \refgo{masterapi.riskgroups.getAll} to get all risk groups.
+	\end{itemize}
+}
 
