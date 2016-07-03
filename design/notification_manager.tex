@@ -6,8 +6,9 @@
 	\caption{Notifier}
 \end{figure}
 
+
 The notifier is installed with the master. 
-Notifies a predefined list of contacts whenever a new \refgo{master.Problem} occurs.
+Notifies a predefined list of contacts whenever a new \reftype{Problem} occurs.
 
 \struct{Controller}{
 	Imports CLIFFagParser to parse command line parameters, such as the path to the contact file.
@@ -25,15 +26,15 @@ Notifies a predefined list of contacts whenever a new \refgo{master.Problem} occ
 		A Go application starts by initializing the Go 'main' package and then running the \textit{main()} function.
 		\begin{itemize}
 			\item Receives problems through the \reftype{APIClient}.
-			\item Uses reftype{diffProblems} to decide which should be send.
-			\item Uses reftype{notify} to hand over problems to a \reftype{Notifier}.
+			\item Uses \reftype{diffProblems} to decide which should be send.
+			\item Uses \reftype{notify} to hand over problems to a \reftype{Notifier}.
 		\end{itemize}
 	}
 	\method{diffProblems}[[]Problem](
 		\param{received}[[]Problems]{List of recently send problems}
 		){
 		Compares \refproperty{lastProblems} to the problems currently staged for notification.
-		To prevent spam only a new \refgo{master.Problem} will be send
+		To prevent repeated alerts on the same problem only a new \reftype{Problem} will be send
 	}
 	\method{notify}(
 		\param{problem}[Problem]{The problem to be send}
@@ -64,21 +65,33 @@ Notifies a predefined list of contacts whenever a new \refgo{master.Problem} occ
 		}
 }
 
+\struct{Problem}{
+	A Problem received from the master.		
+}{
+	\param{Id}[uint]{Problem ID}
+	\param{Description}[string]{short despcription of the Problem}
+	\param{LongDescription}[string]{long description of the Problem}
+	\param{FirstOccurrence}[time.Time]{First occurence of the Problem}
+	\param{LastUpdated}[time.Time]
+	\param{Slave}[*Slave]{Slave the Problem occured in}
+	\param{ReplicaSet}[*ReplicaSet]{ReplicaSet the Problem occured in}
+}
+
 \interface{Notifier}{
 	}{
 	\method{Send}(
 		\param{problem}[Problem]
-		){Receive the problem and send it to the contacts}
+		){Receive the \reftype{Problem} and send it to the contacts}
 }
 
 \struct{EmailNotifier}{
-	Imports smtp.
-	Implements \reftype{Notifier} to send emails via smtp to a list of EmailContacts.
+	Imports SMTP.
+	Implements \reftype{Notifier} to send emails via SMTP to a list of EmailContacts.
 }{
 	\property{Contact}[[]EmailContact]
 }{
 	\method{Send}(
-		\param{problem}[Problem]{The \refgo{master.Problem} to be send}
+		\param{problem}[Problem]{The \reftype{Problem} to be send}
 		){
 			Translates the problem into an email message.
 		}
@@ -86,7 +99,7 @@ Notifies a predefined list of contacts whenever a new \refgo{master.Problem} occ
 		\param{msg}[[]byte]{}
 		){
 			Sends the messages created by \refmethod{Send} to a list of email contacts.
-			Uses the GO smtp package.
+			Uses the GO SMTP package.
 		}
 }
 
