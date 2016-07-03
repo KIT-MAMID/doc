@@ -163,7 +163,7 @@
 %Refgo with alternative text
 \NewDocumentCommand{\refgoalt}{m m}{%
 	\IfHasLabel{#1}{%
-		\hyperref[#1]{\codeinline{#2}}%
+		\sloppy\hyperref[#1]{\codeinline{#2}}%
 	}{%
 	% \codeinline{#1}%
 	\colorbox{red}{\texttt{#1}}%
