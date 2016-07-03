@@ -128,21 +128,21 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 	{200}
 	{}
 	{array of slave objects}
-	{}
+	{}\label{\gocurpackage.slaves.getAll}
 
 \apicall[put]{/slaves}{Adds a slave}
 	{<body> & slave object & slave to add}
 	{201}
 	{Location & Reference to added slave}
 	{}
-	{}
+	{}\label{\gocurpackage.slaves.add}
 	
 \apicall[get]{/slaves/<id>}{Gets a slave}
 	{id & integer & id of the slave to get}
 	{200}
 	{}
 	{slave object}
-	{}
+	{}\label{\gocurpackage.slaves.getById}
 	
 \apicall[post]{/slaves/<id>}{Updates a slave}
 	{id & integer & id of the slave to update\\
@@ -150,21 +150,21 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 	{200}
 	{}
 	{}
-	{}
+	{}\label{\gocurpackage.slaves.update}
 	
 \apicall[delete]{/slaves/<id>}{Deletes a slave}
 	{id & integer & id of the slave to delete}
 	{200}
 	{}
 	{}
-	{}
+	{}\label{\gocurpackage.slaves.delete}
 	
-\apicall[get]{/slaves/<id>/problems}{Gets the problems of a slave and its mongods}
+\apicall[get]{/slaves/<id>/problems}{Gets the problems of a slave and its Mongods}
 	{id & integer & id of the slave to get the problems of}
 	{200}
 	{}
 	{array of problem objects}
-	{}
+	{}\label{\gocurpackage.slaves.getProblems}
 	
 \subsubsection{Replica Sets}
 %Do not add default error codes
@@ -173,21 +173,21 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 	{200}
 	{}
 	{array of replica set objects}
-	{}
+	{}\label{\gocurpackage.replicasets.getAll}
 
 \apicall[put]{/replicasets}{Adds a replica set}
 	{<body> & replica set object & replica set to add}
 	{201}
 	{Location & Reference to added replica set}
 	{}
-	{}
+	{}\label{\gocurpackage.replicasets.add}
 
 \apicall[get]{/replicasets/<id>}{Gets a replica set}
 	{id & integer & id of the replica set to get}
 	{200}
 	{}
 	{replica set object}
-	{}
+	{}\label{\gocurpackage.replicasets.getById}
 
 \apicall[post]{/replicasets/<id>}{Updates a replica set}
 	{id & integer & id of the replica set to update\\
@@ -195,28 +195,28 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 	{200}
 	{}
 	{}
-	{}
+	{}\label{\gocurpackage.replicasets.update}
 
 \apicall[delete]{/replicasets/<id>}{Deletes a replica set}
 	{id & integer & id of the replica set to delete}
 	{200}
 	{}
 	{}
-	{}
+	{}\label{\gocurpackage.replicasets.delete}
 
 \apicall[get]{/replicasets/<id>/slaves}{Gets a replica set's slaves}
 	{id & integer & id of the replica set to get the slaves of}
 	{200}
 	{}
 	{array of slave objects}
-	{}
+	{}\label{\gocurpackage.replicasets.getSlaves}
 
 \apicall[get]{/replicasets/<id>/problems}{Gets the problems of a replica set}
 	{id & integer & id of the replica set to get the problems of}
 	{200}
 	{}
 	{array of problem objects}
-	{}
+	{}\label{\gocurpackage.replicasets.getProblems}
 
 \subsubsection{Risk Groups}
 %Do not add default error codes
@@ -225,21 +225,21 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 	{200}
 	{}
 	{array of risk groups objects}
-	{}
+	{}\label{\gocurpackage.riskgroups.getAll}
 
 \apicall[put]{/riskgroups}{Adds a risk group}
 	{<body> & risk group object & risk group to add}
 	{201}
 	{Location & Reference to added risk group}
 	{}
-	{}
+	{}\label{\gocurpackage.riskgroups.add}
 
 \apicall[get]{/riskgroups/<id>}{Gets a risk group}
 	{id & integer & id of the risk group to get}
 	{200}
 	{}
 	{risk group object}
-	{}
+	{}\label{\gocurpackage.riskgroups.getById}
 
 \apicall[post]{/riskgroups/<id>}{Updates a risk group}
 	{id & integer & id of the risk group to update\\
@@ -247,14 +247,14 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 	{200}
 	{}
 	{}
-	{}
+	{}\label{\gocurpackage.riskgroups.update}
 
 \apicall[delete]{/riskgroups/<id>}{Deletes a risk group}
 	{id & integer & id of the risk group to delete}
 	{200}
 	{}
 	{}
-	{}
+	{}\label{\gocurpackage.riskgroups.delete}
 	
 \apicall[put]{/riskgroups/<risk\_group\_id>/slaves/<slave\_id>}{Assigns a slave to a risk group}
 	{risk\_group\_id & integer & id of the risk group to assign the slave to\\
@@ -262,7 +262,7 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 	{200}
 	{}
 	{}
-	{}
+	{}\label{\gocurpackage.riskgroups.assignSlave}
 
 \apicall[delete]{/riskgroups/<risk\_group\_id>/slaves/<slave\_id>}{Removes a slave from a risk group}
 	{risk\_group\_id & integer & id of the risk group to remove the the slave from\\
@@ -270,13 +270,13 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 	{200}
 	{}
 	{}
-	{}
+	{}\label{\gocurpackage.riskgroups.removeSlave}
 \apicall[get]{/riskgroups/<id>/slaves}{Gets a risk group's slaves}
 	{id & integer & id of the risk group to get the slaves of}
 	{200}
 	{}
 	{array of slave objects}
-	{}
+	{}\label{\gocurpackage.riskgroups.getSlaves}
 	
 \subsubsection{Problems}
 %Do not add default error codes
@@ -285,14 +285,14 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 	{200}
 	{}
 	{array of problem objects}
-	{}
+	{}\label{\gocurpackage.problems.getAll}
 	
 \apicall[get]{/problems/<id>}{Gets a problem}
 	{id & integer & id of the problem to get}
 	{200}
 	{}
 	{problem object}
-	{}
+	{}\label{\gocurpackage.problems.getById}
 
 \struct{MasterAPIServer}
 {
