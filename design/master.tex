@@ -295,9 +295,9 @@ This results in loose coupling of the \refgo{master} components and increases ma
 		It they don't, checks if the database contains a problem of the same type for the same object and removes it.}
 	\method{generateProblem}[Problem]
 	(
-		\param{e}[StatusMessage]{}
+		\param{e}[StatusMessage]{The status message to convert to a problem.}
 	){
-		
+		Converts a \refgo{model.StatusMessage} to a \refgo{model.Problem} with human readable description and references to the object the error concerns.
 	}
 }
 
