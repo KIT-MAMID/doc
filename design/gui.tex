@@ -30,54 +30,55 @@ The views themselves are HTML files.
 
 \jscontroller{main}{
 	\begin{itemize}
-		\item Uses \refgo{masterapi.slaves.getAll} to get all slaves.
+		\item Uses \refgoalt{masterapi.slaves.getAll}{[GET] /slaves} to get all slaves.
 	\end{itemize}
 }
 
 \jscontroller{slaveIndex}{
 	\begin{itemize}
-		\item Uses \refgo{masterapi.slaves.getAll} to get all slaves.
+		\item Uses \refgoalt{masterapi.slaves.getAll}{[GET] /slaves} to get all slaves.
 	\end{itemize}
 }
 
 \jscontroller{replicaSetIndex}{
 		\begin{itemize}
-			\item Uses \refgo{masterapi.replicasets.getAll} to get all Replica Sets.
+			\item Uses \refgoalt{masterapi.replicasets.getAll}{[GET] /replicasets} to get all Replica Sets.
 		\end{itemize}
 }
 
 \jscontroller{problemIndex}{
 	\begin{itemize}
-		\item Uses \refgo{masterapi.problems.getAll} to get all problems.
+		\item Uses \refgoalt{masterapi.problems.getAll}{[GET] /problems} to get all problems.
 	\end{itemize}
 }
 
 \jscontroller{slaveById}{
 		\begin{itemize}
-			\item Uses \refgo{masterapi.slaves.add} to add a new slave to the system.
-			\item Uses \refgo{masterapi.slaves.getById} to get a specific slave.
-			\item Uses \refgo{masterapi.slaves.update} to update a specific slave.
-			\item Uses \refgo{masterapi.slaves.delete} to delete a specific slave.
-			\item Uses \refgo{masterapi.slaves.getProblems} to get the problems of a specific slave.
+			\item Uses \refgoalt{masterapi.slaves.add}{[PUT] /slaves} to add a new slave to the system.
+			\item Uses \refgoalt{masterapi.slaves.getById}{[GET] /slaves/<id>} to get a specific slave.
+			\item Uses \refgoalt{masterapi.slaves.update}{[POST] /slaves/<id>} to update a specific slave.
+			\item Uses \refgoalt{masterapi.slaves.delete}{[DELETE] /slaves/<id>} to delete a specific slave.
+			\item Uses \refgoalt{masterapi.slaves.getProblems}{[GET] /slaves/<id>/problems} to get the problems of a specific slave.
 		\end{itemize}
 }
 \jscontroller{replicaSetById}{
 		\begin{itemize}
-			\item Uses \refgo{masterapi.replicasets.add} to create a new Replica Set.
-			\item Uses \refgo{masterapi.replicasets.getById} to get a specific Replica Set.
-			\item Uses \refgo{masterapi.replicasets.update} to update a specific Replica Set.
-			\item Uses \refgo{masterapi.replicasets.delete} to delete a specific Replica Set.
-			\item Uses \refgo{masterapi.replicasets.getProblems} to get the problems of a specific Replica Set.
+			\item Uses \refgoalt{masterapi.replicasets.add}{[PUT] /replicasets} to create a new Replica Set.
+			\item Uses \refgoalt{masterapi.replicasets.getById}{[GET] /replicasets/<id>} to get a specific Replica Set.
+			\item Uses \refgoalt{masterapi.replicasets.update}{[POST] /replicasets/<id>} to update a specific Replica Set.
+			\item Uses \refgoalt{masterapi.replicasets.delete}{[DELETE] /replicasets/<id>} to delete a specific Replica Set.
+			\item Uses \refgoalt{masterapi.replicasets.getProblems}{[GET] /replicasets/<id>/problems} to get the problems of a specific Replica Set.
 		\end{itemize}	
 }
 
 \jscontroller{riskGroupIndex}{
 	\begin{itemize}
-		\item Uses \refgo{masterapi.riskgroups.getAll} to get all risk groups.
-		\item Uses \refgo{masterapi.riskgroups.assignSlave} to add a slave to a specific risk group.
-		\item Uses \refgo{masterapi.riskgroups.removeSlave} to remove a slave from a specific risk group.
-		\item Uses \refgo{masterapi.riskgroups.update} to update a specific risk group.
-		\item Uses \refgo{masterapi.riskgroups.delete} to remove a specific risk group.
+		\item Uses \refgoalt{masterapi.riskgroups.getAll}{[GET] /riskgroups} to get all risk groups.
+		\item Uses \refgoalt{masterapi.riskgroups.assignSlave}{[PUT] /riskgroups/<risk\_group\_id>/slave/<slave\_id>} to add a slave to a specific risk group.
+		\item Uses \refgoalt{masterapi.riskgroups.removeSlave}{[DELETE] /riskgroups/<risk\_group\_id>/slave/<slave\_id>} to remove a slave from a specific risk group.
+		\item Uses \refgoalt{masterapi.riskgroups.add}{[PUT] /riskgroups/<id>} to add a new risk group.
+		\item Uses \refgoalt{masterapi.riskgroups.update}{[POST] /riskgroups/<id>} to update a specific risk group.
+		\item Uses \refgoalt{masterapi.riskgroups.delete}{[DELETE] /riskgroups/<id>} to remove a specific risk group.
 	}
 	\end{itemize}
 }
