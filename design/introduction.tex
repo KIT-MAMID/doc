@@ -49,6 +49,16 @@ The error handling architecture described in this document is more transparent a
 Hence, the \emph{unknown} state is replaced by more fine grained error reporting.
 Since it was a state only set by the master, this change has fairly low impact on other parts of the design.
 
+\subsection{Other Optional Criteria}
+
+The application architecture presented in this document is designed with extensibility in mind.\\
+The authors are confident that a majority of the optional criteria listed in the \emph{Functional Specification} can be implemented
+transparently, i.e. without greater changes to the existing architecture.
+
+\emph{OC80 Arbiter deployment} is estimated to require the greates amount of additions and will receive lowest priority.
+
+However, the authors consider the implementation of optional criteria mostly a question of time constraints during the
+implementation phase, not one of general feasibility.
 
 \section{Overview}
 
