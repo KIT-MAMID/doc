@@ -24,22 +24,22 @@ activity_diagram.pdf: uml/drafts/activity_diagram_master.uxf
 	$(call UMLET_CONVERT,$<,$@)
 
 slave_classes.pdf: class_diagram.pdf
-	$(PDFCROP_BIN) --bbox "0 1300 800 2320"  class_diagram.pdf $@
+	$(PDFCROP_BIN) --bbox "0 1170 800 2200"  class_diagram.pdf $@
 
 msp_classes.pdf: class_diagram.pdf
-	$(PDFCROP_BIN) --bbox "830 1230 2400 2300"  class_diagram.pdf $@
+	$(PDFCROP_BIN) --bbox "860 1180 2400 2155"  class_diagram.pdf $@
 
 model_classes.pdf: class_diagram.pdf
-	$(PDFCROP_BIN) --bbox "640 140 2340 1200"  class_diagram.pdf $@
+	$(PDFCROP_BIN) --bbox "670 210 2260 1080"  class_diagram.pdf $@
 
 master_classes.pdf: class_diagram.pdf
-	$(PDFCROP_BIN) --bbox "2400 0 4000 700"  class_diagram.pdf $@
+	$(PDFCROP_BIN) --bbox "2450 10 3800 600"  class_diagram.pdf $@
 
 gui_classes.pdf: class_diagram.pdf
-	$(PDFCROP_BIN) --bbox "2400 1650 4220 2900"  class_diagram.pdf $@
+	$(PDFCROP_BIN) --bbox "2450 1570 4220 2740"  class_diagram.pdf $@
 
 notifier_classes.pdf: class_diagram.pdf
-	$(PDFCROP_BIN) --bbox "4050 620 5700 1600"  class_diagram.pdf $@
+	$(PDFCROP_BIN) --bbox "4080 550 5450 1425"  class_diagram.pdf $@
 
 design.pdf: *.tex class_diagram.pdf slave_classes.pdf msp_classes.pdf model_classes.pdf master_classes.pdf activity_diagram.pdf gui_classes.pdf notifier_classes.pdf
 	$(PDFLATEX) design.tex
