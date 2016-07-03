@@ -7,15 +7,19 @@
 \end{figure}
 
 
-The notifier is installed with the master. 
-Notifies a predefined list of contacts whenever a new \reftype{Problem} occurs.
+The \refgo{notifier} polls the \refgo{masterapi} for problems (see Section \ref{masterapi:problems}).
+
+It notifies a predefined list of contacts whenever a new \reftype{Problem} occurs.
+
+The implementation is generic enough to support a variety of different communication channels.
+However, in the basic implementation, only email notifications are supported.
 
 \struct{Controller}{
-	Imports CLIFFagParser to parse command line parameters, such as the path to the contact file.
+	Imports CLIFFagParser to parse command line parameters, such as the path to the contacts file.
 	Imports os, io and fmt to parse the contacts file.
 	Receives problems via \reftype{APIClient}.\\
-	Determines which problems should be send.\\
-	Starts implementations of notifier to send the problems.	
+	Determines which problems should be sent.\\
+        Calls implementations of \refgo{notifier.Notifier} for delivery of notifications.	
 }{
 	\property{lastProblems}[[]Problem]{
 		List of recent problems.
@@ -26,15 +30,15 @@ Notifies a predefined list of contacts whenever a new \reftype{Problem} occurs.
 		A Go application starts by initializing the Go 'main' package and then running the \textit{main()} function.
 		\begin{itemize}
 			\item Receives problems through the \reftype{APIClient}.
-			\item Uses \reftype{diffProblems} to decide which should be send.
-			\item Uses \reftype{notify} to hand over problems to a \reftype{Notifier}.
+			\item Uses \reftype{diffProblems} to decide which should be sent.
+			\item Uses \reftype{notify} to handle delivery of notifications via a \reftype{Notifier}.
 		\end{itemize}
 	}
 	\method{diffProblems}[[]Problem](
 		\param{received}[[]Problems]{List of recently send problems}
 		){
 		Compares \refproperty{lastProblems} to the problems currently staged for notification.
-		To prevent repeated alerts on the same problem only a new \reftype{Problem} will be send
+		To prevent repeated alerts on the same problem only a new \reftype{Problem} will be sent.
 	}
 	\method{notify}(
 		\param{problem}[Problem]{The problem to be send}
@@ -44,7 +48,7 @@ Notifies a predefined list of contacts whenever a new \reftype{Problem} occurs.
 }
 
 \struct{Parser}{
-	Used by the \reftype{Controller} to parse the contact file.
+	Used by the \reftype{Controller} to parse the contacts file.
 }{
 	\method{Parse}[[]\reftype{Contact}, error](
 		\param{path}[string]{Path of the contacts file}
@@ -55,18 +59,18 @@ Notifies a predefined list of contacts whenever a new \reftype{Problem} occurs.
 }
 
 \struct{APIClient}{
-	Receives new problems from the master.
+        Receives new array of \refgo{notifier.Problem} from the \refgo{masterapi}.
 	}{
 	\method{Receive}[[]Problem](
 		\param{host}[string]{
-			Hostname of the APIServer
+			Hostname of the API server.
 			}
 		){
 		}
 }
 
 \struct{Problem}{
-	A Problem received from the master.		
+        A Problem object as specified in section \ref{masterapi:problems} of \refgo{masterapi}.		
 }{
 	\param{Id}[uint]{Problem ID}
 	\param{Description}[string]{short despcription of the Problem}
@@ -78,36 +82,36 @@ Notifies a predefined list of contacts whenever a new \reftype{Problem} occurs.
 }
 
 \interface{Notifier}{
+        Abstract notification delivery interface.
+
+        Any concrete communication mechanism supported by the \refgo{notifier} implements the \reftype{Notifier} interface.
 	}{
 	\method{Send}(
 		\param{problem}[Problem]
-		){Receive the \reftype{Problem} and send it to the contacts}
+                ){Deliver a notification about \refparam{problem} using the concrete communication channel supported by the implementation.}
 }
 
 \struct{EmailNotifier}{
-	Imports SMTP.
-	Implements \reftype{Notifier} to send emails via SMTP to a list of EmailContacts.
+        Implements \reftype{Notifier} to send emails via SMTP to a list of \refgo{EmailContact}.
 }{
-	\property{Contact}[[]EmailContact]
+        \property{Contact}[[]EmailContact]{The list of contacts to be notified via email.}
 }{
 	\method{Send}(
-		\param{problem}[Problem]{The \reftype{Problem} to be send}
+		\param{problem}[Problem]{The \reftype{Problem} subject to the notification}
 		){
-			Translates the problem into an email message.
+                        Generates an email message containing information encapsulated in \refparam{problem} and delivers it using \refmethod{sendMailToContacts}.
 		}
 	\method{sendMailToContacts}[](
 		\param{msg}[[]byte]{}
 		){
 			Sends the messages created by \refmethod{Send} to a list of email contacts.
-			Uses the GO SMTP package.
+                        Uses the Go's \codeinline{net/smtp} package.
 		}
 }
 
 \interface{Contact}{
-	Interface for contactdata of the recipents of problem notifications.\newline
-	Contactdata is read from the contacts file.
-}{
-	\property{contactData}[string]
+	Interface for contact data of the recipents of problem notifications.\newline
+	Contact data is read from the contacts file.
 }
 
 \struct{EmailContact}{
@@ -116,7 +120,9 @@ Notifies a predefined list of contacts whenever a new \reftype{Problem} occurs.
 	\property{Address}[string]{Email address of one contact}
 }
 \struct{SMTPRelay}{
-		An email relay using SMTP.
+        Credentials required for delivery of emails through an SMTP server reachable at \refproperty{Hostname}.
+
+        The role of this SMTP server is commonly referred to as \emph{relay} or \emph{smarthost}.
 }{
 	\property{Hostname}[string]{Hostname of the SMTP Relay}
 	\property{MailFrom}[string]{The email address from which the notifications will be send}
