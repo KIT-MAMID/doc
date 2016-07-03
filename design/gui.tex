@@ -63,6 +63,11 @@ The \refgo{gui} is built with AngularJS. The model is defined by the returned JS
 \jscontroller{riskGroupIndex}{
 	\begin{itemize}
 		\item Uses \refgo{masterapi.riskgroups.getAll} to get all risk groups.
+		\item Uses \refgo{masterapi.riskgroups.assignSlave} to add a slave to a specific risk group.
+		\item Uses \refgo{masterapi.riskgroups.removeSlave} to remove a slave from a specific risk group.
+		\item Uses \refgo{masterapi.riskgroups.update} to update a specific risk group.
+		\item Uses \refgo{masterapi.riskgroups.delete} to remove a specific risk group.
+	}
 	\end{itemize}
 }
 
