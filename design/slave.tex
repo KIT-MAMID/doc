@@ -59,16 +59,15 @@ The \refgo{slave} is installed on the individual host nodes and started by the m
 \interface{MongodConfigurator}{
   Applies or returns configuration of a mongod instance by PortNumber.
 }{
-  \method{MongodConfiguration}[{(\refgo{msp.MongodConfiguration}, \refgo{msp.SlaveError})}](
+  \method{MongodConfiguration}[{(\refgo{msp.Mongod}, \refgo{msp.SlaveError})}](
     \param{p}[\refgo{msp.PortNumber}]{PortNumber to connect to locally}
   ){
     Reads configuration from a local MongoDB instance
   }
   \method{ApplyMongodConfiguration}[*\refgo{msp.SlaveError}](
-    \param{p}[\refgo{msp.PortNumber}]{PortNumber to connect to locally}
-    \param{c}[\refgo{msp.MongodConfiguration}]{Configuration to apply}
+    \param{c}[\refgo{msp.Mongod}]{Configuration to apply}
   ){
-    Connects to a local MongoDB instance on the given port and applies the configuration
+    Connects to the local MongoDB instance given in \refparam{c} and applies the configuration
   }
 }
 

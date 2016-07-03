@@ -87,10 +87,9 @@ MongodConfigurator
 --
 --
 _+ MongodConfiguration(p: msp.PortNumber):_
-_ (msp.Mongod error)_
+_ (msp.Mongod, error)_
 _+ ApplyMongodConfiguration_
-_  (p: portNumber,_
-_   c: msp.Mongod): error_</panel_attributes>
+_ (c: msp.Mongod): error_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -203,10 +202,9 @@ applied
 --
 --
 _+ MongodConfiguration(p: msp.PortNumber):_
-_ (msp.Mongod error)_
+_ (msp.Mongod, error)_
 _+ ApplyMongodConfiguration_
-_  (p: portNumber,_
-_   c: msp.Mongod): error_</panel_attributes>
+_ (c: msp.Mongod): error_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
