@@ -40,22 +40,22 @@ fontfamily=Monospaced //possible: SansSerif,Serif,Monospaced
     <coordinates>
       <x>243</x>
       <y>522</y>
-      <w>162</w>
-      <h>18</h>
+      <w>189</w>
+      <h>27</h>
     </coordinates>
-    <panel_attributes>Start by init process.</panel_attributes>
+    <panel_attributes>Started by init process.</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>315</x>
-      <y>531</y>
+      <y>540</y>
       <w>27</w>
-      <h>72</h>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -63,7 +63,7 @@ fontfamily=Monospaced //possible: SansSerif,Serif,Monospaced
       <x>18</x>
       <y>801</y>
       <w>360</w>
-      <h>81</h>
+      <h>99</h>
     </coordinates>
     <panel_attributes>Controller
 --
@@ -122,7 +122,7 @@ _ (c: msp.Mongod): error_</panel_attributes>
       <x>198</x>
       <y>918</y>
       <w>351</w>
-      <h>144</h>
+      <h>153</h>
     </coordinates>
     <panel_attributes>ProcessManager
 --
@@ -141,16 +141,16 @@ _ (c: msp.Mongod): error_</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>99</x>
-      <y>873</y>
+      <y>891</y>
       <w>117</w>
-      <h>99</h>
+      <h>81</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=1
 r1=Manager
 m2=1
 </panel_attributes>
-    <additional_attributes>110.0;80.0;10.0;80.0;10.0;10.0</additional_attributes>
+    <additional_attributes>110.0;60.0;10.0;60.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -233,13 +233,13 @@ _ (c: msp.Mongod): error_</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>36</x>
-      <y>873</y>
+      <y>891</y>
       <w>108</w>
-      <h>252</h>
+      <h>234</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>100.0;260.0;10.0;260.0;10.0;10.0</additional_attributes>
+    <additional_attributes>100.0;240.0;10.0;240.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -350,7 +350,7 @@ layer=-3</panel_attributes>
       <x>1278</x>
       <y>639</y>
       <w>279</w>
-      <h>117</h>
+      <h>135</h>
     </coordinates>
     <panel_attributes>Mongod
 --
@@ -367,9 +367,9 @@ layer=-3</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1278</x>
-      <y>819</y>
+      <y>837</y>
       <w>261</w>
-      <h>117</h>
+      <h>126</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enum&gt;&gt;
 MongodState
@@ -387,7 +387,7 @@ MongodStateRunning
     <id>Relation</id>
     <coordinates>
       <x>1359</x>
-      <y>747</y>
+      <y>765</y>
       <w>54</w>
       <h>90</h>
     </coordinates>
@@ -481,16 +481,16 @@ r2=State
     <id>Relation</id>
     <coordinates>
       <x>1467</x>
-      <y>747</y>
+      <y>765</y>
       <w>378</w>
-      <h>126</h>
+      <h>108</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m1=1
 m2=*
 r2=ReplicaSetMembers
 </panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;60.0;280.0;60.0;280.0;120.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0;280.0;40.0;280.0;100.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
@@ -678,33 +678,33 @@ error</panel_attributes>
       <x>2655</x>
       <y>2340</y>
       <w>162</w>
-      <h>18</h>
+      <h>27</h>
     </coordinates>
-    <panel_attributes>Start by init process.</panel_attributes>
+    <panel_attributes>Started by init process.</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>2727</x>
-      <y>2268</y>
+      <y>2277</y>
       <w>27</w>
-      <h>90</h>
+      <h>81</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>2835</x>
-      <y>2268</y>
+      <y>2277</y>
       <w>90</w>
-      <h>108</h>
+      <h>99</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>80.0;100.0;10.0;100.0;10.0;10.0</additional_attributes>
+    <additional_attributes>80.0;90.0;10.0;90.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
@@ -747,9 +747,9 @@ error</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2232</x>
+      <x>2214</x>
       <y>2286</y>
-      <w>270</w>
+      <w>360</w>
       <h>117</h>
     </coordinates>
     <panel_attributes>Monitor
@@ -836,10 +836,10 @@ r2=ReplicaSetMembers
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>630</x>
+      <x>603</x>
       <y>1971</y>
-      <w>216</w>
-      <h>108</h>
+      <w>243</w>
+      <h>117</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enum&gt;&gt;
 MongodExecutionState
@@ -1208,7 +1208,7 @@ r2=Slaves</panel_attributes>
       <x>1611</x>
       <y>1917</y>
       <w>279</w>
-      <h>153</h>
+      <h>162</h>
     </coordinates>
     <panel_attributes>Problem
 --
@@ -1429,7 +1429,7 @@ ConfiguredState
       <x>2637</x>
       <y>2205</y>
       <w>243</w>
-      <h>72</h>
+      <h>81</h>
     </coordinates>
     <panel_attributes>Application / main()
 --
@@ -1505,14 +1505,14 @@ UNIQUE(Port,ReplSetName)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2493</x>
+      <x>2565</x>
       <y>2241</y>
-      <w>207</w>
+      <w>135</w>
       <h>72</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;initializes&gt;&gt;</panel_attributes>
-    <additional_attributes>160.0;10.0;120.0;10.0;120.0;60.0;10.0;60.0</additional_attributes>
+    <additional_attributes>80.0;10.0;40.0;10.0;40.0;60.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -1657,7 +1657,7 @@ to be sent over bus</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1701</x>
-      <y>2079</y>
+      <y>2088</y>
       <w>243</w>
       <h>81</h>
     </coordinates>
@@ -1673,12 +1673,12 @@ ActualPersistentCount: uint</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1800</x>
-      <y>2151</y>
+      <y>2160</y>
       <w>27</w>
-      <h>54</h>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;30.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -1698,7 +1698,7 @@ ActualPersistentCount: uint</panel_attributes>
       <x>2322</x>
       <y>2133</y>
       <w>171</w>
-      <h>81</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>Listens on the bus for errors, creates Problems when they occur and removes them when they are resolved</panel_attributes>
     <additional_attributes/>
@@ -1709,7 +1709,7 @@ ActualPersistentCount: uint</panel_attributes>
       <x>2241</x>
       <y>2421</y>
       <w>252</w>
-      <h>63</h>
+      <h>72</h>
     </coordinates>
     <panel_attributes>Asks slaves for mongod states and compares the observed state to the desired. Publishes StateMatchResult and error objects on the bus.</panel_attributes>
     <additional_attributes/>
@@ -1762,12 +1762,12 @@ ActualPersistentCount: uint</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>2637</x>
-      <y>2268</y>
+      <y>2277</y>
       <w>27</w>
-      <h>144</h>
+      <h>135</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;130.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -1786,7 +1786,7 @@ ActualPersistentCount: uint</panel_attributes>
       <x>1683</x>
       <y>2286</y>
       <w>243</w>
-      <h>81</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>ObservedReplicaSetConstraintStatus
 --
@@ -1810,9 +1810,9 @@ ActualPersistentCount: uint</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1260</x>
+      <x>1233</x>
       <y>2259</y>
-      <w>297</w>
+      <w>324</w>
       <h>72</h>
     </coordinates>
     <panel_attributes>ConnectionStatus
@@ -1861,12 +1861,12 @@ CommunicationError: msp.CommunicationError</panel_attributes>
     <coordinates>
       <x>2097</x>
       <y>738</y>
-      <w>153</w>
+      <w>135</w>
       <h>1620</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;80.0;10.0;80.0;1780.0;150.0;1780.0</additional_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0;80.0;1780.0;130.0;1780.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -2301,7 +2301,7 @@ mainController()
       <x>2952</x>
       <y>117</y>
       <w>252</w>
-      <h>81</h>
+      <h>108</h>
     </coordinates>
     <panel_attributes>The MVC framework used to realize the
 Web GUI is AngularJS.
@@ -2813,11 +2813,11 @@ m2=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1521</x>
-      <y>927</y>
+      <y>954</y>
       <w>72</w>
-      <h>63</h>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;60.0;50.0</additional_attributes>
+    <additional_attributes>10.0;10.0;60.0;20.0</additional_attributes>
   </element>
 </diagram>
