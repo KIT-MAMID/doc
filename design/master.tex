@@ -229,7 +229,7 @@ It fulfills many different tasks, running in separate goroutines.
 Different tasks need to communicate with each other. We use two mechanisms for that:
 \begin{itemize}
 	\item A shared persistent database with an ORM abstraction layer => see model for which objects
-	\item A \reftype{Bus} that leverages golang's channels to send status updates. => *Status Objects %TODO
+	\item A \reftype{Bus} that leverages Go's channels to send status updates. => *Status Objects %TODO
 \end{itemize}
 This helps couple the different components loosely.
 
