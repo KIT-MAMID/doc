@@ -22,6 +22,10 @@ However, in the basic implementation, only email notifications are supported.
 	\property{lastProblems}[[]Problem]{
 		List of recent problems.
 	}
+        \property{notifiers}[[]Notifiers]{
+                List of fully initialized \reftype{Notifier} which are called when a new \reftype{Problem} arises.
+        }
+        %TODO missing: references represented by arrows in UML
 }{
 	\method{main}
 	{
@@ -95,7 +99,8 @@ However, in the basic implementation, only email notifications are supported.
 \struct{EmailNotifier}{
         Implements \reftype{Notifier} to send emails via SMTP to a list of \reftype{EmailContact}.
 }{
-        \property{Contact}[[]EmailContact]{The list of contacts to be notified via email.}
+        \property{Contacts}[[]EmailContact]{The list of contacts to be notified via email.}
+        \property{Relay}[SMTPRelay]{The SMTP relay through which notification emails are delivered. See \reftype{SMTPRelay} for details.}
 }{
 	\method{Send}(
 		\param{problem}[Problem]{The \reftype{Problem} subject to the notification}
