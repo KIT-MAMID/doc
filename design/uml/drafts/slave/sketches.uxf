@@ -339,10 +339,7 @@ r1=consumer</panel_attributes>
       <w>1332</w>
       <h>783</h>
     </coordinates>
-    <panel_attributes>msp
-bg=cyan
-transparency=90
-layer=-3</panel_attributes>
+    <panel_attributes>msp</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
