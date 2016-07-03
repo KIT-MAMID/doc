@@ -75,7 +75,8 @@ Being the most complex package of the project, several decoupling patterns are e
 
 The \textbf{repository pattern} is the most one employed inside the \refgo{master}:
 The external \refgo{gorm} database abstraction layer holds several tables of the structures in \refgo{model}.\\
-\refgo{Monitor}, \refgo{ProblemManager}, \refgo{Deployer} and \refgo{ClusterAllocator} are loosely coupled and communicate mostly by
+\refgoalt{master.Monitor}{Monitor},  \refgoalt{master.ProblemManager}{ProblemManager},
+\refgoalt{master.Deployer}{Deployer} and  \refgoalt{master.ClusterAllocator}{ClusterAllocator} are loosely coupled and communicate mostly by
 modifying the database.\\
 Furthermore, a variation of the \textbf{publish/subsribe pattern} is implemented by the \refgo{master.Bus}.
 
@@ -88,8 +89,8 @@ Another term used to describe this relationship between master and slaves is the
 
 % Slave design patterns
 \textbf{Dependency injection} is employed extensively in both \refgo{master} and \refgo{slave} to increase testability through mocks.
-A good example for this are the references to \codeinline{gorm.DB} passed into \refgo{master.Monitor}, \refgo{ProblemManager},
-\refgo{Deployer} and \refgo{ClusterAllocator}.
+A good example for this are the references to \codeinline{gorm.DB} passed into \refgoalt{master.Monitor}{Monitor},  \refgoalt{master.ProblemManager}{ProblemManager},
+ \refgoalt{master.Deployer}{Deployer} and  \refgoalt{master.ClusterAllocator}{ClusterAllocator}.
 
 % Notification Manager patterns
 The \textbf{strategy pattern} is used inside the \refgo{notifier} to encapsulate the concrete notification delivery
