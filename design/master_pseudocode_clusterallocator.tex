@@ -35,8 +35,11 @@ $p_e, v_e = 0$
 }
 \end{algorithm}
 
-Given Algorithm \ref{alg:EffectiveMemberCount}, we can now proceed with the removal of superfluous Replica Set members.
+\begin{minipage}{\textwidth}
 
+Given Algorithm \ref{alg:EffectiveMemberCount}, we can now proceed with the removal of superfluous Replica Set members.
+\par
+\vspace{1em}
 \begin{algorithm}[H]
 \caption{Destroy members of disabled Replica Sets where possible without violating p/v constraints.}
 \ForEach{r in ReplicaSets}{
@@ -64,6 +67,7 @@ Given Algorithm \ref{alg:EffectiveMemberCount}, we can now proceed with the remo
 	
 }
 \end{algorithm}
+\end{minipage}
 
 With all superflous members removed, we now approach the other side of the problem
 and add new members to Replica Sets that need them.\\
