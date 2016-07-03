@@ -6,15 +6,15 @@ The notifier is installed with the master. It executes the notification of a pre
 \struct{Controller}{
 	Imports CLIFFagParser for to parse the contact file path as command Line Parameter.
 	Imports os, io and fmt to parse the contact file.
-	Receives problems via \refstruct{APIClient}. \newline
-	Determines which problems should be send, and to whom. S\newline
+	Receives problems via \reftype{APIClient}.\\
+	Determines which problems should be send, and to whom.\\\
 	Starts implementations of notifier to send the problems.	
 }{
 	\property{lastProblems}[[]Problem]{
 		List of recent problems.
 	}
 }{
-	\method{main}[]
+	\method{main}
 	{
 		Main() handles 
 	}
@@ -23,17 +23,17 @@ The notifier is installed with the master. It executes the notification of a pre
 		){
 		Compares \refproperty{lastProblems} to the problems currently staged for notification to reduce possible spam.
 	}
-	\method{notify}[](
+	\method{notify}(
 		\param{problem}[Problem]{The problem to be send}
 	){
-		Uses a \refstruct{Notifier} to send a problem.
+		Uses a \reftype{Notifier} to send a problem.
 	}
 }
 
 \struct{Parser}{
-	Used by the \refstruct{Controller} to parse the contact file.
+	Used by the \reftype{Controller} to parse the contact file.
 }{
-	\method{Parse}[[]\refstruct{Contact}, error](
+	\method{Parse}[[]\reftype{Contact}, error](
 		\param{path}[string]{Path of the contacts file}
 		){
 			Parses the contacts file.
@@ -54,7 +54,7 @@ The notifier is installed with the master. It executes the notification of a pre
 
 \interface{Notifier}{
 	}{
-	\method{Send}[](
+	\method{Send}(
 		\param{problem}[Problem]
 		){Receive the problem and send it to the contacts}
 }
@@ -65,7 +65,7 @@ The notifier is installed with the master. It executes the notification of a pre
 }{
 	\property{Contact}[[]EmailContact]
 }{
-	\method{Send}[](
+	\method{Send}(
 		\param{problem}[Problem]{The problem to be send}
 		){
 			Creates a email message from the problem.
@@ -86,13 +86,13 @@ The notifier is installed with the master. It executes the notification of a pre
 }
 
 \struct{EmailContact}{
-	Implements \refstruct{Contact}.
+	Implements \reftype{Contact}.
 }{
 	\property{Address}[string]{Email address of one contact}
 }
 \struct{SMTPRelay}{
 		A email relay using SMTP.
 }{
-	\property{Hostname}[string]{}
-	\property{MailFrom}[string]{}
+	\property{Hostname}[string]{TODO}
+	\property{MailFrom}[string]{TODO}
 }
