@@ -43,6 +43,7 @@ The \refgo{gui} is built with AngularJS. The model is defined by the returned JS
 
 \jscontroller{slaveById}{
 		\begin{itemize}
+			\item Uses \refgo{masterapi.slaves.add} to add a new slave to the system.
 			\item Uses \refgo{masterapi.slaves.getById} to get a specific slave.
 			\item Uses \refgo{masterapi.slaves.update} to update a specific slave.
 			\item Uses \refgo{masterapi.slaves.delete} to delete a specific slave.
@@ -51,6 +52,7 @@ The \refgo{gui} is built with AngularJS. The model is defined by the returned JS
 }
 \jscontroller{replicaSetById}{
 		\begin{itemize}
+			\item Uses \refgo{masterapi.replicasets.add} to create a new Replica Set.
 			\item Uses \refgo{masterapi.replicasets.getById} to get a specific Replica Set.
 			\item Uses \refgo{masterapi.replicasets.update} to update a specific Replica Set.
 			\item Uses \refgo{masterapi.replicasets.delete} to delete a specific Replica Set.
