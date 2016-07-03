@@ -1,60 +1,98 @@
-\section{Notifier}
-\renewcommand{\gocurpackage}{Notifier}
-The Notifier is installed with the master.
+\section{notifier}
+\renewcommand{\gocurpackage}{notifier}
+
+The notifier is installed with the master. It executes the notification of a predefined list of contacts whenever a Problem occurs, if there wasn't a notifcation for it earlier. 
 
 \struct{Controller}{
-	\property{lastProblems}[[]Problem]
+	Imports CLIFFagParser for to parse the contact file path as command Line Parameter.
+	Imports os, io and fmt to parse the contact file.
+	Receives problems via \refstruct{APIClient}. \newline
+	Determines which problems should be send, and to whom. S\newline
+	Starts implementations of notifier to send the problems.	
+}{
+	\property{lastProblems}[[]Problem]{
+		List of recent problems.
+	}
 }{
 	\method{main}[]
-	\method{diffProblems}[[]Problem]
-		\param{received}[[]Problems]
-	\method{notify}[]
-		\param{problem}[Problem]
+	{
+		Main() handles 
+	}
+	\method{diffProblems}[[]Problem](
+		\param{received}[[]Problems]{List of recently send problems}
+		){
+		Compares \refproperty{lastProblems} to the problems currently staged for notification to reduce possible spam.
+	}
+	\method{notify}[](
+		\param{problem}[Problem]{The problem to be send}
+	){
+		Uses a \refstruct{Notifier} to send a problem.
+	}
 }
 
 \struct{Parser}{
-	\mathod{Parse}[[]Contact, error]
-		\param{path}[string]
-	
+	Used by the \refstruct{Controller} to parse the contact file.
+}{
+	\method{Parse}[[]\refstruct{Contact}, error](
+		\param{path}[string]{Path of the contacts file}
+		){
+			Parses the contacts file.
+			Returns an array of contacts.	
+		}
 }
 
 \struct{APIClient}{
-	\method{Receive}[[]Problem]
-		\param{host}[string]	
+	Receives new problems from the master.
+	}{
+	\method{Receive}[[]Problem](
+		\param{host}[string]{
+			Hostname of the APIServer
+			}
+		){
+		}
 }
 
-\struct{CLIFlagsParser}{
-
-	
-}
 \interface{Notifier}{
-	\method{Send}[]
+	}{
+	\method{Send}[](
 		\param{problem}[Problem]
-	
+		){Receive the problem and send it to the contacts}
 }
 
 \struct{EmailNotifier}{
-	Implements Notifier to send Emails to List of EmailContacts.
+	Imports smtp.
+	Implements Notifier to send emails via smtp to a list of EmailContacts.
+}{
 	\property{Contact}[[]EmailContact]
 }{
-	\method{Send}[]
-		\param{problem}[Problem]
-	\method{sendMailToContacts}[]
-		\param{msg}[[]byte]
-	
+	\method{Send}[](
+		\param{problem}[Problem]{The problem to be send}
+		){
+			Creates a email message from the problem.
+		}
+	\method{sendMailToContacts}[](
+		\param{msg}[[]byte]{}
+		){
+			Sends the messages created by Send(...) to a list of email contacts.
+			Uses the GO smtp package.
+		}
 }
+
 \interface{Contact}{
-	
-	
+	Interface for contactdata of the recipents of problem notifications.\newline
+	Contactdata is read from the contacts file.
+}{
+	\property{contactData}[string]
 }
 
 \struct{EmailContact}{
-	Implements Contact.
-	\property{Address}[string]
-	
+	Implements \refstruct{Contact}.
+}{
+	\property{Address}[string]{Email address of one contact}
 }
 \struct{SMTPRelay}{
-	\property{Hostname}[string]
-	\property{MailFrom}[string]
-	
+		A email relay using SMTP.
+}{
+	\property{Hostname}[string]{}
+	\property{MailFrom}[string]{}
 }
