@@ -1,13 +1,14 @@
 \section{notifier}
 \renewcommand{\gocurpackage}{notifier}
 
-The notifier is installed with the master. It executes the notification of a predefined list of contacts whenever a Problem occurs, if there wasn't a notifcation for it earlier. 
+The notifier is installed with the master. 
+A predefined list of contacts will be notified whenever a new Problem occurs.
 
 \struct{Controller}{
-	Imports CLIFFagParser for to parse the contact file path as command Line Parameter.
-	Imports os, io and fmt to parse the contact file.
+	Imports CLIFFagParser to parse the path to the contacts file.
+	Imports os, io and fmt to parse the contacts file.
 	Receives problems via \reftype{APIClient}.\\
-	Determines which problems should be send, and to whom.\\\
+	Determines which problems should be send.\\
 	Starts implementations of notifier to send the problems.	
 }{
 	\property{lastProblems}[[]Problem]{
@@ -16,17 +17,23 @@ The notifier is installed with the master. It executes the notification of a pre
 }{
 	\method{main}
 	{
-		Main() handles 
+		A Go application starts by initializing the Go 'main' package and then running the \textit{main()} function.
+		\begin{itemmize}
+		\item Receives problems trough the \reftype{APIClien}.
+		\item Uses diffProblems to decide which should be send.
+		\item Uses notify to hand over problems to a \reftype{Notifier}.
+		\end{itemize}
 	}
 	\method{diffProblems}[[]Problem](
 		\param{received}[[]Problems]{List of recently send problems}
 		){
-		Compares \refproperty{lastProblems} to the problems currently staged for notification to reduce possible spam.
+		Compares \refproperty{lastProblems} to the problems currently staged for notification.
+		To prevent spam only new Problems will be send
 	}
 	\method{notify}(
 		\param{problem}[Problem]{The problem to be send}
 	){
-		Uses a \reftype{Notifier} to send a problem.
+		Hands over problems to a \reftype{Notifier}.
 	}
 }
 
@@ -68,7 +75,7 @@ The notifier is installed with the master. It executes the notification of a pre
 	\method{Send}(
 		\param{problem}[Problem]{The problem to be send}
 		){
-			Creates a email message from the problem.
+			Translates the problem into an email message.
 		}
 	\method{sendMailToContacts}[](
 		\param{msg}[[]byte]{}
@@ -91,8 +98,8 @@ The notifier is installed with the master. It executes the notification of a pre
 	\property{Address}[string]{Email address of one contact}
 }
 \struct{SMTPRelay}{
-		A email relay using SMTP.
+		An email relay using SMTP.
 }{
-	\property{Hostname}[string]{TODO}
-	\property{MailFrom}[string]{TODO}
+	\property{Hostname}[string]{Hostname of the SMTP Relay}
+	\property{MailFrom}[string]{The email address from which the notifications will be send}
 }
