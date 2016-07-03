@@ -1,39 +1,24 @@
-\section {Formatting \& Legend}\label{legend}
-
+\section {Formatting}\label{formatting}
 % NOTE Declaring the current package
-\renewcommand{\gocurpackage}{legend}
+\renewcommand{\gocurpackage}{formatting}
 
-This is a legend package explaining the formatting of the following packages.
+The remainder of this section is a demonstration of the formatting chosen to describe packages types, methods and parameters.
+
+This text could as well be a description of the package \refgo{formatting}.
 
 \struct{AStruct}{
-    Overall description of a \refgo{legend.AStruct}.
-    It implements \refgo{legend.AnInterface}.
+  Overall description of the \codeinline{struct} \refgo{formatting.AStruct}.
 }{
-    \property{variable}[Type]{The description of the struct's field \emph{variable}}
-    \property{fieldtwo}[Type2]{
-      The description of the struct's field \refgo{legend.AStruct.fieldtwo}.
+    \property{fieldname}[FieldType]{
+      The description of the struct's field \refgo{formatting.AStruct.fieldname}.
     }
 }{
-    \method{Methodname}[ReturnType]{Method without parameters}
-    \method{Methodname2}[ReturnType](%% NOTE the parentheses ()
-        \param{pname}[ParamType]{Description of the parameter}
+    \method{Methodname}[ReturnType](%% NOTE the parentheses ()
+        \param{pname1}[ParamType]{Description of the parameter \refparam{pname1}.}
+        \param{pname2}[ParamType]{Description of the parameter \refparam{pname2}.}
     ){
-        Description of the method \refgo{legend.AStruct.Methodname2}.
+        Description of the method \refgo{formatting.AStruct.Methodname}.
         The dot in the parentheses symbolizes that this method expects parameters.
     }
-}
-
-\interface{AnInterface}{
-  Overall description of the Interface. An interface has no fields, hence there is no section for fields.
-
-  References to other types, e.g. \refgo{legend.AStruct} are possible.
-  When referencing another package the package name is shown, e.g. \refgo{master.ClusterAllocator}
-}{
-  \method{Methodname}[ReturnType]{Method without parameters}
-  \method{Methodname2}[ReturnType]( %% NOTE the parentheses ()
-    \param{pname}[ParamType]{Description of the parameter}
-  ){
-    Description of the method \refgo{legend.AnInterface.Methodname2}.
-  }
 }
 
