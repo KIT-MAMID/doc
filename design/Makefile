@@ -33,7 +33,7 @@ model_classes.pdf: class_diagram.pdf
 	$(PDFCROP_BIN) --bbox "670 210 2260 1080"  class_diagram.pdf $@
 
 master_classes.pdf: class_diagram.pdf
-	$(PDFCROP_BIN) --bbox "2450 10 3800 600"  class_diagram.pdf $@
+	$(PDFCROP_BIN) --bbox "2500 0 3870 1480"  class_diagram.pdf $@
 
 gui_classes.pdf: class_diagram.pdf
 	$(PDFCROP_BIN) --bbox "2450 1570 4220 2740"  class_diagram.pdf $@

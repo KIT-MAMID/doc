@@ -670,7 +670,7 @@ Error</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>2664</x>
+      <x>2718</x>
       <y>2331</y>
       <w>171</w>
       <h>27</h>
@@ -681,7 +681,7 @@ Error</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2754</x>
+      <x>2808</x>
       <y>2277</y>
       <w>27</w>
       <h>72</h>
@@ -692,7 +692,7 @@ Error</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2844</x>
+      <x>2898</x>
       <y>2277</y>
       <w>99</w>
       <h>99</h>
@@ -704,7 +704,7 @@ Error</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>2925</x>
+      <x>2979</x>
       <y>2313</y>
       <w>171</w>
       <h>81</h>
@@ -715,7 +715,7 @@ Error</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2610</x>
+      <x>2664</x>
       <y>1944</y>
       <w>252</w>
       <h>108</h>
@@ -731,7 +731,7 @@ Error</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2241</x>
+      <x>2295</x>
       <y>1197</y>
       <w>90</w>
       <h>54</h>
@@ -742,7 +742,7 @@ Error</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2214</x>
+      <x>2268</x>
       <y>2286</y>
       <w>360</w>
       <h>117</h>
@@ -760,7 +760,7 @@ Error</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>2223</x>
+      <x>2277</x>
       <y>1161</y>
       <w>225</w>
       <h>126</h>
@@ -771,7 +771,7 @@ Error</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3024</x>
+      <x>3078</x>
       <y>2043</y>
       <w>252</w>
       <h>126</h>
@@ -989,7 +989,7 @@ r2=Slaves</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>2196</x>
+      <x>2250</x>
       <y>1125</y>
       <w>1197</w>
       <h>1296</h>
@@ -1000,7 +1000,7 @@ r2=Slaves</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2574</x>
+      <x>2628</x>
       <y>1215</y>
       <w>432</w>
       <h>144</h>
@@ -1023,17 +1023,17 @@ r2=Slaves</panel_attributes>
     <coordinates>
       <x>1431</x>
       <y>1278</y>
-      <w>1161</w>
+      <w>1215</w>
       <h>270</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>1270.0;10.0;1160.0;10.0;1160.0;180.0;10.0;180.0;10.0;280.0</additional_attributes>
+    <additional_attributes>1330.0;10.0;1160.0;10.0;1160.0;180.0;10.0;180.0;10.0;280.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2574</x>
+      <x>2628</x>
       <y>1368</y>
       <w>432</w>
       <h>162</h>
@@ -1057,17 +1057,17 @@ r2=Slaves</panel_attributes>
     <coordinates>
       <x>1458</x>
       <y>1512</y>
-      <w>1134</w>
+      <w>1188</w>
       <h>324</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>1240.0;10.0;680.0;10.0;680.0;160.0;10.0;160.0;10.0;340.0</additional_attributes>
+    <additional_attributes>1300.0;10.0;680.0;10.0;680.0;160.0;10.0;160.0;10.0;340.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2574</x>
+      <x>2628</x>
       <y>1539</y>
       <w>432</w>
       <h>153</h>
@@ -1090,17 +1090,17 @@ r2=Slaves</panel_attributes>
     <coordinates>
       <x>1755</x>
       <y>1611</y>
-      <w>837</w>
+      <w>891</w>
       <h>36</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>910.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>970.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2466</x>
+      <x>2520</x>
       <y>1422</y>
       <w>126</w>
       <h>36</h>
@@ -1112,7 +1112,7 @@ r2=Slaves</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2466</x>
+      <x>2520</x>
       <y>1431</y>
       <w>126</w>
       <h>171</h>
@@ -1124,7 +1124,7 @@ r2=Slaves</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3096</x>
+      <x>3150</x>
       <y>1305</y>
       <w>243</w>
       <h>90</h>
@@ -1141,7 +1141,7 @@ r2=Slaves</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2997</x>
+      <x>3051</x>
       <y>1260</y>
       <w>117</w>
       <h>108</h>
@@ -1153,7 +1153,7 @@ r2=Slaves</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2997</x>
+      <x>3051</x>
       <y>1359</y>
       <w>117</w>
       <h>99</h>
@@ -1165,7 +1165,7 @@ r2=Slaves</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2997</x>
+      <x>3051</x>
       <y>1386</y>
       <w>180</w>
       <h>216</h>
@@ -1177,7 +1177,7 @@ r2=Slaves</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>3168</x>
+      <x>3222</x>
       <y>1422</y>
       <w>126</w>
       <h>63</h>
@@ -1190,7 +1190,7 @@ to correct methods</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3222</x>
+      <x>3276</x>
       <y>1386</y>
       <w>27</w>
       <h>54</h>
@@ -1246,7 +1246,7 @@ e.g. &lt;replicaset:123&gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2574</x>
+      <x>2628</x>
       <y>1701</y>
       <w>432</w>
       <h>81</h>
@@ -1262,7 +1262,7 @@ e.g. &lt;replicaset:123&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2997</x>
+      <x>3051</x>
       <y>1386</y>
       <w>189</w>
       <h>378</h>
@@ -1276,17 +1276,17 @@ e.g. &lt;replicaset:123&gt;</panel_attributes>
     <coordinates>
       <x>1953</x>
       <y>1719</y>
-      <w>639</w>
+      <w>693</w>
       <h>36</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>690.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>750.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>2511</x>
+      <x>2565</x>
       <y>1179</y>
       <w>846</w>
       <h>720</h>
@@ -1413,7 +1413,7 @@ ConfiguredState
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2439</x>
+      <x>2493</x>
       <y>1773</y>
       <w>252</w>
       <h>207</h>
@@ -1425,7 +1425,7 @@ ConfiguredState
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2637</x>
+      <x>2691</x>
       <y>2205</y>
       <w>243</w>
       <h>81</h>
@@ -1476,7 +1476,7 @@ UNIQUE(Port, ReplSetName)</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3006</x>
+      <x>3060</x>
       <y>2214</y>
       <w>270</w>
       <h>90</h>
@@ -1492,7 +1492,7 @@ UNIQUE(Port, ReplSetName)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2871</x>
+      <x>2925</x>
       <y>2250</y>
       <w>153</w>
       <h>36</h>
@@ -1504,7 +1504,7 @@ UNIQUE(Port, ReplSetName)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2511</x>
+      <x>2565</x>
       <y>2232</y>
       <w>144</w>
       <h>72</h>
@@ -1516,7 +1516,7 @@ UNIQUE(Port, ReplSetName)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2871</x>
+      <x>2925</x>
       <y>2115</y>
       <w>180</w>
       <h>126</h>
@@ -1528,7 +1528,7 @@ UNIQUE(Port, ReplSetName)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2844</x>
+      <x>2898</x>
       <y>2043</y>
       <w>108</w>
       <h>180</h>
@@ -1540,7 +1540,7 @@ UNIQUE(Port, ReplSetName)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2862</x>
+      <x>2916</x>
       <y>1386</y>
       <w>315</w>
       <h>837</h>
@@ -1552,7 +1552,7 @@ UNIQUE(Port, ReplSetName)</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2232</x>
+      <x>2286</x>
       <y>1962</y>
       <w>324</w>
       <h>144</h>
@@ -1571,7 +1571,7 @@ UNIQUE(Port, ReplSetName)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2547</x>
+      <x>2601</x>
       <y>2088</y>
       <w>216</w>
       <h>135</h>
@@ -1645,12 +1645,12 @@ to be sent over bus</panel_attributes>
     <coordinates>
       <x>1809</x>
       <y>1998</y>
-      <w>441</w>
+      <w>495</w>
       <h>81</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;310.0;10.0;310.0;70.0;470.0;70.0</additional_attributes>
+    <additional_attributes>10.0;10.0;310.0;10.0;310.0;70.0;530.0;70.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -1684,17 +1684,17 @@ ActualPersistentCount: uint</panel_attributes>
     <coordinates>
       <x>1953</x>
       <y>1773</y>
-      <w>297</w>
+      <w>351</w>
       <h>225</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;150.0;10.0;150.0;230.0;310.0;230.0</additional_attributes>
+    <additional_attributes>10.0;10.0;150.0;10.0;150.0;230.0;370.0;230.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>2457</x>
+      <x>2511</x>
       <y>2124</y>
       <w>162</w>
       <h>81</h>
@@ -1709,7 +1709,7 @@ they are resolved</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>2223</x>
+      <x>2277</x>
       <y>2178</y>
       <w>216</w>
       <h>72</h>
@@ -1724,7 +1724,7 @@ error objects on the bus.</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>2673</x>
+      <x>2727</x>
       <y>2097</y>
       <w>171</w>
       <h>63</h>
@@ -1738,7 +1738,7 @@ asynchonously</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>3168</x>
+      <x>3222</x>
       <y>1926</y>
       <w>189</w>
       <h>90</h>
@@ -1753,7 +1753,7 @@ to the Mongod</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2448</x>
+      <x>2502</x>
       <y>2097</y>
       <w>63</w>
       <h>45</h>
@@ -1764,7 +1764,7 @@ to the Mongod</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2286</x>
+      <x>2340</x>
       <y>2241</y>
       <w>45</w>
       <h>63</h>
@@ -1775,7 +1775,7 @@ to the Mongod</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2754</x>
+      <x>2808</x>
       <y>2151</y>
       <w>27</w>
       <h>72</h>
@@ -1786,7 +1786,7 @@ to the Mongod</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3114</x>
+      <x>3168</x>
       <y>1962</y>
       <w>72</w>
       <h>99</h>
@@ -1879,24 +1879,24 @@ the array is empty</panel_attributes>
     <coordinates>
       <x>2079</x>
       <y>738</y>
-      <w>153</w>
+      <w>207</w>
       <h>1620</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;100.0;10.0;100.0;1780.0;150.0;1780.0</additional_attributes>
+    <additional_attributes>10.0;10.0;100.0;10.0;100.0;1780.0;210.0;1780.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>2079</x>
       <y>720</y>
-      <w>1008</w>
+      <w>1062</w>
       <h>1341</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;110.0;10.0;110.0;1330.0;1100.0;1330.0;1100.0;1470.0</additional_attributes>
+    <additional_attributes>10.0;10.0;110.0;10.0;110.0;1330.0;1100.0;1330.0;1160.0;1470.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -2479,8 +2479,8 @@ Notifier
 +LongDescription: string
 +FirstOccurred: time.Time
 +LastUpdated: time.Time
-+Slave: uint
-+ReplicaSet: uint</panel_attributes>
++Slave: uint32
++ReplicaSet: uint32</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -2804,14 +2804,14 @@ m2=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2997</x>
+      <x>3051</x>
       <y>1260</y>
-      <w>846</w>
+      <w>792</w>
       <h>522</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>920.0;10.0;630.0;10.0;630.0;560.0;10.0;560.0</additional_attributes>
+    <additional_attributes>860.0;10.0;570.0;10.0;570.0;560.0;10.0;560.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
