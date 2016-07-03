@@ -27,7 +27,7 @@ slave_classes.pdf: class_diagram.pdf
 	$(PDFCROP_BIN) --bbox "0 1300 800 2320"  class_diagram.pdf $@
 
 msp_classes.pdf: class_diagram.pdf
-	$(PDFCROP_BIN) --bbox "700 1300 4000 2400"  class_diagram.pdf $@
+	$(PDFCROP_BIN) --bbox "830 1230 2400 2300"  class_diagram.pdf $@
 
 model_classes.pdf: class_diagram.pdf
 	$(PDFCROP_BIN) --bbox "700 140 2400 1200"  class_diagram.pdf $@
