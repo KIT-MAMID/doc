@@ -5,6 +5,7 @@ JAVA ?= `which java`
 PDFLATEX ?= pdflatex -synctex=1
 MAKEGLOSSARIES ?= makeglossaries
 INKSCAPE_BIN ?= `which inkscape`
+PDFCROP_BIN ?= `which pdfcrop`
 CURL_BIN ?= `which curl`
 
 # Internal commands
@@ -16,8 +17,25 @@ HTTPDL = $(CURL_BIN) -o $(2) '$(1)'
 .PHONY:
 all: design.pdf
 	
+class_diagram.pdf: uml/drafts/slave/sketches.uxf
+	$(call UMLET_CONVERT,$<,$@)
 
-design.pdf: *.tex
+activity_diagram.pdf: uml/drafts/activity_diagram_master.uxf
+	$(call UMLET_CONVERT,$<,$@)
+
+slave_classes.pdf: class_diagram.pdf
+	$(PDFCROP_BIN) --bbox "0 1300 800 2320"  class_diagram.pdf $@
+
+msp_classes.pdf: class_diagram.pdf
+	$(PDFCROP_BIN) --bbox "700 1300 4000 2400"  class_diagram.pdf $@
+
+model_classes.pdf: class_diagram.pdf
+	$(PDFCROP_BIN) --bbox "700 140 2400 1200"  class_diagram.pdf $@
+
+master_classes.pdf: class_diagram.pdf
+	$(PDFCROP_BIN) --bbox "2400 0 4000 700"  class_diagram.pdf $@
+
+design.pdf: *.tex class_diagram.pdf slave_classes.pdf msp_classes.pdf model_classes.pdf master_classes.pdf activity_diagram.pdf
 	$(PDFLATEX) design.tex
 	$(MAKEGLOSSARIES) design
 	$(PDFLATEX) design
@@ -36,5 +54,9 @@ clean:
 	rm -f design.glg
 	rm -f design.log
 	rm -f glossary.aux
-
+	rm -f class_diagram.pdf
+	rm -f slave_classes.pdf
+	rm -f msp_classes.pdf
+	rm -f model_classes.pdf
+	rm -f master_classes.pdf
 	rm -f design.pdf

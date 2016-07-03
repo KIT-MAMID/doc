@@ -1,0 +1,99 @@
+\section{Introduction}
+
+This document describes the design of the Application \mamid (\emph{Monitor and Manager for In-memory Databases}).
+
+It thorougly explains the architecture of a \mamid deployment, the distribution of responsibilites among the various components,
+individual Go structures, their methods and the relationships among them.
+
+While the textual documentation delivers detailed information on individual components, the various UML diagrams
+--- and in particular the class diagram --- clarify the interoperation between components and the architecture of \mamid.
+
+In order to facilitate lecture of this document, the reader should be familiar with the contents of the \emph{Functional Specification}
+document.\\
+In particular, the following sections of the \emph{Functional Specification} are crucial for proper understanding of the
+application design:
+\begin{itemize}
+  \item the technical terms introduced listed in the \emph{Glossary}
+  \item the naming of \mamid components as described in the \emph{System Model}.
+\end{itemize}
+
+\section{Deviation from the Functional Specification}
+
+%TODO
+
+gekuerzte wunschkriterien? was koennen wir sicher nicht mit diesem design? was verschieben wir auf die implementierung?
+
+(all components are designed with extensibility in mind. for many optional criteria, it is mostly a question of time constraints during the implementation phase, not a question of whether they are feasible or not)
+
+\section{Overview}
+
+\mamid is a manager for database clusters, facilitating creation, administration and monitoring of a MongoDB Replica Set deployment.
+
+Explicit support for volatile storage on primary Replica Set members with lower-prioritized secondaries on persistent
+storage is a key differentiator of \mamid.
+
+As the manager of such distributed systems with high-availibility requirements, \mamid faces a series of non-trivial problems:
+\begin{itemize}
+  \item unreliable hardware
+  \item unreliable communication between nodes
+  \item resilience against unexpected failures of the above 
+  \item finding a deployment layout that fulfills a set of availibility requirements
+  \item monitoring \& state tracking of the deployed MongoDB processes
+  \item abstraction of the above complexity from the administrator
+  %TODO more?
+\end{itemize}
+
+In order to achieve these goals, a distributed architecture is necessary.
+
+\mamid implements several well-established design patterns, facilitating understanding of design and implementation and improving
+testability of individual components.
+
+As specified in the \emph{Functional Specification}, the language of choice for all components but the GUI is \emph{Golang}.
+While \emph{Golang} is an object-oriented language, it differs from languages like \emph{Java} in certain critical approaches:
+\begin{itemize}
+  \item no generics
+  \item no classes, only \codeinline{struct} with \emph{method sets}
+  \item this is most notable in the lack of \emph{Constructors} and \emph{inheritance}
+  \item however, inhertance can be simulated to a certain degree through \emph{embedding} %TODO ref go spec
+\end{itemize}
+
+Overall, this leads to a situation where many traditional design patterns do not apply as well (as e.g. to Java) and hence need
+to be adopted.
+
+Given these constraints, \mamid still employs a variety of design patterns across its different components:
+
+% GUI Design pattersn
+The architecture of the \refgo{gui} follows the \textbf{Model-View-Controller} pattern.
+% is this actually MVC? @janis should elaborate on this.
+% TODO explain in short the idea of MVC proposed by Angular. It should be written down somewhere -> quote it
+
+% Master Design Patterns
+The \textbf{Client/server architecture pattern} is used to decouple the \refgo{gui} functionality from the \refgo{master}:
+The \refgo{gui} acts as a frontend to the functionality provided by the \refgo{master} HTTP API (\refgo{masterapi}).
+
+Being the most complex package of the project, several decoupling patterns are employed in the \refgo{master}:
+
+The \textbf{repository pattern} is the most one employed inside the \refgo{master}:
+The external \refgo{gorm} database abstraction layer holds several tables of the structures in \refgo{model}.\\
+\refgo{Monitor}, \refgo{ProblemManager}, \refgo{Deployer} and \refgo{ClusterAllocator} are loosely coupled and communicate mostly by
+modifying the database.\\
+Furthermore, a variation of the \textbf{publish/subsribe pattern} is implemented by the \refgo{master.Bus}.
+
+% MasterSlave Protocol
+The \textbf{remote proxy} decoupling pattern is employed in the {Master Slave Protocol (\refgo{msp}) package:
+it implements communication bewteen \refgo{master} and \refgo{slave}.
+\refgo{msp.MSPClient} exposes RPC stubs that call the the \refgo{msp.MSPConsumer} implemented on the \refgo{slave}.
+Another term used to describe this relationship between master and slaves is the \textbf{Multi-Server/Single-Client architecture}.
+%TODO or is it peer2peer? check SWT slides
+
+% Slave design patterns
+\textbf{Dependency injection} is employed extensively in both \refgo{master} and \refgo{slave} to increase testability through mocks.
+A good example for this are the references to \codeinline{gorm.DB} passed into \refgo{master.Monitor}, \refgo{ProblemManager},
+\refgo{Deployer} and \refgo{ClusterAllocator}.
+
+% Notification Manager patterns
+The \textbf{strategy pattern} is used inside the \refgo{notifier} to encapsulate the concrete notification delivery
+to per communication channel (\refgo{notifier.Notifier}, increasing extensibility for different communication channels in the future.
+% TODO actually a strategy or more of a template method?
+
+%TODO more design patterns

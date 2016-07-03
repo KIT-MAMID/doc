@@ -1,36 +1,51 @@
 \section{MasterSlaveProtocol}
 \renewcommand{\gocurpackage}{msp}
 
-The MasterSlaveProtocol \refgo{msp} implements communication between \refgo{slave} and \refgo{master}.
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{msp_classes}
+	\caption{MasterSlaveProtocol}
+\end{figure}
 
-\struct{MSPListener}{
-  Structure for handling communication through the MasterSlaveProtocol.
+The MasterSlaveProtocol \refgo{msp} implements communication between \refgo{slave} and \refgo{master}.\\
+There are two structures which may be sent directly over HTTP as request body, represented with JSON:
+\begin{itemize}
+  \item \codeinline{[]\reftype{Mongod}} An array of descriptions of all Mongod instances of that \refgo{slave}.
+  \item \codeinline{\reftype{SlaveError}} Sent (only) by \refgo{slave} in case there are general problems preventing observation of any running Mongod instances.
+\end{itemize}
+
+For several datastructures in \refgo{msp}, similar ones exist in  \refgo{model}. The reasoning behind this is the desire to have a
+stable protocol format for the \refgo{msp}: the JSON objects are auto-generated during runtime via reflection.
+Hence, duplication of datastructures is a necessary tradeoff in order to sustain the principle of information hiding.
+
+% server (slave) side structures
+\struct{Listener}{
+  Structure for handling communication through the MasterSlaveProtocol on the \refgo{slave} side.
 }{
-  \property{consumer}[MSPConsumer]{
+  \property{Consumer}[\reftype{Consumer}]{
     Reference to an event handler, typically a controller.
   }
 }{
   \method{Run}{
     Start listening for connections using the MasterSlaveProtocol.
     \begin{itemize}
-      \item Listen for incoming connections from the Master.
+      \item Listen for incoming connections from the \refgo{master}.
       \item Decode / Encode the transport format.
       \item Validate incoming request format.
-      \item Delegate valid requests to the MSPConsumer.
+      \item Delegate valid requests to the \reftype{Consumer}.
     \end{itemize}
   }
 }
 
-\interface{MSPConsumer}{
-  An MSPConsumer handles MasterSlaveProtocol requests received by an instance of \ref{slave:MSPListener}.
+\interface{Consumer}{
+  A Consumer handles MasterSlaveProtocol requests received by an instance of \reftype{Listener}.
 }{
-  \method{MSPStatusRequest}[SlaveStatus]{
+  \method{RequestStatus}[{(\reftype{SlaveStatus}, \reftype{SlaveError})}]{
     %TODO reference request message object here -> proto specification
     Request to provide a status report of the slave's state.
-    See \ref{msp:SlaveStatus} for details on the data returned by this method.
+    See \reftype{Mongod} for details on the data returned by this method.
   }
-  \method{MSPEstablishMongodState}[error](
-    \param{m}[MSP.Mongod]{State description of a mongod instance that shall be established}
+  \method{EstablishMongodState}[*\reftype{SlaveError}](
+    \param{m}[\reftype{Mongod}]{State description of a Mongod instance that shall be established.}
   ){
     %TODO reference request message object here -> proto specification
     Request to establish the configuration state $m$ of a MongoDB process on the slave.
@@ -39,3 +54,79 @@ The MasterSlaveProtocol \refgo{msp} implements communication between \refgo{slav
 }
 
 
+% client (master) side structures
+\struct{Client}{
+  Structure for handling communication through the MasterSlaveProtocol on the \refgo{master} side.
+}{
+  \item \textit{none}
+}{
+  \method{RequestStatus}[{([]\reftype{Mongod}, \reftype{error})}]{
+    Send a status request to the \refgo{slave} to retrieve all the running \reftype{Mongod} instances. May return an instance of \reftype{error} in case overall retrieving failed.
+  }
+  \method{EstablishMongodState}[*\reftype{CommunicationError}](
+    \param{m}[[]\reftype{Mongod}]{Array of \reftype{Mongod} instances to establish}
+  ){
+    Sends the array of \reftype{Mongod} instances to the \refgo{slave} which is tasked with creating and configuring the described processes.
+  }
+}
+
+
+% protocol specific structures
+\struct{Mongod}{
+  Datastructure describing a Mongod instance controlled by the slave.
+}{
+  \property{Port}[\reftype{PortNumber}]{The port the Mongod instance listens on.}
+  \property{ReplicaSetName}[string]{Identifier for the Replica Set the Mongod instance participates in.}
+  \property{ShardingConfigServer}[bool]{If \codeinline{true}, the Mongod's configuration should be such that it can work in a MongoDB Sharding Config Server Replica Set.}
+  \property{StatusError}[*\reftype{SlaveError}]{Set by \refgo{slave} when retrieving the status of the Mongod instance resulted in an error.}
+  \property{LastEstablishStateError}[*\reftype{SlaveError}]{The last \reftype{SlaveError} created upon executing \refgo{msp.MSPConsumer.EstablishMongodState}.\\
+       (\codeinline{nil} when sent by \refgo{master} or when state has successfully been established since the last establish request).}
+  \property{State}[\reftype{MongodState}]{State the Mongod instance is / should be in.}
+  \property{ReplicaSetMembers}[[]\reftype{HostPort}]{Members of the Mongod's Replica Set.\\
+      When sent in response to \refgo{msp.MSPConsumer.RequestStatus}, \refparam{ReplicaSetMembers} is based on what is reported by the running Mongod instance.}
+}
+
+\goenum{MongodState}{
+  Describes the state of a Mongod instance controlled by the slave.
+
+}{
+  \goenumitem{MongodStateDestroyed}{The Mongod instance is not running and all related data stored on the \refgo{slave} host is deleted. (only sent by \refgo{master})}
+  \goenumitem{MongodStateNotRunning}{The Mongod instance is not running but related data may be stored on the \refgo{slave}.}
+  \goenumitem{MongodStateRecovering}{The Mongod is running but not available for reads because data needs to be synced from other Replica Set members.
+                                     This is a common case when adding new members to an existing Replica Set. (only sent by \refgo{slave})}
+  \goenumitem{MongodStateRunning}{The Mongod instance is running and in sync with other Replica Set members.}
+}
+
+\struct{HostPort}{
+  Tuple of $(hostname, port)$.
+}{
+  \property{Hostname}[string]{The unique hostname of a machine resolvable by the slave.}
+  \property{Port}[PortNumber]{The TCP port on the host identified by \refproperty{Hostname}}
+}
+
+\typealias{PortNumber}[uint16]{
+  A TCP port number as specified in \href{https://tools.ietf.org/html/rfc793\#section-3.1}{RFC 793 Section 3.1}.
+}
+
+\interface{error}{
+  Generic interface for errors of the MasterSlaveProtocol. The \refgo{master.ProblemManager} will have to deal with the specific types of errors.
+}
+
+\struct{SlaveError}{
+  Description of an error in the slave, usually corresponding to a partial error when executing a request from the master.
+  See \refgo{msp.Mongod} for examples.
+}{
+  \property{Identifier}[string]{Unique identifier for the type of errror defined by the slave. Intended for communicating errors,
+                                e.g. in a remote support situation. }
+  \property{Description}[string]{Short human-readable description of the error, suitable for display in subject lines, etc.}
+  \property{LongDescription}[string]{Long human-readable description of the error.\\
+                                     Can contain the \codeinline{error.Error()} of one or more underlying errors or other useful
+                                     information for further debugging.}
+}
+
+\struct{CommunicationError}{
+  Description of an error generated on the \refgo{msp.MSPClient} side in case it cannot communicate properly with the \refgo{slave},
+  e.g. when reading or writing to the socket fails or the connection times out.
+}{
+  \property{Message}[string]{Failure message from internal Go functions or message about the timeout.}
+}

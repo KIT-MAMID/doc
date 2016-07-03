@@ -4,64 +4,73 @@
 \section{Master: Model}% cannot use subsections here because helpers macros have fixed sectioning-hierarchy
 \renewcommand{\gocurpackage}{model}
 
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{model_classes}
+	\caption{Model}
+\end{figure}
+
 The \refgo{model} package contains all datastructures used to model the cluster managed by \mamid.
 
-All datastructures in \refgo{model} are designed to be fully serializable \& usable with a database abstraction layer.
+The structures implementing the \codeinline{StatusMessage} interface are used to pass status information on the application internal bus (\refgo{master.Bus}).
+
+The other structures in \refgo{model} are stored in the database using a database abstraction layer.
 
 \struct{Slave}{
-	A \refstruct{Slave} models an instance of the \mamid slave application running on a host.
+  A \reftype{Slave} models an instance of the \mamid slave application running on a host.
 }{
   \property{Id}[uint]{Unique id.}
   \property{Hostname}[string]{Hostname of the host the slave is running on. \refproperty{Hostname} uniquely identifies a host in the cluster.} 
-  \property{Port}[uint]{Port on which the slave listens for connections from the master.}
-  \property{MongodPortRangeBegin}[uint]{Beginning of the range of ports \refstruct{Mongod} spawned by the slave may listen on (inclusive).}
-  \property{MongodPortRangeEnd}[uint]{End of the range of ports \refstruct{Mongod} spawned by the slave may listen on (exclusive).
+  \property{Port}[PortNumber]{Port on which the slave listens for connections from the master.}
+  \property{MongodPortRangeBegin}[PortNumber]{Beginning of the range of ports \reftype{Mongod} spawned by the slave may listen on (inclusive).}
+  \property{MongodPortRangeEnd}[PortNumber]{End of the range of ports \reftype{Mongod} spawned by the slave may listen on (exclusive).
       Implicitly specifies --- in combination with \refproperty{MongodPortRangeBegin} ---
-      how many concurrently running \refstruct{Mongod}s can be spawned by a slave.}
+      how many concurrently running \reftype{Mongod}s can be spawned by a slave.}
   \property{PersistentStorage}[bool]{Flag indicating whether the slave's data directory is located on persistent or volatile storage.}
       %todo ref location where it is mentioned that a slave is spawned with root data directory as a flag
-  \property{ConfiguredState}[\refenum{SlaveState}]{The state of the slave set by the user.}
-  \property{RiskGroup}[\refstruct{RiskGroup}]{The risk group the slave is a member of.}
-  \property{Mongods}[[]\refstruct{Mongod}]{The \refstruct{Mongod}s that are running or should be running on this slave.
-      Note that there may exist \refstruct{Mongods} that do not have a \refstruct{ParentSlave}.}
+  \property{ConfiguredState}[\reftype{SlaveState}]{The state of the slave set by the user.}
+  \property{RiskGroup}[\reftype{RiskGroup}]{The risk group the slave is a member of.}
+  \property{Mongods}[[]\reftype{Mongod}]{The \reftype{Mongod}s that are running or should be running on this slave.
+      Note that there may exist \reftype{Mongods} that do not have a \reftype{ParentSlave}.}
       %todo ref location where it is mentioned that the monitor may create Mongod instances, too.
 }
 
 \goenum{SlaveState}
 {}
 {
-	\goenumitem{Active}{Slaves in active mode are available to host Mongod instances. They are monitored and the administrator is notified of problems on the slave.}
-	\goenumitem{Maintenance}{Slaves in maintenance mode are not monitored but running Mongods will not be stopped.}
-	\goenumitem{Disabled}{Slaves in disabled mode are not monitored.
-            The \refgo{master.CluserAllocator} attempts to migrate Mongod instances from disabled slaves migrated to active slaves.\\
-            However, it will not violate or worsen availibility constraints imposed by the administrator.}
+  \goenumitem{Active}{Slaves in active mode are available to host Mongod instances. They are monitored and the administrator is notified of problems on the slave.}
+  \goenumitem{Maintenance}{Slaves in maintenance mode are not monitored but running Mongods will not be stopped.}
+  \goenumitem{Disabled}{
+    Slaves in disabled mode are not monitored.
+    The \refgo{master.CluserAllocator} attempts to migrate Mongod instances from disabled slaves migrated to active slaves.\\
+    However, it will not violate or worsen availibility constraints imposed by the administrator.
+  }
 }
 
 \struct{RiskGroup}{
-  A \refstruct{RiskGroup} models a set of slaves sharing a common risk of failure.
+  A \reftype{RiskGroup} models a set of slaves sharing a common risk of failure.
   
-  A \refstruct{Slave} always belongs to exactly one \refstruct{RiskGroups}.
+  A \reftype{Slave} always belongs to exactly one \reftype{RiskGroups}.
   Hence, \codeinline{RiskGroup}s are mutually disjoint.
 }{
   \property{Id}[uint]{Unique id.}
   \property{Name}[string]{Unique name of the risk group.}
-  \property{Slaves}[[]\refstruct{Slave}]{The \refstruct{Slave}s that are members of a the given instance of \refstruct{RiskGroup}.}
+  \property{Slaves}[[]\reftype{Slave}]{The \reftype{Slave}s that are members of a the given instance of \reftype{RiskGroup}.}
 }
 
 \struct{ReplicaSet}{
-	A \refstruct{ReplicaSet} models a MongoDB Replica Set consisting of multiple \refstruct{Mongod}s.
+  A \reftype{ReplicaSet} models a MongoDB Replica Set consisting of multiple \reftype{Mongod}s.
 
-        The degree of desired availbility \& redundancy of data stored in the Replica Set is modeled through 
-        \refproperty{PersistentMemberCount} and \refproperty{VolatileMemberCount}.
+  The degree of desired availbility \& redundancy of data stored in the Replica Set is modeled through 
+  \refproperty{PersistentMemberCount} and \refproperty{VolatileMemberCount}.
 }{
   \property{Id}[uint]{Unique id.}
   \property{Name}[string]{Name of the Replica Set.}
-  \property{PersistentMemberCount}[uint]{Number of persistent \refstruct{Mongod}s that should be part of this \refstruct{ReplicaSet}.}
-  \property{VolatileMemberCount}[uint]{Number of volatile \refstruct{Mongod}s that should be part of this \refstruct{ReplicaSet}.}
+  \property{PersistentMemberCount}[uint]{Number of persistent \reftype{Mongod}s that should be part of this \reftype{ReplicaSet}.}
+  \property{VolatileMemberCount}[uint]{Number of volatile \reftype{Mongod}s that should be part of this \reftype{ReplicaSet}.}
 }
 
 \struct{Mongod}{
-  An instance of \refstruct{Mongod} is uniquely identified by
+  An instance of \reftype{Mongod} is uniquely identified by
   \begin{itemize}
     \item its parent slave (the machine it is running on)
     \item the port it is listening on
@@ -85,19 +94,22 @@ All datastructures in \refgo{model} are designed to be fully serializable \& usa
   \end{figure}
 
 }{
-  \property{Port}[PortNumber]{Port number the Mongod is listening on.}
+  \property{Port}[PortNumber]{TCP Port number the Mongod is listening on.}
   \property{ReplSetName}[string]{Name of the Mongods Replica Set. A Mongod is always in exactly one Replica Set.}
-  \property{ObservationError}[error]{Latest error that occurred when attempting to update the \refproperty{Mongod.ObservedState}.\\
-                                     \codeinline{nil} if no error occurred on last attempt.}
-  \property{LastEstablishStateError}[SlaveError]{Latest error reported by the slave when attempting to establish
-                                                the \refproperty{Mongod.DesiredState}.\\
-                                                \codeinline{nil} if no error occurred on last attempt.}
-\property{DesiredState}[MongodState]{State the Mongod should be in. \codeinline{nil} if no desired state has been set.}
+  \property{ObservationError}[error]{
+    Latest error that occurred when attempting to update the \refproperty{ObservedState}.\\
+    \codeinline{nil} if no error occurred on last attempt.
+  }
+  \property{LastEstablishStateError}[SlaveError]{
+    Latest error reported by the slave when attempting to establish the \refproperty{DesiredState}.\\
+    \codeinline{nil} if no error occurred on last attempt.
+  }
+  \property{DesiredState}[MongodState]{State the Mongod should be in. \codeinline{nil} if no desired state has been set.}
   \property{ObservedState}[MongodState]{State the Mongod was last observed to be in. \codeinline{nil} if no observation has been made.}
 }
 
 \struct{MongodState}{
-        Description of state of a particular \refstruct{Mongod} that is not already contained in \refgo{model.Mongod}.
+        Description of state of a particular \reftype{Mongod} that is not already contained in \refgo{model.Mongod}.
 }{
   \property{IsShardingConfigServer}[bool]{indicates whether the Mongod is configured as a Sharding config server.}
   \property{ExecutionState}[MongodExecutionState]{execution state of the Mongod process.}
@@ -120,38 +132,41 @@ All datastructures in \refgo{model} are designed to be fully serializable \& usa
 \struct{HostPort}{
   Tuple of $(hostname, port)$ that is a Mongod's identifier for Replica Set members.
 }{
-  \property{Hostname}[string]{The hostname of the Replica Set member.\\
-                              For a given \refgo{model.HostPort.gostname} a \refgo{model.Slave}
-                              with the same \codeinline{Hostname} should exist.\\
-                              Otherwise, there exists a Mongod in the cluster that is not managed by \mamid.}
-  \property{Port}[PortNumber]{The port on the host identified by \refproperty{Hostname} on which the
-                              Replica Set member is listening.}
+  \property{Hostname}[string]{
+    The hostname of the Replica Set member.\\
+    For a given \codeinline{Hostname} a \refgo{model.Slave} with the same \codeinline{Hostname} should exist.\\
+    Otherwise, there exists a Mongod in the cluster that is not managed by \mamid.
+  }
+  \property{Port}[PortNumber]{
+    The port on the host identified by \refproperty{Hostname} on which theReplica Set member is listening.
+  }
 }
 
-\subsection{Type Alias \codeinline{PortNumber $\equiv$ uint16}}\label{\gocurpackage.PortNumber}
-
-A TCP port number as specified in \href{https://tools.ietf.org/html/rfc793#section-3.1}{RFC 793 Section 3.1}.
+\typealias{PortNumber}[uint16]{
+  A TCP port number as specified in \href{https://tools.ietf.org/html/rfc793\#section-3.1}{RFC 793 Section 3.1}.
+}
 
 \struct{Problem}{
   Representation of a problem or error that occurred during operation of the \refgo{master}.
 
-  The references to \refstruct{Slave}, \refstruct{ReplicaSet} and \refstruct{Mongod} enable searchability
-  of the \refstruct{Problem} list.
+  The references to \reftype{Slave}, \reftype{ReplicaSet} and \reftype{Mongod} enable searchability
+  of the \reftype{Problem} list.
   If all references are \codeinline{nil}, the problem is still legitimate and should be reported by a user interface or alerting system.
 
-  See \refgo{master.ProblemManager} for the transformation from errors to \refgo{master.Problem}.
+  See \refgo{master.ProblemManager} for the transformation from errors to this structure.
 }{
-  \property{Id}[uint]{Unique ID of the problem. If the \emph{same} problem occurrs after it was resolved before,
-                      its different incarnations are distinguishable by their \refproperty{Id}.}
-                      %TODO really necessary? problem is uniquely identified by (Slave, ReplicaSet, Mongod)
+  \property{Id}[uint]{
+    Unique ID of the problem. If the \emph{same} problem occurrs after it was resolved before,
+    its different incarnations are distinguishable by their \refproperty{Id}.
+  }
+  %TODO really necessary? problem is uniquely identified by (Slave, ReplicaSet, Mongod)
   \property{Description}[string]{Short human-readable description of the problem, suitable for subject lines of error messages.}
-  \property{LongDescription}[string]{Long human-readable description of the problem.\\
-                                     Can contain the \codeinline{error.Error()} of one or more underlying errors.}
+  \property{LongDescription}[string]{Long human-readable description of the problem.}
   \property{FirstOccurred}[time.Time]{The point in time when the particular problem first occurred.}
   \property{LastUpdated}[time.Time]{The point in time when the particular problem was last observed, e.g. the time of the last monitor run.}
-  \property{Slave}[*Slave]{A reference to a \refstruct{Slave} from which the problem originated. May be \codeinline{nil}}
-  \property{ReplicaSet}[*ReplicaSet]{A reference to a \refstruct{ReplicaSet} form which the problem originated. May be \codeinline{nil}}
-  \property{Mongod}[*Mongod]{A reference to a \refstruct{Mongod} from where the problem originated. May be \codeinline{nil}}
+  \property{Slave}[*Slave]{A reference to a \reftype{Slave} from which the problem originated. May be \codeinline{nil}}
+  \property{ReplicaSet}[*\reftype{ReplicaSet}]{A reference to a \reftype{ReplicaSet} form which the problem originated. May be \codeinline{nil}}
+  \property{Mongod}[*Mongod]{A reference to a \reftype{Mongod} from where the problem originated. May be \codeinline{nil}}
 }
 
 data transfer objects (used to communicate via the master.Bus)
@@ -160,40 +175,40 @@ data transfer objects (used to communicate via the master.Bus)
 {
   Represents whether the \refgo{master.ClusterAllocator} can satisfy the constraints on a Replica Set given by
   \begin{itemize}
-    \item the persistent and volatile member counts of the \refstruct{ReplicaSet}
-    \item the maximum number of \refstruct{Mongod}s on the \refstruct{Slave}s
-    \item the \refstruct{RiskGroup}s
+    \item the persistent and volatile member counts of the \reftype{ReplicaSet}
+    \item the maximum number of \reftype{Mongod}s on the \reftype{Slave}s
+    \item the \reftype{RiskGroup}s
   \end{itemize}
 }{
   \property{Unsatisfied}[bool]{Whether the constraint cannot be satisfied.}
-  \property{ReplicaSet}[\refstruct{ReplicaSet}]{The Replica Set whose constraints can/cannot be fulfilled}
-  \property{ActualVolatileCount}[uint]{The count of volatile members the Replica Set now has because the constraints are not fulfilled. If they are fullfilled this is the same as \refstruct{ReplicaSet.VolatileMemberCount}.}
-  \property{ActualPersistentCount}[uint]{The count of persistent members the Replica Set now has because the constraints are not fulfilled. If they are fullfilled this is the same as \refstruct{ReplicaSet.PersistentMemberCount}.}
+  \property{ReplicaSet}[\reftype{ReplicaSet}]{The Replica Set whose constraints can/cannot be fulfilled}
+  \property{ActualVolatileCount}[uint]{The count of volatile members the Replica Set now has because the constraints are not fulfilled. If they are fullfilled this is the same as \reftype{ReplicaSet.VolatileMemberCount}.}
+  \property{ActualPersistentCount}[uint]{The count of persistent members the Replica Set now has because the constraints are not fulfilled. If they are fullfilled this is the same as \reftype{ReplicaSet.PersistentMemberCount}.}
 }
 
 \struct{MongodMatchStatus}
 {
-  Represents whether the observed and desired state of a \refstruct{Mongod} do not match.
+  Represents whether the observed and desired state of a \reftype{Mongod} do not match.
 }{
   \property{Mismatch}[bool]{Whether the stated do not match.}
-  \property{Mongod}[\refstruct{Mongod}]{The mongod whose states do/do not match}
+  \property{Mongod}[\reftype{Mongod}]{The mongod whose states do/do not match}
 }
 
 \struct{ConnectionStatus}
 {
-  Represents whether a \refstruct{Slave} cannot be reached from the master.
+  Represents whether a \reftype{Slave} cannot be reached from the master.
 }{
   \property{Mismatch}[bool]{Whether the slave cannot be reached.}
-  \property{Slave}[\refstruct{Mongod}]{The slave that can/cannot be reached}
+  \property{Slave}[\reftype{Mongod}]{The slave that can/cannot be reached}
   \property{CommunicationError}[\refgo{msp.CommunicationError}]{The error that occurred when trying to reach the slave. \codeinline{nil} if slave can be reached}
 }
 
 \struct{ObservedReplicaSetConstraintStatus}
 {
-  Represents whether the observed member counts of a \refstruct{ReplicaSet} do not match \refstruct{ReplicaSet.VolatileMemberCount} and \refstruct{ReplicaSet.PersistentMemberCount}
+  Represents whether the observed member counts of a \reftype{ReplicaSet} do not match \reftype{ReplicaSet.VolatileMemberCount} and \reftype{ReplicaSet.PersistentMemberCount}
 }{
   \property{Unsatisfied}[bool]{Whether the counts do not match.}
-  \property{ReplicaSet}[\refstruct{ReplicaSet}]{The Replica Set whose counts do not match.}
+  \property{ReplicaSet}[\reftype{ReplicaSet}]{The Replica Set whose counts do not match.}
   \property{ActualVolatileCount}[uint]{The observed volatile member count of the Replica Set.}
   \property{ActualPersistentCount}[uint]{The observed persistent member count of the Replica Set.}
 }
@@ -202,21 +217,44 @@ data transfer objects (used to communicate via the master.Bus)
 \section{Master: Main Package}
 \renewcommand{\gocurpackage}{master}
 
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{master_classes}
+	\caption{Master}
+\end{figure}
+
 The Master (\refgo{master}) is the most complex component of \mamid.
 
-fulfills many diff tasks, running in separate goroutines
+It fulfills many different tasks, running in separate goroutines.
 
-different tasks need to communicate with each other
-  shared persistent database with ORM abstraction 'gorm' => see model for which objcets
-  status information (similar to observer pattern), realized through a Bus that leverages Golang's channels
-    messages sent over bus are structs suffixed with .*Status
-    generally, bus messages are sent repeatedly => != edge-triggered notifications
-    encapsulate enough information about a type of status of an object in the database
-      other components on the bus can react to information
-=> loose coupling of components
+Different tasks need to communicate with each other. We use two mechanisms for that:
+\begin{itemize}
+	\item A shared persistent database with an ORM abstraction layer => see model for which objects
+	\item A \reftype{Bus} that leverages golang's channels to send status updates. => *Status Objects %TODO
+\end{itemize}
+This helps couple the different components loosely.
+
+\struct{Bus}{
+	The \reftype{Bus} is used by the different components of the master to share and react to status updates.
+	At the start of the application channels for all the components are created and passed into the components.
+	The components can then use this channel to broadcast messages to the other components and receive messages
+	from the Bus from which they can filter the ones they are interested in.
+	
+	All messages sent over the bus carry the current state not state changes and are
+	sent repeatedly not just on state change (i.e. level triggered instead of edge triggered).
+	
+	\begin{figure}[H]
+		\includegraphics[width=\textwidth]{activity_diagram}
+		\caption{Communication inside the master over the Bus}
+	\end{figure}
+}{
+	\property{channels}[[]chan interface\{\}]{The channels the Bus will broadcast the messages to.}
+}{
+	\method{GetNewChannel}[chan interface\{\}]{Creates a new channel that is attached to the Bus.
+		The new channel will be added to \refproperty{channels} and returned to the caller}
+}
 
 \struct{Deployer}{
-	The \refstruct{Deployer} listens on the bus for \refgo{model.MongodMismatchStatus} objects with \refgo{Mismatch} set to true and deployes the desired state of the affected mongod using the \refgo{msp.MSPClient}
+	The \reftype{Deployer} listens on the bus for \refgo{model.MongodMismatchStatus} objects with \refgo{Mismatch} set to true and deployes the desired state of the affected mongod using the \refgo{msp.MSPClient}
 }{
 	\property{DB}[gorm.DB]{Initialized handle to the database.}
 	\property{BusChannel}[chan interface\{\}]{Initialized channel to the application bus.}
@@ -231,7 +269,7 @@ different tasks need to communicate with each other
 }
 
 \struct{Monitor}{
-	The \refstruct{Monitor} uses the \refgo{msp.MSPClient} to ask all slaves for their mongod's states, saves the observed state in the database and compares the observed state to the desired state from the database. It publishes \refgo{model.MongodMismatchStatus} objects with the result of each comparison on the bus.
+	The \reftype{Monitor} uses the \refgo{msp.MSPClient} to ask all slaves for their mongod's states, saves the observed state in the database and compares the observed state to the desired state from the database. It publishes \refgo{model.MongodMismatchStatus} objects with the result of each comparison on the bus.
 }{
 	\property{DB}[gorm.DB]{Initialized handle to the database.}
 	\property{BusChannel}[chan interface\{\}]{Initialized channel to the application bus.}
@@ -246,7 +284,7 @@ different tasks need to communicate with each other
 }
 
 \struct{ProblemManager}{
-	The \refstruct{ProblemManager} listens on the bus for \refgo{model.StatusMessage}s, checks if they represent an error and generates or removes a problem and saves the changes in the database.
+	The \reftype{ProblemManager} listens on the bus for \refgo{model.StatusMessage}s, checks if they represent an error and generates or removes a problem and saves the changes in the database.
 }{
 	\property{DB}[gorm.DB]{Initialized handle to the database.}
 	\property{BusChannel}[chan interface\{\}]{Initialized channel to the application bus.}
@@ -263,7 +301,7 @@ different tasks need to communicate with each other
 }
 
 \struct{ClusterAllocator}{
-  The \refstruct{ClusterAllocator} determines the layout of the cluster managed by \mamid.
+  The \reftype{ClusterAllocator} determines the layout of the cluster managed by \mamid.
 
   It attempts to fulfill the constraints defined through the model objects, in particular
   \begin{itemize}
@@ -282,9 +320,10 @@ different tasks need to communicate with each other
     \item is a minimal change in comparison to the previous layout
   \end{itemize}
 
-  \begin{theorem}{Idempotence of the ClusterAllocator}
+  \begin{theorem}[Idempotence of the ClusterAllocator]
     \label{theorem:idempotence_clusterallocator}
-    Let $l$ be a layout of the cluster. Then $ClusterAllocator(ClusterAllocator(l)) = ClusterAllocator(l)$.
+    Let $l$ be a layout of the cluster. Then
+          \[\text{ClusterAllocator}(\text{ClusterAllocator}(l)) =\text{ ClusterAllocator}(l)\].
   \end{theorem}
 
 }{
@@ -296,7 +335,7 @@ different tasks need to communicate with each other
 
 \subsubsection{Pseudocode}
 
-The \refstruct{master.ClusterAllocator} is crucial to the stable operation of the \mamid-managed cluster.\\
+The \reftype{master.ClusterAllocator} is crucial to the stable operation of the \mamid-managed cluster.\\
 Hence, it is worth defining the implementation of \refgo{master.ClusterAllocator.LayoutCluster} through pseudocode. %TODO parentheses
 
 While studying the algorithms below, the reader should keep in mind that
