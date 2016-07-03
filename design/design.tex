@@ -154,8 +154,8 @@
   \IfHasLabel{#1}{%
     \hyperref[#1]{\codeinline{\refgosymboltext{#1}}}%
   }{%
-   % \codeinline{#1}%
-   \colorbox{red}{\texttt{#1}}%
+   \codeinline{#1}%
+   %\colorbox{red}{\texttt{#1}}%
   }%
   \let\refdisplaytext\undefined%
 }
@@ -165,8 +165,8 @@
 	\IfHasLabel{#1}{%
 		\sloppy\hyperref[#1]{\codeinline{#2}}%
 	}{%
-	% \codeinline{#1}%
-	\colorbox{red}{\texttt{#1}}%
+	\codeinline{#1}%
+	%\colorbox{red}{\texttt{#1}}%
 }%
 \let\refdisplaytext\undefined%
 }
