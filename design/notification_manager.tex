@@ -14,11 +14,10 @@ The implementation is generic enough to support a variety of different communica
 However, in the basic implementation, only email notifications are supported.
 
 \struct{Controller}{
-	Imports CLIFlagParser to parse command line parameters, such as the path to the contacts file.
-	Imports os, io and fmt to parse the contacts file.
-	Receives problems via \reftype{APIClient}.\\
-	Determines which problems should be sent.\\
-        Calls implementations of \refgo{notifier.Notifier} for delivery of notifications.	
+        The \reftype{Controller} coordinates the flow of events and information inside the \refgo{notifier}.
+
+        It leverages a command line flags parser, the contacts file \reftype{Parser}, \reftype{APIClient} and \reftype{Notifier}
+        to realize the required functionality.
 }{
 	\property{lastProblems}[[]Problem]{
 		List of recent problems.
@@ -27,10 +26,12 @@ However, in the basic implementation, only email notifications are supported.
 	\method{main}
 	{
 		A Go application starts by initializing the Go 'main' package and then running the \textit{main()} function.
+
+                The \reftype{Notifier} works in a loop:
 		\begin{itemize}
-			\item Receives problems through the \reftype{APIClient}.
-			\item Uses \refmethod{diffProblems} to decide which should be sent.
-			\item Uses \refmethod{notify} to handle delivery of notifications via a \reftype{Notifier}.
+                        \item Receive a list of \reftype{Problem} through the \reftype{APIClient}.
+                        \item Call \refmethod{diffProblems} to determine which new \codeinline{Problems} occured..
+			\item Call \refmethod{notify} to handle delivery of notifications via a \reftype{Notifier}.
 		\end{itemize}
 	}
 	\method{diffProblems}[[]Problem](
