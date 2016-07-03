@@ -19,6 +19,20 @@ application design:
 
 \section{Deviation from the Functional Specification}
 
+The design phase revealed flaws in the \emph{Functional Specification} that have been addressed as follows.
+
+\subsection{Root Data Directory (MC80, F40, Section 9.3.1)}
+
+The \emph{Root Data Directory} is no longer specified in the master's inventory using the GUI.\\
+Instead, it is passed directly to the slave via a command line flag parsed by the slave executable.
+
+Changing the value on a slave with \refgo{msp.MongodState.Running} \codeinline{Mongods} results in a situation where either
+all Mongds on the slave need to be temporarily destroyed or a special-case transition needs to be implemented.
+Neither alternative is desirable.
+
+Furthermore, changing the value is usually related to manual administrative action on the specific slave host.\\
+Hence, moving the parameter to the command line flags of the slave simplifies both implementation and administrative work.
+
 %TODO
 
 gekuerzte wunschkriterien? was koennen wir sicher nicht mit diesem design? was verschieben wir auf die implementierung?
