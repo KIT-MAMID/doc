@@ -30,7 +30,7 @@ The other structures in \refgo{model} are stored in the database using a databas
   \property{ConfiguredState}[\reftype{SlaveState}]{The state of the slave set by the user.}
   \property{RiskGroup}[\reftype{RiskGroup}]{The risk group the slave is a member of.}
   \property{Mongods}[[]\reftype{Mongod}]{The \reftype{Mongod}s that are running or should be running on this slave.
-      Note that there may exist \reftype{Mongods} that do not have a \reftype{ParentSlave}.}
+      Note that there may exist \reftype{Mongod}s that do not have a \refgoalt{model.Mongod.ParentSlave}{ParentSlave}.}
       %todo ref location where it is mentioned that the monitor may create Mongod instances, too.
 }
 
@@ -41,8 +41,8 @@ The other structures in \refgo{model} are stored in the database using a databas
   \goenumitem{Maintenance}{Slaves in maintenance mode are not monitored but running Mongods will not be stopped.}
   \goenumitem{Disabled}{
     Slaves in disabled mode are not monitored.
-    The \refgo{master.CluserAllocator} attempts to migrate Mongod instances from disabled slaves migrated to active slaves.\\
-    However, it will not violate or worsen availibility constraints imposed by the administrator.
+    The \refgo{master.ClusterAllocator} attempts to migrate Mongod instances from disabled slaves to active slaves.\\
+    However, it will not violate or worsen availability constraints imposed by the administrator.
   }
 }
 
@@ -94,18 +94,19 @@ The other structures in \refgo{model} are stored in the database using a databas
   \end{figure}
 
 }{
-  \property{Port}[PortNumber]{TCP Port number the Mongod is listening on.}
+  \property{Port}[\reftype{PortNumber}]{TCP Port number the Mongod is listening on.}
   \property{ReplSetName}[string]{Name of the Mongods Replica Set. A Mongod is always in exactly one Replica Set.}
   \property{ObservationError}[error]{
     Latest error that occurred when attempting to update the \refproperty{ObservedState}.\\
     \codeinline{nil} if no error occurred on last attempt.
   }
-  \property{LastEstablishStateError}[SlaveError]{
+  \property{LastEstablishStateError}[\refgo{msp.SlaveError}]{
     Latest error reported by the slave when attempting to establish the \refproperty{DesiredState}.\\
     \codeinline{nil} if no error occurred on last attempt.
   }
-  \property{DesiredState}[MongodState]{State the Mongod should be in. \codeinline{nil} if no desired state has been set.}
-  \property{ObservedState}[MongodState]{State the Mongod was last observed to be in. \codeinline{nil} if no observation has been made.}
+  \property{DesiredState}[\reftype{MongodState}]{State the Mongod should be in. \codeinline{nil} if no desired state has been set.}
+  \property{ObservedState}[\reftype{MongodState}]{State the Mongod was last observed to be in. \codeinline{nil} if no observation has been made.}
+  \property{ParentSlave}[\reftype{Slave}]{Slave this Mongod is or should be running on}
 }
 
 \struct{MongodState}{
