@@ -29,9 +29,7 @@ The other structures in \refgo{model} are stored in the database using a databas
       %todo ref location where it is mentioned that a slave is spawned with root data directory as a flag
   \property{ConfiguredState}[\reftype{SlaveState}]{The state of the slave set by the user.}
   \property{RiskGroup}[\reftype{RiskGroup}]{The risk group the slave is a member of.}
-  \property{Mongods}[[]\reftype{Mongod}]{The \reftype{Mongod}s that are running or should be running on this slave.
-      Note that there may exist \reftype{Mongod}s that do not have a \refgoalt{model.Mongod.ParentSlave}{ParentSlave}.}
-      %todo ref location where it is mentioned that the monitor may create Mongod instances, too.
+  \property{Mongods}[[]\reftype{Mongod}]{The \reftype{Mongod}s that are running or should be running on this slave.}
 }
 
 \goenum{SlaveState}
