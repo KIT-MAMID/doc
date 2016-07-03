@@ -4,8 +4,14 @@
 	\includegraphics[width=\textwidth]{gui_classes}
 	\caption{GUI}
 \end{figure}
-The \refgo{gui} is built with AngularJS. The model is defined within AngularJS by the returned JSON object structure of the master API (see \ref{masterapi:apiobjects}). "[In AngularJS] the purpose of controllers is to expose variables and functionality to expressions and directives"\footnote{\url{https://docs.angularjs.org/guide/concepts\#controller}}. The view functions are abstracted into AngularJS, so the "render"-calls in the UML are placeholders for the work of Angluar. The views itself are HTML files.
-%TODO remark about AngularJS in the beginning of the package description
+The \refgo{gui} is built with AngularJS.
+The model is defined within AngularJS by the returned JSON object structure of the master API (see \ref{masterapi:apiobjects}).
+
+"[In AngularJS] the purpose of controllers is to expose variables and functionality to
+expressions and directives"\footnote{\url{https://docs.angularjs.org/guide/concepts\#controller}}.
+
+The view functions are abstracted into AngularJS, so the \codeinline{render}-calls in the UML are placeholders for the work of Angluar.
+The views themselves are HTML files.
 
 \jsview{Main}{Displays the main page with the latest 5 current slave problems and the latest 5 Replica Set problems as well as
 	a pie chart showing the distribution of slave states in the system.}
