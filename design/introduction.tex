@@ -41,7 +41,7 @@ The design phase revealed flaws in the \emph{Functional Specification} that have
 The \emph{Root Data Directory} is no longer specified in the master's inventory using the GUI.\\
 Instead, it is passed directly to the slave via a command line flag parsed by the slave executable.
 
-Changing the value on a slave with \refgo{msp.MongodState.Running} \codeinline{Mongods} results in a situation where either
+Changing the value on a slave with \refgoalt{msp.MongodState.MongodStateRunning}{Running} \codeinline{Mongods} results in a situation where either
 all Mongds on the slave need to be temporarily destroyed or a special-case transition needs to be implemented.
 Neither alternative is desirable.
 
@@ -122,7 +122,7 @@ The \refgo{gui} acts as a frontend to the functionality provided by the \refgo{m
 Being the most complex package of the project, several decoupling patterns are employed in the \refgo{master}:
 
 The \textbf{repository pattern} is the most one employed inside the \refgo{master}:
-The external \refgo{gorm} database abstraction layer holds several tables of the structures in \refgo{model}.\\
+The external \codeinline{gorm} database abstraction layer holds several tables of the structures in \refgo{model}.\\
 \refgoalt{master.Monitor}{Monitor},  \refgoalt{master.ProblemManager}{ProblemManager},
 \refgoalt{master.Deployer}{Deployer} and  \refgoalt{master.ClusterAllocator}{ClusterAllocator} are loosely coupled and communicate mostly by
 modifying the database.\\
@@ -131,7 +131,7 @@ Furthermore, a variation of the \textbf{publish/subsribe pattern} is implemented
 % MasterSlave Protocol
 The \textbf{remote proxy} decoupling pattern is employed in the {Master Slave Protocol (\refgo{msp}) package:
 it implements communication bewteen \refgo{master} and \refgo{slave}.
-\refgo{msp.MSPClient} exposes RPC stubs that call the the \refgo{msp.MSPConsumer} implemented on the \refgo{slave}.
+\refgo{msp.Client} exposes RPC stubs that call the the \refgo{msp.Consumer} implemented on the \refgo{slave}.
 Another term used to describe this relationship between master and slaves is the \textbf{Multi-Server/Single-Client architecture}.
 %TODO or is it peer2peer? check SWT slides
 
