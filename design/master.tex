@@ -191,7 +191,7 @@ The other structures in \refgo{model} are stored in the database using a databas
   Represents whether the observed and desired state of a \reftype{Mongod} do not match.
 }{
   \property{Mismatch}[bool]{Whether the stated do not match.}
-  \property{Mongod}[\reftype{Mongod}]{The mongod whose states do/do not match}
+  \property{Mongod}[\reftype{Mongod}]{The Mongod whose states do/do not match}
 }
 
 \struct{ConnectionStatus}
@@ -254,7 +254,7 @@ This helps couple the different components loosely.
 }
 
 \struct{Deployer}{
-	The \reftype{Deployer} listens on the bus for \refgo{model.MongodMatchStatus} objects with \refgoalt{model.MongodMatchStatus.Mismatch}{Mismatch} set to true and deployes the desired state of the affected mongod using the \refgo{msp.Client}
+	The \reftype{Deployer} listens on the bus for \refgo{model.MongodMatchStatus} objects with \refgoalt{model.MongodMatchStatus.Mismatch}{Mismatch} set to true and deployes the desired state of the affected Mongod using the \refgo{msp.Client}
 }{
 	\property{DB}[gorm.DB]{Initialized handle to the database.}
 	\property{BusChannel}[chan interface\{\}]{Initialized channel to the application bus.}
@@ -262,22 +262,22 @@ This helps couple the different components loosely.
 	\method{Run}{Waits for \refgo{model.MongodMatchStatus} objects and runs \refmethod{pushMongodState} when a mismatch occurrs.}
 	\method{pushMongodState}
 	(
-		\param{mongod}[model.Mongod]{The mongod to push the state to.}
+		\param{mongod}[model.Mongod]{The Mongod to push the state to.}
 	){
 		Gets the desired state of \refparam{mongod} from the database and pushes it using the \refgo{msp.Client}.
 	}
 }
 
 \struct{Monitor}{
-	The \reftype{Monitor} uses the \refgo{msp.Client} to ask all slaves for their mongod's states, saves the observed state in the database and compares the observed state to the desired state from the database. It publishes \refgo{model.MongodMatchStatus} objects with the result of each comparison on the bus.
+	The \reftype{Monitor} uses the \refgo{msp.Client} to ask all slaves for their Mongod's states, saves the observed state in the database and compares the observed state to the desired state from the database. It publishes \refgo{model.MongodMatchStatus} objects with the result of each comparison on the bus.
 }{
 	\property{DB}[gorm.DB]{Initialized handle to the database.}
 	\property{BusChannel}[chan interface\{\}]{Initialized channel to the application bus.}
 }{
-	\method{Run}{Periodically fetches the mongods' states from the slaves, saves it in the database, compares it to the desired state using \refmethod{compareStates} and publishes the result on the bus as a \refgo{model.MongodMatchStatus} object.}
+	\method{Run}{Periodically fetches the Mongods' states from the slaves, saves it in the database, compares it to the desired state using \refmethod{compareStates} and publishes the result on the bus as a \refgo{model.MongodMatchStatus} object.}
 	\method{compareStates}[MongodMatchStatus]
 	(
-		\param{mongod}[model.Mongod]{The mongod to compare the state of}
+		\param{mongod}[model.Mongod]{The Mongod to compare the state of}
 	){
 		Compares the \refgo{model.Mongod.ObservedState} and \refgo{model.Mongod.DesiredState} for mismatches and returns the result as a \refgo{model.MongodMatchStatus}.
 	}

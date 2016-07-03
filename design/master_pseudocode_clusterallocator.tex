@@ -38,7 +38,7 @@ $p_e, v_e = 0$
 Given Algorithm \ref{alg:EffectiveMemberCount}, we can now proceed with the removal of superfluous Replica Set members.
 
 \begin{algorithm}[H]
-\caption{Destroy members of disabled replica sets where possible without violating p/v constraints.}
+\caption{Destroy members of disabled Replica Sets where possible without violating p/v constraints.}
 \ForEach{r in ReplicaSets}{
 	
 	$p_e, v_e \gets $ EffectiveRunningMembers(r)
@@ -96,7 +96,7 @@ Again, we need to examine the current state of the cluster.
 }
 \end{algorithm}
 
-Knowing the needs of individual replica sets, we spawn new Mongod processes as needed.\\
+Knowing the needs of individual Replica Sets, we spawn new Mongod processes as needed.\\
 Spawning of processes is constrained by
 \begin{itemize}
   \item the Risk Group memberships of the slaves
