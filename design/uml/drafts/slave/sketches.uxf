@@ -1210,13 +1210,14 @@ r2=Slaves</panel_attributes>
       <x>1683</x>
       <y>1917</y>
       <w>279</w>
-      <h>135</h>
+      <h>153</h>
     </coordinates>
     <panel_attributes>Problem
 --
 +Id: uint
 +Description: string
 +LongDescription: string
++ProblemType: uint
 +FirstOccurred: time.Time
 +LastUpdated: time.Time
 +Slave: *Slave

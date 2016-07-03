@@ -162,6 +162,7 @@ The other structures in \refgo{model} are stored in the database using a databas
   %TODO really necessary? problem is uniquely identified by (Slave, ReplicaSet, Mongod)
   \property{Description}[string]{Short human-readable description of the problem, suitable for subject lines of error messages.}
   \property{LongDescription}[string]{Long human-readable description of the problem.}
+  \property{ProblemType}[uint]{Identifies the \codeinline{StatusMessage} type this problem originated from. Used to check if a problem of the same type for the same \codeinline{ReplicaSet}/\codeinline{Slave}/\codeinline{Mongod} already exists.}
   \property{FirstOccurred}[time.Time]{The point in time when the particular problem first occurred.}
   \property{LastUpdated}[time.Time]{The point in time when the particular problem was last observed, e.g. the time of the last monitor run.}
   \property{Slave}[*Slave]{A reference to a \reftype{Slave} from which the problem originated. May be \codeinline{nil}}
@@ -169,7 +170,7 @@ The other structures in \refgo{model} are stored in the database using a databas
   \property{Mongod}[*Mongod]{A reference to a \reftype{Mongod} from where the problem originated. May be \codeinline{nil}}
 }
 
-data transfer objects (used to communicate via the master.Bus)
+%data transfer objects (used to communicate via the master.Bus)
 
 \struct{DesiredReplicaSetConstraintStatus}
 {
