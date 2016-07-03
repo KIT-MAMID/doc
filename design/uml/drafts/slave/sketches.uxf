@@ -1864,7 +1864,7 @@ CommunicationError: msp.CommunicationError</panel_attributes>
       <w>153</w>
       <h>1620</h>
     </coordinates>
-    <panel_attributes>lt=.
+    <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
     <additional_attributes>10.0;10.0;80.0;10.0;80.0;1780.0;150.0;1780.0</additional_attributes>
   </element>
