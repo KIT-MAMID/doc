@@ -41,8 +41,14 @@ The \refgo{gui} is built with AngularJS. The model is defined by the returned JS
 	\end{itemize}
 }
 
-\jscontroller{slaveById}{}
-
+\jscontroller{slaveById}{
+		\begin{itemize}
+			\item Uses \refgo{masterapi.slaves.getById} to get a specific slave.
+			\item Uses \refgo{masterapi.slaves.update} to update a specific slave.
+			\item Uses \refgo{masterapi.slaves.delete} to delete a specific slave.
+			\item Uses \refgo{masterapi.slaves.getProblems} to get the problems of a specific slave.
+		\end{itemize}
+}
 \jscontroller{replicaSetById}{}
 
 \jscontroller{riskGroupIndex}{
