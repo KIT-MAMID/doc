@@ -7,7 +7,8 @@
 The \refgo{gui} is built with AngularJS. The model is defined by the returned JSON object structure of the master API (see \ref{masterapi:apiobjects}).
 %TODO remark about AngularJS in the beginning of the package description
 
-\jsview{Main}{Displays the main page.}
+\jsview{Main}{Displays the main page with the latest 5 current slave problems and the latest 5 Replica Set problems as well as
+	a pie chart showing the distribution of slave states in the system.}
 
 \jsview{ReplicaSets}{Displays all configured Replica Sets.}
 
@@ -21,7 +22,11 @@ The \refgo{gui} is built with AngularJS. The model is defined by the returned JS
 
 \jsview{RiskGroups}{Displays all risk groups and allows CRUD.}
 
-\jscontroller{main}{}
+\jscontroller{main}{
+	\begin{itemize}
+		\item Uses \refgo{masterapi.slaves.getAll} to get all slaves.
+	\end{itemize}
+}
 
 \jscontroller{slaveIndex}{
 	\begin{itemize}
