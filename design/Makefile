@@ -35,7 +35,10 @@ model_classes.pdf: class_diagram.pdf
 master_classes.pdf: class_diagram.pdf
 	$(PDFCROP_BIN) --bbox "2400 0 4000 700"  class_diagram.pdf $@
 
-design.pdf: *.tex class_diagram.pdf slave_classes.pdf msp_classes.pdf model_classes.pdf master_classes.pdf activity_diagram.pdf
+gui_classes.pdf: class_diagram.pdf
+	$(PDFCROP_BIN) --bbox "2400 1650 4220 2900"  class_diagram.pdf $@
+
+design.pdf: *.tex class_diagram.pdf slave_classes.pdf msp_classes.pdf model_classes.pdf master_classes.pdf activity_diagram.pdf gui_classes.pdf
 	$(PDFLATEX) design.tex
 	$(MAKEGLOSSARIES) design
 	$(PDFLATEX) design
@@ -59,4 +62,5 @@ clean:
 	rm -f msp_classes.pdf
 	rm -f model_classes.pdf
 	rm -f master_classes.pdf
+	rm -f gui_classes.pdf
 	rm -f design.pdf
