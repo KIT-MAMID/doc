@@ -152,7 +152,7 @@
 
 \NewDocumentCommand{\refgo}{m}{%
   \IfHasLabel{#1}{%
-    \hyperref[#1]{\codeinline{\refgosymboltext{#1}}}%
+    \sloppy\hyperref[#1]{\codeinline{\refgosymboltext{#1}}}%
   }{%
    \codeinline{#1}%
    %\colorbox{red}{\texttt{#1}}%
@@ -373,7 +373,7 @@ SCC\\[2em]}
 \include{master}
 \include{master_api}
 \include{gui}
-\include{notification_manager}
+\include{notifier}
 \include{appendix}
 
 \glsaddallunused

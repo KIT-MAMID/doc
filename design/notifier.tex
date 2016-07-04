@@ -19,13 +19,12 @@ However, in the basic implementation, only email notifications are supported.
         It leverages a command line flags parser, the contacts file \reftype{Parser}, \reftype{APIClient} and \reftype{Notifier}
         to realize the required functionality.
 }{
-	\property{lastProblems}[[]Problem]{
+	\property{lastProblems}[[]\reftype{Problem}]{
 		List of recent problems.
 	}
-        \property{notifiers}[[]Notifiers]{
+        \property{notifiers}[[]\reftype{Notifier}]{
                 List of fully initialized \reftype{Notifier} which are called when a new \reftype{Problem} arises.
         }
-        %TODO missing: references represented by arrows in UML
 }{
 	\method{main}
 	{
@@ -34,15 +33,15 @@ However, in the basic implementation, only email notifications are supported.
                 The \reftype{Notifier} works in a loop:
 		\begin{itemize}
                         \item Receive a list of \reftype{Problem} through the \reftype{APIClient}.
-                        \item Call \refmethod{diffProblems} to determine which new \codeinline{Problems} occured..
+                        \item Call \refmethod{diffProblems} to determine which new \codeinline{Problems} occured
+                                to prevent repeated alerts on the same problem only a new \reftype{Problem} will be sent.
 			\item Call \refmethod{notify} to handle delivery of notifications via a \reftype{Notifier}.
 		\end{itemize}
 	}
 	\method{diffProblems}[[]Problem](
-		\param{received}[[]Problems]{List of recently send problems}
+		\param{received}[[]\reftype{Problem}]{List of recently sent problems}
 		){
-		Compares \refproperty{lastProblems} to the problems currently staged for notification.
-		To prevent repeated alerts on the same problem only a new \reftype{Problem} will be sent.
+		Compares \refproperty{lastProblems} to the passed array of problems and returns the new ones.
 	}
 	\method{notify}(
 		\param{problem}[\reftype{Problem}]{Problem currenty staged for notification}
@@ -54,8 +53,10 @@ However, in the basic implementation, only email notifications are supported.
 \struct{Parser}{
 	Used by the \reftype{Controller} to parse the contacts file.
 }{
+  \item \textit{none}
+}{
 	\method{Parse}[[]\reftype{Contact}, error](
-		\param{path}[string]{Path of the contacts file}
+		\param{path}[string]{Path to the contacts file}
 		){
 			Parses the contacts file.
 			Returns an array of contacts.
@@ -64,26 +65,29 @@ However, in the basic implementation, only email notifications are supported.
 
 \struct{APIClient}{
         Receives new array of \refgo{notifier.Problem} from the \refgo{masterapi}.
-	}{
-	\method{Receive}[[]Problem](
+}{
+  \item \textit{none}
+}{
+	\method{Receive}[[]\reftype{Problem}](
 		\param{host}[string]{
 			Hostname of the API server.
-			}
-		){
 		}
+	){
+	  Uses \refgoalt{masterapi.problems.getAll}{[GET] /problems} to get all the problems and returns them. 
+	}
 }
 
 \struct{Problem}{		
      A Problem object as specified in section \ref{masterapi:problems} of \refgo{masterapi}.
 }{
 	 \property{Id}[uint]{Unique ID of the problem. If the \emph{same} problem occurrs after it was resolved before,
-		its different incarnations are distinguishable by their \refproperty{Id}.}
+		its different incarnations are distinguishable by this ID.}
 	 \property{Description}[string]{Short human-readable description of the problem, suitable for subject lines of error messages.}
 	 \property{LongDescription}[string]{Long human-readable description of the problem.}
 	 \property{FirstOccurred}[time.Time]{The point in time when the particular problem first occurred.}
 	 \property{LastUpdated}[time.Time]{The point in time when the particular problem was last observed, e.g. the time of the last monitor run.}
-	 \property{Slave}[uint]{A reference to a \refgo{model.Slave} from which the problem originated. May be \codeinline{nil}}
-	 \property{ReplicaSet}[uint]{A reference to a \refgo{model.ReplicaSet} form which the problem originated. May be \codeinline{nil}}
+	 \property{Slave}[uint]{The identifier of the slave. May be \codeinline{0} if not tied to a particular slave.}
+	 \property{ReplicaSet}[uint]{The identifier of the Replica Set. May be \codeinline{0} if not tied to a particular Replica Set.}
 }
 
 \interface{Notifier}{
@@ -99,16 +103,16 @@ However, in the basic implementation, only email notifications are supported.
 \struct{EmailNotifier}{
         Implements \reftype{Notifier} to send emails via SMTP to a list of \reftype{EmailContact}.
 }{
-        \property{Contacts}[[]EmailContact]{The list of contacts to be notified via email.}
-        \property{Relay}[SMTPRelay]{The SMTP relay through which notification emails are delivered. See \reftype{SMTPRelay} for details.}
+        \property{Contacts}[[]\reftype{EmailContact}]{The list of contacts to be notified via email.}
+        \property{Relay}[\reftype{SMTPRelay}]{The SMTP relay through which notification emails are delivered. See \reftype{SMTPRelay} for details.}
 }{
 	\method{Send}(
-		\param{problem}[Problem]{The \reftype{Problem} subject to the notification}
+		\param{problem}[\reftype{Problem}]{The \reftype{Problem} subject to the notification}
 		){
                         Generates an email message containing information encapsulated in \refparam{problem} and delivers it using \refmethod{sendMailToContacts}.
 		}
 	\method{sendMailToContacts}[](
-		\param{msg}[[]byte]{}
+		\param{msg}[string]{}
 		){
 			Sends the messages created by \refmethod{Send} to a list of email contacts.
                         Uses the Go's \codeinline{net/smtp} package.
@@ -131,5 +135,5 @@ However, in the basic implementation, only email notifications are supported.
         The role of this SMTP server is commonly referred to as \emph{relay} or \emph{smarthost}.
 }{
 	\property{Hostname}[string]{Hostname of the SMTP Relay}
-	\property{MailFrom}[string]{The email address from which the notifications will be send}
+	\property{MailFrom}[string]{The email address from which the notifications will be sent}
 }
