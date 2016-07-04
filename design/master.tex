@@ -103,8 +103,8 @@ The other structures in \refgo{model} are stored in the database using a databas
     Latest error reported by the slave when attempting to establish the \refproperty{DesiredState}.\\
     \codeinline{nil} if no error occurred on last attempt.
   }
-  \property{DesiredState}[\reftype{MongodState}]{State the Mongod should be in. \codeinline{nil} if no desired state has been set.}
-  \property{ObservedState}[\reftype{MongodState}]{State the Mongod was last observed to be in. \codeinline{nil} if no observation has been made.}
+  \property{DesiredState}[*\reftype{MongodState}]{State the Mongod should be in. \codeinline{nil} if no desired state has been set.}
+  \property{ObservedState}[*\reftype{MongodState}]{State the Mongod was last observed to be in. \codeinline{nil} if no observation has been made.}
   \property{ParentSlave}[\reftype{Slave}]{Slave this Mongod is or should be running on}
 }
 
@@ -138,7 +138,7 @@ The other structures in \refgo{model} are stored in the database using a databas
     Otherwise, there exists a Mongod in the cluster that is not managed by \mamid.
   }
   \property{Port}[PortNumber]{
-    The port on the host identified by \refproperty{Hostname} on which theReplica Set member is listening.
+    The port on the host identified by \refproperty{Hostname} on which the Replica Set member is listening.
   }
 }
 
@@ -158,15 +158,14 @@ The other structures in \refgo{model} are stored in the database using a databas
     Unique ID of the problem. If the \emph{same} problem occurrs after it was resolved before,
     its different incarnations are distinguishable by their \refproperty{Id}.
   }
-  %TODO really necessary? problem is uniquely identified by (Slave, ReplicaSet, Mongod)
   \property{Description}[string]{Short human-readable description of the problem, suitable for subject lines of error messages.}
   \property{LongDescription}[string]{Long human-readable description of the problem.}
   \property{ProblemType}[uint]{Identifies the \codeinline{StatusMessage} type this problem originated from. Used to check if a problem of the same type for the same \codeinline{ReplicaSet}/\codeinline{Slave}/\codeinline{Mongod} already exists.}
   \property{FirstOccurred}[time.Time]{The point in time when the particular problem first occurred.}
   \property{LastUpdated}[time.Time]{The point in time when the particular problem was last observed, e.g. the time of the last monitor run.}
-  \property{Slave}[*Slave]{A reference to a \reftype{Slave} from which the problem originated. May be \codeinline{nil}}
+  \property{Slave}[*\reftype{Slave}]{A reference to a \reftype{Slave} from which the problem originated. May be \codeinline{nil}}
   \property{ReplicaSet}[*\reftype{ReplicaSet}]{A reference to a \reftype{ReplicaSet} form which the problem originated. May be \codeinline{nil}}
-  \property{Mongod}[*Mongod]{A reference to a \reftype{Mongod} from where the problem originated. May be \codeinline{nil}}
+  \property{Mongod}[*\reftype{Mongod}]{A reference to a \reftype{Mongod} from where the problem originated. May be \codeinline{nil}}
 }
 
 %data transfer objects (used to communicate via the master.Bus)
@@ -240,17 +239,17 @@ It fulfills many different tasks, running in separate goroutines.
 These tasks need to communicate with each other. Two different mechanism are employed to achieve this:
 \begin{itemize}
 	\item A shared persistent database with an ORM abstraction layer
-	\item A \reftype{Bus} that leverages Go's channels to send status updates
+	\item A \reftype{Bus} that leverages Go's channels to send status updates via \refgo{model.StatusMessage}
 \end{itemize}
 This results in loose coupling of the \refgo{master} components and increases maintainability of the code base.
 
 \struct{Bus}{
 	The \reftype{Bus} is used by the different components of the master to share and react to status updates.
-	At the start of the application channels for all the components are created and passed into the components.
+	At the start of the application channels for all the components are created and passed to them.
 	The components can then use this channel to broadcast messages to the other components and receive messages
-	from the Bus from which they can filter the ones they are interested in.
+	from the \codeinline{Bus} from which they can filter the ones they are interested in.
 	
-	All messages sent over the bus carry the current state --- not state changes --- and are
+	All messages sent over the \codeinline{Bus} carry the current state --- not state changes --- and are
 	sent repeatedly (i.e. level processing, not edge processing).
 	
 	\begin{figure}[H]
@@ -258,14 +257,14 @@ This results in loose coupling of the \refgo{master} components and increases ma
 		\caption{Communication inside the master over the Bus}
 	\end{figure}
 }{
-	\property{channels}[[]chan interface\{\}]{The channels the Bus will broadcast the messages to.}
+	\property{channels}[[]chan interface\{\}]{The channels the Bus will read messages from and broadcast them to.}
 }{
 	\method{GetNewChannel}[chan interface\{\}]{Creates a new channel that is attached to the Bus.
 		The new channel will be added to \refproperty{channels} and returned to the caller}
 }
 
 \struct{Deployer}{
-	The \reftype{Deployer} listens on the bus for \refgo{model.MongodMatchStatus} objects with \refgoalt{model.MongodMatchStatus.Mismatch}{Mismatch} set to true and deployes the desired state of the affected Mongod using the \refgo{msp.Client}
+	The \reftype{Deployer} listens on the bus channel for \refgo{model.MongodMatchStatus} objects with \refgoalt{model.MongodMatchStatus.Mismatch}{Mismatch} set to true and deployes the desired state of the affected Mongod using the \refgo{msp.Client}
 }{
 	\property{DB}[gorm.DB]{Initialized handle to the database.}
 	\property{BusChannel}[chan interface\{\}]{Initialized channel to the application bus.}
@@ -300,9 +299,9 @@ This results in loose coupling of the \refgo{master} components and increases ma
 	\property{DB}[gorm.DB]{Initialized handle to the database.}
 	\property{BusChannel}[chan interface\{\}]{Initialized channel to the application bus.}
 }{
-	\method{Run}{Listens for \refgo{model.StatusMessage}s on the bus and checks if they respresent an error.
+	\method{Run}{Listens for \refgo{model.StatusMessage}s on the bus and checks whether they represent an error.
 		If they do, generates a problem using \refmethod{generateProblem} and stores it in the database.
-		It they don't, checks if the database contains a problem of the same type for the same object and removes it.}
+		If they don't, checks if the database contains a \refgo{model.Problem} of the same type for the same object and removes it.}
 	\method{generateProblem}[Problem]
 	(
 		\param{e}[StatusMessage]{The status message to convert to a problem.}
@@ -331,10 +330,10 @@ This results in loose coupling of the \refgo{master} components and increases ma
     \item is a minimal change in comparison to the previous layout
   \end{itemize}
 
+  \label{theorem:idempotence_clusterallocator}
   \begin{theorem}[Idempotence of the ClusterAllocator]
-    \label{theorem:idempotence_clusterallocator}
-    Let $l$ be a layout of the cluster. Then
-          \[\text{ClusterAllocator}(\text{ClusterAllocator}(l)) =\text{ ClusterAllocator}(l)\].
+    \item Let $l$ be a layout of the cluster. Then:
+          \[\text{ClusterAllocator}(\text{ClusterAllocator}(l)) = \text{ClusterAllocator}(l)\]
   \end{theorem}
 
 }{
@@ -351,7 +350,7 @@ Hence, it is worth defining the implementation of \refgo{master.ClusterAllocator
 
 While studying the algorithms below, the reader should keep in mind that
 \begin{itemize}
-  \item changes in the cluster layout $\equiv$ change or creation of \refgo{model.Mongod.DesiredState} 
+  \item changes in the cluster layout $\equiv$ change, creation or removal of \refgo{model.Mongod.DesiredState}
   \item the \refgo{model.Mongod.ObservedState} may change after an arbitrary amount of time or even not at all
   \item changes to a ReplicaSet must not violate or further worsen the high-availibility constraints,
         in particular \refgo{model.ReplicaSet}'s \refgoalt{model.ReplicaSet.VolatileMemberCount}{VolatileMemberCount} \& \refgoalt{model.ReplicaSet.PersistentMemberCount}{PersistentMemberCount}\\

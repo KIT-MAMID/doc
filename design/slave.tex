@@ -65,9 +65,9 @@ The \refgo{slave} is installed on the individual host nodes and started by the m
     Reads configuration from a local MongoDB instance
   }
   \method{ApplyMongodConfiguration}[*\refgo{msp.SlaveError}](
-    \param{c}[\refgo{msp.Mongod}]{Configuration to apply}
+    \param{config}[\refgo{msp.Mongod}]{Configuration to apply}
   ){
-    Connects to the local MongoDB instance given in \refparam{c} and applies the configuration
+    Connects to the local MongoDB instance given in \refparam{config} parameter and applies the configuration
   }
 }
 

@@ -60,8 +60,8 @@ of the structs of the package.
 
 There exists a 1:1 mapping between
 \begin{itemize}
-  \item \hyperref[masterapi:apiobjects]{API Objects} and \codeinline{structs} in \refgo{masterapi}
-  \item \hyperref[masterapi:apimethods]{API Methods} and \codeinline{methods} of \codeinline{structs} in \refgo{masterapi}
+  \item \hyperref[masterapi:apiobjects]{API Objects} and structures in \refgo{masterapi}
+  \item \hyperref[masterapi:apimethods]{API Methods} and methods of structures in \refgo{masterapi}
 \end{itemize}
 
 Hence, a definition of the HTTP REST Interface is
@@ -84,7 +84,7 @@ API Objects are exchanged in JSON format.
 	"mongod_port_range_end": <int (exclusive)>,
 	"persistent_storage": <bool>,
 	"root data directory": <string>,
-	"desired_state": <{active, maintenance, disabled}>
+	"desired_state": <{"active", "maintenance", "disabled"}>
 	"observed_and_desired_state_mismatch": <bool>
 }
 \end{lstlisting}
@@ -297,7 +297,7 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 \struct{MasterAPIServer}
 {
 	% _an_ HTTP Server http://blog.apastyle.org/apastyle/2012/04/using-a-or-an-with-acronyms-and-abbreviations.html
-	Starts an HTTP Server, listens for requests and routes them to the appropriate handler Methods.
+	Starts an HTTP Server, listens for requests and routes them to the appropriate handler methods.
 }{
 	\property{DB}[gorm.DB]{Initialized handle to the database.}
 	\property{ClusterAllocator}[\refgo{master.ClusterAllocator}]{Reference to the \codeinline{ClusterAllocator} used to trigger a recalculation when the User changes a replica set or a slave}

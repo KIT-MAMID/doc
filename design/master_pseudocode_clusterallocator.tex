@@ -69,7 +69,7 @@ Given Algorithm \ref{alg:EffectiveMemberCount}, we can now proceed with the remo
 \end{algorithm}
 \end{minipage}
 
-With all superflous members removed, we now approach the other side of the problem
+With all superfluous members removed, we now approach the other side of the problem
 and add new members to Replica Sets that need them.\\
 Again, we need to examine the current state of the cluster.
 
@@ -130,7 +130,7 @@ $p_a, v_a \gets $ AlreadyAddedMemberCount(r)
 	
 	\While{$r = RQ.pop()$; $r \neq nil$}{
 	
-		\Invariant $r$ needs a member of type $\textbf{x}$
+		\Invariant $r$ needs a member of type $\textbf{x}$\;
 		
 		// find slave $s$ of type $x$ in a risk group $g$ with no other Mongod of $r$ in $g$\;
                 $G_{candidates}\gets \{g \mid g \in RGSQ.keys \land \text{r has no member in g}\}$\;
@@ -167,12 +167,12 @@ $p_a, v_a \gets $ AlreadyAddedMemberCount(r)
 It is crucial to the implementation of Algorithm \ref{alg:addmongods} that Mongods in \refgo{model.MongodExecutionState.Recovering}
 \begin{itemize}
   \item are counting toward the \texttt{AlreadyAddedMemberCount} (Algorithm \ref{alg:AlreadyAddedMemberCount})
-  \item are not not counting toward the \texttt{EffectiveMemberCount} (Algorithm \ref{alg:EffectiveMemberCount})
+  \item are not counting toward the \texttt{EffectiveMemberCount} (Algorithm \ref{alg:EffectiveMemberCount})
 \end{itemize}
 
 If this were not the case, the following failure scenarios would be possible:
 \begin{itemize}
   \item Oscillation, violating the fundamental requirement to the algorithm stated in the theorem on \hyperref[theorem:idempotence_clusterallocator]{Idempotence of the ClusterAllocator}
   \item Invisible degradation (members in \refgo{model.MongodExecutionState.Recovering} do not hold all Replica Set data yet)
-  \item Data Loss (as a result of Oscillation + Invisible degradation)
+  \item Data loss (as a result of Oscillation + Invisible degradation)
 \end{itemize}
