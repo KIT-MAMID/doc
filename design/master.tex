@@ -150,8 +150,7 @@ The other structures in \refgo{model} are stored in the database using a databas
   Representation of a problem or error that occurred during operation of the \refgo{master}.
 
   The references to \reftype{Slave}, \reftype{ReplicaSet} and \reftype{Mongod} enable searchability
-  of the \reftype{Problem} list.
-  If all references are \codeinline{nil}, the problem is still legitimate and should be reported by a user interface or alerting system.
+  of the \reftype{Problem} list. Exactly one of these must not be \codeinline{nil}.
 
   See \refgo{master.ProblemManager} for the transformation from errors to this structure.
 }{
