@@ -178,22 +178,6 @@ The other structures in \refgo{model} are stored in the database using a databas
   an empty interface for grouping the message objects in UML.
 }
 
-\struct{DesiredReplicaSetConstraintStatus}
-{
-  A message object implementing \reftype{StatusMessage}.
-  Represents whether the \refgo{master.ClusterAllocator} can satisfy the constraints on a Replica Set given by
-  \begin{itemize}
-    \item the persistent and volatile member counts of the \reftype{ReplicaSet}
-    \item the maximum number of \reftype{Mongod}s on the \reftype{Slave}s
-    \item the \reftype{RiskGroup}s
-  \end{itemize}
-}{
-  \property{Unsatisfied}[bool]{Whether the constraint cannot be satisfied.}
-  \property{ReplicaSet}[\reftype{ReplicaSet}]{The Replica Set whose constraints can/cannot be fulfilled}
-  \property{ActualVolatileCount}[uint]{The count of volatile members the Replica Set now has because the constraints are not fulfilled. If they are fullfilled this is the same as \reftype{ReplicaSet.VolatileMemberCount}.}
-  \property{ActualPersistentCount}[uint]{The count of persistent members the Replica Set now has because the constraints are not fulfilled. If they are fullfilled this is the same as \reftype{ReplicaSet.PersistentMemberCount}.}
-}
-
 \struct{MongodMatchStatus}
 {
   A message object implementing \reftype{StatusMessage}.
@@ -210,7 +194,23 @@ Represents whether a \reftype{Slave} cannot be reached from the master.
 }{
   \property{Mismatch}[bool]{Whether the slave cannot be reached.}
   \property{Slave}[\reftype{Mongod}]{The slave that can/cannot be reached}
-  \property{CommunicationError}[\refgo{msp.CommunicationError}]{The error that occurred when trying to reach the slave. \codeinline{nil} if slave can be reached}
+  \property{CommunicationError}[\refgo{msp.CommunicationError}]{The error that occurred while trying to reach the slave. \codeinline{nil} if the slave can be reached}
+}
+
+\struct{DesiredReplicaSetConstraintStatus}
+{
+  A message object implementing \reftype{StatusMessage}.
+  Represents whether the \refgo{master.ClusterAllocator} can satisfy the constraints on a Replica Set given by
+  \begin{itemize}
+    \item the persistent and volatile member counts of the \reftype{ReplicaSet}
+    \item the maximum number of \reftype{Mongod}s on the \reftype{Slave}s
+    \item the \reftype{RiskGroup}s
+  \end{itemize}
+}{
+  \property{Unsatisfied}[bool]{Whether the constraint cannot be satisfied.}
+  \property{ReplicaSet}[\reftype{ReplicaSet}]{The Replica Set whose constraints can/cannot be satisfied.}
+  \property{ActualVolatileCount}[uint]{The count of volatile members the Replica Set currently has been allocated. If the constraint is satisfied this is the same as \reftype{ReplicaSet.VolatileMemberCount}.}
+  \property{ActualPersistentCount}[uint]{The count of persistent members the Replica Set currently has been allocated. If the constraint is satisfied this is the same as \reftype{ReplicaSet.PersistentMemberCount}.}
 }
 
 \struct{ObservedReplicaSetConstraintStatus}
