@@ -2926,13 +2926,13 @@ Listener responses</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>819</x>
+      <x>855</x>
       <y>2034</y>
-      <w>117</w>
+      <w>81</w>
       <h>45</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>110.0;30.0;10.0;10.0</additional_attributes>
+    <additional_attributes>70.0;30.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
