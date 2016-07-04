@@ -409,7 +409,7 @@ r2=State
     <coordinates>
       <x>1710</x>
       <y>666</y>
-      <w>378</w>
+      <w>396</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>Client
@@ -1874,26 +1874,26 @@ the array is empty</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2079</x>
+      <x>2097</x>
       <y>738</y>
-      <w>207</w>
+      <w>189</w>
       <h>1620</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;100.0;10.0;100.0;1780.0;210.0;1780.0</additional_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0;80.0;1780.0;190.0;1780.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2079</x>
+      <x>2097</x>
       <y>720</y>
-      <w>1062</w>
+      <w>1044</w>
       <h>1341</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;110.0;10.0;110.0;1330.0;1160.0;1330.0;1160.0;1470.0</additional_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0;90.0;1330.0;1140.0;1330.0;1140.0;1470.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
