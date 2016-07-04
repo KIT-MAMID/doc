@@ -770,7 +770,7 @@ Error</panel_attributes>
     <coordinates>
       <x>3078</x>
       <y>2043</y>
-      <w>252</w>
+      <w>261</w>
       <h>126</h>
     </coordinates>
     <panel_attributes>Deployer
@@ -2369,7 +2369,7 @@ realized by AngularJS.</panel_attributes>
     </coordinates>
     <panel_attributes>APIClient
 --
-_+ Receive(host string): []Problem_
+_+ Receive(host: string): []Problem_
 
 
 
@@ -2410,7 +2410,7 @@ _+ Receive(host string): []Problem_
 + Contacts: []EmailContact
 --
 + Send(problem: Problem)
-- sendMailToContacts(msg []byte)</panel_attributes>
+- sendMailToContacts(msg: string)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -2476,8 +2476,8 @@ Notifier
 +LongDescription: string
 +FirstOccurred: time.Time
 +LastUpdated: time.Time
-+Slave: uint32
-+ReplicaSet: uint32</panel_attributes>
++Slave: uint
++ReplicaSet: uint</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
