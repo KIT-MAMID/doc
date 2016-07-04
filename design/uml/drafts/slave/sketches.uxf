@@ -785,7 +785,7 @@ Error</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>729</x>
+      <x>720</x>
       <y>1809</y>
       <w>279</w>
       <h>72</h>
@@ -798,7 +798,7 @@ Error</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>783</x>
+      <x>774</x>
       <y>1872</y>
       <w>117</w>
       <h>117</h>
@@ -813,7 +813,7 @@ r2=ExecutionState
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>945</x>
+      <x>936</x>
       <y>1872</y>
       <w>135</w>
       <h>117</h>
@@ -828,7 +828,7 @@ r2=ReplicaSetMembers
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>630</x>
+      <x>621</x>
       <y>1971</y>
       <w>243</w>
       <h>117</h>
@@ -846,7 +846,7 @@ MongodExecutionState
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>882</x>
+      <x>873</x>
       <y>1971</y>
       <w>144</w>
       <h>63</h>
@@ -957,9 +957,9 @@ MongodExecutionState
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>999</x>
+      <x>990</x>
       <y>1620</y>
-      <w>189</w>
+      <w>198</w>
       <h>45</h>
     </coordinates>
     <panel_attributes>lt=-
@@ -967,7 +967,7 @@ m1=1
 m2=*
 r1=ParentSlave
 r2=Mongods</panel_attributes>
-    <additional_attributes>190.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>200.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -1294,7 +1294,7 @@ e.g. &lt;replicaset:123&gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>711</x>
+      <x>702</x>
       <y>1629</y>
       <w>297</w>
       <h>90</h>
@@ -1310,7 +1310,7 @@ e.g. &lt;replicaset:123&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>792</x>
+      <x>783</x>
       <y>1710</y>
       <w>99</w>
       <h>117</h>
@@ -1325,7 +1325,7 @@ r2=DesiredState
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>936</x>
+      <x>927</x>
       <y>1710</y>
       <w>108</w>
       <h>117</h>
@@ -1340,9 +1340,9 @@ r2=ObservedState
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>999</x>
+      <x>990</x>
       <y>1647</y>
-      <w>243</w>
+      <w>252</w>
       <h>279</h>
     </coordinates>
     <panel_attributes>lt=-
@@ -1350,7 +1350,7 @@ m1=1
 r1=ReplicaSet
 m2=*
 r2=Mongods</panel_attributes>
-    <additional_attributes>250.0;280.0;140.0;280.0;140.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>260.0;280.0;150.0;280.0;150.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
@@ -1450,7 +1450,7 @@ UNIQUE(Port, ReplSetName)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>819</x>
+      <x>810</x>
       <y>1593</y>
       <w>54</w>
       <h>54</h>
@@ -2915,7 +2915,7 @@ Listener responses</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>927</x>
+      <x>918</x>
       <y>2052</y>
       <w>189</w>
       <h>36</h>
@@ -2926,7 +2926,7 @@ Listener responses</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>828</x>
+      <x>819</x>
       <y>2034</y>
       <w>117</w>
       <h>45</h>
