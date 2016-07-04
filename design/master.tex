@@ -280,7 +280,7 @@ This results in loose coupling of the \refgo{master} components and increases ma
 }
 
 \struct{Monitor}{
-	The \reftype{Monitor} uses the \refgo{msp.Client} to query all slaves for their Mongod's states, saves the observed state in the database and compares the observed state to the desired state from the database. It publishes \refgo{model.MongodMatchStatus} objects with the result of each comparison on the bus.
+	The \reftype{Monitor} uses the \refgo{msp.Client} to query all slaves for their Mongod's states, saves the observed state in the database and compares the observed state to the desired state from the database. It publishes \refgo{model.MongodMatchStatus} objects with the result of each comparison on the bus. It also checks whether the constraints of the involved \refgo{model.ReplicaSet} are fulfilled and accordingly publishes a \refgo{model.ObservedReplicaSetConstraintStatus} object.
 }{
 	\property{DB}[gorm.DB]{Initialized handle to the database.}
 	\property{BusChannel}[chan interface\{\}]{Initialized channel to the application bus.}
