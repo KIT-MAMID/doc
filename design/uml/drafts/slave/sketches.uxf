@@ -370,10 +370,10 @@ r1=consumer</panel_attributes>
     <panel_attributes>&lt;&lt;enum&gt;&gt;
 MongodState
 --
-MongodStateDestroyed
-MongodStateNotRunning
-MongodStateRecovering
-MongodStateRunning
++ MongodStateDestroyed
++ MongodStateNotRunning
++ MongodStateRecovering
++ MongodStateRunning
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -836,10 +836,10 @@ r2=ReplicaSetMembers
     <panel_attributes>&lt;&lt;enum&gt;&gt;
 MongodExecutionState
 --
-MongodExecutionStateDestroyed
-MongodExecutionStateNotRunning
-MongodExecutionStateRecovering
-MongodExecutionStateRunning
++ MongodExecutionStateDestroyed
++ MongodExecutionStateNotRunning
++ MongodExecutionStateRecovering
++ MongodExecutionStateRunning
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -897,19 +897,19 @@ MongodExecutionStateRunning
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1179</x>
+      <x>1170</x>
       <y>1530</y>
-      <w>288</w>
+      <w>306</w>
       <h>117</h>
     </coordinates>
     <panel_attributes>Slave
 --
-+Id: uint
-+Hostname: string
-+Port: PortNumber
-+MongodPortRangeBegin: PortNumber
-+MongodPortRangeEnd: PortNumber
-+PersistantStorage: bool</panel_attributes>
++ Id: uint
++ Hostname: string
++ Port: PortNumber
++ MongodPortRangeBegin: PortNumber
++ MongodPortRangeEnd: PortNumber
++ PersistantStorage: bool</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -933,8 +933,8 @@ MongodExecutionStateRunning
     </coordinates>
     <panel_attributes>RiskGroup
 --
-+Id: uint
-+Name: string</panel_attributes>
++ Id: uint
++ Name: string</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -947,11 +947,11 @@ MongodExecutionStateRunning
     </coordinates>
     <panel_attributes>ReplicaSet
 --
-+Id: uint
-+Name: string
-+PersistentMemberCount: uint
-+VolatileMemberCount: uint
-+ConfigureAsShardingConfigServer: bool</panel_attributes>
++ Id: uint
++ Name: string
++ PersistentMemberCount: uint
++ VolatileMemberCount: uint
++ ConfigureAsShardingConfigServer: bool</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -959,7 +959,7 @@ MongodExecutionStateRunning
     <coordinates>
       <x>999</x>
       <y>1620</y>
-      <w>198</w>
+      <w>189</w>
       <h>45</h>
     </coordinates>
     <panel_attributes>lt=-
@@ -967,21 +967,21 @@ m1=1
 m2=*
 r1=ParentSlave
 r2=Mongods</panel_attributes>
-    <additional_attributes>200.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>190.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1458</x>
+      <x>1467</x>
       <y>1602</y>
-      <w>135</w>
+      <w>126</w>
       <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1=1
 m2=*
 r2=Slaves</panel_attributes>
-    <additional_attributes>130.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
@@ -999,7 +999,7 @@ r2=Slaves</panel_attributes>
     <coordinates>
       <x>2628</x>
       <y>1215</y>
-      <w>432</w>
+      <w>450</w>
       <h>144</h>
     </coordinates>
     <panel_attributes>SlaveAPI
@@ -1007,12 +1007,12 @@ r2=Slaves</panel_attributes>
 + DB: gorm.DB
 + ClusterAllocator: ClusterAllocator
 --
-+SlaveIndex(w: http.ResponseWriter, r *http.Request)
-+SlaveById(w: http.ResponseWriter, r *http.Request)
-+SlavePut(w: http.ResponseWriter, r *http.Request)
-+SlaveUpdate(w: http.ResponseWriter, r *http.Request)
-+SlaveDelete(w: http.ResponseWriter, r *http.Request)
-+SlaveGetProblems(w: http.ResponseWriter, r *http.Request)</panel_attributes>
++ SlaveIndex(w: http.ResponseWriter, r *http.Request)
++ SlaveById(w: http.ResponseWriter, r *http.Request)
++ SlavePut(w: http.ResponseWriter, r *http.Request)
++ SlaveUpdate(w: http.ResponseWriter, r *http.Request)
++ SlaveDelete(w: http.ResponseWriter, r *http.Request)
++ SlaveGetProblems(w: http.ResponseWriter, r *http.Request)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1032,7 +1032,7 @@ r2=Slaves</panel_attributes>
     <coordinates>
       <x>2628</x>
       <y>1368</y>
-      <w>432</w>
+      <w>450</w>
       <h>162</h>
     </coordinates>
     <panel_attributes>ReplicaSetAPI
@@ -1040,13 +1040,13 @@ r2=Slaves</panel_attributes>
 + DB: gorm.DB
 + ClusterAllocator: ClusterAllocator
 --
-+ReplicaSetIndex(w: http.ResponseWriter, r *http.Request)
-+ReplicaSetById(w: http.ResponseWriter, r *http.Request)
-+ReplicaSetPut(w: http.ResponseWriter, r *http.Request)
-+ReplicaSetUpdate(w: http.ResponseWriter, r *http.Request)
-+ReplicaSetDelete(w: http.ResponseWriter, r *http.Request)
-+ReplicaSetGetSlaves(w: http.ResponseWriter, r *http.Request)
-+ReplicaSetGetProblems(w: http.ResponseWriter, r *http.Request)</panel_attributes>
++ ReplicaSetIndex(w: http.ResponseWriter, r *http.Request)
++ ReplicaSetById(w: http.ResponseWriter, r *http.Request)
++ ReplicaSetPut(w: http.ResponseWriter, r *http.Request)
++ ReplicaSetUpdate(w: http.ResponseWriter, r *http.Request)
++ ReplicaSetDelete(w: http.ResponseWriter, r *http.Request)
++ ReplicaSetGetSlaves(w: http.ResponseWriter, r *http.Request)
++ ReplicaSetGetProblems(w: http.ResponseWriter, r *http.Request)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1066,20 +1066,20 @@ r2=Slaves</panel_attributes>
     <coordinates>
       <x>2628</x>
       <y>1539</y>
-      <w>432</w>
+      <w>450</w>
       <h>153</h>
     </coordinates>
     <panel_attributes>RiskGroupAPI
 --
 + DB: gorm.DB
 --
-+RiskGroupIndex(w: http.ResponseWriter, r *http.Request)
-+RiskGroupById(w: http.ResponseWriter, r *http.Request)
-+RiskGroupPut(w: http.ResponseWriter, r *http.Request)
-+RiskGroupUpdate(w: http.ResponseWriter, r *http.Request)
-+RiskGroupDelete(w: http.ResponseWriter, r *http.Request)
-+RiskGroupGetSlaves(w: http.ResponseWriter, r *http.Request)
-+RiskGroupAssignSlave(w: http.ResponseWriter, r *http.Request)</panel_attributes>
++ RiskGroupIndex(w: http.ResponseWriter, r *http.Request)
++ RiskGroupById(w: http.ResponseWriter, r *http.Request)
++ RiskGroupPut(w: http.ResponseWriter, r *http.Request)
++ RiskGroupUpdate(w: http.ResponseWriter, r *http.Request)
++ RiskGroupDelete(w: http.ResponseWriter, r *http.Request)
++ RiskGroupGetSlaves(w: http.ResponseWriter, r *http.Request)
++ RiskGroupAssignSlave(w: http.ResponseWriter, r *http.Request)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1138,38 +1138,38 @@ r2=Slaves</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3051</x>
+      <x>3069</x>
       <y>1260</y>
-      <w>117</w>
+      <w>99</w>
       <h>108</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>110.0;100.0;60.0;100.0;60.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>90.0;100.0;40.0;100.0;40.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3051</x>
+      <x>3069</x>
       <y>1359</y>
-      <w>117</w>
+      <w>99</w>
       <h>99</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>110.0;10.0;60.0;10.0;60.0;90.0;10.0;90.0</additional_attributes>
+    <additional_attributes>90.0;10.0;40.0;10.0;40.0;90.0;10.0;90.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3051</x>
+      <x>3069</x>
       <y>1386</y>
-      <w>180</w>
+      <w>162</w>
       <h>216</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>140.0;10.0;140.0;220.0;10.0;220.0</additional_attributes>
+    <additional_attributes>120.0;10.0;120.0;220.0;10.0;220.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
@@ -1205,15 +1205,15 @@ to correct methods</panel_attributes>
     </coordinates>
     <panel_attributes>Problem
 --
-+Id: uint
-+Description: string
-+LongDescription: string
-+ProblemType: uint
-+FirstOccurred: time.Time
-+LastUpdated: time.Time
-+Slave: *Slave
-+ReplicaSet: *ReplicaSet
-+Mongod: *Mongod</panel_attributes>
++ Id: uint
++ Description: string
++ LongDescription: string
++ ProblemType: uint
++ FirstOccurred: time.Time
++ LastUpdated: time.Time
++ Slave: *Slave
++ ReplicaSet: *ReplicaSet
++ Mongod: *Mongod</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1245,28 +1245,28 @@ e.g. &lt;replicaset:123&gt;</panel_attributes>
     <coordinates>
       <x>2628</x>
       <y>1701</y>
-      <w>432</w>
+      <w>450</w>
       <h>81</h>
     </coordinates>
     <panel_attributes>ProblemAPI
 --
 + DB: gorm.DB
 --
-+ProblemIndex(w: http.ResponseWriter, r *http.Request)
-+ProblemById(w: http.ResponseWriter, r *http.Request)</panel_attributes>
++ ProblemIndex(w: http.ResponseWriter, r *http.Request)
++ ProblemById(w: http.ResponseWriter, r *http.Request)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3051</x>
+      <x>3069</x>
       <y>1386</y>
-      <w>189</w>
+      <w>171</w>
       <h>378</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>150.0;10.0;150.0;400.0;10.0;400.0</additional_attributes>
+    <additional_attributes>130.0;10.0;130.0;400.0;10.0;400.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -1294,17 +1294,17 @@ e.g. &lt;replicaset:123&gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>729</x>
+      <x>711</x>
       <y>1629</y>
-      <w>279</w>
+      <w>297</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>Mongod
 --
-Port: PortNumber
-ReplSetName: string
-ObservationError: msp.Error
-LastEstablishStateError: msp.SlaveError</panel_attributes>
++ Port: PortNumber
++ ReplSetName: string
++ ObservationError: msp.Error
++ LastEstablishStateError: msp.SlaveError</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1387,9 +1387,9 @@ of slaves.</panel_attributes>
     <panel_attributes>&lt;&lt;enum&gt;&gt;
 SlaveState
 --
-SlaveStateActive
-SlaveStateMaintenance
-SlaveStateDisabled</panel_attributes>
++ SlaveStateActive
++ SlaveStateMaintenance
++ SlaveStateDisabled</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1587,8 +1587,8 @@ r1=&lt;&lt;initializes&gt;&gt;</panel_attributes>
     </coordinates>
     <panel_attributes>MongodMatchStatus
 --
-Mismatch: bool
-Mongod: Mongod</panel_attributes>
++ Mismatch: bool
++ Mongod: Mongod</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1659,10 +1659,10 @@ to be sent over bus</panel_attributes>
     </coordinates>
     <panel_attributes>DesiredReplicaSetConstraintStatus
 --
-Unsatisfied: bool
-ReplicaSet: ReplicaSet
-ActualVolatileCount: uint
-ActualPersistentCount: uint</panel_attributes>
++ Unsatisfied: bool
++ ReplicaSet: ReplicaSet
++ ActualVolatileCount: uint
++ ActualPersistentCount: uint</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1694,7 +1694,7 @@ ActualPersistentCount: uint</panel_attributes>
       <x>2511</x>
       <y>2124</y>
       <w>162</w>
-      <h>81</h>
+      <h>99</h>
     </coordinates>
     <panel_attributes>Listens on the bus for
 errors, creates Problems
@@ -1707,9 +1707,9 @@ they are resolved</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>2277</x>
-      <y>2178</y>
+      <y>2160</y>
       <w>216</w>
-      <h>72</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>Asks slaves for mongod states
 and compares the observed state
@@ -1722,9 +1722,9 @@ error objects on the bus.</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>2727</x>
-      <y>2097</y>
+      <y>2079</y>
       <w>171</w>
-      <h>63</h>
+      <h>81</h>
     </coordinates>
     <panel_attributes>Initializes all parts of
 the master with channels
@@ -1738,7 +1738,7 @@ asynchonously</panel_attributes>
       <x>3222</x>
       <y>1926</y>
       <w>189</w>
-      <h>90</h>
+      <h>108</h>
     </coordinates>
     <panel_attributes>Listens on the bus for
 state mismatches and
@@ -1796,15 +1796,15 @@ to the Mongod</panel_attributes>
     <coordinates>
       <x>1638</x>
       <y>2070</y>
-      <w>243</w>
+      <w>279</w>
       <h>81</h>
     </coordinates>
     <panel_attributes>ObservedReplicaSetConstraintStatus
 --
-Unsatisfied: bool
-ReplicaSet: ReplicaSet
-ActualVolatileCount: uint
-ActualPersistentCount: uint</panel_attributes>
++ Unsatisfied: bool
++ ReplicaSet: ReplicaSet
++ ActualVolatileCount: uint
++ ActualPersistentCount: uint</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1821,16 +1821,16 @@ ActualPersistentCount: uint</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1296</x>
+      <x>1278</x>
       <y>2034</y>
-      <w>324</w>
+      <w>342</w>
       <h>72</h>
     </coordinates>
     <panel_attributes>ConnectionStatus
 --
-Unreachable: bool
-Slave: Slave
-CommunicationError: msp.CommunicationError</panel_attributes>
++ Unreachable: bool
++ Slave: Slave
++ CommunicationError: msp.CommunicationError</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -2471,13 +2471,13 @@ Notifier
     </coordinates>
     <panel_attributes>Problem
 --
-+Id: uint
-+Description: string
-+LongDescription: string
-+FirstOccurred: time.Time
-+LastUpdated: time.Time
-+Slave: uint
-+ReplicaSet: uint</panel_attributes>
++ Id: uint
++ Description: string
++ LongDescription: string
++ FirstOccurred: time.Time
++ LastUpdated: time.Time
++ Slave: uint
++ ReplicaSet: uint</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -2801,14 +2801,14 @@ m2=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3051</x>
+      <x>3069</x>
       <y>1260</y>
-      <w>792</w>
+      <w>774</w>
       <h>522</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>860.0;10.0;570.0;10.0;570.0;560.0;10.0;560.0</additional_attributes>
+    <additional_attributes>840.0;10.0;550.0;10.0;550.0;560.0;10.0;560.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
