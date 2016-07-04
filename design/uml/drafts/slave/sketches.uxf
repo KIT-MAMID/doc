@@ -741,7 +741,7 @@ Error</panel_attributes>
     <coordinates>
       <x>2268</x>
       <y>2286</y>
-      <w>360</w>
+      <w>396</w>
       <h>117</h>
     </coordinates>
     <panel_attributes>Monitor
@@ -770,7 +770,7 @@ Error</panel_attributes>
     <coordinates>
       <x>3078</x>
       <y>2043</y>
-      <w>261</w>
+      <w>324</w>
       <h>126</h>
     </coordinates>
     <panel_attributes>Deployer
