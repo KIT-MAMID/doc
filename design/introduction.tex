@@ -1,6 +1,6 @@
 \section{Introduction}
 
-This document describes the design of the Application \mamid (\emph{Monitor and Manager for In-memory Databases}).
+This document describes the design of the application \mamid (\emph{Monitor and Manager for In-memory Databases}).
 
 It thorougly explains the architecture of a \mamid deployment, the distribution of responsibilites among the various components,
 individual Go structures, their methods and the relationships among them.
@@ -39,14 +39,14 @@ The design phase revealed flaws in the \emph{Functional Specification} that have
 \subsection{Root Data Directory (MC80, F40, Section 9.3.1)}
 
 The \emph{Root Data Directory} is no longer specified in the master's inventory using the GUI.\\
-Instead, it is passed directly to the slave via a command line flag parsed by the slave executable.
+Instead, it is passed directly to the slave via a command-line flag parsed by the slave executable.
 
 Changing the value on a slave with \refgoalt{msp.MongodState.MongodStateRunning}{Running} \codeinline{Mongods} results in a situation where either
 all Mongds on the slave need to be temporarily destroyed or a special-case transition needs to be implemented.
 Neither alternative is desirable.
 
 Furthermore, changing the value is usually related to manual administrative action on the specific slave host.\\
-Hence, moving the parameter to the command line flags of the slave simplifies both implementation and administrative work.
+Hence, moving the parameter to the command-line flags of the slave simplifies both implementation and administrative work.
 
 \subsection{Slave Mode \emph{unknown} \& Slave Error Handling (Section 5.3.1)}
 
@@ -105,8 +105,8 @@ While Go can be considered an object-oriented language, it differs from language
   \item however, inhertance can be simulated to a certain degree through \emph{embedding} %TODO ref go spec
 \end{itemize}
 
-Overall, this leads to a situation where many traditional design patterns do not apply as well (as e.g. to Java) and hence need
-to be adopted to Go.
+Overall, this leads to a situation where many traditional design patterns do not apply as well as e.g. to Java and hence need
+to be adapted to Go.
 
 Given these constraints, \mamid still employs a variety of design patterns across its different components:
 
@@ -130,7 +130,7 @@ Furthermore, a variation of the \textbf{publish/subscribe pattern} is implemente
 
 % MasterSlave Protocol
 The \textbf{remote proxy} decoupling pattern is employed in the {Master Slave Protocol (\refgo{msp}) package:
-it implements communication bewteen \refgo{master} and \refgo{slave}.
+it implements communication between \refgo{master} and \refgo{slave}.
 \refgo{msp.Client} exposes RPC stubs that call the \refgo{msp.Consumer} implemented on the \refgo{slave}.
 Another term used to describe this relationship between master and slaves is the \textbf{Multi-Server/Single-Client architecture}.
 
