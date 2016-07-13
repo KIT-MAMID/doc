@@ -25,7 +25,13 @@ The \refgo{slave} is installed on the individual host nodes and started by the m
   Most importantly, it leverages the \reftype{ProcessManager} and \reftype{MongodConfigurator} to spawn and configure instances of MongoDB.
 }{
   \property{BusyTable}[map[\refgo{msp.PortNumber}]bool]{
-    Contains a boolean busy state per instance of MongoDB to prevent concurrent configuration of a single instance.
+    Contains a boolean busy state per instance of MongoDB.\\
+    \refproperty{BusyTable} must only be altered from a goroutine holding the \refproperty{busyTableLock}.\\
+    \vspace{-0.4em}\\ % dirty hack because we do not support paragraphs in property descriptions
+    \refgo{msp.Consumer.EstablishMongodState} may be called repeatedly by \refgo{master}
+    while an earlier state establishment request is still executing.\\
+    However, a MongoDB instance must not be configured concurrently.\\
+    Hence, \refproperty{BusyTable} in combination with \refproperty{busyTableLock} is used to ensure sequential configuration.
   }
   \property{busyTableLock}[sync.Mutex]{
     Mutex controlling access to \refproperty{BusyTable}.
