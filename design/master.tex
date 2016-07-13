@@ -245,18 +245,29 @@ These tasks need to communicate with each other. Two different mechanism are emp
 This results in loose coupling of the \refgo{master} components and increases maintainability of the code base.
 
 \struct{Bus}{
+
+        \begin{figure}[H]
+	\includegraphics[width=\textwidth]{activity_diagram}
+	\caption{Communication inside the master over the Bus}
+        \end{figure}
+
 	The \reftype{Bus} is used by the different components of the master to share and react to status updates.
 	At the start of the application channels for all the components are created and passed to them.
 	The components can then use this channel to broadcast messages to the other components and receive messages
 	from the \codeinline{Bus} from which they can filter the ones they are interested in.
 	
-	All messages sent over the \codeinline{Bus} carry the current state --- not state changes --- and are
-	sent repeatedly (i.e. level processing, not edge processing).
-	
-	\begin{figure}[H]
-		\includegraphics[width=\textwidth]{activity_diagram}
-		\caption{Communication inside the master over the Bus}
-	\end{figure}
+        All messages sent over the \codeinline{Bus} carry a description of some state --- not events or sender-specific data.
+        This decouples the implementation of sender and receiver and enhances receiver testability.
+
+        Some senders may communicate state descriptions repeatedly while others may only send them occassionally.
+
+        \textbf{Example}: mismatch detection is decoupled from deployment and problem reporting.\\
+        \reftype{Monitor} sends \refgo{model.MongodMatchStatus} messages every monitoring interval while
+        \reftype{ClusterAllocator} does so only when it changes the desired deployment.\\
+        Neither \reftype{Monitor} nor \reftype{ClusterAllocator} need to know (and call) \reftype{Deployer} and \reftype{ProblemManager}
+        directly.\\
+        Instead, the latter two components simply subscribe to the bus.
+
 }{
 	\property{channels}[[]chan interface\{\}]{The channels the Bus will read messages from and broadcast them to.}
 }{
