@@ -17,10 +17,10 @@ HTTPDL = $(CURL_BIN) -o $(2) '$(1)'
 .PHONY:
 all: design.pdf
 	
-class_diagram.pdf: uml/drafts/slave/sketches.uxf
+class_diagram.pdf: uml/class_diagram.uxf
 	$(call UMLET_CONVERT,$<,$@)
 
-activity_diagram.pdf: uml/drafts/activity_diagram_master.uxf
+activity_diagram.pdf: uml/activity_diagram_master.uxf
 	$(call UMLET_CONVERT,$<,$@)
 
 slave_classes.pdf: class_diagram.pdf
