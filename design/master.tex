@@ -18,7 +18,7 @@ The other structures in \refgo{model} are stored in the database using a databas
 \struct{Slave}{
   A \reftype{Slave} models an instance of the \mamid slave application running on a host.
 }{
-  \property{Id}[uint]{Unique id.}
+  \property{Id}[uint]{Unique ID generated and used by the ORM layer (primary \& foreign key) and Master API (as simple identifier).}
   \property{Hostname}[string]{Hostname of the host the slave is running on. \refproperty{Hostname} uniquely identifies a host in the cluster.\\
                               \textbf{Note:} IPv4 addresses in quad-dotted notation and IPv6 addresses as in RFC2732 Section 3.1 notation (\texttt{[<16bit-colon-separated>]}) are valid hostnames.} 
   \property{Port}[PortNumber]{Port on which the slave listens for connections from the master.}
@@ -51,7 +51,7 @@ The other structures in \refgo{model} are stored in the database using a databas
   A \reftype{Slave} always belongs to exactly one \reftype{RiskGroup}.
   Hence, \codeinline{RiskGroup}s are mutually disjoint.
 }{
-  \property{Id}[uint]{Unique id.}
+  \property{Id}[uint]{Unique ID generated and used by the ORM layer (primary \& foreign key) and Master API (as simple identifier).}
   \property{Name}[string]{Unique name of the risk group.}
   \property{Slaves}[[]\reftype{Slave}]{The \reftype{Slave}s that are members of a the given instance of \reftype{RiskGroup}.}
 }
@@ -62,7 +62,7 @@ The other structures in \refgo{model} are stored in the database using a databas
   The degree of desired availbility \& redundancy of data stored in the Replica Set is modeled through 
   \refproperty{PersistentMemberCount} and \refproperty{VolatileMemberCount}.
 }{
-  \property{Id}[uint]{Unique id.}
+  \property{Id}[uint]{Unique ID generated and used by the ORM layer (primary \& foreign key) and Master API (as simple identifier).}
   \property{Name}[string]{Name of the Replica Set.}
   \property{PersistentMemberCount}[uint]{Number of persistent \reftype{Mongod}s that should be part of this \reftype{ReplicaSet}.}
   \property{VolatileMemberCount}[uint]{Number of volatile \reftype{Mongod}s that should be part of this \reftype{ReplicaSet}.}
@@ -155,7 +155,8 @@ The other structures in \refgo{model} are stored in the database using a databas
   See \refgo{master.ProblemManager} for the transformation from errors to this structure.
 }{
   \property{Id}[uint]{
-    Unique ID of the problem. If the \emph{same} problem occurrs after it was resolved before,
+    Unique ID of the problem generated and used by the ORM layer (primary \& foreign key) and Master API (as simple identifier).\\
+    If the \emph{same} problem occurrs after it was resolved before,
     its different incarnations are distinguishable by their \refproperty{Id}.
   }
   \property{Description}[string]{Short human-readable description of the problem, suitable for subject lines of error messages.}

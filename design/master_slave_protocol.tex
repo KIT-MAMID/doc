@@ -116,8 +116,8 @@ Hence, duplication of datastructures is a necessary tradeoff in order to sustain
   Description of an error in the slave, usually corresponding to a partial error when executing a request from the master.
   See \refgo{msp.Mongod} for examples.
 }{
-  \property{Identifier}[string]{Unique identifier for the type of errror defined by the slave. Intended for communicating errors,
-                                e.g. in a remote support situation. }
+  \property{Identifier}[string]{Unique identifier for the type of error. Set of compile-time constants in the slave implementation.
+                                Intended for debugging purposes and human-to-human conversation about an error.}
   \property{Description}[string]{Short human-readable description of the error, suitable for display in subject lines, etc.}
   \property{LongDescription}[string]{Long human-readable description of the error.\\
                                      Can contain the \codeinline{error.Error()} of one or more underlying errors or other useful

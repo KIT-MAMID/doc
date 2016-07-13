@@ -80,8 +80,10 @@ However, in the basic implementation, only email notifications are supported.
 \struct{Problem}{		
      A Problem object as specified in section \ref{masterapi:problems} of \refgo{masterapi}.
 }{
-	 \property{Id}[uint]{Unique ID of the problem. If the \emph{same} problem occurrs after it was resolved before,
-		its different incarnations are distinguishable by this ID.}
+	 \property{Id}[uint]{Unique ID of the problem generated and used by the ORM layer (primary \& foreign key)
+                             and Master API (as simple identifier).\\
+                             If the \emph{same} problem occurrs after it was resolved before,
+                             its different incarnations are distinguishable by their \refproperty{Id}.}
 	 \property{Description}[string]{Short human-readable description of the problem, suitable for subject lines of error messages.}
 	 \property{LongDescription}[string]{Long human-readable description of the problem.}
 	 \property{FirstOccurred}[time.Time]{The point in time when the particular problem first occurred.}
