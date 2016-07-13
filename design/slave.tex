@@ -12,7 +12,7 @@ The \refgo{slave} is installed on the individual host nodes and started by the m
   A Go application starts by initializing the Go 'main' package and then running the \textit{main()} function.
   This function performs early initialization of the slave's main datastructures:
   \begin{itemize}
-    \item Parse command line flags using an external CLIFlagsParser.
+    \item Parse command line flags using an external parser package (\codeinline{CLIFlagsParser}).
     \item Initialize the MSPListener.
     \item Initialize the Controller with the MSPListener instance.
     \item Transfer control to MSPListener to wait for incoming connections.

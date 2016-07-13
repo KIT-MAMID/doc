@@ -51,9 +51,11 @@
 \section{Master API}
 \beginpackage{masterapi}
 %TODO General api description
-The Master API (\refgo{masterapi}) is used by the GUI to CRUD Slaves, Replica Sets, Risk Groups and to display Problems.
+The Master API (\refgo{masterapi}) is used by the GUI to \emph{Create/Read/Update/Delete} (CRUD) Slaves, Replica Sets, Risk Groups and to display Problems.
 
 It is also used by the \refgo{notifier} to get the current list of Problems.
+
+The overall API interface follows the \emph{representational state transfer} (REST) style.
 
 The reader should recognize that --- aside from \reftype{MasterAPIServer} --- this document does not describe the interface
 of the structs of the package.

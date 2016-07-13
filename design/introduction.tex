@@ -117,7 +117,8 @@ The architecture of the \refgo{gui} follows the \textbf{Model-View-Controller} p
 
 % Master Design Patterns
 The \textbf{client/server architecture pattern} is used to decouple the \refgo{gui} functionality from the \refgo{master}:
-The \refgo{gui} acts as a frontend to the functionality provided by the \refgo{master} HTTP API (\refgo{masterapi}).
+The \refgo{gui} acts as a frontend to the functionality provided by the \refgo{master} HTTP
+\emph{Application Programming Interface} (API) (\refgo{masterapi}).
 
 Being the most complex package of the project, several decoupling patterns are employed in the \refgo{master}:
 
@@ -131,7 +132,7 @@ Furthermore, a variation of the \textbf{publish/subscribe pattern} is implemente
 % MasterSlave Protocol
 The \textbf{remote proxy} decoupling pattern is employed in the {Master Slave Protocol (\refgo{msp}) package:
 it implements communication between \refgo{master} and \refgo{slave}.
-\refgo{msp.Client} exposes RPC stubs that call the \refgo{msp.Consumer} implemented on the \refgo{slave}.
+\refgo{msp.Client} exposes remote-procedure-call stubs that call the \refgo{msp.Consumer} implemented on the \refgo{slave}.
 Another term used to describe this relationship between master and slaves is the \textbf{Multi-Server/Single-Client architecture}.
 
 % Slave design patterns

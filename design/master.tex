@@ -238,7 +238,7 @@ It fulfills many different tasks, running in separate goroutines.
 
 These tasks need to communicate with each other. Two different mechanism are employed to achieve this:
 \begin{itemize}
-	\item A shared persistent database with an ORM abstraction layer
+        \item A shared persistent database with an \emph{object-relational mapping} (ORM) abstraction layer
 	\item A \reftype{Bus} that leverages Go's channels to send status updates via \refgo{model.StatusMessage}
 \end{itemize}
 This results in loose coupling of the \refgo{master} components and increases maintainability of the code base.
