@@ -1,0 +1,376 @@
+%% das Papierformat zuerst
+\documentclass[a4paper, 11pt]{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
+\usepackage[fleqn]{amsmath} %left aligned equations
+\usepackage{hyperref} % clickable refs
+\usepackage{graphicx}
+\usepackage[toc, numberedsection]{glossaries}
+\usepackage{float}
+\usepackage{amssymb}
+\usepackage{calc}
+\usepackage{enumitem} 
+\usepackage{url}
+\usepackage{parskip}
+% http://tex.stackexchange.com/questions/17730/newcommand-and-spacing
+\usepackage{xspace}
+\usepackage{xparse}
+% 'frame' option for figures
+\usepackage[export]{adjustbox}
+% fancy page headers
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{xstring}
+\usepackage[lined,boxed,commentsnumbered]{algorithm2e}
+\usepackage{makecell}
+
+% page style
+\pagestyle{fancy}
+\fancyhead[R]{\includegraphics[width=2cm]{../assets/kitlogo}}
+\fancyhead[L]{\leftmark}
+\fancypagestyle{plain}{
+	\rhead{\includegraphics[width=2cm]{../assets/kitlogo}}
+	\lhead{\leftmark}
+}
+
+% TODO: template übersetzten
+
+\makeglossaries
+
+%Hack for referencing labels
+\makeatletter
+\def\namedlabel#1#2{\begingroup
+    #2%
+    \def\@currentlabel{#2}%
+    \phantomsection\label{#1}\endgroup
+}
+\makeatother
+% End: Hack for referencing labels
+
+% Glossar: alle Einträge, aber ohne extra Referenzen
+% http://tex.stackexchange.com/questions/115635/glossaries-suppress-pages-when-using-glsaddall
+\newcommand*{\glsgobblenumber}[1]{}
+\makeatletter
+\newcommand*{\glsaddnp}[2][]{
+  \glsdoifexists{#2}{
+    \def\@glsnumberformat{glsgobblenumber}
+    \edef\@gls@counter{\csname glo@#2@counter\endcsname}
+    \setkeys{glossadd}{#1}
+    \@gls@saveentrycounter
+    \@do@wrglossary{#2}
+  }
+}
+\renewcommand{\glsaddallunused}[1][]{
+  \edef\@glo@type{\@glo@types}
+  \setkeys{glossadd}{#1}
+  \forallglsentries[\@glo@type]{\@glo@entry}{
+    \ifglsused{\@glo@entry}{}{
+      \glsaddnp[#1]{\@glo@entry}}}
+}
+\makeatother
+
+\renewcommand{\glsnamefont}[1]{\mdseries #1} % glossary entries shouldn’t be bold
+
+% Glossar
+
+% So sieht ein Glossar-Eintrag aus:
+%
+%\newglossaryentry{dijkstra}{
+%  name={Dijkstra’s Algorithmus},
+%  description={ein Algorithmus, um den optimalen Pfad in einem gerichteten Graphen zu finden}
+%}
+%\newglossaryentry{arc}{
+%  name={Arc-Flags},
+%  description={eine Technik, um Routenberechnung zu beschleunigen},
+%  see={dijkstra}
+%}
+%
+% Und so kann er im Dokument verwendet werden:
+%
+% lorem ipsum dolor sit \gls{arc}, consectetur
+%
+% End: Glossar
+
+% usage: \counteditem{prefix}{refName} -> item `/prefixXX/` with label `prefix:refName` (where XX is counted in increments of 10)
+\makeatletter
+\newcommand{\oitem}[2]{
+  % define the counter
+  \@ifundefined{c@oitem#1}{\newcounter{oitem#1}}{} % initialized at 0
+  \addtocounter{oitem#1}{10}
+  \item[\namedlabel{#1:#2}{/#1\arabic{oitem#1}/}]
+}
+\makeatother
+
+% new page after section
+\let\oldsection\section
+\renewcommand\section{\clearpage\oldsection}
+
+\newcommand{\mamidscreenshot}[1]{\includegraphics[width=\textwidth,frame]{#1}}
+
+\newcommand{\uiel}[3]{\item \textbf{"#1" #2:} #3}
+
+\begin{document}
+
+\newcommand{\abbildung}[1]{\autoref{fig:#1}}
+\newcommand{\mamid}{\textit{MAMID}\xspace}
+
+
+%http://tex.stackexchange.com/questions/43002/how-to-preserve-the-same-parskip-in-minipage
+\newlength{\currentparskip}
+\newenvironment{minipageparskip}
+{
+        \setlength{\currentparskip}{\parskip}% save the value
+	\begin{minipage}{\textwidth}% open the minipage
+	\setlength{\parskip}{\currentparskip}% restore the value
+} {
+        \end{minipage}
+}
+
+\NewDocumentCommand{\refgo}{m}{%
+  \IfHasLabel{#1}{%
+    \sloppy\hyperref[#1]{\codeinline{\refgosymboltext{#1}}}%
+  }{%
+   \codeinline{#1}%
+   %\colorbox{red}{\texttt{#1}}%
+  }%
+  \let\refdisplaytext\undefined%
+}
+
+%Refgo with alternative text
+\NewDocumentCommand{\refgoalt}{m m}{%
+	\IfHasLabel{#1}{%
+		\sloppy\hyperref[#1]{\codeinline{#2}}%
+	}{%
+	\codeinline{#1}%
+	%\colorbox{red}{\texttt{#1}}%
+}%
+\let\refdisplaytext\undefined%
+}
+
+% used to produce symbol names relative to the current scope
+\NewDocumentCommand{\refgosymboltext}{m}{%
+  % nibble the scope hierarchy: .gocurpackage.gocurtype.gocurmethod%
+  \StrLen{\gocurpackage.}[\gocurlen]%
+  \StrLeft{#1}{\gocurlen}[\refgosymbolCurComponent]%
+  \IfStrEq{\refgosymbolCurComponent}{\gocurpackage.}{%
+    % we are in scope of the package  %
+      \StrGobbleLeft{#1}{\gocurlen}[\gocurremainingpath]%
+      %
+      \StrLen{\gocurtype.}[\gocurlen]%
+      \StrLeft{\gocurremainingpath}{\gocurlen}[\refgosymbolCurComponent]%
+      \IfStrEq{\refgosymbolCurComponent}{\gocurtype.}{%
+        % we are in class scope       %
+        \StrGobbleLeft{\gocurremainingpath}{\gocurlen}[\gocurremainingpath]%
+        %
+        \StrLen{\gocurmethod.}[\gocurlen]%
+        \StrLeft{\gocurremainingpath}{\gocurlen}[\refgosymbolCurComponent]%
+        \IfStrEq{\refgosymbolCurComponent}{\gocurmethod.}{%
+          %
+          \StrGobbleLeft{\gocurremainingpath}{\gocurlen}[\gocurremainingpath]%
+          \gocurremainingpath%
+        }{%
+          \gocurremainingpath%
+        }%
+      }{%
+        \gocurremainingpath%
+      }%
+  }{%
+    % we are not in scope of the package%
+    #1%
+  }%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       Util-commands that are dirty hacks
+%                       to enable the helper commands
+
+% evaluate #2 if the label #1 exists, else #3.
+\makeatletter
+\newcommand{\IfHasLabel}[3]{%
+  \@ifundefined{r@#1}% declaring a label xyz defines r@xyz
+               {#3}%
+               {#2}%
+}
+\makeatother
+
+% Styling of inline 'code', e.g. types.
+\definecolor{codeinline-gray}{gray}{0.95}
+\NewDocumentCommand{\codeinline}{m}{%
+  % Specify inline code / command
+  % Markdown equivalent: `#1`
+  \colorbox{codeinline-gray}{\texttt{#1}}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                               Helper Commands
+% ... defining types, methods, paramters, etc
+
+% redefine \gocurpackage to the package name that the
+%   subsequent \, \property, \method, etc belong too
+\newcommand{\gocurpackage}{none}
+\newcommand{\gocurtype}{}
+\newcommand{\gocurmethod}{}
+
+% an abstraction for declaring types, i.e. \struc or \interface
+% #1: the type of type, i.e Struct or Interface
+% #2: the name of the type
+% #3: prologue
+% #4: properties. list of \property
+% #5: methods. list of \method
+%
+\NewDocumentCommand{\gotype}{m m +m +g +g +d<>}{%
+  \subsection{#1 \codeinline{#2}}\label{\gocurpackage.#2}%
+  % Make the current type name available in the scope of the class.
+  % Useful for making labels.
+  \renewcommand{\gocurtype}[0]{#2}% 
+  #3%
+  \IfValueT{#5}{%
+    \subsubsection*{Fields}%
+    \begin{description}%
+      #5% list of \property
+    \end{description}%
+   }%
+   \IfValueT{#4}{%
+      \subsubsection*{Methods}%
+      \begin{description}%
+        %\setlength{\itemsep}{1em}
+        #4%list of \method
+      \end{description}%
+   }%
+   \IfValueT{#6}{%
+      \subsection*{Enum Values}%
+      \begin{description}%
+          #6% list of \goenumitem
+      \end{description}%
+   }%
+   \renewcommand\gocurtype[0]{}%
+}
+\NewDocumentCommand{\jsview}{m +m}{\gotype{View}{#1View}{#2}}
+\NewDocumentCommand{\jscontroller}{m +m}{\gotype{Controller}{#1Controller}{#2}}
+\NewDocumentCommand{\struct}{m +m +g +g}{\gotype{Struct}{#1}{#2}{#4}{#3}}
+\NewDocumentCommand{\interface}{m +m +g}{\gotype{Interface}{#1}{#2}{#3}}
+\NewDocumentCommand{\goenum}{m +m +m}{\gotype{Enum}{#1}{#2}<#3>}
+\NewDocumentCommand{\typealias}{m r[] +g}{%
+  \subsection{Type Alias \codeinline{#1 $\equiv$ #2}}\label{\gocurpackage.#1}%
+  #3
+}
+
+\NewDocumentCommand{\beginpackage}{m}{
+	\renewcommand{\gocurpackage}{#1}\label{\gocurpackage}
+}
+
+\NewDocumentCommand{\reftype}{m}{\refgo{\gocurpackage.#1}}
+
+% \property is used to declare fields of a struct
+\NewDocumentCommand{\property}{m o +g}{
+  \item[\codeinline{#1\hspace{0.1cm}:\hspace{0.1cm}#2}]\label{\gocurpackage.\gocurtype.#1}\hfill %(line break for the poor)
+  \IfValueT{#3}{%
+    \par
+    #3
+  }%
+}
+\NewDocumentCommand{\refproperty}{m}{\refgo{\gocurpackage.\gocurtype.#1}}
+
+\NewDocumentCommand{\goenumitem}{m +m}{
+  \item [\codeinline{#1}]\label{\gocurpackage.\gocurtype.#1} #2
+}
+
+% \method is used to declare a struct's method set.
+\NewDocumentCommand{\method}{m o d() +m}{
+\renewcommand\gocurmethod[0]{#1}%
+\item[\codeinline{#1(\IfValueT{#3}{$\cdot$})\IfValueT{#2}{\hspace{0.1cm}:\hspace{0.1cm}#2}}]\label{\gocurpackage.\gocurtype.#1}\hfill %(line break for the poor)
+  \IfValueT{#3}{
+    \begin{description}
+      #3 % should only contain \param
+    \end{description}
+  }
+  \par
+  #4
+  \renewcommand\gocurmethod[0]{}%
+}
+\NewDocumentCommand{\refmethod}{m}{
+	\refgo{\gocurpackage.\gocurtype.#1}
+}
+
+% \param is used to declare paramters of a \method -> check \method for details
+\NewDocumentCommand{\param}{m o +m}{%
+  \item[\codeinline{#1\hspace{0.1cm}:\hspace{0.1cm}#2}]\label{\gocurpackage.\gocurtype.\gocurmethod.#1} #3
+}
+
+\NewDocumentCommand{\refparam}{m}{
+  \refgo{\gocurpackage.\gocurtype.\gocurmethod.#1}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{glossary}
+
+\begin{titlepage}
+\makeatletter
+\begin{center}
+~\\[4em]
+{\Huge MAMID}\\[.8em]\huge{Monitor and Manager for In-memory Databases}\\[2em]
+{\huge Implementation \& Testing}\\[1em]
+{\large\today}\\[2.5em]
+{\LARGE
+Niklas Fuhrberg\\
+Anton Schirg\\
+Christian Schwarz\\
+Janis Streib\\
+Bob Weinand\\[3em]}
+{\Large supervised by}\\[2em]
+{\LARGE
+Dr Marek Szuba\\[1em]}
+{\Large at}\\[1em]
+{\LARGE
+Karlsruhe Institute of Technology\\
+SCC\\[2em]}
+{\color{gray}
+  \small Document Version: \input{../.git/refs/heads/master}
+}
+\end{center}
+\makeatother
+\end{titlepage}
+\newpage
+\tableofcontents
+\newpage
+
+\include{introduction}
+
+\section{Deviations From Design}
+\include{master_slave_protocol}
+\include{slave}
+\include{master}
+\include{master_api}
+\include{gui}
+\include{notifier}
+
+% \section
+\include{development_process}
+% \section
+\include{testing}
+
+\glsaddallunused
+\makeatletter
+\newglossarystyle{myAltlist}{
+  \glossarystyle{altlist} % base this style on altlist
+  \renewcommand*{\glossaryentryfield}[5]{
+  \item[\glsentryitem{##1}\glstarget{##1}{##2}]
+    \mbox{}\par\nobreak\@afterheading
+    ##3\glspostdescription\space On page ##5.
+  }
+}
+\makeatother
+
+\end{document}
