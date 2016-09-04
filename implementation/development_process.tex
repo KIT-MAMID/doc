@@ -1,16 +1,20 @@
 \section{Development Process}
-\subsection{CI (Jenkins)}\label{ci}
+\subsection{Version Control}
+As planned in the requirements analysis phase, Git\footnote{\url{https://git-scm.com/}} was used as the version control system.
+Github\footnote{\url{https://github.com/}} was chosen as repository hosting service.
+
+\subsection{Continuous Integration (Jenkins)}\label{ci}
 On each push a GitHub webhook triggers a Jenkins instance\footnote{\url{https://jenkins.dogcraft.de/job/mamid/}} to build the head 
 of the pushed commits. While building, Jenkins marks the commit on GitHub to indicate whether the respective target passed.
 
-Jenkins utilzes two remote build nodes: 
+Jenkins utilizes two remote build nodes: 
 \begin{itemize}
 	\item A node on a Linux server
-	\item A node on a openindiana server 
+	\item A node on an OpenIndiana server 
 \end{itemize}
 Therefore artifacts for both Linux and OpenIndiana can be produced and tested.
 
-Jenkins executes the folowing Makefile targets on both nodes:
+Jenkins executes the following Makefile targets on both nodes:
 \begin{itemize}
 	\item \codeinline{check\_format}
 	\item \codeinline{vet}
@@ -27,7 +31,7 @@ only allows changes to be pushed on master if the following constraints are fulf
 	\begin{itemize}
 		\item the \codeinline{check\_format} makefile target succeeds
 		\item the \codeinline{vet} makefile target succeeds
-		\item the \codeinline{test} makefile target succeeds on both Linux and openindiana
+		\item the \codeinline{test} makefile target succeeds on both Linux and OpenIndiana
 		\item the \codeinline{build} makefile target succeeds
 	\end{itemize}
 \end{itemize}
