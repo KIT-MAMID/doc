@@ -41,7 +41,7 @@
 
 % TODO: template übersetzten
 
-\makeglossaries
+%\makeglossaries
 
 %Hack for referencing labels
 \makeatletter
@@ -368,16 +368,16 @@ SCC\\[2em]}
 \include{testing}
 \include{appendix}
 
-\glsaddallunused
-\makeatletter
-\newglossarystyle{myAltlist}{
-  \glossarystyle{altlist} % base this style on altlist
-  \renewcommand*{\glossaryentryfield}[5]{
-  \item[\glsentryitem{##1}\glstarget{##1}{##2}]
-    \mbox{}\par\nobreak\@afterheading
-    ##3\glspostdescription\space On page ##5.
-  }
-}
+%\glsaddallunused
+%\makeatletter
+%\newglossarystyle{myAltlist}{
+%  \glossarystyle{altlist} % base this style on altlist
+%  \renewcommand*{\glossaryentryfield}[5]{
+%  \item[\glsentryitem{##1}\glstarget{##1}{##2}]
+%    \mbox{}\par\nobreak\@afterheading
+%    ##3\glspostdescription\space On page ##5.
+%  }
+%}
 \makeatother
 
 \end{document}
