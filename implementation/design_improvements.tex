@@ -119,7 +119,7 @@ In particular, the following problems complicated and delayed the slave implemen
 \begin{description}
 \item[Replica Set Initiation] Initiation must happen from a single Mongod in the soon-to-be Replica Set.
      This prohibits the original idea of simply broadcasting a state description to all Slaves hosting Mongods of the Replica Set,
-        as is done once the ReplicaSet is initiated.
+        as is done once the Replica Set is initiated.
      A separate MSP protocol message \refgo{msp.RsInitiateMessage} was introduced and other sub-datastructures refactored, allowing
         a coordinated initiation of the Replica Set.
 \item[User Access Control] The introduction of \textit{user access control} complicates the retrieval of Mongod state since most MongoDB
