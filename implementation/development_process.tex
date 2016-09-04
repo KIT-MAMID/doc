@@ -32,3 +32,24 @@ only allows changes to be pushed on master if the following constraints are fulf
 	\end{itemize}
 \end{itemize}
 
+\subsection{Local Staging Environment}
+A local staging environment can be spawned using Docker and the Makefile target \codeinline{testbed\_up}.
+
+The target
+\begin{itemize}
+  \item creates a host-only test network
+  \item builds \mamid in a container
+  \item builds Docker images with the newly built binaries for master, slave and notifier
+  \item starts Docker containers: 1 master, 1 PostgreSQL instance, 3 slaves, 1 notifier
+\end{itemize}
+
+Re-executing the \codeinline{testbed\_up} wipes the previously created environment, allowing for quick reproducible testing of changes.
+
+\subsection{Communication}
+
+Team communication was handled mostly via the Slack\footnote{\url{https://slack.com}} chat platform.
+Automatic posting of commits and CI results into separate channels was configured to increase overivew of the team's activity.
+
+Github's issue tracker was used to track bugs, enhancements and deviations from the design document.
+However, bugs that were fixed as they were encountered were not necessarily tracked in order to reduce time overhead.
+
