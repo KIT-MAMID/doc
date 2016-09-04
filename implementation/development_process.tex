@@ -1,14 +1,14 @@
 \section{Development Process}
 \subsection{CI (Jenkins)}\label{ci}
-On each push a GitHub webhook triggers a Jenkins instance to build the head commit of the pushed commits. While building, Jenkins marks the 
-commit to indicate whether the target passed or not.
+On each push a GitHub webhook triggers a Jenkins instance\footnote{\url{https://jenkins.dogcraft.de/job/mamid/}} to build the head 
+of the pushed commits. While building, Jenkins marks the commit on GitHub to indicate whether the respective target passed.
 
 Jenkins utilzes two remote build nodes: 
 \begin{itemize}
 	\item A node on a Linux server
 	\item A node on a openindiana server 
 \end{itemize}
-Therefore artifacts for both Linux and openindiana can be produced and tested.
+Therefore artifacts for both Linux and OpenIndiana can be produced and tested.
 
 Jenkins executes the folowing Makefile targets on both nodes:
 \begin{itemize}
