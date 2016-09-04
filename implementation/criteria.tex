@@ -31,7 +31,7 @@ Additional features are listed in a separate subsection.
 		\oitem{MC}{available_slave_types} The administrator can specify whether the Slave has persistent (typically HDD-/SSD-backed) or 
 		volatile (RAM-backed) storage. \done
 		\oitem{MC}{root_data_directory} The administrator can specify in which filesystem directory on the host the Slave 
-		and its MongoDB processes store data. \done[Done as commandline paramter for the Slave]
+		and its MongoDB processes store data. \done[Done as commandline parameter for the slave.]
 		% inventory ops -> Slave
 		\oitem{MC}{slave_mode_active} The administrator can announce to \mamid that a Slave is ready to host MongoDB processes. 
 		\done
@@ -85,8 +85,8 @@ Additional features are listed in a separate subsection.
 \begin{description}
 	
 	% master
-	\oitem{OC}{api_authentication} \mamid requires authentication from the user for all operations. \done[Done with client certs
-	issued/signed by a CA. Optional CLI flag for the master]
+	\oitem{OC}{api_authentication} \mamid requires authentication from the user for all operations.
+		\done[Implemented using TLS client certificates issued/signed by a CA. Optional CLI flag for the master.]
 	
 	% inventory
 	\oitem{OC}{manual_autodiscovery} \mamid auto-discovers new Slaves on the administrator's request. \notdone
@@ -94,8 +94,7 @@ Additional features are listed in a separate subsection.
 	\oitem{OC}{monitor_icmp} \mamid recognizes when the Slave software does not respond but the corresponding host is still 
 	connected to the network.  \notdone
 	\oitem{OC}{export_import_snapshot} The administrator can back up and restore the cluster description. \done[Possible with 
-	PostgreSQL tools by dumping the mamid PostgreSQL databse]
-	
+		PostgreSQL's \codeinline{pg\_dump(8)} utility.]
 	% Slaves
 	\oitem{OC}{tweak_performance_parameters} The administrator can customize performance-relevant parameters of MongoDB 
 	processes. \notdone
@@ -107,21 +106,22 @@ Additional features are listed in a separate subsection.
 	
 	% Replica Sets
 	\oitem{OC}{deploy_arbiters} \mamid deploys MongoDB arbiters for configured Replica Sets as needed, removing the 
-	restriction to an odd count of Replica Set members in \ref{F:master_alloc_resp_pv_counts}.  \notdone
+		restriction to an odd count of Replica Set members in \ref{F:master_alloc_resp_pv_counts}.
+		\notdone[even member counts without arbiter did not appear to be problematic in test setups.]
 	\oitem{OC}{extended_monitoring} \mamid supports extended monitoring of hosts, i.e. metrics beyond the processes managed by \mamid.  
 	\notdone
 	
 	% other
-	\oitem{OC}{} The administrator can interact with \mamid via a cli.  \notdone
-	\oitem{OC}{http_api} The administrator can interact with \mamid via a stable, documented HTTP API.  \done
+	\oitem{OC}{} The administrator can interact with \mamid via a CLI.  \notdone
+	\oitem{OC}{http_api} The administrator can interact with \mamid via a stable, documented HTTP API. \done
 \end{description}
 
 \subsection{Demarcation Criteria}
 \begin{description}
 	\oitem{DMC}{} The administrator does not directly configure individual MongoDB instances spawned \& controlled by \mamid. 
 	All configuration happens through \mamid, either automatically (e.g. Replica Set deployment) or through a \mamid interface (e.g. 
-	GUI, CLI, HTTP API). \done[In some error cases administrative intervention may be required]
-	\oitem{DMC}{} \mamid does not deploy MongoDB query routers.  \done
+	GUI, CLI, HTTP API). \done[In case a Replica Set is not able to elect a primary member, administrative intervention may be required]
+		\oitem{DMC}{} \mamid does not deploy MongoDB query routers.  \done
 	\oitem{DMC}{} \mamid deploys neither the operating system nor other required software (such as MongoDB binaries) to the 
 	cluster hosts.  \done
 \end{description}
