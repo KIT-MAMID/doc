@@ -161,7 +161,13 @@ This issue was addressed through more compact UI elements and the addition of a 
 
 \subsection{Notifier Config File}
 
-Instead of command line arguments, the notifier uses a configuration file to facilitate deployment for the administrator:
-the config file contains the SMTP relay host information, the master API endpoint and the path to the contacts file in a \textit{ini} file.
+The notifier command line arguments were moved to a configuration file in order to facilitate deployment.
+The file in the popular \textit{ini} format contains
 
-Also the API endpoint informtaion is used to generate links to affected Slaves \& Replica Sets in the notification e-mails.
+\begin{itemize}
+                \item the SMTP relay host information 
+                \item the master API endpoint
+                \item and the path to the alert contacts file.
+\end{itemize}
+
+Also the API endpoint information is used to generate links to affected Slaves \& Replica Sets in notification e-mails.
