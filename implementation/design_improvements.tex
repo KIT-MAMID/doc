@@ -134,20 +134,30 @@ Making the slave compatible with the the problems described above led significan
 
 To increase maintainability, the interaction with the MongoDB API was extracted into a private MongoDB API wrapper (\refgo{slave.mgoContext}).
 
-\subsection{We realized: administrator needs more details on the deployment of the cluster in order to use it for applications}
+\subsection{Addressing Operational Needs}
 
-=> GUI needs to display more information
-    - Mongods of Replica Sets
-    => requirement for Mongod API endpoint (expose what is already in the Master database)
+The functional specification contains mockups of the \mamid web user interface.
 
-=> Useful gimmics for the admin: ready to copy-to-clipboard 
-    - command lines for starting a sharding config server
-    - MongoDB URL useful for pasting into application configuration running on top of a Replica Set
+During development though, it became evident that the minimalist user interface would not communicate enough information
+to the administrator, particularly in case of failure scenarios.
 
-\subsection{Original GUI draft does not scale well to 80-100 machines }
+The GUI \& Master API were extended to satisfy the administator's need for information and provide
+quick and intuitive ways to investigate problems:
 
-- use dense UI elements
-- implement filtering functionality (cheap win using Angular!)
+\begin{itemize}
+  \item Mongods and their MongodState are exposed through the Master API, queriable either by parent slave or Replica Set.
+  \item The \textit{Replica Set view} and \textit{slave view} were extended to display the list of child Mongods.
+  \item Mongods are clickable hyperlinks in both of the above views, enabling quick navigation from a Mongod
+          viewed as a member of a Replica Set to its parent Slave (and vice versa).
+  \item Mongods whose parent slaves have problems are highlighted in the \textit{Replica Set view},
+          simplifying investigation in case of failure scenarios.
+  \item The \textit{Replica Set view} was extended to include helpful copy-to-clipboard text fields with commands and MongoDB connect-URLs.
+%TODO forgot anything?
+\end{itemize}
+
+Furthermore, the original mockups proved unsuitable for larger deployments, mostly as a consequence of the excessive use of whitespace.
+
+This issue was addressed through more compact UI elements and the addition of a filtering text field in the replica set and slave list views.
 
 \subsection{Notifier Config File}
 
