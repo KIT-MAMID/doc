@@ -13,6 +13,7 @@
 \usepackage{enumitem} 
 \usepackage{url}
 \usepackage{parskip}
+\usepackage{amssymb}
 % http://tex.stackexchange.com/questions/17730/newcommand-and-spacing
 \usepackage{xspace}
 \usepackage{xparse}
@@ -27,7 +28,8 @@
 \usepackage{xstring}
 \usepackage[lined,boxed,commentsnumbered]{algorithm2e}
 \usepackage{makecell}
-
+\usepackage{pifont}
+\newcommand{\xmark}{\ding{55}}%
 % page style
 \pagestyle{fancy}
 \fancyhead[R]{\includegraphics[width=2cm]{../assets/kitlogo}}
@@ -112,6 +114,19 @@
 \newcommand{\mamidscreenshot}[1]{\includegraphics[width=\textwidth,frame]{#1}}
 
 \newcommand{\uiel}[3]{\item \textbf{"#1" #2:} #3}
+
+\definecolor{darkgreen}{rgb}{0.0, 0.5, 0.0}
+\newcommand{\checkcomment}[1]{
+	\def\temp{#1}
+	\ifx\temp\empty
+	\emph{}
+	\else
+	 \emph{Note: #1}
+	\fi
+}
+\newcommand{\done}[1][]{{\color{darkgreen}\checkmark\checkcomment{#1}}}
+\newcommand{\notdone}[1][]{{\color{red}\xmark\checkcomment{#1}}}
+
 
 \begin{document}
 
