@@ -1,0 +1,62 @@
+\section{Design Improvements}
+
+In accordance with the project supervisor, a text-based diff between original and implemented application design
+is beyond the scope of this document.
+
+However, to facilitate understanding and future maintenance of the code base, the design document has been updated to the state of
+the implementation at the time of writing.
+
+The purpose of this section is to provide an overview of the reasoning behind the design changes.
+
+% one subsection per problem encountered during implementation
+
+\subsection{Master: ORM Layer}
+
+\subsection{Master: SQlite sucks}
+
+\subsection{Master: Cluster Allocator Prioritization Datastructures}
+
+\subsection{Replica Set deployment procedure with keyfiles far more complicated than expected}
+
+Took 3 days to get right.
+
+=> Keyfiles for internal authentication => required keyfile deployment
+=> Keyfiles in turn require User Access Control  => require configuration of management user
+
+==> this information needs to be presented to the administrator if he/she wants to actually use deployed replica sets
+    (e.g. app user configuration, sharding configuration, etc)
+    => extend GUI for a System view
+      => additional API endpoints for Keyfiles and Management User Credential
+    => extend Master, MSP and Slave to support deployment of this information
+       (shortcut taken: unchangeable)
+
+\subsection{We realized: administrator needs more details on the deployment of the cluster in order to use it for applications}
+
+=> GUI needs to display more information
+    - Mongods of Replica Sets
+    => requirement for Mongod API endpoint (expose what is already in the Master database)
+
+=> Useful gimmics for the admin: ready to copy-to-clipboard 
+    - command lines for starting a sharding config server
+    - MongoDB URL useful for pasting into application configuration running on top of a Replica Set
+
+\subsection{Original GUI draft does not scale well to 80-100 machines }
+
+- use dense UI elements
+- implement filtering functionality (cheap win using Angular!)
+
+\subsection{Slave: Mongod configuration far more edge cases than expected}
+
+elaborate on the process of deploying a ReplicaSet, possible a UML activity diagram
+
+=> Configurator logic became unmaintainable because one could not see the forest from the trees
+  => implementation of MongoDB API wrapper to increase oversight (wording?) in MongodConfigurator logic
+
+=> Additional MSP endpoint needed to be created for replica set initiiation since it must happen from a single machine
+   (requires global coordination form the master)
+
+  => Replica Set Config (Priorities, NumberOfVotes) needs ot be communicated to the Slave initiating the Replica Set
+
+\subsection{Notifier config file}
+
+TODO janis
