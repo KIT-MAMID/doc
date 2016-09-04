@@ -121,6 +121,29 @@ API Objects are exchanged in JSON format.
 	"replica_set_id": <int, may be 0 if unused>
 }
 \end{lstlisting}
+\subsubsection{Mongod}\label{masterapi:mongod}
+\begin{lstlisting}
+{
+	"id": <int>,
+	"slave_port": <int>,
+	"replica_set_id": <int>,
+	"parent_slave_id": <int>,
+	"observed_execution_state": <string>
+}
+\end{lstlisting}
+\subsubsection{MongodKeyfile}\label{masterapi:mongodkeyfile}
+\begin{lstlisting}
+{
+	"content": <string>
+}
+\end{lstlisting}
+\subsubsection{MongodbCredential}\label{masterapi:mongodbcredential}
+\begin{lstlisting}
+{
+	"username": <string>,
+	"password": <string>
+}
+\end{lstlisting}
 \subsection{API Methods} \label{masterapi:apimethods}
 All requests and responses are made with the \emph{Content-Type}-Header set to \emph{application/json}. Requests containing any other content type are honored with the HTTP-Status-Code \emph{406 - Not Acceptable}.
 \subsubsection{Slaves}
@@ -167,6 +190,13 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 	{}
 	{array of problem objects}
 	{}\label{\gocurpackage.slaves.getProblems}
+	
+\apicall[get]{/slaves/$<$id$>$/mongods}{Gets the Mongods existing on a slave}
+	{id & integer & id of the slave to get the Mongods of}
+	{200}
+	{}
+	{array of mongod objects}
+	{}\label{\gocurpackage.slaves.getMongods}
 	
 \subsubsection{Replica Sets}
 %Do not add default error codes
@@ -219,6 +249,13 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 	{}
 	{array of problem objects}
 	{}\label{\gocurpackage.replicasets.getProblems}
+
+\apicall[get]{/replicasets/$<$id$>$/mongods}{Gets the Mongod of a replica set}
+	{id & integer & id of the replica set to get the mongods of}
+	{200}
+	{}
+	{array of mongod objects}
+	{}\label{\gocurpackage.replicasets.getMongods}
 
 \subsubsection{Risk Groups}
 %Do not add default error codes
@@ -295,6 +332,22 @@ All requests and responses are made with the \emph{Content-Type}-Header set to \
 	{}
 	{problem object}
 	{}\label{\gocurpackage.problems.getById}
+
+\subsubsection{System}
+%Do not add default error codes
+\apicall[get\relax]{/system/keyfile}{Gets the keyfile}
+	{}
+	{200}
+	{}
+	{mongodKeyfile object}
+	{}\label{\gocurpackage.system.keyfile}
+	
+\apicall[get]{/system/managementuser}{Gets a MongoDB credentials}
+	{}
+	{200}
+	{}
+	{mongodbCredential object}
+	{}\label{\gocurpackage.system.managementuser}
 
 \struct{MasterAPIServer}
 {

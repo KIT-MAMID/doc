@@ -61,7 +61,12 @@ However, in the basic implementation, only email notifications are supported.
 			Parses the contacts file.
 			Returns an array of contacts.
 		}
-}
+	\method{ParseConfig}[\reftype{SMTPRelay}, string, string, error](
+		\param{path}[string]{Path to the config file}
+		){
+			Parses the config file.
+			Returns the SMTPRelay, apiHost and contactsFile.
+		}}
 
 \struct{APIClient}{
         Receives new array of \refgo{notifier.Problem} from the \refgo{masterapi}.
