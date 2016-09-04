@@ -1,2 +1,34 @@
 \section{Development Process}
+\subsection{CI (Jenkins)}\label{ci}
+On each push a GitHub webhook triggers a Jenkins instance to build the head commit of the pushed commits. While building, Jenkins marks the 
+commit to indicate whether the target passed or not.
+
+Jenkins utilzes two remote build nodes: 
+\begin{itemize}
+	\item A node on a Linux server
+	\item A node on a openindiana server 
+\end{itemize}
+Therefore artifacts for both Linux and openindiana can be produced and tested.
+
+Jenkins executes the folowing Makefile targets on both nodes:
+\begin{itemize}
+	\item \codeinline{check\_format}
+	\item \codeinline{vet}
+	\item \codeinline{test}
+	\item \codeinline{build}
+	\item \codeinline{cover}
+\end{itemize}
+\subsection{Workflow}
+Each change of the code have to be implemented in a seperate feature branch since the master branch is protected on GitHub. The protection 
+only allows changes to be pushed on master if the following constraints are fulfilled:
+\begin{itemize}
+	\item The change can be applied fast forward
+	\item The change passes all required checks on the \hyperref[ci]{CI}, which are:
+	\begin{itemize}
+		\item the \codeinline{check\_format} makefile target succeeds
+		\item the \codeinline{vet} makefile target succeeds
+		\item the \codeinline{test} makefile target succeeds on both Linux and openindiana
+		\item the \codeinline{build} makefile target succeeds
+	\end{itemize}
+\end{itemize}
 
