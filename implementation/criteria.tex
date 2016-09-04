@@ -16,8 +16,8 @@
 		list. \done
 		\oitem{MC}{spec_risk_groups} The administrator can model a shared risk of failure between hosts, e.g. a shared power 
 		supply. \done
-		\oitem{MC}{available_slave_types} The administrator can specify whether the Slave has \glslink{persistent 
-		storage}{persistent (typically HDD-/SSD-backed)} or \glslink{volatile storage}{volatile (RAM-backed)} storage. \done
+		\oitem{MC}{available_slave_types} The administrator can specify whether the Slave has persistent (typically HDD-/SSD-backed) or 
+		volatile (RAM-backed) storage. \done
 		\oitem{MC}{root_data_directory} The administrator can specify in which filesystem directory on the host the Slave 
 		and its MongoDB processes store data. \done[Done as commandline paramter for the Slave]
 		% inventory ops -> Slave
@@ -90,8 +90,8 @@
 	
 	% automatic repair
 	\oitem{OC}{auto_repair} \mamid supports automatic reconfiguration when detecting unexpected behavior of Slaves. The failing 
-	Slave is marked as unsuitable to host MongoDB processes and redeployment is triggered to repair the degraded \glspl{replica 
-	set} (extends \ref{MC:detect_slave_unexpected_behavior}). \notdone
+	Slave is marked as unsuitable to host MongoDB processes and redeployment is triggered to repair the degraded Replica 
+	Set (extends \ref{MC:detect_slave_unexpected_behavior}). \notdone
 	
 	% Replica Sets
 	\oitem{OC}{deploy_arbiters} \mamid deploys MongoDB arbiters for configured Replica Sets as needed, removing the 
