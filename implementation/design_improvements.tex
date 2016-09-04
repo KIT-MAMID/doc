@@ -18,18 +18,20 @@ for \mamid application data.
 While never officially stated, the developers assumed SQlite 3 to be sufficient for the purposes of \mamid.
 
 This assumption was proven wrong when enough of the master modules were implemented to reveal the limited capabilities of SQlite 3 regarding
-concurrent access: updating a single row or column in the database effectively requires an exclusive lock on the entire database (see https://www.sqlite.org/lockingv3.html).
+concurrent access: updating a single row or column in the database effectively requires an exclusive lock on the entire 
+database\footnote{\url{https://www.sqlite.org/lockingv3.html}}.
 The various master components however udpate (disjoint!) rows or columns in parallel.
 
 Given a substantial part of the master codebase had already been written expecting this behavior, the developers decided to switch to
-PostgreSQL, a well-established open source relational database (see https://www.postgresql.org/).
+PostgreSQL, a well-established open source relational database\footnote{\url{https://www.postgresql.org/}}.
 
 PostgreSQL
 \begin{itemize}
 \item compiles in its most recent version 9.5.4 on the primary target operating system \textit{OpenIndiana 151a9} (also with TLS support)
 \item allows for the degree of parallel database access required by the master
 \item has features like foreign keys, data type checking and referential actions enabled by default %TODO ref
-\item allows for redundant deployments \& zero downtime backups through the \codeinline{pg\_dump(1)} utility (optional criteria) %TODO ref
+\item allows for redundant deployments \& zero downtime backups through the \codeinline{pg\_dump(1)} utility 
+(\ref{OC:export_import_snapshot})
 \item thus significantly reduces the risk of a corrupted database.
 \end{itemize}
 
@@ -42,7 +44,8 @@ However, switching to PostgreSQL revealed flaws in the database schema auto-gene
 
 It was decided to define the database schema in plain SQL and to implement support for creating and migrating the schema in \mamid. %TODO this ok?
 
-Effortless compatibility to \refgo{gorm} is maintained by following the documented conventions for naming columns (see http://jinzhu.me/gorm/models.html\#conventions) .
+Effortless compatibility to \refgo{gorm} is maintained by following the documented conventions for naming 
+columns\footnote{\url{http://jinzhu.me/gorm/models.html\#convention}}.
 
 \subsection{Master: Cluster Allocator Prioritization Datastructures}
 
