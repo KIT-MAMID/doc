@@ -125,3 +125,17 @@ Additional features are listed in a separate subsection.
 	\oitem{DMC}{} \mamid deploys neither the operating system nor other required software (such as MongoDB binaries) to the 
 	cluster hosts.  \done
 \end{description}
+
+\subsection{Additional Features}
+
+The following features were added during the implementation phase:
+
+\begin{description}
+		\oitem{AF}{} \mamid configures Mongods \& Replica Sets to use \textit{internal authentication} with key files. \done
+		\oitem{AF}{} \mamid configures a management user on the Replica Sets to remove the Mongod \textit{localhost} exception
+			and enable user access control. \done
+		\oitem{AF}{} \mamid supports TLS for communication between master and slave. \done
+		\oitem{AF}{} \mamid provides prepared command-lines and MongoDB URLs for further usage of the created Replica Sets. \done
+		\oitem{AF}{} \mamid provides helper scripts for creating a x.509 certificate authority and signing certificates with it. \done
+\end{description}
+
