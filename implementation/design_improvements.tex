@@ -84,6 +84,19 @@ Took 3 days to get right.
     => extend Master, MSP and Slave to support deployment of this information
        (shortcut taken: unchangeable)
 
+\subsection{Slave: Mongod \& Replica Set configuration far more edge cases than expected}
+
+elaborate on the process of deploying a ReplicaSet, possible a UML activity diagram
+
+=> Configurator logic became unmaintainable because one could not see the forest from the trees
+  => implementation of MongoDB API wrapper to increase oversight (wording?) in MongodConfigurator logic
+
+=> Additional MSP endpoint needed to be created for replica set initiiation since it must happen from a single machine
+   (requires global coordination form the master)
+
+  => Replica Set Config (Priorities, NumberOfVotes) needs ot be communicated to the Slave initiating the Replica Set
+
+
 \subsection{We realized: administrator needs more details on the deployment of the cluster in order to use it for applications}
 
 => GUI needs to display more information
@@ -98,18 +111,6 @@ Took 3 days to get right.
 
 - use dense UI elements
 - implement filtering functionality (cheap win using Angular!)
-
-\subsection{Slave: Mongod configuration far more edge cases than expected}
-
-elaborate on the process of deploying a ReplicaSet, possible a UML activity diagram
-
-=> Configurator logic became unmaintainable because one could not see the forest from the trees
-  => implementation of MongoDB API wrapper to increase oversight (wording?) in MongodConfigurator logic
-
-=> Additional MSP endpoint needed to be created for replica set initiiation since it must happen from a single machine
-   (requires global coordination form the master)
-
-  => Replica Set Config (Priorities, NumberOfVotes) needs ot be communicated to the Slave initiating the Replica Set
 
 \subsection{Notifier config file}
 
