@@ -145,8 +145,9 @@ To increase maintainability, the interaction with the MongoDB API was extracted 
 - use dense UI elements
 - implement filtering functionality (cheap win using Angular!)
 
-\subsection{Notifier config file}
+\subsection{Notifier Config File}
 
-A config file was added to the notifier to make the deployment easier for the administrator. The config file contains the SMTP relay host 
-information, the master api endpoint and the path to the contacts file in a ini file. Also the api endpoint informtaion is used to generate 
-links to affected Slaves \& Replica Sets in the notification e-mails.
+Instead of command line arguments, the notifier uses a configuration file to facilitate deployment for the administrator:
+the config file contains the SMTP relay host information, the master API endpoint and the path to the contacts file in a \textit{ini} file.
+
+Also the API endpoint informtaion is used to generate links to affected Slaves \& Replica Sets in the notification e-mails.
