@@ -70,7 +70,7 @@ Given these problems, the priority queues where replaced by SQL queries encoding
 Several SQL views were introduced to keep the prioritization queries concise and improve performance.
 Testing did not reveal performance problems with the \refgo{master.ClusterAllocator} implementation.
 
-\subsection{Replica Set Deployment with Keyfiles}
+\subsection{Replica Set Deployment with Keyfiles}\label{:di:keyfiles}
 
 MongoDB supports several mechanisms for internal authentication between members of a Replica Set. The only mechanism available on the
 the target operating system \textit{OpenIndiana 151a9} is authentication through a shared secret (\textit{keyfile}).
@@ -107,18 +107,28 @@ In order to meet the implementation deadline, the \textit{keyfile} and \textit{m
 The developers are aware of the security problems this situation implies and furthermore recommend using a target platform that supports
 the MongoDB x509 authentication mechanism. %TODO ok?
 
-\subsection{Slave: Mongod \& Replica Set configuration far more edge cases than expected}
+\subsection{Slave: Mongod \& Replica Set Configuration}
 
-elaborate on the process of deploying a ReplicaSet, possible a UML activity diagram
+The various edge-cases and subtleties of MongoDB were underestimated during the design phase of \mamid.
 
-=> Configurator logic became unmaintainable because one could not see the forest from the trees
-  => implementation of MongoDB API wrapper to increase oversight (wording?) in MongodConfigurator logic
+In particular, the following problems complicated and delayed the slave implementation:
+\begin{description}
+\item[Replica Set Initiation] Initiation must happen from a single Mongod in the soon-to-be Replica Set.
+     This prohibits the original idea of simply broadcasting a state description to all Slaves hosting Mongods of the Replica Set,
+        as is done once the ReplicaSet is initiated.
+     A separate MSP protocol message \refgo{msp.RsInitiateMessage} was introduced and other sub-datastructures refactored, allowing
+        a coordinated initiation of the Replica Set.
+\item[User Access Control] The introduction of \textit{user access control} complicates the retrieval of Mongod state since most MongoDB
+        commands relevant to the \refgo{master.Monitor} are only allowed when authenticated.
+        The slave needs to cache the \textit{management user} credential received through the MSP.
+\item[Situations without Primary] A Replica Set with a majority of Mongods unreachable cannot elect a new Primary.
+        However, reconfiguring the Replica Set without overriding safety checks (\codeinline{force=true}) is not possible then.
+        \mamid itself should not make the decision to override the safety checks because this behavior could lead to data loss.
+\end{description}
 
-=> Additional MSP endpoint needed to be created for replica set initiiation since it must happen from a single machine
-   (requires global coordination form the master)
+Making the slave compatible with the the problems described above led significant bloat in the \refgo{slave.MongodConfigurator}.
 
-  => Replica Set Config (Priorities, NumberOfVotes) needs ot be communicated to the Slave initiating the Replica Set
-
+To increase maintainability, the interaction with the MongoDB API was extracted into a private MongoDB API wrapper (\refgo{slave.mgoContext}).
 
 \subsection{We realized: administrator needs more details on the deployment of the cluster in order to use it for applications}
 
