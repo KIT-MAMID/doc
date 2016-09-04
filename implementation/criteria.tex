@@ -6,13 +6,117 @@ TODO foreach criteria in functional spec (maybe group some of them together), re
 	- which are not implemented
 
 => Macro for referencing???
+\subsection{Mandatory Criteria}
+\subsubsection{Cluster Description by Administrator}
+% TODO analyze whether the given criteria can be phrased more abstractly \& move the details to (new) functional requirements. (-> forward 
+%lookup references from criteria to functional requirement if required)
+\begin{description}
+	
+	\oitem{MC}{} The administrator interacts with \mamid through a web gui. \done
+	
+	% inventory ops
+	\oitem{MC}{inventory_definition} The master maintains a list of slaves. \done
+	\begin{description}
+		\oitem{MC}{} The gui visualizes the list of slaves. \done
+		\oitem{MC}{} The administrator can add slaves to the list. \done
+		\oitem{MC}{} The administrator can remove a slave that does not host any MongoDB processes from the 
+		list. \done
+		\oitem{MC}{spec_risk_groups} The administrator can model a shared risk of failure between hosts, e.g. a shared power 
+		supply. \done
+		\oitem{MC}{available_slave_types} The administrator can specify whether the slave has \glslink{persistent 
+		storage}{persistent (typically HDD-/SSD-backed)} or \glslink{volatile storage}{volatile (RAM-backed)} storage. \done
+		\oitem{MC}{root_data_directory} The administrator can specify in which filesystem directory on the host the slave 
+		and its MongoDB processes store data. \done[Done as commandline paramter for the slave]
+		% inventory ops -> slave
+		\oitem{MC}{slave_mode_active} The administrator can announce to \mamid that a slave is ready to host MongoDB processes. 
+		\done
+		\oitem{MC}{slave_mode_maintenance} The administrator can announce to \mamid that a slave is under maintenance to inhibit 
+		automatic reconfiguration of its MongoDB processes. \done % TODO discuss
+		\oitem{MC}{slave_mode_disabled} The administrator can announce to \mamid that a slave should not host any MongoDB processes. 
+		\done
+	\end{description}
+	
+	% Replica Set ops
+	\oitem{MC}{replica_set_create} The administrator can describe a new MongoDB \gls{replica set} by specifying constraints on 
+	how it should be configured by \mamid. \done
+	\begin{description}
+		\oitem{MC}{replica_set_config_profiles} The administrator can --- on creation of a \gls{replica set} 
+		(\ref{MC:replica_set_create}) --- specify that it must be usable as a configuration server for MongoDB sharding. 
+		\done
+		\oitem{MC}{replica_set_member_total_counts} The administrator can select the number of MongoDB instances (members) of a 
+		\gls{replica set}. \done
+		\oitem{MC}{replica_set_member_pv_counts} Volatile and persistent member count of a \gls{replica set} can be independently 
+		configured, under constraints described in \ref{F:master_alloc_resp_pv_counts}. \done
+	\end{description}
+	\oitem{MC}{} The gui visualizes the list of configured \glspl{replica set}. \done
+	\oitem{MC}{} The administrator can destroy a \gls{replica set}. \done
+	
+\end{description}
 
-\subsection{Required Criteria}
+\subsubsection{MongoDB Configuration \& Monitoring}
+\begin{description}
+	\oitem{MC}{mongod_deployment1} \mamid asserts that the \glspl{replica set} described by the administrator are configured on the cluster 
+	(see \ref{MC:replica_set_create}). \done
+	\oitem{MC}{mongod_deployment2} To achieve \ref{MC:mongod_deployment1}, \mamid spawns \& controls MongoDB processes on the hosts 
+	using a slave process. \done
+	\begin{description}
+		\oitem{MC}{mongod_redeployment} \mamid redeploys configured MongoDB processes to hosts where the slave process reports 
+		a situation different from what is expected by the master. \done
+		\oitem{MC}{mongod_redeployment_powercycle_specific} Specifically, a host with volatile data storage can lose all data originating 
+		from the slave process or MongoDB and is automatically redeployed with correctly configured MongoDB instances 
+		(\ref{MC:mongod_deployment2}). \done
+	\end{description}
+	% Todo old \oitem{MC}{} The master deploys the \gls{replica set} configuration described by the administrator to the cluster.
+	
+	% monitoring features
+	\oitem{MC}{detect_slave_unexpected_behavior} \mamid detects when a slave in the inventory behaves unexpectedly, e.g. when 
+	it becomes unreachable and the administrator did not announce maintenance to \mamid beforehand. \done
+	\oitem{MC}{} \mamid informs the administrator by e-mail about problems in the cluster 
+	(\ref{MC:detect_slave_unexpected_behavior}). \done
+	\oitem{MC}{} The gui visualizes slaves behaving unexpectedly (\ref{MC:detect_slave_unexpected_behavior}). \done
+\end{description}
 
-\subsection{Optional Criteria}
-
-we added a lot of things that weren't mentioned in the funcspec => see design Improvements and mention them, too
+\subsection{Optional Criteria}\label{OptionalCriteria}
+\begin{description}
+	
+	% master
+	\oitem{OC}{api_authentication} \mamid requires authentication from the user for all operations. \done[Done with client certs
+	issued/signed by a CA. Optional CLI flag for the master]
+	
+	% inventory
+	\oitem{OC}{manual_autodiscovery} \mamid auto-discovers new slaves on the administrator's request. \notdone
+	\oitem{OC}{continuous_autodiscovery} \mamid continuously auto-discovers new slaves. \notdone
+	\oitem{OC}{monitor_icmp} \mamid recognizes when the slave software does not respond but the corresponding host is still 
+	connected to the network.  \notdone
+	\oitem{OC}{export_import_snapshot} The administrator can back up and restore the cluster description. \done[Possible with 
+	postgres tools by dumping the mamid postgres databse]
+	
+	% slaves
+	\oitem{OC}{tweak_performance_parameters} The administrator can customize performance-relevant parameters of MongoDB 
+	processes. \notdone
+	
+	% automatic repair
+	\oitem{OC}{auto_repair} \mamid supports automatic reconfiguration when detecting unexpected behavior of slaves. The failing 
+	slave is marked as unsuitable to host MongoDB processes and redeployment is triggered to repair the degraded \glspl{replica 
+	set} (extends \ref{MC:detect_slave_unexpected_behavior}). \notdone
+	
+	% Replica Sets
+	\oitem{OC}{deploy_arbiters} \mamid deploys MongoDB arbiters for configured \glspl{replica set} as needed, removing the 
+	restriction to an odd count of \gls{replica set} members in \ref{F:master_alloc_resp_pv_counts}.  \notdone
+	\oitem{OC}{extended_monitoring} \mamid supports extended monitoring of hosts, i.e. metrics beyond the processes managed by \mamid.  
+	\notdone
+	
+	% other
+	\oitem{OC}{} The administrator can interact with \mamid via a cli.  \notdone
+	\oitem{OC}{http_api} The administrator can interact with \mamid via a stable, documented HTTP API.  \done
+\end{description}
 
 \subsection{Demarcation Criteria}
-
-just list them and state we stuck to them
+\begin{description}
+	\oitem{DMC}{} The administrator does not directly configure individual MongoDB instances spawned \& controlled by \mamid. 
+	All configuration happens through \mamid, either automatically (e.g. \gls{replica set} deployment) or through a \mamid interface (e.g. 
+	GUI, CLI, HTTP API). \done[In some error cases administrative intervention may be required]
+	\oitem{DMC}{} \mamid does not deploy MongoDB query routers.  \done
+	\oitem{DMC}{} \mamid deploys neither the operating system nor other required software (such as MongoDB binaries) to the 
+	cluster hosts.  \done
+\end{description}
