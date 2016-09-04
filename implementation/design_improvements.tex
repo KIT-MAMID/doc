@@ -70,19 +70,42 @@ Given these problems, the priority queues where replaced by SQL queries encoding
 Several SQL views were introduced to keep the prioritization queries concise and improve performance.
 Testing did not reveal performance problems with the \refgo{master.ClusterAllocator} implementation.
 
-\subsection{Replica Set deployment procedure with keyfiles far more complicated than expected}
+\subsection{Replica Set Deployment with Keyfiles}
 
-Took 3 days to get right.
+MongoDB supports several mechanisms for internal authentication between members of a Replica Set. The only mechanism available on the
+the target operating system \textit{OpenIndiana 151a9} is authentication through a shared secret (\textit{keyfile}).
 
-=> Keyfiles for internal authentication => required keyfile deployment
-=> Keyfiles in turn require User Access Control  => require configuration of management user
+The supervisor's desire to have the deployed Mongods authenticate themselves to each other using this meachanism was not mentioned 
+until 1.5 weeks before the implementation deadline. %TODO validate
 
-==> this information needs to be presented to the administrator if he/she wants to actually use deployed replica sets
-    (e.g. app user configuration, sharding configuration, etc)
-    => extend GUI for a System view
-      => additional API endpoints for Keyfiles and Management User Credential
-    => extend Master, MSP and Slave to support deployment of this information
-       (shortcut taken: unchangeable)
+Implementation of the feature proved problematic: Mongod instances started with the \textit{keyfile} parameter disable the \textit{localhost exception}
+as soon as a Replica Set is configured and activate \textit{user access control}. %TODO review and ref
+This was incompatible with the assumption made during the design phase that a Mongod would be always configurable by a its system user without authentication.
+
+Hence, support for keyfiles required substantial changes to the deployment process late in the implementation phase:
+
+\begin{itemize}
+  \item Represent keyfile data in the Model \& MSP
+  \item Represent user credential data in the Model \& MSP
+  \item Support deployment of keyfiles in Master \& Slave
+  \item Support authentication in the \refgo{slave.MongodConfigurator} by defining a \textit{management user}
+  \item Deal with various edge-cases related to MongoDB \textit{write-concern} and the \textit{sharding role} of a Mongod
+  \item Allow the user to retrieve keyfile and \textit{management user} credential through the GUI,
+        e.g. to create additional users or configure sharding configuration servers.
+\end{itemize}
+
+Adapting the deployment process to work with the \textit{localhost exception} proved time-consuming.
+
+In order to meet the implementation deadline, the \textit{keyfile} and \textit{management user} are currently
+
+\begin{itemize}
+  \item generated using a PRNG on first launch of the master
+  \item global to all Mongods in the cluster
+  \item unchangeable through the GUI / API.
+\end{itemize}
+
+The developers are aware of the security problems this situation implies and furthermore recommend using a target platform that supports
+the MongoDB x509 authentication mechanism. %TODO ok?
 
 \subsection{Slave: Mongod \& Replica Set configuration far more edge cases than expected}
 
