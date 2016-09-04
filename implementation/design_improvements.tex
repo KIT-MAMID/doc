@@ -46,6 +46,30 @@ Effortless compatibility to \refgo{gorm} is maintained by following the document
 
 \subsection{Master: Cluster Allocator Prioritization Datastructures}
 
+The \refgo{master.ClusterAllocator} is crucial for the stable operation of the \mamid-managed cluster.
+
+The design document contains a pseudocode implementation of the \refgo{master.ClusterAllocator} algorithms managing Replica Set members.
+
+However, pseudocode usually does not map directly to the concrete implementation.
+
+For the implementation of MAMID, the priority queue datastructures used in the Cluster Allocator pseudocode proved impractical to implement:
+
+\begin{itemize}
+\item The master architecture follows the \textit{repository pattern}, meaning that decoupled components work together by sharing data
+through the central database.
+\item The Cluster Allocator algorithms need read access to a a substantial amount of the cluster model stored in the database
+      in order to make allocation decisions.
+\item The \refgo{gorm} ORM layer cannot record fine-grained changes to objects (missing dynamism in Go).
+      Hence, saving updates to an object graph to database leads to an update of all attributes,
+      inducing conflicting transactions with other components of MAMID.
+\item Keeping the priority queue datastructures in sync with the database state during a \refgo{master.ClusterAllocator} run
+      appears to be impossible with \refgo{gorm}.
+\end{itemize}
+
+Given these problems, the priority queues where replaced by SQL queries encoding the prioritization criteria.
+Several SQL views were introduced to keep the prioritization queries concise and improve performance.
+Testing did not reveal performance problems with the \refgo{master.ClusterAllocator} implementation.
+
 \subsection{Replica Set deployment procedure with keyfiles far more complicated than expected}
 
 Took 3 days to get right.
