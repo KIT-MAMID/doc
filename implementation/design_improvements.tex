@@ -82,7 +82,7 @@ The supervisor's desire to have the deployed Mongods authenticate themselves to 
 until 1.5 weeks before the implementation deadline. %TODO validate
 
 Implementation of the feature proved problematic: Mongod instances started with the \textit{keyfile} parameter disable the 
-\textit{localhost exception}\footnote{\url{https://docs.mongodb.com/manual/core/security-users/#localhost-exception}}
+\textit{localhost exception}\footnote{\url{https://docs.mongodb.com/manual/core/security-users/\#localhost-exception}}
 as soon as a Replica Set is configured and activate \textit{user access control}. %TODO review and ref
 This was incompatible with the assumption made during the design phase that a Mongod would be always configurable by a its system user without authentication.
 
