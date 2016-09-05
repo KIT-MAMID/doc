@@ -16,10 +16,11 @@ HTTPDL = $(CURL_BIN) -o $(2) '$(1)'
 # Targets
 .PHONY:
 all: implReport.pdf
-	
-implReport.pdf: *.tex
-	$(PDFLATEX) implReport.tex
-	$(MAKEGLOSSARIES) implReport
+
+assets/module_graph.pdf: assets/module_graph.svg
+	$(call SVG2PDF,$<,$@)
+
+implReport.pdf: *.tex assets/module_graph.pdf
 	$(PDFLATEX) implReport
 	$(PDFLATEX) implReport
 

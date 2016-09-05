@@ -59,3 +59,69 @@ Automatic posting of commits and CI results into separate channels was configure
 GitHub's issue tracker was used to track bugs, enhancements and deviations from the design document.
 However, bugs that were fixed as they were encountered were not necessarily tracked in order to reduce time overhead.
 
+\subsection{Distribution of Work}
+
+The first step of the implementation phase was analyzing the API dependencies between \mamid components:
+
+\begin{figure}[h]
+\centering
+\includegraphics[height=5cm]{assets/module_graph}
+\caption{Module Dependency Graph}
+\end{figure}
+
+\begin{itemize}
+  \item Since the Master API was fully specified in the design document, GUI and notifier could be implemented indepenently.
+
+  \item MSP and Model are mostly static datastructures and a simple transport mechanism.
+        It was assumed they could be implemented quickly.
+
+  \item Master and slave do not depend on each other code-wise, hence implementation could be parallelized, too.
+\end{itemize}
+
+Given these assumptions, it was attempted to distribute the work fairly between the team members, assuming cleanly separated
+responsibilities would increase speed \& motivation through independent \& parallel work.
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{l|l}
+        Component & Name\\
+        \hline
+        msp       & Anton\\
+        model     & Christian\\
+        master    & Anton, Christian\\
+        slave     & Bob\\
+        gui       & Janis\\
+        notifier  & Niklas, Janis\\
+\end{tabular}
+\caption{Original Distribution of Work}
+\end{figure}
+
+This plan played out as follows:
+
+\begin{itemize}
+\item Initial versions of MSP and Model were implemented in a few days.
+\item The master with its \textit{repository pattern} (independent modules with central database) proved as difficult to implement, as
+      explained in \ref{di}.
+\item The GUI implementation was straight forward. In particular, the AngularJS framework turned out to be a pleasant choice.
+\item The notifier implementation was equally straight forward.
+\item The initial slave implementation was finished early.
+\end{itemize}
+
+Two weeks prior to the phase deadline, integration of the individual components began:
+
+\begin{itemize}
+\item GUI and notifier worked flawlessly with the master API. The fact that the originally defined API endpoints were not changed
+                but only new ones added was beneficial (see \ref{di:opneeds}).
+\item Model and MSP worked well, apart from the consequences of migrating to PostgreSQL late in the implementation phase
+        (see \ref{di:dbchanges}).
+\item Integration of master and slave revealed flaws in the assumptions made about MongoDB in the design phase:
+        \begin{itemize}
+                \item a lot of unexpected Mongod behavior as described in \ref{di:replsetconfig} was only discovered at the
+                        time of integration and required time-consuming test setups and debugging sessions.
+                \item the addition of the keyfile requirement consumed a significant amount of time (3 days) in the
+                       last seven days of the implementation phase (see \ref{di:keyfiles})
+        \end{itemize}
+\end{itemize}
+
+The main conclusion drawn from this integration subphase is that master and slave should have been tested together earlier, allowing for
+discovery and possibly more elegant handling of unexpected MongoDB behavior, as described in section \ref{di}.
