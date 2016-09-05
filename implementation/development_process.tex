@@ -23,7 +23,7 @@ Jenkins executes the following Makefile targets on both nodes:
 	\item \codeinline{cover}
 \end{itemize}
 \subsection{Workflow}
-Each change of the code have to be implemented in a seperate feature branch since the master branch is protected on GitHub. The protection 
+Each change of the code have to be implemented in a separate feature branch since the master branch is protected on GitHub. The protection 
 only allows changes to be pushed on master if the following constraints are fulfilled:
 \begin{itemize}
 	\item The change can be applied fast forward
@@ -37,7 +37,7 @@ only allows changes to be pushed on master if the following constraints are fulf
 \end{itemize}
 
 \subsection{Local Staging Environment}
-A local staging environment can be spawned using Docker and the Makefile target \codeinline{testbed\_up}.
+A local staging environment can be spawned using Docker and the makefile target \codeinline{testbed\_up}.
 
 The target
 \begin{itemize}
@@ -52,8 +52,8 @@ Re-executing the \codeinline{testbed\_up} wipes the previously created environme
 \subsection{Communication}
 
 Team communication was handled mostly via the Slack\footnote{\url{https://slack.com}} chat platform.
-Automatic posting of commits and CI results into separate channels was configured to increase overivew of the team's activity.
+Automatic posting of commits and CI results into separate channels was configured to increase overview of the team's activity.
 
-Github's issue tracker was used to track bugs, enhancements and deviations from the design document.
+GitHub's issue tracker was used to track bugs, enhancements and deviations from the design document.
 However, bugs that were fixed as they were encountered were not necessarily tracked in order to reduce time overhead.
 

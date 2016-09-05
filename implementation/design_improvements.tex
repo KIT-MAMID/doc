@@ -20,7 +20,7 @@ While never officially stated, the developers assumed SQlite 3 to be sufficient 
 This assumption was proven wrong when enough of the master modules were implemented to reveal the limited capabilities of SQlite 3 regarding
 concurrent access: updating a single row or column in the database effectively requires an exclusive lock on the entire 
 database\footnote{\url{https://www.sqlite.org/lockingv3.html}}.
-The various master components however udpate (disjoint!) rows or columns in parallel.
+The various master components however update (disjoint!) rows or columns in parallel.
 
 Given a substantial part of the master codebase had already been written expecting this behavior, the developers decided to switch to
 PostgreSQL, a well-established open source relational database\footnote{\url{https://www.postgresql.org/}}.
@@ -78,7 +78,7 @@ Testing did not reveal performance problems with the \refgo{master.ClusterAlloca
 MongoDB supports several mechanisms for internal authentication between members of a Replica Set. The only mechanism available on the
 the target operating system \textit{OpenIndiana 151a9} is authentication through a shared secret (\textit{keyfile}).
 
-The supervisor's desire to have the deployed Mongods authenticate themselves to each other using this meachanism was not mentioned 
+The supervisor's desire to have the deployed Mongods authenticate themselves to each other using this mechanism was not mentioned 
 until 1.5 weeks before the implementation deadline. %TODO validate
 
 Implementation of the feature proved problematic: Mongod instances started with the \textit{keyfile} parameter disable the 
@@ -141,7 +141,7 @@ The functional specification contains mockups of the \mamid web user interface.
 During development though, it became evident that the minimalist user interface would not communicate enough information
 to the administrator, particularly in case of failure scenarios.
 
-The GUI \& Master API were extended to satisfy the administator's need for information and provide
+The GUI \& Master API were extended to satisfy the administrator's need for information and provide
 quick and intuitive ways to investigate problems:
 
 \begin{itemize}
