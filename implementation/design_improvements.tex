@@ -1,4 +1,4 @@
-\section{Design Improvements}
+\section{Design Improvements}\label{di}
 
 In accordance with the project supervisor, a text-based delta between the original and implemented application design
 is beyond the scope of this document.
@@ -10,7 +10,7 @@ The purpose of this section is to provide an overview of the reasoning behind th
 
 % one subsection per problem encountered during implementation
 
-\subsection{Master: Database-Related Changes}
+\subsection{Master: Database-Related Changes}\label{di:dbchanges}
 
 During the design phase of the project, it was decided to use the \refgo{gorm} ORM layer and a relational database as the backing store
 for \mamid application data.
@@ -73,7 +73,7 @@ Given these problems, the priority queues where replaced by SQL queries encoding
 Several SQL views were introduced to keep the prioritization queries concise and improve performance.
 Testing did not reveal performance problems with the \refgo{master.ClusterAllocator} implementation.
 
-\subsection{Replica Set Deployment with Keyfiles}\label{:di:keyfiles}
+\subsection{Replica Set Deployment with Keyfiles}\label{di:keyfiles}
 
 MongoDB supports several mechanisms for internal authentication between members of a Replica Set. The only mechanism available on the
 the target operating system \textit{OpenIndiana 151a9} is authentication through a shared secret (\textit{keyfile}).
@@ -111,7 +111,7 @@ In order to meet the implementation deadline, the \textit{keyfile} and \textit{m
 The developers are aware of the security problems this situation implies and furthermore recommend using a target platform that supports
 the MongoDB x509 authentication mechanism. %TODO ok?
 
-\subsection{Slave: Mongod \& Replica Set Configuration}
+\subsection{Slave: Mongod \& Replica Set Configuration}\label{di:replsetconfig}
 
 The various edge-cases and subtleties of MongoDB configuration were underestimated during the design phase of \mamid.
 
@@ -134,7 +134,7 @@ Making the slave compatible with the the problems described above led significan
 
 To increase maintainability, the interaction with the MongoDB API was extracted into a private MongoDB API wrapper (\refgo{slave.mgoContext}).
 
-\subsection{Addressing Operational Needs}
+\subsection{Addressing Operational Needs}\label{di:opneeds}
 
 The functional specification contains mockups of the \mamid web user interface.
 
