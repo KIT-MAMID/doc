@@ -188,10 +188,12 @@ The \refgo{slave} is installed on the individual host nodes and started by the m
 \goenum{replSetState}
 {}
 {
-  \goenumitem{replSetStartup}{Replica Set has been initiated.}
+	
+  \goenumitem{replSetStartup}{Mongod is not an active member of any set.}
   \goenumitem{replSetPrimary}{Replica Set is active and the Mongod is a primary.}
   \goenumitem{replSetSecondary}{Replica Set is active and the Mongod is a secondary.}
-  \goenumitem{replSetRecovering}{Replica Set is currently recovering.}
+  \goenumitem{replSetRecovering}{Mongod is currently recovering.}
   \goenumitem{replSetUnknown}{Status is unknown.}
   \goenumitem{replSetRemoved}{Mongod has been removed from the Replica Set.}
 }
+See the MongoDB documentation.\footnote{\url{https://docs.mongodb.com/manual/reference/replica-states/}}

@@ -7,10 +7,11 @@
 \end{figure}
 
 The MasterSlaveProtocol \refgo{msp} implements communication between \refgo{slave} and \refgo{master}.\\
-There are two structures which may be sent directly over HTTP as request body, represented with JSON:
+There are three structures which may be sent directly over HTTP as request body, represented with JSON:
 \begin{itemize}
   \item \codeinline{[]\reftype{Mongod}} An array of descriptions of all Mongod instances of that \refgo{slave}.
   \item \codeinline{\reftype{Error}} Sent (only) by \refgo{slave} in case there are general problems preventing observation of any running Mongod instances.
+  \item \codeinline{\reftype{RsInitiateMessage}} Sent by master to initiate the Replica Set through a Mongod using a Replica Set configuration. Is sent to a Replica Set until it succeeds and not again after it succeeded once.
 \end{itemize}
 
 For several datastructures in \refgo{msp}, similar ones exist in  \refgo{model}. The reasoning behind this is the desire to have a
@@ -51,6 +52,14 @@ Hence, duplication of datastructures is a necessary tradeoff in order to sustain
     Request to establish the configuration state $m$ of a MongoDB process on the slave.
     May return an error in case the state could not be established.
   }
+  \method{RsInitiate}[*\reftype{Error}](
+  \param{m}[\reftype{RsInitiateMessage}]{Message containing Replica Set configuration that shall be established and additional information needed to initiate the Replica Set.}
+  ){
+  	%TODO reference request message object here -> proto specification
+  	Request to initiate a Replica Set and establish the configuration $m$ of the Replica Set.
+  	For a given Replica Set this message is sent repeatedly until it succeeds and never again after that.
+  	May return an error in case the Replica Set could not be initiated.
+  }
 }
 
 
@@ -60,23 +69,31 @@ Hence, duplication of datastructures is a necessary tradeoff in order to sustain
 }{
   \item \textit{none}
 }{
-  \method{RequestStatus}[{([]\reftype{Mongod}, \reftype{error})}]{
+  \method{RequestStatus}[{([]\reftype{Mongod}, *\reftype{Error})}]{
     Send a status request to the \refgo{slave} to retrieve all the running \reftype{Mongod} instances. May return an instance of \reftype{error} in case overall retrieving failed.
   }
-  \method{EstablishMongodState}[*\reftype{CommunicationError}](
+  \method{EstablishMongodState}[*\reftype{Error}](
     \param{m}[[]\reftype{Mongod}]{Array of \reftype{Mongod} instances to establish}
   ){
     Sends the array of \reftype{Mongod} instances to the \refgo{slave} which is tasked with creating and configuring the described processes.
+  }
+  \method{RsInitiate}[*\reftype{Error}](
+  \param{m}[\reftype{RsInitiateMessage}]{Message containing Replica Set configuration that shall be established and additional information needed to initiate the Replica Set.}
+  ){
+  	%TODO reference request message object here -> proto specification
+  	Sends a request to initiate a Replica Set and establish the configuration $m$ of the Replica Set.
+  	For a given Replica Set this message is sent repeatedly until it succeeds and never again after that.
+  	May return an error in case the Replica Set could not be initiated.
   }
 }
 
 
 % protocol specific structures
 \struct{RsInitiateMessage}{
-  Datastructure telling the slave to create a Mongod process and initiate a Replica Set on it.
+  Datastructure telling the slave to initiate a Replica Set though one of its Mongods.
 }{
-  \property{Port}[\reftype{PortNumber}]{Port on which to have the Mongod process listen.}
-  \property{ReplicaSetConfig}[\reftype{ReplicaSetConfig}]{Configuration of the Replica Set the Mongod instance must participate in.}
+  \property{Port}[\reftype{PortNumber}]{Port of the Mongod process that shall initiate the Replica Set.}
+  \property{ReplicaSetConfig}[\reftype{ReplicaSetConfig}]{Intitial configuration of the Replica Set.}
 }
 
 \struct{Mongod}{
@@ -92,13 +109,13 @@ Hence, duplication of datastructures is a necessary tradeoff in order to sustain
 }
 
 \struct{ReplicaSetConfig}{
-  Contains configuration of a Replica Set equal for all its members.
+  Contains configuration of a Replica Set.
+  When sent in response to \refgo{msp.Consumer.RequestStatus}, \reftype{ReplicaSetConfig} is based on what is reported by the running Mongod instance.
 }{
   \property{ReplicaSetName}[string]{Name of the Replica Set.}
   \property{RootCredential}[\reftype{MongodCredential}]{Credentials of the admin user of the Replica Set.}
-  \property{ShardingRole}[\reftype{ShardingRole}]{Whether to use sharding.}
-  \property{ReplicaSetMembers}[[]\reftype{ReplicaSetMember}]{Members of the Replica Set.\\
-      When sent in response to \refgo{msp.Consumer.RequestStatus}, \refproperty{ReplicaSetMembers} is based on what is reported by the running Mongod instance.}
+  \property{ShardingRole}[\reftype{ShardingRole}]{Whether to use sharding / The role of the Replica Set in the sharded cluster.}
+  \property{ReplicaSetMembers}[[]\reftype{ReplicaSetMember}]{Members of the Replica Set.}
 }
 
 \goenum{ShardingRole}
@@ -112,14 +129,14 @@ Hence, duplication of datastructures is a necessary tradeoff in order to sustain
 \goenum{MongodState}{
   Describes the state of a Mongod instance controlled by the slave.
 }{
-  \goenumitem{MongodStateForceDestroyed}{The Mongod instance must stop and all related data stored on the \refgo{slave} host must be deleted. (only sent by \refgo{master})}
-  \goenumitem{MongodStateDestroyed}{The Mongod instance should stop and all related data stored on the \refgo{slave} host should be deleted. (only sent by \refgo{master})}
-  \goenumitem{MongodStateNotRunning}{The Mongod instance is not running but related data is stored on the \refgo{slave}.}
+  \goenumitem{MongodStateForceDestroyed}{The Mongod instance should be killed and all related data stored on the \refgo{slave} host should be deleted. (only sent by \refgo{master})}
+  \goenumitem{MongodStateDestroyed}{The Mongod instance should be shut down without force and all related data stored on the \refgo{slave} host should be deleted if it has been shut down. (only sent by \refgo{master})}
+  \goenumitem{MongodStateNotRunning}{The Mongod instance is not running / should be shut down without force but related data is kept on the \refgo{slave}.}
   \goenumitem{MongodStateRunning}{The Mongod instance is running and in sync with other Replica Set members.}
   \goenumitem{MongodStateRecovering}{The Mongod is running but not available for reads because data needs to be synced from other Replica Set members.
                                      This is a common case when adding new members to an existing Replica Set. (only sent by \refgo{slave})}
-  \goenumitem{MongodStateUninitiated}{The Mongod is running but the Replica Set has not been initiated yet. (only sent by \refgo{slave})}
-  \goenumitem{MongodStateRemoved}{The Mongod is has been stopped and all related data removed. (only sent by \refgo{slave})}
+  \goenumitem{MongodStateUninitiated}{The Mongod is running but the Replica Set has not been initiated yet or the Mongod is not added to the Replica Set (yet) (only sent by \refgo{slave})}
+  \goenumitem{MongodStateRemoved}{The Mongod has been removed from the Replica Set. (only sent by \refgo{slave})}
 }
 
 \struct{ReplicaSetMember}{
@@ -127,6 +144,7 @@ Hence, duplication of datastructures is a necessary tradeoff in order to sustain
 }{
   \property{HostPort}[\reftype{HostPort}]{Location of the Replica Set member.}
   \property{Priority}[float]{Priority of the member in the Replica Set.}
+  \property{Votes}[int]{1 if the member is allowed to vote, 0 otherwise. If it is not allowed to vote \refproperty{Priority} has to be 0.}
 }
 
 \struct{HostPort}{
