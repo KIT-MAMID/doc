@@ -20,7 +20,7 @@ all: implReport.pdf
 assets/module_graph.pdf: assets/module_graph.svg
 	$(call SVG2PDF,$<,$@)
 
-implReport.pdf: *.tex assets/module_graph.pdf
+implReport.pdf: *.tex assets/cloc.tex assets/report.txt assets/module_graph.pdf
 	$(PDFLATEX) implReport
 	$(PDFLATEX) implReport
 

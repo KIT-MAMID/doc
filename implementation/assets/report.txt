@@ -1,0 +1,73 @@
+Git SHA1: 3d7ad20f6f9f4025b8a62133ebd604a7c46826e6
+
+ directory: doc
+ lines    : 0
+ authors  :
+
+
+ directory: docker
+ lines    : 43
+ authors  :
+      39 Christian Schwarz   90.7%
+       2 Janis Streib        4.7%
+       2 Bob Weinand         4.7%
+
+
+ directory: gui
+ lines    : 3024
+ authors  :
+    2041 Janis Streib        67.5%
+     972 Anton Schirg        32.1%
+      11 Christian Schwarz   0.4%
+
+
+ directory: master
+ lines    : 5941
+ authors  :
+    3112 Anton Schirg        52.4%
+    2370 Christian Schwarz   39.9%
+     447 Janis Streib        7.5%
+      12 Bob Weinand         0.2%
+
+
+ directory: model
+ lines    : 1187
+ authors  :
+     857 Christian Schwarz   72.2%
+     286 Anton Schirg        24.1%
+      44 Janis Streib        3.7%
+
+
+ directory: msp
+ lines    : 346
+ authors  :
+     174 Christian Schwarz   50.3%
+     135 Anton Schirg        39.0%
+      33 Janis Streib        9.5%
+       4 Bob Weinand         1.2%
+
+
+ directory: notifier
+ lines    : 609
+ authors  :
+     547 Janis Streib        89.8%
+      38 Niklas Fuhrberg     6.2%
+      24 Christian Schwarz   3.9%
+
+
+ directory: scripts
+ lines    : 235
+ authors  :
+     184 Janis Streib        78.3%
+      28 Anton Schirg        11.9%
+      23 Christian Schwarz   9.8%
+
+
+ directory: slave
+ lines    : 1485
+ authors  :
+     749 Christian Schwarz   50.4%
+     381 Anton Schirg        25.7%
+     288 Bob Weinand         19.4%
+      67 Janis Streib        4.5%
+
