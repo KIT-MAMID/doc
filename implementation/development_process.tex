@@ -3,6 +3,8 @@
 As planned in the requirements analysis phase, Git\footnote{\url{https://git-scm.com/}} was used as the version control system.
 Github\footnote{\url{https://github.com/}} was chosen as repository hosting service.
 
+Separate repositories were created for documentation (\codeinline{doc}) and code (\codeinline{mamid}).
+
 \subsection{Continuous Integration (Jenkins)}\label{ci}
 On each push a GitHub webhook triggers a Jenkins instance\footnote{\url{https://jenkins.dogcraft.de/job/mamid/}} to build the head 
 of the pushed commits. While building, Jenkins marks the commit on GitHub to indicate whether the respective target passed.
