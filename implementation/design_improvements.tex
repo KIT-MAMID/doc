@@ -78,8 +78,8 @@ Testing did not reveal performance problems with the \refgo{master.ClusterAlloca
 MongoDB supports several mechanisms for internal authentication between members of a Replica Set. The only mechanism available on the
 the target operating system \textit{OpenIndiana 151a9} is authentication through a shared secret (\textit{keyfile}).
 
-The supervisor's desire to have the deployed Mongods authenticate themselves to each other using this mechanism was not mentioned 
-until 1.5 weeks before the implementation deadline. %TODO validate
+The strong desire to have the deployed Mongods authenticate themselves to each other using this mechanism was not clear 
+until two weeks before the implementation deadline.
 
 Implementation of the feature proved problematic: Mongod instances started with the \textit{keyfile} parameter disable the 
 \textit{localhost exception}\footnote{\url{https://docs.mongodb.com/manual/core/security-users/\#localhost-exception}}
