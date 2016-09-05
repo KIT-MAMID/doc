@@ -93,7 +93,7 @@ Hence, support for keyfiles required substantial changes to the deployment proce
   \item Represent user credential data in the Model \& MSP
   \item Support deployment of keyfiles in Master \& Slave
   \item Support authentication in the \refgo{slave.MongodConfigurator} by defining a \textit{management user}
-  \item Deal with various edge-cases related to MongoDB \textit{write-concern} and the \textit{sharding role} of a Mongod
+  \item Deal with various edge-cases related to MongoDB \textit{write-concern} and the \textit{sharding role} of a Mongod. (Creating a user requires \textit{majority write concern} on \textit{sharding config server} Replica Sets)
   \item Allow the user to retrieve keyfile and \textit{management user} credential through the GUI,
         e.g. to create additional users or configure sharding configuration servers.
 \end{itemize}
@@ -130,7 +130,7 @@ In particular, the following problems complicated and delayed the slave implemen
         \mamid itself should not make the decision to override the safety checks because this behavior could lead to data loss.
 \end{description}
 
-Making the slave compatible with the the problems described above led significant bloat in the \refgo{slave.MongodConfigurator}.
+Making the slave compatible with the the problems described above led to significant bloat in the \refgo{slave.MongodConfigurator}.
 
 To increase maintainability, the interaction with the MongoDB API was extracted into a private MongoDB API wrapper (\refgo{slave.mgoContext}).
 

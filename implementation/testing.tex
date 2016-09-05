@@ -1,14 +1,19 @@
 \section{Testing}
 
 \subsection{Unit Tests}
+Earlier in the development process unit tests where written to test the behavior of single components:
 
-TODO elaborate on purpose of various unit tests.
-possibly list all of them and elaborate on some in detail
+\begin{itemize}
+	\item The Master API was tested by sending manually checked json objects --- mocking the HTTP server --- and checking the changes in the database
+	\item The Cluster Allocator was tested for idempotency by fetching the whole database after two consecutive Cluster Allocator runs and comparing them using deep equal
+	\item The Monitor and Deployer were tested by creating scenarios in the database and asserting the changes in the database and checking the sent bus messages
+	\item The slaves process management was tested by starting a mocked Mongod process
+	\item The notifier was tested against a mocked master api and with generated config files
+\end{itemize}
 
 \subsection{Integration Tests}
 
-TODO explain why we have almost none and what we could do
-, e.g. scripted API tests
+Setup of automated integration tests would be possible by calling the HTTP API of the Master in the local staging environment and asserting the results.
 
-\subsection{Manual Tests}
-
+But as integration begun only 2 weeks before the deadline setup of automated integration tests would have been to time consuming.
+Instead the local staging environment was used to manual tests after potentially critical changes.
