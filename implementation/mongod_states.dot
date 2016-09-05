@@ -1,0 +1,26 @@
+digraph mongod_states
+{
+
+    rankdir=LR;
+
+    d [label="destroyed"];
+    nr [label="not running"];
+    unin [label="uninitialized"];
+    rem [label="removed"];
+    rec [label="recovering"];
+    run [label="running"];
+
+    { rank=max; run }
+    { rank=min; d }
+
+    d -> nr -> d;
+    nr -> unin -> rec -> run;
+    unin -> run [label="rs.inititate\nonce per replica set"];
+    run -> rem -> nr;
+    run -> nr;
+
+    run -> d [label="force"];
+    unin -> d [label="force"];
+    rec -> d [label="force"];
+
+}
