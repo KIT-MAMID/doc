@@ -1,0 +1,168 @@
+Introduction
+
+  What is PSE?
+  Supervisor
+  Team members, semester
+
+What is our project? Requirement Elicitation
+
+  satellite mission, data, what shall be done with it
+	archive of dat aform `envisat mipas`: trace gasses in the atmosphere
+	1) original data not that big, but processed data (stored in MongoDB) considerably larger
+	2) reprocessing happens periodically, old results need to be kept for reference purposes
+	96+ TB and growing
+  
+  MongoDB as the backing database
+    What is MongoDB
+    Mongod: show command line of starting a Mongod, walk through parameters, maybe show shell
+    ReplicaSet: write concern, read preference, primaries, secondaries, elections, priorities, votes
+    Sharding: 
+
+  will run on a cluster at IMK:
+    topology: 4 cabinets with separate PSUs => see Marek's mail
+    operating system: OpenIndiana 105a9, joke: who has heard of it?
+    lots of nodes with inperformant persistent HDD storage, but lots of RAM
+    => need for
+          in-memory storage for read performance
+          secondary nodes with persistent storage in case of power failure or maintenance
+          => ReplicaSets need to be configured with Mongods
+                - running in different cabinets
+                - at least one Mongod with persistent storage if persitence of data is desired
+                  - that persistent Mongod should not become the primary of the replica set as long as there
+                    are volatiles
+                - explain what happens if topology is not respected in cluster layout
+          monitoring of the deployment
+
+Related Work
+
+- in memory engine only in commercial (enterprise) version
+	- doesn't work on cluster (os)
+	- still need persistent storage
+- mongodb cloud manager (costs?)
+
+Requirement Analysis
+
+    => our solution (mandatory + optional criteria)
+
+            write management software called MAMID (expand acronym)
+              => be installed as an unprivileged daemon on all machines in the cluster
+              => take care of deployment, i.e. starting, stopping of Mongods
+            
+           
+            simple administration through a web GUI
+              declarative approach: administrator describes cluster topology and desired replica sets
+                Slaves, Risk Groups, Replica Sets => new screenshots
+                Slave States to control deployment of Mongods on this Slave
+                  - explain what's written in the GUI
+                	
+              automatic
+                enforcement of the constraints presented above
+                deployment of the Mongds and ReplicaSet configuration
+                re-configuration in case volatile nodes need to reboot and loose their state
+
+            monitoring of the deployment instances
+            alerting in case of problems
+
+            provide an HTTP API to script the cluster deployment if necessary
+              (later emphasize GUI is built on top of this)
+
+    => demarcation criteria
+        
+        MAMID does not do anything above deployment of Replica Sets
+            => sharding requires application specific knowledge
+            BUT: administrator can configure Replica Sets to be started as sharding config servers
+
+    => implementation language
+
+          choose Go as the programming language for everything but the web interface
+            - compiled language with good performance
+            - concurrency built into the language
+            - rich standard library
+            => network services are easy to implement 
+            - builds on MANY platforms (generate a slide here)
+            => solves the problem that there's no full C++11 (which was the originally intended language)
+               in the gcc version on the cluster (fill in version here)
+
+          use web frameworks for the web interface
+            @janis fill in here
+
+Application Design
+  
+   Overall architecture  => minified UML, leave out the details
+      
+      Daemons, called `slaves` running on all machines in the cluster
+      
+      `master` instance running on a central instance, e.g. gateway host
+          PostgreSQL as the backing store for data
+          Repostitory pattern: *independent* components communicating through data stored in the database
+            Cluster Allocator: determines cluster layout, i.e. deployment of Mongods
+            Deployer: deploys cluster layout by communicating desired deployment state to `slaves`
+            Monitor: continuous monitoring of deployment
+            REST API: documented interface of toward the user
+          
+       HTML5/CSS3/JS frontend with `master` REST API
+      
+      `master slave protocol` implements RPC between master and slave
+
+      `notifier` implements notification in case of problems (currently only email, but extensible)
+
+
+   
+
+Implementation & Testing pahse (part 1)
+
+  Merged the two phases in accordance with the supervisor
+    REASON
+
+  development workflow:
+    github, feature branches, continous integration, static analysis (go vet), docker testbed
+
+  Sub-phases
+    isolated development of MAMID components => reuse svg
+
+  Integration
+    fit everything together
+
+  Statistics
+
+Live Demo
+
+	Goals:
+		manual clicking: create 3 risk groups, add 1 slave to each rg, create repl set "wekan", show config, deploy app
+		HTTP API / python script (show it): add remaining slaves to rgs, active 
+		Show Risk Groups populated with slaves
+		create second Replica Set 'foobar'
+		show monitoring works: stop a slave, wait for problem to appear in GUI, show rs.status(), start a slave, watch problem disappear
+		show setting defective slave to disabled fixes a degraded replica set: stop a slave, wait for problem to appear in GUI, set slave to disabled, watch for reprovisioning
+		
+
+Impl & testing (part 2)
+
+  Results
+   
+    Why is test coverage suboptimal?
+      Unit Testing large object graph requires lots of fixtures
+      Integration-testing networked application is hard (timeouts, missing frameworks, missing measurement)
+
+    Surprises during implementation
+      => cost a lot of implementation time
+      ... transistion
+      ORM layers in Golang: missing dynamism + immature frameworks
+        `gorm` framework does not allow fine grained UDPATEs => required rewrite of Cluster Allocator prioritization datastructures
+      
+      MongoDB surprised us with a lot of unexpected behavior that was not clear during the design phase
+         @antonxy's MongoDB deployment flowchart
+         MongoDB Keyfile authentication
+           => requires user access control
+           => both not specified in original design
+         MongoDB Replica Set Initiation
+           => must happen from one single node => contrary to architecture where state (including replica set config) is communicated to every slave)
+           (leaky abstractions)
+      Operational Needs:
+        => application displays more information than originally planned
+            give admin insight into deployment
+        
+
+Review
+
+Questions
