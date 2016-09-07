@@ -1,0 +1,236 @@
+\documentclass[11pt,aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usetheme{default}
+\usepackage{pdfpcnotes}
+\usepackage{todonotes}
+\usepackage{xspace}
+
+% MAMID macro
+\newcommand{\mamid}{\textit{MAMID}\xspace}
+
+% insert section title at \section{}
+% http://tex.stackexchange.com/questions/178800/creating-sections-each-with-title-pages-in-beamers-slides
+\AtBeginSection[]{
+    \begin{frame}
+        \vfill
+        \centering
+        \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+            \usebeamerfont{title}\insertsectionhead\par%
+        \end{beamercolorbox}
+        \vfill
+    \end{frame}
+}
+
+\begin{document}
+   	\author{Niklas Fuhrberg, Anton Schirg,\\ Christian Schwarz, Janis Streib, Bob Weinand}
+    \title{MAMID}
+    \subtitle{Monitor and Manager for In-memory Databases}
+    %\logo{}
+    \institute{\textbf{Supervisor}\\Dr Marek Szuba\\SCC}
+    \date{8 June 2016}
+    \subject{Final Presentation}
+    %\setbeamercovered{transparent}
+    %\setbeamertemplate{navigation symbols}{}
+    
+    \frame[plain]{\maketitle}
+
+    \begin{frame}[label=waterfall]{PSE: Where are we?}
+        \centering\huge
+        \textbf{5-stages image of the waterfall model}
+    \end{frame}
+    
+    \section{Requirements Elicitation}
+    
+    \begin{frame}{Motivation}
+        \begin{itemize}
+            \item Envisat earth observation satellite
+            \item Archive of data from MIPAS instrument\pnote{MIPAS records trace gasses in the atmosphere}
+            \item Research project at IMK: %TODO what is its name?
+            \item \pnote{Original data not that big but }Processed data: $96+$ TB
+            \item Periodic reprocessing \& archiving \pnote{Reprocessing happens periodically, old results need to be kept for reference purposes => dataset is growing}
+            \item Use MongoDB for storage\pnote{use MongoDB's sharding feature (more in a second) to distribute the data over multiple machines, easy way to access data and use it in downstream applications}
+        \end{itemize}
+    \end{frame}
+    
+    \begin{frame}{MongoDB}
+        TODO
+        \begin{itemize}
+            \item MongoDs / Mongods
+            \item Replica Set
+            \item Sharding
+        \end{itemize}
+    \end{frame}
+    
+    \begin{frame}[allowframebreaks]{MongoDB on IMK Cluster}
+        
+        \begin{figure}
+            \centering
+            \missingfigure[figwidth=0.8\linewidth]{PSU image, no replica sets or risk groups}
+        \end{figure}
+
+        \begin{itemize}
+            \item Few big machines with (slow?) persistent storage\\%TODO ask marek whcih one it is
+                  + 4 cabinets à 20 blades à $98$ GB RAM %TODO check this
+            \item Runs OpenIndiana \pnote{openindiana, who has heard of it? it's an illumos distro. which is? anyone??}
+            \item Blades have small boot-only HDDs
+            \item Cabinets have independent PSUs
+        \end{itemize}
+
+        \framebreak
+        
+        Performance: Replica Sets \pnote{so what can we do to maximize performance, in particular read performance for downstream applications?}
+        
+        \begin{itemize}
+            \item Primaries: on blades with in-memory storage (\emph{performance})
+            \item Secondaries: on machines with HDDs (\emph{persistence}) \pnote{this can be arranged by configuring the Priority of a Mongod in Replica Set elections}
+        \end{itemize}
+        \pnote{indicate where primaries and secondaries go using a pointing device}
+        \begin{figure}
+            \centering
+            \missingfigure[figwidth=0.8\linewidth]{PSU image, replica sets, each replica set only on one PSU. Second version: failure of one PSU kills one replset}
+        \end{figure}
+        
+        \framebreak
+        
+        Availability \& Redundancy: Risk Groups \pnote{so far we have performance, but what happens in case a PSU dies and takes a cabinet offline?}
+        
+        \begin{itemize}
+            \item Distribute Replica Set members over different cabinets
+            \item Assert enough Replica Set members have persistent storage\pnote{requirements may vary, depending on importance of data, ... generally a tradeoff between space usage and safety}
+        \end{itemize}
+        
+        \begin{figure}
+            \centering
+            \missingfigure[figwidth=0.8\linewidth]{PSU image, replica sets, risk groups marked, each replica set distributed}
+        \end{figure}
+        
+        \framebreak
+        
+        Operation
+        
+        \begin{itemize}
+           \item Monitor Mongod processes \& configuration
+           \item Notify administrators
+           \item Continuous redeployment\pnote{blades may fail and loose their state \& data(remember: they are in-memory only)}
+           \item Self-healing using hot spares\footnote{not in current release though (time constraints)}\pnote{Idea: have unused machines available to replace failing ones.}
+        \end{itemize}
+        
+    \end{frame}
+    
+    \section{Related Work}
+    
+    \begin{frame}{Related Work}
+        
+        \begin{itemize}
+            \item MongoDB In-Memory Engine ($<$ 3.2.6, \textit{enterprise} subscription)
+            \item MongoDB Ops Manager (\textit{enterprise} subscription)
+            \item MongoDB Cloud Manager (\textit{enterprise} subscription)
+            \item Configuration Management (Puppet, etc.): cannot model dependencies, no monitoring, no integrated solution
+        \end{itemize}
+        
+        Problems
+        
+        \begin{itemize}
+            \item No MongoDB \textit{enterprise} binaries for OpenIndiana
+            \item No solution to the mix of persistent \& volatile storage 
+        \end{itemize}
+        \pnote{regex matching host names appears to be possible, adequately named host schema would probably work out ok}
+        
+    \end{frame}
+    
+   \againframe<2>{waterfall}
+    
+    \section{Requirements Analysis}
+   
+   \begin{frame}{Requirements Analysis}
+       \begin{itemize}
+           \item declarative administration
+           \item automation!
+           \begin{itemize}
+               \item cluster layout
+               \item persistence requirements
+               \item deployment
+               \item re-configuration
+            \end{itemize}
+            \item monitoring
+            \item alerting
+        \end{itemize}
+    \end{frame}
+    
+    \begin{frame}{Declarative Administration}
+        
+        \begin{itemize}
+           \item<1-> Administrator describes cluster topology \& desired Replica Sets
+           \item<2-> Replica Set description $\equiv$ set of constraints
+           \item<3-> $\implies$ \alert<3>{greedy}, \alert<4>{priority driven}, \alert<5>{iterative} allocation algorithm
+        \end{itemize}
+        
+        \begin{columns}
+            \begin{column}{0.5\linewidth}
+                \missingfigure[figwidth=\linewidth]{screenshot risk group view}
+            \end{column}
+            \begin{column}{0.5\linewidth}
+                \missingfigure[figwidth=\linewidth]{screenshot replica set creation view}
+            \end{column}
+        \end{columns}
+       
+        
+    \end{frame}
+    
+    
+    \begin{frame}{Declarative Administration: Screenshots}
+         %again in big
+         \begin{columns}
+             \begin{column}{0.5\linewidth}
+                 \missingfigure[figwidth=\linewidth]{screenshot risk group view}
+                \end{column}
+                \begin{column}{0.5\linewidth}
+                    \missingfigure[figwidth=\linewidth]{screenshot replica set creation view}
+                \end{column}
+        \end{columns}
+    \end{frame}
+    
+    \begin{frame}
+        
+    
+     % showcase slave states, necessary for understanding live demo
+       % all below should be fine
+       
+%       \item automatic deployment
+%       
+%       \item continuous monitoring
+%       
+%       \item write management software called MAMID (expand acronym)
+%       => be installed as an unprivileged daemon on all machines in the cluster
+%       => take care of deployment, i.e. starting, stopping of Mongods
+%       
+%       \item simple administration through a web GUI
+%       \item declarative approach\pnote{}administrator describes cluster topology and desired replica sets}
+%           \begin{itemize}
+%               \item describe cluster topology (slaves, risk groups) and desired Replica Sets
+%               \item enable slave state 
+%            \end{itemize}
+%       Slaves, Risk Groups, Replica Sets => new screenshots
+%       Slave States to control deployment of Mongods on this Slave
+%       - explain what's written in the GUI
+%       
+%       automatic
+%       enforcement of the constraints presented above
+%       deployment of the Mongds and ReplicaSet configuration
+%       re-configuration in case volatile nodes need to reboot and loose their state
+%       
+%       monitoring of the deployment instances
+%       alerting in case of problems
+%       
+%       provide an HTTP API to script the cluster deployment if necessary
+%       (later emphasize GUI is built on top of this)
+%        
+    
+    \end{frame}
+    
+    
+    
+\end{document}
+
+
