@@ -20,6 +20,12 @@ all: implReport.pdf
 assets/module_graph.pdf: assets/module_graph.svg
 	$(call SVG2PDF,$<,$@)
 
+assets/mongod_states.svg: assets/mongod_states.dot
+	dot -Tsvg $< -o $@
+
+assets/mongod_states_old.svg: assets/mongod_states_old.dot
+	dot -Tsvg $< -o $@
+
 implReport.pdf: *.tex assets/cloc.tex assets/report.txt assets/module_graph.pdf
 	$(PDFLATEX) implReport
 	$(PDFLATEX) implReport
@@ -45,3 +51,4 @@ clean:
 	rm -f gui_classes.pdf
 	rm -f implReport.pdf
 	rm -f notifier_classes.pdf
+	rm -f assets/module_graph.pdf

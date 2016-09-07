@@ -1,0 +1,34 @@
+digraph mongod_states
+{
+
+    rankdir=BT;
+
+    d [label="destroyed", rank=min];
+    nr [label="not running"];
+    unin [label="uninitialized"];
+    rem [label="removed"];
+    rec [label="recovering"];
+    run [label="running", rank=max];
+
+
+    d -> nr [label="create folder"];
+    nr -> rec [label="start mongod"];
+    rec -> run [label="mognod recovered"];
+    nr -> run [label="start mognod first time"];
+    run -> nr [label="shutdown"];
+    nr -> d [label="delete data"];
+
+    nr -> unin [label="start mongod of\nuninitiated replica set"];
+    unin-> rec [label="mongod is added to\nreplica set with data\nby other mongod"];
+    unin -> run [label="rs.inititate\n(once per replica set)"];
+    unin -> run [label="mongod is added to\nempty replica set \nby other mongod"];
+    run -> rem [label="mongod is removed from\nreplica set by\nother member"];
+    rem -> nr [label="shutdown"];
+    run -> nr [label="shutdown"];
+/*
+    run -> d [label="kill force"];
+    unin -> d [label="kill force"];
+    rec -> d [label="kill force"];
+    rem -> d [label="kill force"];
+*/
+}
