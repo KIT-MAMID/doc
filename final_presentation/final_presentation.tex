@@ -5,9 +5,26 @@
 \usepackage{pdfpcnotes}
 \usepackage{todonotes}
 \usepackage{xspace}
+%checkmarks
+\usepackage{pifont}
+\newcommand{\xmark}{\ding{55}}%
 
 % MAMID macro
 \newcommand{\mamid}{\textit{MAMID}\xspace}
+
+%done checkmark
+\definecolor{darkgreen}{rgb}{0.0, 0.5, 0.0}
+\newcommand{\checkcomment}[1]{
+    \def\temp{#1}
+    \ifx\temp\empty
+    \emph{}
+    \else
+    \emph{Note: #1}
+    \fi
+}
+\newcommand{\done}[1][]{{\color{darkgreen}\checkmark\checkcomment{#1}}}
+\newcommand{\notdone}[1][]{{\color{red}\xmark\checkcomment{#1}}}
+
 
 % insert section title at \section{}
 % http://tex.stackexchange.com/questions/178800/creating-sections-each-with-title-pages-in-beamers-slides
@@ -143,91 +160,113 @@
     
     \section{Requirements Analysis}
    
-   \begin{frame}{Requirements Analysis}
-       \begin{itemize}
-           \item declarative administration
-           \item automation!
-           \begin{itemize}
-               \item cluster layout
-               \item persistence requirements
-               \item deployment
-               \item re-configuration
+   \begin{frame}<1-10>[label=reqanalysis]{Requirements Analysis}
+       
+        \begin{columns}
+        \begin{column}{0.5\linewidth}
+            Features
+            \begin{itemize}
+                \item<2-> declarative administration \only<11->{\done}
+                \item<3-> simple graphical interface \only<12->{\done}
+                \item<4-> automation! \only<13->{\done}
+                \begin{itemize}
+                    \item<5-> cluster layout \only<13->{\done}
+                    \item<6-> persistence requirements \only<13->{\done}
+                    \item<7-> deployment \only<13->{\done}
+                    \item<8-> reconfiguration \only<13->{\done}
+                \end{itemize}
+                \item<9-> monitoring \only<14->{\done}
+                \item<10-> alerting \only<15->{\done}
             \end{itemize}
-            \item monitoring
-            \item alerting
-        \end{itemize}
+        \end{column} 
+       	\begin{column}{0.5\linewidth}
+            \onslide<16->{Demarcation Criteria}
+            \begin{itemize}
+                \item<17-> no manual configuration
+                \item<18-> limited to MongoDB\pnote{originally, extensibility to other databases was considered}
+                \item<19-> no Sharding query router deployment (\textit{mongos}) \pnote{we provide useful help for this, however}
+            \end{itemize}
+            \vspace{6em} % dirty hacks
+        \end{column}
+        \end{columns}
     \end{frame}
     
     \begin{frame}{Declarative Administration}
         
         \begin{itemize}
-           \item<1-> Administrator describes cluster topology \& desired Replica Sets
-           \item<2-> Replica Set description $\equiv$ set of constraints
-           \item<3-> $\implies$ \alert<3>{greedy}, \alert<4>{priority driven}, \alert<5>{iterative} allocation algorithm
+           \item<1-> Administrator describes cluster topology
+               \begin{description}
+                   \item[Slaves] hosts in the cluster
+                   \item[Risk Groups] shared risk of failure, e.g. cabinets
+                   \item[Replica Sets] persistent \& volatile member count, configuration parameters
+                \end{description}
+           \item<2-> $\equiv$ set of constraints
+           \item<3-> allocation algorithm: \alert<3>{greedy}, \alert<4>{priority driven}, \alert<5>{idempotent}
         \end{itemize}
+       
         
+    \end{frame}
+    
+    
+    \begin{frame}[allowframebreaks]{Declarative Administration: Screenshots}
+         \missingfigure[figwidth=\linewidth]{screenshot slave CREATION view (no slave states)}
+         \framebreak
+         \missingfigure[figwidth=\linewidth]{screenshot risk group view with lots of configured slaves \& risk groups}
+         \framebreak
+         \missingfigure[figwidth=\linewidth]{screenshot replica set creation view}
+         \framebreak
+         \missingfigure[figwidth=\linewidth]{screenshot replica set view, with all Mongods active}
+    \end{frame}
+    
+    \begin{frame}{Controlling Deployment}
         \begin{columns}
-            \begin{column}{0.5\linewidth}
-                \missingfigure[figwidth=\linewidth]{screenshot risk group view}
+            \begin{column}{0.6\linewidth}
+                \begin{itemize}
+                    \item \textbf{Slave states} control allocation of Mongods
+                    \begin{description}
+                        \item[active] can host Mongods \pnote{slave will be used to satisfy replica set constratins, if in the right risk group}
+                        \item[maintenance] scheduled downtime, no redeployment\pnote{use case: rebooting for system updates}
+                        \item[disabled] should not host Mongods\pnote{slave not used to satisfy replica set constraints. use case: machine shall be removed from the cluster, be used as hot spare, etc.}
+                    \end{description}
+                    \item Migration of Mongods without reduced redundancy\pnote{example: setting a Slave to disabled that is the only persistent host in a Replica Set is probably a bad idea...}
+                \end{itemize}
             \end{column}
-            \begin{column}{0.5\linewidth}
-                \missingfigure[figwidth=\linewidth]{screenshot replica set creation view}
+            \begin{column}{0.4\linewidth}
+                \missingfigure[figwidth=\linewidth]{closeup of button states}
             \end{column}
         \end{columns}
-       
         
     \end{frame}
     
-    
-    \begin{frame}{Declarative Administration: Screenshots}
-         %again in big
-         \begin{columns}
-             \begin{column}{0.5\linewidth}
-                 \missingfigure[figwidth=\linewidth]{screenshot risk group view}
-                \end{column}
-                \begin{column}{0.5\linewidth}
-                    \missingfigure[figwidth=\linewidth]{screenshot replica set creation view}
-                \end{column}
-        \end{columns}
+     \begin{frame}[allowframebreaks]{Controlling Deployment: Screenshots} % this slide gives an impression on how to think when administering MAMID: manipulate constraints, not take direct actions
+        \missingfigure[figwidth=\linewidth]{screenshot replica set view, one slave with problems}
+        \framebreak
+        \missingfigure[figwidth=\linewidth]{screenshot slave view of slave with problems, should be clear the slave has an error}
+        \framebreak
+        \missingfigure[figwidth=\linewidth]{screenshot slave view, right after desired state switched to Disabled (transitioning spinner visible)}
+        \framebreak
+        \missingfigure[figwidth=\linewidth]{screenshot slave view, replica set view: all green, maybe emphasizing circle around new (replacement) slave}
+        \framebreak
     \end{frame}
     
-    \begin{frame}
-        
+    \againframe<10-15>{reqanalysis}
     
-     % showcase slave states, necessary for understanding live demo
-       % all below should be fine
-       
-%       \item automatic deployment
-%       
-%       \item continuous monitoring
-%       
-%       \item write management software called MAMID (expand acronym)
-%       => be installed as an unprivileged daemon on all machines in the cluster
-%       => take care of deployment, i.e. starting, stopping of Mongods
-%       
-%       \item simple administration through a web GUI
-%       \item declarative approach\pnote{}administrator describes cluster topology and desired replica sets}
-%           \begin{itemize}
-%               \item describe cluster topology (slaves, risk groups) and desired Replica Sets
-%               \item enable slave state 
-%            \end{itemize}
-%       Slaves, Risk Groups, Replica Sets => new screenshots
-%       Slave States to control deployment of Mongods on this Slave
-%       - explain what's written in the GUI
-%       
-%       automatic
-%       enforcement of the constraints presented above
-%       deployment of the Mongds and ReplicaSet configuration
-%       re-configuration in case volatile nodes need to reboot and loose their state
-%       
-%       monitoring of the deployment instances
-%       alerting in case of problems
-%       
-%       provide an HTTP API to script the cluster deployment if necessary
-%       (later emphasize GUI is built on top of this)
-%        
-    
+    \begin{frame}{Monitoring \& Alerting}
+        \begin{itemize}
+            \item declarative administration $\implies$ infrastructure description
+            \item zero-configuration monitoring \pnote{emphasize it is built in}
+            \item HTTP API: decouple monitoring \& alerting \pnote{expose recognized problems through an HTTP API}
+            \begin{itemize}
+                \item MAMID \textit{notifier} supports e-mail notifications
+                \item easy integration into existing infrastructure possible \pnote{HTTP API also allows easy integration into existing monitoring frameworks \& alerting services, e.g. Pager Duty, Pushover or similar}
+            \end{itemize}
+        \end{itemize}
     \end{frame}
+    
+    \againframe<15-19>{reqanalysis}
+    
+    % end of requirement analysis
+    
     
     
     
