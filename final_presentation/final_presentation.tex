@@ -263,9 +263,27 @@
         \end{itemize}
     \end{frame}
     
-    \againframe<15-19>{reqanalysis}
+   \againframe<15-19>{reqanalysis}
     
-    % end of requirement analysis
+    \begin{frame}
+        \frametitle{Implementation Constraints}
+        \begin{itemize}
+            \item<2-> Primary target OS: OpenIndiana 105a9
+            \item<3-> Frontend: Web Frameworks TODO Janis %TODO
+            \item<4-> Core Application: Go $>=$ 1.6
+            \begin{itemize}
+                \item<5-> compiled language, good performance
+                \item<6-> built-in concurrency paradigm (channels)
+                \item<7-> rich standard library
+                \item<8-> cross-platform, simple cross-compilation \pnote{solves problem of missing C++ 11 support in the C++ compiler on the cluster}
+                \item<9->\texttt{\$ GOOS=solaris go build}
+            \end{itemize}
+        \end{itemize}
+        
+    \end{frame}
+        
+   
+     % end of requirement analysis
     
     
     
