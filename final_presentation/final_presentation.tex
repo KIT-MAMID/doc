@@ -285,6 +285,86 @@
    
      % end of requirement analysis
     
+    \againframe<3>{waterfall}
+    
+    \begin{frame}[label=appdesign]{Application Design}
+          \missingfigure[figwidth=\linewidth]{UML without the details, bigger fonts, write names of components into boxes. Master modules should be left in. Slave modules maybe, too}
+    \end{frame}
+       
+   \begin{frame}{Master Slave Protocol}
+       \begin{itemize}
+           \item HTTP(S) based protocol
+           \item JSON transport format
+           \item x.509 client certificate authentication\footnote{OpenSSL-based CA scripts already prepared.}
+           \item Central idea: communicating state, not commands\footnote{more on this later}
+           \begin{itemize}
+               \item Process states
+               \item Abstract Mongod configuration
+            \end{itemize}
+        \end{itemize}
+    \end{frame}
+    
+    \againframe{appdesign}
+
+    \begin{frame}{Slave}
+        
+           \begin{itemize}
+               \item Runs on every cluster host
+               \item Unprivileged daemon
+               \item MSP listener
+               \item Mongod process management
+               \item Idempotent (re)configuration of Mongods
+            \end{itemize}
+            \vspace{15pt}
+            \texttt{\$ mamid\_slave -listen ':8081' -data /srv/mamid/data}
+    \end{frame}
+    
+    \againframe{appdesign}
+    
+    \begin{frame}{Master}
+        
+        \begin{itemize}
+            \item Runs on central instance, e.g. gateway host
+            \item MSP client
+            \item PostgreSQL as backing store for data
+            \item Repository pattern: \textit{independent} components communicate through data in database
+            \begin{description}
+                 \item[Cluster Allocator]: determines cluster layout, i.e. deployment of Mongods
+                 \item[Deployer]: deploys cluster layout by communicating desired deployment state to `slaves`
+                 \item[Monitor]: continuous monitoring of deployment
+                 \item[REST API]: documented interface of toward the user
+            \end{description}
+            \item HTTPS \& TLS client authentication\pnote{again, the OpenSSL-scripts are already prepared. No reason not to set this up.}
+        \end{itemize}
+        \vspace{15pt}
+        \texttt{\$ mamid\_master -listen ':8080' -db.dsn '<Postgres dsn>'}
+        
+    \end{frame}   
+    
+    \againframe{appdesign}
+    
+    \begin{frame}{GUI}
+           HTML5/CSS3/JS frontend with `master` REST API
+           TODO Janis %TODO
+    \end{frame}
+    
+    \begin{frame}{Notifier}
+        
+        \begin{itemize}
+            \item Polls the master's REST API
+            \item Configurable list of alert contacts
+            \begin{itemize}
+                \item currently limited to e-mail
+                \item support for SMTP \textit{smarthost}
+            \end{itemize}
+            \item Extensible to support other notification mechanisms %TODO correct preposition?
+        \end{itemize}
+        \vspace{15pt}
+        \texttt{\$ mamid\_notifier /etc/mamid/notifier.conf}
+    \end{frame}
+    
+    \againframe{appdesign}
+    
     
     
     
