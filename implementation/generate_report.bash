@@ -12,6 +12,7 @@ set -e
 
 SUMMARYOUT=$(readlink -f $2)
 LATEXOUT=$(readlink -f $3)
+LATEXTESTCOUNTOUT=$(readlink -f $4)
 
 pushd $1
 
@@ -27,10 +28,13 @@ cloc --quiet --csv-delimiter='  &  ' $OWN_DIRS | egrep -v '^$' | sed '1d' | sed 
 
 
 echo "Git SHA1: $GIT_REV" > $SUMMARYOUT
+echo -n "" > $LATEXTESTCOUNTOUT
 for i in $OWN_DIRS; do
 	if [ -d "$i" ]; then
 	        pushd $i > /dev/null
 		git line-summary | sed 's/ project  :/ directory:/' >> $SUMMARYOUT
+		#we could write a Go app/script with a little reflection for more accurate measurements...
+		echo "$i" '&' $(egrep -r '^func Test' . | grep '.go:' | wc -l) '\\' >> $LATEXTESTCOUNTOUT
 	        popd > /dev/null
 	fi
 done 
