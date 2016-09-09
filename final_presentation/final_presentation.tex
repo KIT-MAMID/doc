@@ -362,6 +362,7 @@
      % end of requirement analysis
     
     \againframe<3>{waterfall}
+    \section{Application Design}
     
     \begin{frame}[label=appdesign]{Application Design}
           \missingfigure[figwidth=\linewidth]{UML without the details, bigger fonts, write names of components into boxes. Master modules should be left in. Slave modules maybe, too}
@@ -403,12 +404,12 @@
             \item Runs on central instance, e.g. gateway host
             \item MSP client
             \item PostgreSQL as backing store for data
-            \item Repository pattern: \textit{independent} components communicate through data in database
+            \item Repository pattern: \textit{independent} components communicate through data in DB
             \begin{description}
-                 \item[Cluster Allocator]: determines cluster layout, i.e. deployment of Mongods
-                 \item[Deployer]: deploys cluster layout by communicating desired deployment state to `slaves`
-                 \item[Monitor]: continuous monitoring of deployment
-                 \item[REST API]: documented interface of toward the user
+                 \item[Allocator]: determines cluster layout (deployment of Mongods)
+                 \item[Deployer]: sends desired configuration state to slaves\pnote{thus enforces the cluster layout}
+                 \item[Monitor]: continuous monitoring (observed state)
+                 \item[REST API]: documented interface toward the user
             \end{description}
             \item HTTPS \& TLS client authentication\pnote{again, the OpenSSL-scripts are already prepared. No reason not to set this up.}
         \end{itemize}
@@ -441,6 +442,7 @@
     
     \againframe{appdesign}
     
+    % end of application design phase
     
     
     
