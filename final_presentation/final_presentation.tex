@@ -8,6 +8,9 @@
 %checkmarks
 \usepackage{pifont}
 \newcommand{\xmark}{\ding{55}}%
+% toprule, midrule, bottomrule
+\usepackage{booktabs}
+\usepackage{caption}
 
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes,calc}
@@ -444,7 +447,183 @@
     
     % end of application design phase
     
+    \againframe<4>{waterfall}
     
+    \section{Implementation \& Testing (Part I)}\pnote{mention two phases were merged for a more flexible schedule}
+    
+    \begin{frame}{Checkboxes first}
+        \begin{itemize}
+            \item All Mandatory Criteria implemented
+            \item Some optional criteria implemented
+            \item Unforeseen features added
+            \item Deadlines met
+            \item Sleep deprivation
+            \item Caffeine addiction
+            \item Software works and is useful
+        \end{itemize}
+    \end{frame}
+    
+    \begin{frame}[allowframebreaks]{Development Workflow}
+        Tools \& Infrastructure
+        \begin{itemize}
+            \item Git + GitHub
+            \item Self-hosted Continuous Integration (Jenkins, both Linux \& OpenIndiana)
+            \item Feature branches \& \texttt{master} branch protection
+            \item Unified code style (\texttt{gofmt})
+            \item Static code-analysis (\texttt{go vet})
+            \item Unit testing (\texttt{go test})
+            \item Coverage profiles as CI artifacts (\texttt{go cover})
+            \item Local staging environment (Docker)
+            \item All of the above wrapped in a GNU Makefile
+            \item Dog-fooding the master API for manual tests (Python)
+        \end{itemize}
+        \framebreak
+        Communication
+        \begin{itemize}
+            \item GitHub's issue tracker
+            \item Slack platform
+            \begin{itemize}
+                \item Commit \& Repo activity bot
+                \item CI results bot
+            \end{itemize}
+        \end{itemize}
+    \end{frame}
+    
+    \begin{frame}[allowframebreaks]{Distribution of Work}
+        
+        \begin{columns}
+            \begin{column}{0.5\linewidth}
+                \centering
+                \begin{figure}[h]
+                    \includegraphics[height=5cm]{assets/module_graph}
+                    \caption{Module Dependency Graph}
+                \end{figure}
+            \end{column}
+           
+            \begin{column}{0.5\linewidth}
+                 \centering
+                 \begin{figure}[h]
+                     \begin{tabular}{l|l}
+                         \toprule
+                         Component & Name\\
+                         \midrule
+                         msp       & Anton\\
+                         model     & Christian\\
+                         master    & Anton, Christian\\
+                         slave     & Bob\\
+                         gui       & Janis\\
+                         notifier  & Niklas, Janis\\
+                         \bottomrule
+                        \end{tabular}
+                        \caption{Distribution of Work}
+                    \end{figure}
+            \end{column}
+        \end{columns}
+        
+        \framebreak
+        
+        Module development
+        \begin{itemize}
+            \item Attempt to distribute work fairly among members
+            \item Independent work
+            \begin{itemize}
+                \item Different schedules
+                \item Everyone stays informed
+            \end{itemize}
+        \end{itemize}
+        
+        
+        Integration
+        \begin{itemize}
+            \item Distributed application
+            \item Problems usually encountered in this phase
+            \begin{description}
+                \item [model] additional data types
+                \item[msp] additional method (Replica Set Initialization)
+                \item[gui] more linking between detail views, convenience features
+                \item[notifier] mail server configuration $\rightarrow$ configuration file
+                \item[slave] unexpected MongoDB behavior
+                \item[master] ORM layer problems, prioritization datastructures
+            \end{description}
+        \end{itemize}
+        
+         \pnote{msp and model were easy to implement. initial versions finished after a few days.}
+         \pnote{master repository pattern proved more difficult than expected, mostly because of immature ORM layer (would use something more leightweight / direct SQL instead). More on this later}
+         \pnote{initial slave implementation was finished early, however, required substantial rewriting after discovering unexpected behavior in the MongoDB configuration process}
+         \pnote{notifier \& gui implementation were straightforward because of well-defined API interface. actual GUI has way more features than GUI drafts in the functional spec }
+        
+    \end{frame}
+    
+    \begin{frame}[allowframebreaks,fragile]{Statistics}
+        \begin{figure}[h]
+            \centering
+            \begin{tabular}{lllll}
+                \toprule
+                files  &  language  &  blank  &  comment  &  code \\
+                \midrule
+                \input{assets/cloc.tex}
+                \bottomrule
+            \end{tabular}
+            \caption{Lines of Code in the code repository. \\ Generated by \textit{generate\_report.bash} with \texttt{cloc(8)}. Commit \texttt{6465447}}
+        \end{figure}
+        
+        \framebreak
+        
+        \begin{itemize}
+            \item Number of commits: 811
+            \item Number of issues: 58 (13 open / 45 closed) \pnote{mention number of open issues mostly enhancements, 13 not a bad sign }
+        \end{itemize}
+
+        \begin{figure}
+        \centering
+        \includegraphics[width=0.6\linewidth]{assets/gh_punchcard}
+        \caption{GitHub Punchcard \texttt{code} repo, commit \texttt{6465447}}
+        \label{fig:ghpunchcard}
+        \end{figure}
+        
+        \begin{tiny}
+        All data extracted from GitHub, 10 Sep 2016 01:00 CEST 
+        \end{tiny}
+
+        \framebreak
+            
+        \begin{figure}[h]
+            \centering
+            \begin{tabular}{l|l}
+            \toprule
+            Module  &  Number of Tests \\
+            \midrule
+            master & 57 \\
+            model & 11 \\
+            msp & 0 \\
+            notifier & 16 \\
+            slave & 5 \\
+            \bottomrule
+            \end{tabular}
+            \caption{Number of tests by module.\\Generated by \textit{generate\_report.bash}. Commit \texttt{6465447}}
+        \end{figure}
+        
+        \framebreak
+
+\texttt{go cover} (formatted)
+\begin{verbatim}
+ok  	master            6.361s	coverage: 45.3% of statements
+?   	master/cmd        [no test files]
+ok  	master/masterapi  36.568s	coverage: 56.1% of statements
+ok  	model             8.559s	coverage: 29.6% of statements
+?   	msp	              [no test files]
+ok  	notifier          0.006s	coverage: 40.0% of statements
+ok  	slave             0.086s	coverage: 19.5% of statements
+\end{verbatim}
+
+\begin{itemize}
+    \item Tests against ORM layer
+    \item Time constraints
+    \item Complex fixtures for \texttt{ClusterAllocator}, \texttt{Deployer}, \texttt{Monitor}
+    \item $\rightarrow$ only prepare testing infrastructure
+\end{itemize}
+
+\end{frame}
     
 \end{document}
 

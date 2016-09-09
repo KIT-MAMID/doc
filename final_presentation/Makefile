@@ -19,8 +19,8 @@ SVG2PDF = $(INKSCAPE_BIN) -A $(2) $(1)
 # Targets
 .PHONY:
 all: final_presentation.pdf
-	
-final_presentation.pdf: final_presentation.tex
+
+final_presentation.pdf: final_presentation.tex $(SVGS) assets/cloc.tex
 	$(PDFLATEX) $<
 
 # Assets
