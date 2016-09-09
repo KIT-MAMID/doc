@@ -9,6 +9,9 @@
 \usepackage{pifont}
 \newcommand{\xmark}{\ding{55}}%
 
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes}
+
 % MAMID macro
 \newcommand{\mamid}{\textit{MAMID}\xspace}
 
@@ -39,6 +42,11 @@
     \end{frame}
 }
 
+% For tikz highlighting
+\tikzset{onslide/.code args={<#1>#2}{%
+    \only<#1>{\pgfkeysalso{#2}} % \pgfkeysalso doesn't change the path
+}}
+
 \begin{document}
    	\author{Niklas Fuhrberg, Anton Schirg,\\ Christian Schwarz, Janis Streib, Bob Weinand}
     \title{MAMID}
@@ -52,9 +60,25 @@
     
     \frame[plain]{\maketitle}
 
-    \begin{frame}[label=waterfall]{PSE: Where are we?}
-        \centering\huge
-        \textbf{5-stages image of the waterfall model}
+    \begin{frame}<1>[label=waterfall]{PSE: Where are we?}
+        \tikzstyle{phase} = [draw, thin]
+        \tikzstyle{alert} = [fill=red!20]
+        \tikzstyle{dim} = [fill=blue!20]
+        \begin{figure}
+            \begin{tikzpicture}[node distance=1cm, auto,>=latex', thick]
+                \path[->] node[phase, onslide=<1>{alert}] (elicitation) {Requirements Elicitation};
+                \path[->] node[phase, onslide=<2>{alert}, right of=elicitation, below of=elicitation] (analysis) {Requirements Analysis}
+                          (elicitation) edge (analysis);
+                \path[->] node[phase, onslide=<3>{alert}, right of=analysis, below of=analysis] (design) {Design}
+                          (analysis) edge (design);
+                \path[->] node[phase, onslide=<4>{alert}, right of=design, below of=design] (implementation) {Implementation}
+                          (design) edge (implementation);
+                \path[->] node[phase, onslide=<5>{alert}, right of=implementation, below of=implementation] (testing) {Testing}
+                          (implementation) edge (testing);
+                \path[->] node[phase, onslide=<6>{alert}, right of=testing, below of=testing] (acceptance) {Acceptance}
+                          (testing) edge (acceptance);
+            \end{tikzpicture}
+        \end{figure}
     \end{frame}
     
     \section{Requirements Elicitation}
