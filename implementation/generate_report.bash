@@ -18,7 +18,6 @@ pushd $1
 
 GIT_REV=$(git rev-parse HEAD)
 OWN_DIRS=$(git archive HEAD | tar t | cut -d / -f 1 | sort | uniq | \
-           xargs -I{} bash -c "test -d '{}' && echo '{}'" | \
            egrep -v '(vendor)' | \
            egrep -v 'gui/static/(css/bootstrap|fonts|img)' | \
            egrep -v 'gui/static/js/(c3|d3|angular|jquery|bootstrap)')
@@ -29,9 +28,11 @@ cloc --quiet --csv-delimiter='  &  ' $OWN_DIRS | egrep -v '^$' | sed '1d' | sed 
 
 echo "Git SHA1: $GIT_REV" > $SUMMARYOUT
 for i in $OWN_DIRS; do
-        pushd $i > /dev/null
-        git line-summary | sed 's/ project  :/ directory:/' >> $SUMMARYOUT
-        popd > /dev/null
+	if [ -d "$i" ]; then
+	        pushd $i > /dev/null
+		git line-summary | sed 's/ project  :/ directory:/' >> $SUMMARYOUT
+	        popd > /dev/null
+	fi
 done 
 
 
