@@ -273,7 +273,7 @@
                 \begin{itemize}
                     \item \textbf{Slave states} control allocation of Mongods
                     \begin{description}
-                        \item[active] can host Mongods \pnote{slave will be used to satisfy replica set constratins, if in the right risk group}
+                        \item[active] can host Mongods \pnote{slave will be used to satisfy replica set constraints, if in the right risk group}
                         \item[maintenance] scheduled downtime, no redeployment\pnote{use case: rebooting for system updates}
                         \item[disabled] should not host Mongods\pnote{slave not used to satisfy replica set constraints. use case: machine shall be removed from the cluster, be used as hot spare, etc.}
                     \end{description}
@@ -518,14 +518,14 @@
                 \pause \item[gui] more linking between detail views, convenience features
                 \pause \item[notifier] mail server configuration $\rightarrow$ configuration file
                 \pause \item[slave] unexpected MongoDB behavior
-                \pause \item[master] ORM layer problems, prioritization datastructures
+                \pause \item[master] ORM layer problems, prioritization data structures
             \end{description}
         \end{itemize}
         
          \pnote{msp and model were easy to implement. initial versions finished after a few days.}
-         \pnote{master repository pattern proved more difficult than expected, mostly because of immature ORM layer (would use something more leightweight / direct SQL instead). More on this later}
+         \pnote{master repository pattern proved more difficult than expected, mostly because of immature ORM layer (would use something more lightweight / direct SQL instead). More on this later}
          \pnote{initial slave implementation was finished early, however, required substantial rewriting after discovering unexpected behavior in the MongoDB configuration process}
-         \pnote{notifier \& gui implementation were straightforward because of well-defined API interface. actual GUI has way more features than GUI drafts in the functional spec }
+         \pnote{notifier \& GUI implementation were straightforward because of well-defined API interface. actual GUI has way more features than GUI drafts in the functional spec }
         
     \end{frame}
     
@@ -643,7 +643,7 @@ ok  	slave             0.086s	coverage: 19.5% of statements
          \begin{itemize}
            \item<+-> Initiation from single Mongod
            \item<+-> $\rightarrow$ global coordination in master
-                   \pnote{does not fit with originla architecture, had to extend MSP \& deployer for this special case, leaky abstractions}
+                   \pnote{does not fit with original architecture, had to extend MSP \& deployer for this special case, leaky abstractions}
          \end{itemize}
       \end{itemize}
 
