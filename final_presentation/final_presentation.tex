@@ -33,6 +33,7 @@
 \newcommand{\done}[1][]{{\color{darkgreen}\checkmark\checkcomment{#1}}}
 \newcommand{\notdone}[1][]{{\color{red}\xmark\checkcomment{#1}}}
 
+\include{assets/shrug}
 
 % insert section title at \section{}
 % http://tex.stackexchange.com/questions/178800/creating-sections-each-with-title-pages-in-beamers-slides
@@ -604,6 +605,91 @@ ok  	slave             0.086s	coverage: 19.5% of statements
     
         \againframe<4>{waterfall}
     \section{Implementation \& Testing (Part II)}
+   
+    \begin{frame}{Lessons Learned}
+     
+      ORM layers \& Go
+            
+      \pnote{as already suggested before the demo, implementing master \& slave proved difficult}
+      \pause
+      \begin{itemize}
+        \item<+-> Generally debatable\footnote{\tiny Recommended read: \url{http://www.hydrogen18.com/blog/golang-orms-and-why-im-still-not-using-one.html}}
+        \item<+-> Lack of dynamism in language $\rightarrow$ transparent lazy fetching impossible
+        \item<+-> \texttt{database/sql} transaction support \pnote{cannot set isolation level through standard db.Begin() interface}
+        \item<+-> \texttt{gorm} shortcomings
+          \begin{itemize}
+            \item<+-> foreign key support $\rightarrow$ ugly hacks \pnote{mention no ON DELETE CASCADE} 
+            \item<+-> fine-grained \texttt{UPDATE}s with complex object graphs
+          \end{itemize}
+      \end{itemize}
+
+    \end{frame}
+    \begin{frame}{Lessons Learned}
+
+      MongoDB \pause \shrug \pause
+
+      \begin{itemize}
+       \item<+-> Good documentation
+       \item<+-> Focus on manual configuration \pnote{no automation} \pnote{no automation} \pnote{no automation} \pnote{no automation}
+       \item<+-> No OpenSSL support in Solaris builds
+       \item<+-> $\rightarrow$ no x.509 support on Solaris
+       \item<+-> $\rightarrow$ keyfile authentication in production
+       \item<+-> Replica Set Configuration TODO flowchart
+         \begin{itemize}
+           \item<+-> Initiation from single Mongod
+           \item<+-> $\rightarrow$ global coordination in master
+                   \pnote{does not fit with originla architecture, had to extend MSP \& deployer for this special case, leaky abstractions}
+         \end{itemize}
+      \end{itemize}
+
+    \end{frame}
+    \begin{frame}{Lessons Learned}
+      \pnote{explain states in the graphics, from replica set created to running, including recovering phase}
+      \missingfigure[figwidth=\linewidth]{vertical DOT graph of replica set states}
+    \end{frame}
+    \begin{frame}{Lessons Learned}
+
+      Operational Needs - Exposing more Information
+
+      \pnote{intention: give admin insight into the deployment}  
+      \pause
+      \begin{itemize}
+              \item<+-> Mongods by slave \& Replica Set
+              \item<+-> Hyperlinks between slave \& Replica Set
+              \item<+-> Visualize problems in slave \& Replica Set view
+              \item<+-> Copy-to-clipboard command lines \& Mongo shell commands
+      \end{itemize}
+     
+    \end{frame}
+
+    \begin{frame}{What Worked Well}
+            \begin{columns}
+            \begin{column}{0.6\linewidth}
+              \begin{itemize}
+                \item<2-> Go
+                    \begin{itemize}
+                      \item<3-> \texttt{net/http}
+                      \item<4-> \texttt{crypto/tls}
+                      \item<5-> channels + \texttt{sync}
+                      \item<6-> \texttt{flags}
+                      \item<7-> code organization
+                      \item<8-> \texttt{go(8)} (build system, testing, vet)
+                    \end{itemize}
+                \item<9-> PostgreSQL $>>$ SQlite \pnote{originally SQLite, but locking behavior not suitable with repository pattern + concurrent access}
+                \item<10-> AngularJS \pnote{Angular maaaaagic (nicely integrated mvc) saves a lot of time}
+                \item<11-> Bootstrap \pnote{familiar, nice looking user interfaces. UI components. accessibility + readability}
+                \item<12-> Docker \pnote{Docker, in particular for testing networked applications}
+              \end{itemize}
+            \end{column}
+            \begin{column}{0.4\linewidth}
+                \begin{tabular}{ll}
+                        \visible<9->{\includegraphics[width=0.35\linewidth]{assets/contrib/postgres/PostgreSQL_logo}} & \visible<2->{\includegraphics[width=0.4\linewidth]{assets/contrib/gopher/gopher}} \\
+                        \visible<10->{\includegraphics[width=0.35\linewidth]{assets/contrib/angularjs/AngularJS_logo}} & \visible<12->{\includegraphics[width=0.35\linewidth]{assets/contrib/docker/vector_h-trans.eps}} \\
+                \end{tabular}
+            \end{column}
+        \end{columns}
+
+    \end{frame}
     
     \againframe<5>{waterfall}
     

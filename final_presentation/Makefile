@@ -7,7 +7,7 @@ CUTYCAPT_BIN ?= `which cutycapt`
 INKSCAPE_BIN ?= `which inkscape`
 
 UMLET_PDFS = 
-SVGS = module_graph gh_punchcard 
+SVGS = module_graph gh_punchcard contrib/angularjs/AngularJS_logo contrib/postgres/PostgreSQL_logo contrib/gopher/gopher
 SVGS := $(addprefix assets/,$(SVGS)) 
 SVGS := $(addsuffix .pdf,$(SVGS)) 
 
