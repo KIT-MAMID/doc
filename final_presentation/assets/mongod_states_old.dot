@@ -1,0 +1,21 @@
+digraph mongod_states
+{
+
+    rankdir=BT;
+
+    d [label="destroyed"];
+    nr [label="not running"];
+    rec [label="recovering"];
+    run [label="running"];
+
+    { rank=max; run }
+    { rank=min; d }
+
+    d -> nr [label="create folder"];
+    nr -> rec [label="start mongod"];
+    rec -> run [label="mognod recovered"];
+    nr -> run [label="start mognod\nfirst time"];
+    run -> nr [label="stop mongod"];
+    nr -> d [label="delete data"];
+
+}

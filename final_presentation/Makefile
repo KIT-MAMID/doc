@@ -20,8 +20,14 @@ SVG2PDF = $(INKSCAPE_BIN) -A $(2) $(1)
 .PHONY:
 all: final_presentation.pdf
 
-final_presentation.pdf: final_presentation.tex $(SVGS) assets/cloc.tex
+final_presentation.pdf: final_presentation.tex $(SVGS) assets/cloc.tex assets/mongod_states.eps assets/mongod_states_old.eps
 	$(PDFLATEX) $<
+
+assets/mongod_states.eps: assets/mongod_states.dot
+	dot -Teps $< -o $@
+
+assets/mongod_states_old.eps: assets/mongod_states_old.dot
+	dot -Teps $< -o $@
 
 # Assets
 ## UMLet
@@ -46,4 +52,5 @@ clean:
 	rm -f final_presentation.log
 	rm -f final_presentation.pdf
 	rm -f final_presentation.pdfpc
+	rm -f assets/mongod_states*.eps
 
