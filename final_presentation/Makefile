@@ -5,29 +5,27 @@ JAVA ?= `which java`
 PDFLATEX ?= pdflatex -synctex=1
 CUTYCAPT_BIN ?= `which cutycapt`
 INKSCAPE_BIN ?= `which inkscape`
+DOT_BIN ?= `which dot`
 
 UMLET_PDFS = 
 SVGS = module_graph gh_punchcard contrib/angularjs/AngularJS_logo contrib/postgres/PostgreSQL_logo contrib/gopher/gopher
 SVGS := $(addprefix assets/,$(SVGS)) 
 SVGS := $(addsuffix .pdf,$(SVGS)) 
-
+DOTS = assets/mongod_states.eps assets/mongod_states_old.eps
 
 # Internal commands
 UMLET_CONVERT = $(JAVA) -jar $(UMLET_JAR) -action=convert -format=pdf -filename=$(1) -output=$(2)
 SVG2PDF = $(INKSCAPE_BIN) -A $(2) $(1)
-
+DOT_CMD = $(DOT_BIN) -Efontsize=24 -Nfontsize=28 -Teps $(1) -o $(2)
 # Targets
 .PHONY:
 all: final_presentation.pdf
 
-final_presentation.pdf: final_presentation.tex $(SVGS) assets/cloc.tex assets/mongod_states.eps assets/mongod_states_old.eps
+final_presentation.pdf: final_presentation.tex $(SVGS) $(DOTS) assets/cloc.tex
 	$(PDFLATEX) $<
 
-assets/mongod_states.eps: assets/mongod_states.dot
-	dot -Teps $< -o $@
-
-assets/mongod_states_old.eps: assets/mongod_states_old.dot
-	dot -Teps $< -o $@
+$(DOTS): %.eps: %.dot
+	$(call DOT_CMD,$<,$@)	
 
 # Assets
 ## UMLet

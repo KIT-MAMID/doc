@@ -644,10 +644,22 @@ ok  	slave             0.086s	coverage: 19.5% of statements
 
     \end{frame}
     \begin{frame}{Lessons Learned}
-      \pnote{explain states in the graphics, from replica set created to running, including recovering phase}
-      \missingfigure[figwidth=\linewidth]{vertical DOT graph of replica set states}
+      \begin{figure}
+        \centering
+        \includegraphics[height=0.6\textheight]{assets/mongod_states_old}
+              \caption{Mongod Configuration States (pre-implementation)}
+        \label{fig:mongodstates}
+        \end{figure}
     \end{frame}
     \begin{frame}{Lessons Learned}
+      \begin{figure}
+        \centering
+        \includegraphics[height=0.8\textheight]{assets/mongod_states}
+              \caption{Mongod Configuration States (post-implementation)}
+        \label{fig:mongodstates}
+        \end{figure}
+    \end{frame}
+\begin{frame}{Lessons Learned}
 
       Operational Needs - Exposing more Information
 
