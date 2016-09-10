@@ -7,6 +7,7 @@
 \usepackage{xspace}
 %checkmarks
 \usepackage{pifont}
+\usepackage{bbding}
 \newcommand{\xmark}{\ding{55}}%
 % toprule, midrule, bottomrule
 \usepackage{booktabs}
@@ -25,14 +26,14 @@
 
 %done checkmark
 \definecolor{darkgreen}{rgb}{0.0, 0.5, 0.0}
-\newcommand{\checkcomment}[1]{
-    \def\temp{#1}
-    \ifx\temp\empty
-    \emph{}
-    \else
-    \emph{Note: #1}
-    \fi
-}
+\newcommand{\checkcomment}[1]{%
+    \def\temp{#1}%
+    \ifx\temp\empty%
+    \emph{}%
+    \else%
+    \emph{Note: #1}%
+    \fi%
+}%
 \newcommand{\done}[1][]{{\color{darkgreen}\checkmark\checkcomment{#1}}}
 \newcommand{\notdone}[1][]{{\color{red}\xmark\checkcomment{#1}}}
 
@@ -695,6 +696,9 @@ ok  	slave             0.086s	coverage: 19.5% of statements
                 \item<10-> AngularJS \pnote{Angular maaaaagic (nicely integrated mvc) saves a lot of time}
                 \item<11-> Bootstrap \pnote{familiar, nice looking user interfaces. UI components. accessibility + readability}
                 \item<12-> Docker \pnote{Docker, in particular for testing networked applications}
+                \item<13-> Jenkins (testing on OpenIndiana)
+                \item<14-> Slack (convenience)
+                \item<15-> \LaTeX + \texttt{git} <3
               \end{itemize}
             \end{column}
             \begin{column}{0.4\linewidth}
@@ -711,7 +715,38 @@ ok  	slave             0.086s	coverage: 19.5% of statements
     
     \section{Review on PSE}
 
-    \section{Q\&A}
+    \newcommand\itembad{\item[\notdone]}
+    \newcommand\itemgood{\item[\done]}
+
+    \begin{frame}{Review on PSE}
+      \pause
+      \begin{itemize}
+        \itembad<+-> Waterfall development model
+        \begin{itemize}
+          \itembad<+-> Immutable document artifacts
+          \itembad<+-> Split between \textit{implementation} \& \textit{testing}
+          \itembad<+-> $\rightarrow$ cross-component bugs discovered too late
+        \end{itemize}
+        \itembad<+-> UML
+            \begin{itemize}
+              \item class diagrams
+              \item activity diagrams: helpful
+            \end{itemize}
+        \itembad<+-> Time vs ECTS
+        \itembad<+-> Final PSE phases overlap with examination phase
+        \itemgood<+-> Project in English
+      \end{itemize}
+    \end{frame}
+
+    \begin{frame}{}
+       \vfill
+        \centering
+        \Huge
+        Q\&A \\
+            \vspace{10pt}
+            \hspace*{5pt}\includegraphics[width=0.3\linewidth]{assets/mamid3_web}
+        \vfill
+    \end{frame}
     
 \end{document}
 

@@ -1,6 +1,7 @@
 /*.pdf
 assets/cluster_hw_stepwise/*.pdf
 assets/**/*.pdf
+assets/mongod_states*.eps
 assets/xkcd1289.png
 
 screenshots/
