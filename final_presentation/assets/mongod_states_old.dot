@@ -13,8 +13,8 @@ digraph mongod_states
 
     d -> nr [label="create folder"];
     nr -> rec [label="start mongod"];
-    rec -> run [label="mognod recovered"];
-    nr -> run [label="start mognod\nfirst time"];
+    rec -> run [label="mongod recovered"];
+    nr -> run [label="start mongod\nfirst time"];
     run -> nr [label="stop mongod"];
     nr -> d [label="delete data"];
 
