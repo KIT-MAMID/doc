@@ -453,40 +453,40 @@
     
     \section{Implementation \& Testing (Part I)}\pnote{mention two phases were merged for a more flexible schedule}
     
-    \begin{frame}{Checkboxes first}
+    \begin{frame}{Checkmarks First}
         \begin{itemize}
-            \item All Mandatory Criteria implemented
-            \item Some optional criteria implemented
-            \item Unforeseen features added
-            \item Deadlines met
-            \item Sleep deprivation
-            \item Caffeine addiction
-            \item Software works and is useful
+            \item All mandatory criteria implemented \only<2->{\done}
+            \item Some optional criteria implemented \only<3->{\done}
+            \item Unforeseen features added \only<4->{\done}
+            \item Deadlines met \only<5->{\done}
+            \item Sleep deprivation \only<6->{\done}
+            \item Caffeine addiction \only<7->{\done}
+            \item Software works and is useful \only<8->{\done}
         \end{itemize}
     \end{frame}
     
-    \begin{frame}[allowframebreaks]{Development Workflow}
+    \begin{frame}{Development Workflow}
         Tools \& Infrastructure
         \begin{itemize}
-            \item Git + GitHub
-            \item Self-hosted Continuous Integration (Jenkins, both Linux \& OpenIndiana)
-            \item Feature branches \& \texttt{master} branch protection
-            \item Unified code style (\texttt{gofmt})
-            \item Static code-analysis (\texttt{go vet})
-            \item Unit testing (\texttt{go test})
-            \item Coverage profiles as CI artifacts (\texttt{go cover})
-            \item Local staging environment (Docker)
-            \item All of the above wrapped in a GNU Makefile
-            \item Dog-fooding the master API for manual tests (Python)
+            \pause \item Git + GitHub
+            \pause \item Self-hosted Continuous Integration (Jenkins, both Linux \& OpenIndiana)
+            \pause \item Feature branches \& \texttt{master} branch protection
+            \pause \item Unified code style (\texttt{gofmt})
+            \pause \item Static code-analysis (\texttt{go vet})
+            \pause \item Unit testing (\texttt{go test})
+            \pause \item Coverage profiles as CI artifacts (\texttt{go cover})
+            \pause \item Local staging environment (Docker)
+            \pause \item All of the above wrapped in a GNU Makefile
+            \pause \item Dog-fooding the master API for manual tests (Python)
         \end{itemize}
-        \framebreak
-        Communication
+    \end{frame}
+   \begin{frame}{Communication}
         \begin{itemize}
-            \item GitHub's issue tracker
-            \item Slack platform
+            \pause \item GitHub's issue tracker
+            \pause \item Slack platform
             \begin{itemize}
-                \item Commit \& Repo activity bot
-                \item CI results bot
+                \pause \item Commit \& Repo activity bot
+                \pause \item CI results bot
             \end{itemize}
         \end{itemize}
     \end{frame}
@@ -522,30 +522,33 @@
             \end{column}
         \end{columns}
         
-        \framebreak
+    \end{frame}
+    \begin{frame}{Distribution of Work}
         
         Module development
+        
         \begin{itemize}
-            \item Attempt to distribute work fairly among members
-            \item Independent work
+            \pause \item Attempt to distribute work fairly among members
+            \pause \item Independent work
             \begin{itemize}
                 \item Different schedules
                 \item Everyone stays informed
             \end{itemize}
         \end{itemize}
         
-        
+        \pause
         Integration
+        
         \begin{itemize}
             \item Distributed application
             \item Problems usually encountered in this phase
             \begin{description}
-                \item [model] additional data types
-                \item[msp] additional method (Replica Set Initialization)
-                \item[gui] more linking between detail views, convenience features
-                \item[notifier] mail server configuration $\rightarrow$ configuration file
-                \item[slave] unexpected MongoDB behavior
-                \item[master] ORM layer problems, prioritization datastructures
+                \pause \item [model] additional data types
+                \pause \item[msp] additional method (Replica Set Initialization)
+                \pause \item[gui] more linking between detail views, convenience features
+                \pause \item[notifier] mail server configuration $\rightarrow$ configuration file
+                \pause \item[slave] unexpected MongoDB behavior
+                \pause \item[master] ORM layer problems, prioritization datastructures
             \end{description}
         \end{itemize}
         
@@ -556,7 +559,8 @@
         
     \end{frame}
     
-    \begin{frame}[allowframebreaks,fragile]{Statistics}
+    \begin{frame}{Statistics}
+        \pause
         \begin{figure}[h]
             \centering
             \begin{tabular}{lllll}
@@ -568,13 +572,16 @@
             \end{tabular}
             \caption{Lines of Code in the code repository. \\ Generated by \textit{generate\_report.bash} with \texttt{cloc(8)}. Commit \texttt{6465447}}
         \end{figure}
-        
-        \framebreak
+    \end{frame}
+    \begin{frame}{Statistics}
+        \pause
         
         \begin{itemize}
             \item Number of commits: 811
             \item Number of issues: 58 (13 open / 45 closed) \pnote{mention number of open issues mostly enhancements, 13 not a bad sign }
         \end{itemize}
+        
+        \pause
 
         \begin{figure}
         \centering
@@ -586,9 +593,10 @@
         \begin{tiny}
         All data extracted from GitHub, 10 Sep 2016 01:00 CEST 
         \end{tiny}
-
-        \framebreak
-            
+    
+    \end{frame}
+    \begin{frame}{Statistics}
+        \pause
         \begin{figure}[h]
             \centering
             \begin{tabular}{l|l}
@@ -605,7 +613,8 @@
             \caption{Number of tests by module.\\Generated by \textit{generate\_report.bash}. Commit \texttt{6465447}}
         \end{figure}
         
-        \framebreak
+    \end{frame}
+    \begin{frame}[fragile]{Statistics}
 
 \texttt{go cover} (formatted)
 \begin{verbatim}
