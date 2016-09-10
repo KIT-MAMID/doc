@@ -13,18 +13,17 @@ digraph mongod_states
 
     d -> nr [label="create folder"];
     nr -> rec [label="start mongod"];
-    rec -> run [label="mognod recovered"];
-    nr -> run [label="start mognod first time"];
+    rec -> run [label="mongod recovered"];
+    nr -> run [label="start mongod first time"];
     run -> nr [label="shutdown"];
     nr -> d [label="delete data"];
 
     nr -> unin [label="start mongod of\nuninitiated replica set"];
     unin-> rec [label="mongod is added to\nreplica set with data\nby other mongod"];
-    unin -> run [label="rs.inititate\n(once per replica set)"];
+    unin -> run [label="rs.initiate\n(once per replica set)"];
     unin -> run [label="mongod is added to\nempty replica set \nby other mongod"];
     run -> rem [label="mongod is removed from\nreplica set by\nother member"];
     rem -> nr [label="shutdown"];
-    run -> nr [label="shutdown"];
 /*
     run -> d [label="kill force"];
     unin -> d [label="kill force"];
