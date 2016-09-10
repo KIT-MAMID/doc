@@ -1,0 +1,73 @@
+\newcommand{\clusterlayoutbase}
+{
+    \tikzstyle{host} = [draw, thin, minimum width=160pt, minimum height=40pt]
+    \tikzstyle{slave} = [draw, thin, minimum width=160pt, minimum height=40pt]
+    \tikzstyle{mongod} = [draw, thin, minimum width=80pt, minimum height=40pt]
+    \tikzstyle{psu} = [draw, ellipse, thin, minimum width=60pt, minimum height=40pt]
+    \tikzstyle{repl} = [draw, ellipse, thin, minimum width=60pt, minimum height=40pt]
+    \tikzstyle{alert} = [draw, fill=red!50, fill opacity=0.5]
+    \path[->] coordinate (host0) {};
+    \foreach \h in {1,...,6}
+    {
+        \path[->] node[host, anchor=east] at ($(host0.east) + (190pt * \h, 0)$) (host\h) {Host \h};
+        \path[->] node[slave, anchor=south] at ($(host\h.north)$) (slave\h) {Slave};
+        \foreach \m in {1,...,2}
+        {
+            \path[->] node[mongod, anchor=south east] at ($(slave\h.north west) + (80pt * \m, 0)$) (mongod\h-\m) {mongod};
+        }
+    }
+    \path[->] coordinate (hostn) at ($(host6.east)$) {};
+    \foreach \p in {1,...,3}
+    {
+        \pgfmathtruncatemacro{\refh}{\p * 2 - 1}
+        \pgfmathtruncatemacro{\lasth}{\refh + 1}
+        \path[->] node[psu, anchor=north] (psu\p) at ($(host\refh.south)!0.5!(host\lasth.south) + (0, -30pt)$) {PSU \p};
+        \foreach \hc in {0,...,1}
+        {
+            \pgfmathtruncatemacro{\host}{\refh + \hc}
+            \path[-] (host\host) edge (psu\p);
+        }
+    }
+ 
+    \foreach \r in {1,...,4}
+    {
+        \pgfmathsetmacro{\pos}{(\r-0.5)/4}
+        \path[->] node[repl, anchor=south] (repl\r) at ($(host0)!\pos!(hostn) + (0, 160pt)$) {Replica Set \r};
+    }
+}
+\newcommand{\clusterlayoutdumbreplicasets}
+{
+    \path[-] (mongod1-1.north) edge (repl1);
+    \path[-] (mongod1-2.north) edge (repl1);
+    \path[-] (mongod2-1.north) edge (repl1);
+
+    \path[-] (mongod2-2.north) edge (repl2);
+    \path[-] (mongod3-1.north) edge (repl2);
+    \path[-] (mongod3-2.north) edge (repl2);
+
+    \path[-] (mongod4-1.north) edge (repl3);
+    \path[-] (mongod4-2.north) edge (repl3);
+    \path[-] (mongod5-1.north) edge (repl3);
+
+    \path[-] (mongod5-2.north) edge (repl4);
+    \path[-] (mongod6-1.north) edge (repl4);
+    \path[-] (mongod6-2.north) edge (repl4);
+}
+\newcommand{\clusterlayoutsmartreplicasets}
+{
+    \path[-] (mongod1-1.north) edge (repl1);
+    \path[-] (mongod3-1.north) edge (repl1);
+    \path[-] (mongod5-1.north) edge (repl1);
+
+    \path[-] (mongod1-2.north) edge (repl2);
+    \path[-] (mongod3-2.north) edge (repl2);
+    \path[-] (mongod5-2.north) edge (repl2);
+
+    \path[-] (mongod2-1.north) edge (repl3);
+    \path[-] (mongod4-1.north) edge (repl3);
+    \path[-] (mongod6-1.north) edge (repl3);
+
+    \path[-] (mongod2-2.north) edge (repl4);
+    \path[-] (mongod4-2.north) edge (repl4);
+    \path[-] (mongod6-2.north) edge (repl4);
+}
