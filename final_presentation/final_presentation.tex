@@ -15,6 +15,9 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes,calc}
 
+% 'frame' option for figures
+\usepackage[export]{adjustbox}
+
 \usepackage{adjustbox}
 
 % MAMID macro
@@ -52,6 +55,8 @@
 \tikzset{onslide/.code args={<#1>#2}{%
     \only<#1>{\pgfkeysalso{#2}} % \pgfkeysalso doesn't change the path
 }}
+
+\newcommand{\mamidscreenshot}[1]{\includegraphics[width=\textwidth,frame]{#1}}
 
 \input{graphics.tex}
 
@@ -254,14 +259,11 @@
     \end{frame}
     
     
-    \begin{frame}[allowframebreaks]{Declarative Administration: Screenshots}
-         \missingfigure[figwidth=\linewidth]{screenshot slave CREATION view (no slave states)}
-         \framebreak
-         \missingfigure[figwidth=\linewidth]{screenshot risk group view with lots of configured slaves \& risk groups}
-         \framebreak
-         \missingfigure[figwidth=\linewidth]{screenshot replica set creation view}
-         \framebreak
-         \missingfigure[figwidth=\linewidth]{screenshot replica set view, with all Mongods active}
+    \begin{frame}{Declarative Administration: Screenshots}
+         \includegraphics<1>[width=\linewidth, frame]{assets/new_slave}
+         \includegraphics<2>[width=\linewidth, frame]{assets/risk_groups}
+         \includegraphics<3>[width=\linewidth, frame]{assets/new_repl_set}
+         \includegraphics<4>[width=\linewidth, frame]{assets/running_repl_set}
     \end{frame}
     
     \begin{frame}{Controlling Deployment}
@@ -278,20 +280,22 @@
                 \end{itemize}
             \end{column}
             \begin{column}{0.4\linewidth}
-                \missingfigure[figwidth=\linewidth]{closeup of button states}
+                \includegraphics[width=\linewidth, frame]{assets/buttons_closeup}
             \end{column}
         \end{columns}
         
     \end{frame}
     
-     \begin{frame}[allowframebreaks]{Controlling Deployment: Screenshots} % this slide gives an impression on how to think when administering MAMID: manipulate constraints, not take direct actions
-        \missingfigure[figwidth=\linewidth]{screenshot replica set view, one slave with problems}
+     \begin{frame}{Controlling Deployment: Screenshots} % this slide gives an impression on how to think when administering MAMID: manipulate constraints, not take direct actions
+        \includegraphics<1>[width=\linewidth, frame]{assets/degraded_repl_set}
         \framebreak
-        \missingfigure[figwidth=\linewidth]{screenshot slave view of slave with problems, should be clear the slave has an error}
+        \includegraphics<2>[width=\linewidth, frame]{assets/unreachable_slave}
         \framebreak
-        \missingfigure[figwidth=\linewidth]{screenshot slave view, right after desired state switched to Disabled (transitioning spinner visible)}
+        \includegraphics<3>[width=\linewidth, frame]{assets/slave_changing_state}
         \framebreak
-        \missingfigure[figwidth=\linewidth]{screenshot slave view, replica set view: all green, maybe emphasizing circle around new (replacement) slave}
+        \includegraphics<4>[width=\linewidth, frame]{assets/repl_set_repair1}
+        \includegraphics<5>[width=\linewidth, frame]{assets/repl_set_repair2}
+        \includegraphics<6>[width=\linewidth, frame]{assets/repl_set_repair3}
         \framebreak
     \end{frame}
     
