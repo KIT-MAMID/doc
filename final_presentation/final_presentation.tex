@@ -69,7 +69,7 @@
         \tikzstyle{phase} = [draw, thin]
         \tikzstyle{alert} = [fill=red!20]
         \begin{figure}
-            \begin{tikzpicture}[node distance=1cm, auto,>=latex', thick]
+            \begin{tikzpicture}[node distance=1cm, auto,>=latex', thick, text width={width("Requirements Elicitation")}, align=center]
                 \path[->] node[phase, onslide=<1>{alert}] (elicitation) {Requirements Elicitation};
                 \path[->] node[phase, onslide=<2>{alert}, right of=elicitation, below of=elicitation] (analysis) {Requirements Analysis}
                           (elicitation) edge (analysis);
@@ -77,9 +77,9 @@
                           (analysis) edge (design);
                 \path[->] node[phase, onslide=<4>{alert}, right of=design, below of=design] (implementation) {Implementation}
                           (design) edge (implementation);
-                \path[->] node[phase, onslide=<5>{alert}, right of=implementation, below of=implementation] (testing) {Testing}
+                \path[->] node[phase, onslide=<4>{alert}, right of=implementation, below of=implementation] (testing) {Testing}
                           (implementation) edge (testing);
-                \path[->] node[phase, onslide=<6>{alert}, right of=testing, below of=testing] (acceptance) {Acceptance}
+                \path[->] node[phase, onslide=<5>{alert}, right of=testing, below of=testing] (acceptance) {Acceptance}
                           (testing) edge (acceptance);
             \end{tikzpicture}
         \end{figure}
@@ -117,7 +117,9 @@
         \tikzstyle{alert} = [fill=red!20]
         \begin{figure}
         \end{figure}
+            
             \begin{adjustbox}{max totalsize={.9\textwidth}{.7\textheight},center}
+                \huge
             \begin{tikzpicture}[node distance=1cm, auto,>=latex', thick]
                 \path[->] coordinate (host0) {};
                 \foreach \h in {1,...,6}
