@@ -120,17 +120,7 @@
         \end{itemize}
     \end{frame}
     
-    \begin{frame}[allowframebreaks]{MongoDB on IMK Cluster}
-        
-        \begin{figure}
-        \end{figure}
-            \begin{adjustbox}{max totalsize={.9\textwidth}{.7\textheight},center}
-                \huge
-            \begin{tikzpicture}[node distance=1cm, auto,>=latex', thick]
-                \clusterlayoutbase
-                \clusterlayoutdumbreplicasets
-            \end{tikzpicture}
-            \end{adjustbox}
+    \begin{frame}{MongoDB on IMK Cluster}
         \begin{itemize}
             \item Few big machines with (slow?) persistent storage\\%TODO ask marek whcih one it is
                   + 4 cabinets à 20 blades à $98$ GB RAM %TODO check this
@@ -138,9 +128,16 @@
             \item Blades have small boot-only HDDs
             \item Cabinets have independent PSUs
         \end{itemize}
-
-        \framebreak
-        
+            \begin{adjustbox}{max totalsize={.9\textwidth}{.7\textheight},center}
+                \huge
+            \begin{tikzpicture}[node distance=1cm, auto,>=latex', thick]
+                \clusterlayoutbase
+                \clusterlayoutdumbreplicasets
+            \end{tikzpicture}
+            \end{adjustbox}
+    \end{frame}
+    
+    \begin{frame}{MongoDB on IMK Cluster}
         Performance: Replica Sets \pnote{so what can we do to maximize performance, in particular read performance for downstream applications?}
         
         \begin{itemize}
@@ -148,19 +145,30 @@
             \item Secondaries: on machines with HDDs (\emph{persistence}) \pnote{this can be arranged by configuring the Priority of a Mongod in Replica Set elections}
         \end{itemize}
         \pnote{indicate where primaries and secondaries go using a pointing device}
-        \begin{figure}
+        \only<1>{\begin{figure}
+            \begin{adjustbox}{max totalsize={.9\textwidth}{.7\textheight},center}
+                \huge
+            \begin{tikzpicture}[node distance=1cm, auto,>=latex', thick]
+                \clusterlayoutbase
+                \clusterlayoutdumbreplicasets
+                \path[->] node[anchor=south, minimum height=210pt, minimum width=400pt] (psudown) at ($(psu1.south) + (0, -10pt)$) {};
+            \end{tikzpicture}
+            \end{adjustbox}
+        \end{figure}}
+        \only<2>{\begin{figure}
             \begin{adjustbox}{max totalsize={.9\textwidth}{.7\textheight},center}
                 \huge
             \begin{tikzpicture}[node distance=1cm, auto,>=latex', thick]
                 \clusterlayoutbase
                 \clusterlayoutdumbreplicasets
                 \path[->] node[alert, anchor=south, minimum height=210pt, minimum width=400pt] (psudown) at ($(psu1.south) + (0, -10pt)$) {};
+                \path[->] node[alert, repl, anchor=south] (repl1alert) at ($(repl1.south)$) {Replica Set 1};
             \end{tikzpicture}
             \end{adjustbox}
-        \end{figure}
-        
-        \framebreak
-        
+        \end{figure}}
+    \end{frame}
+    
+    \begin{frame}{MongoDB on IMK Cluster}
         Availability \& Redundancy: Risk Groups \pnote{so far we have performance, but what happens in case a PSU dies and takes a cabinet offline?}
         
         \begin{itemize}
@@ -168,18 +176,29 @@
             \item Assert enough Replica Set members have persistent storage\pnote{requirements may vary, depending on importance of data, ... generally a tradeoff between space usage and safety}
         \end{itemize}
         
-        \begin{figure}
+        \only<1>{\begin{figure}
             \begin{adjustbox}{max totalsize={.9\textwidth}{.7\textheight},center}
                 \huge
             \begin{tikzpicture}[node distance=1cm, auto,>=latex', thick]
                 \clusterlayoutbase
                 \clusterlayoutsmartreplicasets
+                \path[->] node[anchor=south, minimum height=210pt, minimum width=400pt] (psudown) at ($(psu1.south) + (0, -10pt)$) {};
             \end{tikzpicture}
             \end{adjustbox}
-        \end{figure}
-        
-        \framebreak
-        
+        \end{figure}}
+        \only<2>{\begin{figure}
+            \begin{adjustbox}{max totalsize={.9\textwidth}{.7\textheight},center}
+                \huge
+            \begin{tikzpicture}[node distance=1cm, auto,>=latex', thick]
+                \clusterlayoutbase
+                \clusterlayoutsmartreplicasets
+                \path[->] node[alert, anchor=south, minimum height=210pt, minimum width=400pt] (psudown) at ($(psu1.south) + (0, -10pt)$) {};
+            \end{tikzpicture}
+            \end{adjustbox}
+        \end{figure}}
+    \end{frame}
+    
+    \begin{frame}{MongoDB on IMK Cluster}
         Operation
         
         \begin{itemize}
