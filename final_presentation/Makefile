@@ -8,7 +8,7 @@ INKSCAPE_BIN ?= `which inkscape`
 DOT_BIN ?= `which dot`
 
 UMLET_PDFS = 
-SVGS = module_graph mamid3_web gh_punchcard contrib/angularjs/AngularJS_logo contrib/postgres/PostgreSQL_logo contrib/gopher/gopher
+SVGS = mamid3_web gh_punchcard contrib/angularjs/AngularJS_logo contrib/postgres/PostgreSQL_logo contrib/gopher/gopher
 SVGS := $(addprefix assets/,$(SVGS)) 
 SVGS := $(addsuffix .pdf,$(SVGS)) 
 DOTS = assets/mongod_states.eps assets/mongod_states_old.eps assets/module_graph.eps
