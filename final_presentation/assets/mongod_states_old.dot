@@ -12,10 +12,10 @@ digraph mongod_states
     { rank=min; d }
 
     d -> nr [label="create folder"];
-    nr -> rec [label="start mongod"];
-    rec -> run [label="mongod recovered"];
-    nr -> run [label="start mongod\nfirst time"];
-    run -> nr [label="stop mongod"];
+    nr -> rec [label="start Mongod"];
+    rec -> run [label="Mongod recovered"];
+    nr -> run [label="start Mongod\nfirst time"];
+    run -> nr [label="stop Mongod"];
     nr -> d [label="delete data"];
 
 }
