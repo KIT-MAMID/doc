@@ -14,14 +14,14 @@ SVGS := $(addsuffix .pdf,$(SVGS))
 DOTS = assets/mongod_states.eps assets/mongod_states_old.eps
 
 # Internal commands
-UMLET_CONVERT = $(JAVA) -jar $(UMLET_JAR) -action=convert -format=eps -filename=$(1) -output=$(2)
+UMLET_CONVERT = $(JAVA) -jar $(UMLET_JAR) -action=convert -format=pdf -filename=$(1) -output=$(2)
 SVG2PDF = $(INKSCAPE_BIN) -A $(2) $(1)
 DOT_CMD = $(DOT_BIN) -Efontsize=24 -Nfontsize=28 -Teps $(1) -o $(2)
 # Targets
 .PHONY:
 all: final_presentation.pdf
 
-final_presentation.pdf: final_presentation.tex $(SVGS) $(DOTS) assets/cloc.tex assets/class_diagram.eps
+final_presentation.pdf: final_presentation.tex $(SVGS) $(DOTS) assets/cloc.tex assets/class_diagram.pdf
 	$(PDFLATEX) $<
 
 $(DOTS): %.eps: %.dot
@@ -36,7 +36,7 @@ $(UMLET_PDFS): %.pdf: %.uxf
 $(SVGS): %.pdf : %.svg
 	$(call SVG2PDF,$<,$@)
 
-assets/class_diagram.eps: assets/class_diagram.uxf
+assets/class_diagram.pdf: assets/class_diagram.uxf
 	$(call UMLET_CONVERT,$<,$@)
 
 # Cleaning
