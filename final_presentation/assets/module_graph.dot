@@ -1,0 +1,23 @@
+digraph mongod_states
+{
+    rankdir=BT;
+
+    msp;
+    master;
+    masterapi;
+    model;
+    slave;
+    gui;
+    notifier;
+    
+    { rank=max; msp, model } 
+    { rank=min; gui, notifier }
+
+    msp -> master;
+    msp -> slave;
+    model -> master;
+    model -> masterapi;
+    masterapi -> gui;
+    masterapi -> notifier;
+
+}
