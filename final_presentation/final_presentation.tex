@@ -75,10 +75,11 @@
     \frame[plain]{\maketitle}
 
     \begin{frame}<1>[label=waterfall]{PSE: Where are we?}
-        \tikzstyle{phase} = [draw, thin]
+        \tikzstyle{phase} = [draw, thin,text width={width("Requirements Elicitation")}]
+        \tikzstyle{artifact} = [draw, rounded corners=0.1cm, thin,font=\tiny]
         \tikzstyle{alert} = [fill=red!20]
         \begin{figure}
-            \begin{tikzpicture}[node distance=1cm, auto,>=latex', thick, text width={width("Requirements Elicitation")}, align=center]
+            \begin{tikzpicture}[node distance=1cm, auto,>=latex', thick, align=center]
                 \path[->] node[phase, onslide=<1>{alert}] (elicitation) {Requirements Elicitation};
                 \path[->] node[phase, onslide=<2>{alert}, right of=elicitation, below of=elicitation] (analysis) {Requirements Analysis}
                           (elicitation) edge (analysis);
@@ -90,6 +91,9 @@
                           (implementation) edge (testing);
                 \path[->] node[phase, onslide=<5>{alert}, right of=testing, below of=testing] (acceptance) {Acceptance}
                           (testing) edge (acceptance);
+                    \draw[->] (analysis) [out=0,in=100,looseness=0.75] to node[artifact]{Functional\\Specification} ($(design.north east) - (0.25cm, 0)$);
+                    \draw[->] (design) [out=0,in=100,looseness=0.75] to node[artifact]{Class Diagram\\Design Document} ($(implementation.north east) - (0.25cm, 0)$);
+                    \draw[->] (implementation) [out=0,in=100,looseness=0.75] to node[artifact]{Implementation \&\\Testing Report} ($(acceptance.north east) - (0.25cm, 0)$);
             \end{tikzpicture}
         \end{figure}
     \end{frame}
