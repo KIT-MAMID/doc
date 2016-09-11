@@ -349,7 +349,7 @@
           \includegraphics[width=\linewidth]{assets/class_diagram.pdf}
     \end{frame}
        
-   \begin{frame}{Master Slave Protocol}
+    \begin{frame}{Master Slave Protocol}
        \begin{itemize}
            \item HTTP(S) based protocol
            \item JSON transport format
@@ -360,6 +360,10 @@
                \item Abstract Mongod configuration
             \end{itemize}
         \end{itemize}
+        \framebreak
+    \end{frame}
+    \begin{frame}{Master Slave Protocol}
+        \includegraphics[width=\linewidth]{assets/msp_classes.pdf}
     \end{frame}
     
     \againframe{appdesign}
@@ -375,6 +379,9 @@
             \end{itemize}
             \vspace{15pt}
             \texttt{\$ mamid\_slave -listen ':8081' -data /srv/mamid/data}
+    \end{frame}
+    \begin{frame}{Slave}
+        \includegraphics[width=\linewidth]{assets/slave_classes.pdf}
     \end{frame}
     
     \againframe{appdesign}
@@ -398,6 +405,9 @@
         \texttt{\$ mamid\_master -listen ':8080' -db.dsn '<Postgres dsn>'}
         
     \end{frame}
+    \begin{frame}{Master}
+        \includegraphics[width=\linewidth]{assets/master_classes.pdf}
+    \end{frame}
     
     \againframe{appdesign}
     
@@ -409,6 +419,9 @@
 	           	\item View: HTML + CSS \pause
 	           	\item Controller: JavaScript evaluated by the web browser
            \end{itemize}
+    \end{frame}
+    \begin{frame}{GUI}
+        \includegraphics[width=\linewidth]{assets/gui_classes.pdf}
     \end{frame}
     
     \againframe{appdesign}
@@ -426,6 +439,9 @@
         \end{itemize}
         \vspace{15pt}
         \texttt{\$ mamid\_notifier /etc/mamid/notifier.conf}
+    \end{frame}
+    \begin{frame}{Notifier}
+        \includegraphics[width=\linewidth]{assets/notifier_classes.pdf}
     \end{frame}
     
     \againframe{appdesign}
