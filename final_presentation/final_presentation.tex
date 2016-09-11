@@ -192,7 +192,7 @@
     \begin{frame}{Related Work}
         
         \begin{itemize}
-            \item MongoDB In-Memory Engine ($<$ 3.2.6, \textit{enterprise} subscription)
+            \item MongoDB In-Memory Engine ($>=$ 3.2.6, \textit{enterprise} subscription)
             \item MongoDB Ops Manager (\textit{enterprise} subscription)
             \item MongoDB Cloud Manager (\textit{enterprise} subscription)
             \item Configuration Management (Puppet, etc.): cannot model dependencies, no monitoring, no integrated solution
@@ -399,14 +399,16 @@
     \againframe{appdesign}
     
     \begin{frame}{GUI}
-           HTML5/CSS3/JS frontend with `master` REST API
+           HTML5/CSS3/JS frontend with master's REST API
            \begin{itemize}
-	           	\item MVC pattern \pause
+	           	\item AngularJS MVC pattern \pause
 	           	\item Model implicitly derived from API JSON objects \pause
 	           	\item View: HTML + CSS \pause
-	           	\item Controller: Javascript evaluated by the web browser
+	           	\item Controller: JavaScript evaluated by the web browser
            \end{itemize}
     \end{frame}
+    
+    \againframe{appdesign}
     
     \begin{frame}{Notifier}
         
@@ -519,10 +521,10 @@
         
         \begin{itemize}
             \item Distributed application
-            \item Problems usually encountered in this phase
+            \item Problems encountered in this phase
             \begin{description}
                 \pause \item [model] additional data types
-                \pause \item[msp] additional method (Replica Set Initialization)
+                \pause \item[msp] additional method (Replica Set initiation)
                 \pause \item[gui] more linking between detail views, convenience features
                 \pause \item[notifier] mail server configuration $\rightarrow$ configuration file
                 \pause \item[slave] unexpected MongoDB behavior
@@ -631,8 +633,8 @@ ok  	slave             0.086s	coverage: 19.5% of statements
         \item<+-> \texttt{database/sql} transaction support \pnote{cannot set isolation level through standard db.Begin() interface}
         \item<+-> \texttt{gorm} shortcomings
           \begin{itemize}
-            \item<+-> foreign key support $\rightarrow$ ugly hacks \pnote{mention no ON DELETE CASCADE} 
-            \item<+-> fine-grained \texttt{UPDATE}s with complex object graphs
+            \item<+-> missing foreign key support $\rightarrow$ ugly hacks \pnote{mention no ON DELETE CASCADE} 
+            \item<+-> missing fine-grained \texttt{UPDATE}s with complex object graphs
           \end{itemize}
       \end{itemize}
 
@@ -647,7 +649,7 @@ ok  	slave             0.086s	coverage: 19.5% of statements
        \item<+-> No OpenSSL support in Solaris builds
        \item<+-> $\rightarrow$ no x.509 support on Solaris
        \item<+-> $\rightarrow$ keyfile authentication in production
-       \item<+-> Replica Set Configuration TODO flowchart
+       \item<+-> Replica Set Configuration
          \begin{itemize}
            \item<+-> Initiation from single Mongod
            \item<+-> $\rightarrow$ global coordination in master
@@ -743,6 +745,7 @@ ok  	slave             0.086s	coverage: 19.5% of statements
         \itembad<+-> Time vs ECTS
         \itembad<+-> Final PSE phases overlap with examination phase
         \itemgood<+-> Project in English
+        \itemgood<+-> Software might actually be used!
       \end{itemize}
     \end{frame}
 
