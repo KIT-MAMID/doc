@@ -112,12 +112,54 @@
     \end{frame}
     
     \begin{frame}{MongoDB}
-        TODO
+
+            \begin{itemize}
+                            \item Document-oriented NoSQL database
+                            \item Open-source version since 2009
+                            \item Focus on Big Data applications
+                            \item Replication \& Load Balancing
+            \end{itemize}
+
+        Hierarchy
         \begin{itemize}
-            \item MongoDs / Mongods
+            \item Mongods
             \item Replica Set
             \item Sharding
         \end{itemize}
+    \end{frame}
+
+    \begin{frame}{MongoDB: Mongods}
+      \begin{itemize}
+              \item primary daemon process
+              \item serves data requests
+              \item controls data access
+              \item interaction with file system 
+      \end{itemize}
+    \end{frame}
+    \begin{frame}{MongoDB: Replica Set}
+      \begin{itemize}
+              \item MongoDB's solution to 
+                      \begin{itemize}
+                        \item high-availbility
+                        \item redundancy
+                      \end{itemize}
+              \item Group of Mongods
+              \item Host same data set
+              \item Primaries, Secondaries, Elections, Priority, Votes
+              \item Write-concern \& read-preference
+      \end{itemize}
+    \end{frame}
+
+    \begin{frame}{MongoDB: Sharding}
+      \begin{itemize}
+              \item Load balancing \& data distribution
+              \item Horizontal scaling
+              \item Shard = subset of data in the cluster
+              \item can \& should be a Replica Set
+              \item \texttt{mongos} query router \pnote{mongos routes application queries to correct shard}
+              \item Config Server = metadata \& sharding configuration
+              \item can \& should be a Replica Set
+      \end{itemize}
     \end{frame}
     
     \begin{frame}{MongoDB on IMK Cluster}
