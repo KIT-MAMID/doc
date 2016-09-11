@@ -127,11 +127,18 @@ Implementation & Testing pahse (part 1)
 
 Live Demo
 
+	Prequesits:
+		4 slaves deployed in a mongocontainer, running, with all certs
+		master running
+		i3 window setup ready
+			htop with filter
+			shells
+			correct mongod commands in the history
+			correct deploy command for wekan in a shell prepared
+			tab with wekan url opened in chrome
 	Goals:
-		manual clicking: create 3 risk groups, add 1 slave to each rg, create repl set "wekan", show config, deploy app
-		HTTP API / python script (show it): add remaining slaves to rgs, active 
+		manual clicking: create 4 risk groups, add 1 slave to each rg, create repl set "wekan" with 3 volatile, show config, deploy app
 		Show Risk Groups populated with slaves
-		create second Replica Set 'foobar'
 		show monitoring works: stop a slave, wait for problem to appear in GUI, show rs.status(), start a slave, watch problem disappear
 		show setting defective slave to disabled fixes a degraded replica set: stop a slave, wait for problem to appear in GUI, set slave to disabled, watch for reprovisioning
 		
